@@ -8,7 +8,7 @@ pi установлена с нуля, адрес зарезервирован �
 ## Удаленный доступ на pi
 
 Сгенерить ключ. Дома без пароля сойдет
-```sh
+```text
 (base) vit@a:~$ ssh-keygen 
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/vit/.ssh/id_rsa): 
@@ -33,7 +33,7 @@ The key's randomart image is:
 
 ```
 Скопировать ключ и проверить доступ.
-```sh
+```text
 (base) vit@a:~$ ssh-copy-id -i pi@192.168.2.254
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/vit/.ssh/id_rsa.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
@@ -51,7 +51,7 @@ Linux raspberrypi 5.4.51-v7+ #1327 SMP Thu Jul 23 10:58:46 BST 2020 armv7l
 ## Подготовка ansible
 
 В каталоге ~/work/home будет роль и настройки ansible, который установлен через [miniconda](/work/miniconda/).
-```sh
+```text
 (base) vit@a:~/work/home$ cat ansible.cfg 
 [defaults]
 host_key_checking = False
@@ -85,7 +85,7 @@ pi | SUCCESS => {
 ## Роль ansible
 
 Посмотреть [https://github.com/v98765/ansible-adguardhome](https://github.com/v98765/ansible-adguardhome). Скопировать
-```sh
+```text
 $ git clone https://github.com/v98765/ansible-adguardhome
 ```
 
@@ -93,7 +93,7 @@ $ git clone https://github.com/v98765/ansible-adguardhome
 ## Проверка 
 
 Корректность синтаксиса yamllint
-```sh
+```text
 (base) vit@a:~/work/home$ yamllint roles
 roles/adguardhome/tasks/install.yml
   29:81     error    line too long (158 > 80 characters)  (line-length)
@@ -101,18 +101,18 @@ roles/adguardhome/tasks/install.yml
   41:81     error    line too long (116 > 80 characters)  (line-length)
 ```
 Ошибок в плее нет
-```sh
+```text
 (base) vit@a:~/work/home$ ansible-playbook play-pi.yml --syntax-check
 
 playbook: play-pi.yml
 ```
 Проверка на pi
-```sh
+```text
 (base) vit@a:~/work/home$ ansible-playbook play-pi.yml --check
 ```
 
 ## Запуск
 
-```sh
+```text
 $ ansible-playbook play-pi.yml
 ```
