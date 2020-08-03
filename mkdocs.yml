@@ -1,0 +1,7 @@
+site_name: My Docs
+nav:
+    - home: index.md
+    - work:
+        - 'miniconda': work/miniconda.md
+theme:
+  name: material
