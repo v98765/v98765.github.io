@@ -1,17 +1,20 @@
 site_name: My Docs
 nav:
-    - home: index.md
+    - 'About': index.md
     - network:
         - 'Interface Errors': network/errors.md
         - 'Switching': network/switching.md
         - 'DHCP snooping': network/dhcpsnooping.md
-        - 'NLB': network/switching.md
+        - 'NLB': network/nlb.md
         - 'Switch cisco': network/cisco_sw.md
         - 'Switch juniper ex': network/juniper_ex.md
         - 'Switch huawei s57': network/huawei.md
         - 'Switch eltex': network/eltex.md
         - 'Switch tfortis': network/tfortis.md
-        - 'Router Cisco': network/cisco_r.md
+        - 'Router cisco': network/cisco_r.md
+    - voip:
+        - 'Softphones': voip/softphone.md
+        - 'Voip cisco': work/cisco_voip.md
     - work:
         - 'Miniconda': work/miniconda.md
         - 'Mkdocs': work/mkdocs.md
