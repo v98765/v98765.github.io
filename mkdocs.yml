@@ -19,6 +19,7 @@ nav:
         - 'Softphones': voip/softphone.md
         - 'Voip cisco': voip/cisco_voip.md
     - work:
+        - 'AdGuardHome' work/adguardhome.md
         - 'Miniconda': work/miniconda.md
         - 'Mkdocs': work/mkdocs.md
 theme:
