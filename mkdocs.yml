@@ -14,7 +14,7 @@ nav:
         - 'Router cisco': network/cisco_r.md
     - voip:
         - 'Softphones': voip/softphone.md
-        - 'Voip cisco': work/cisco_voip.md
+        - 'Voip cisco': voip/cisco_voip.md
     - work:
         - 'Miniconda': work/miniconda.md
         - 'Mkdocs': work/mkdocs.md
