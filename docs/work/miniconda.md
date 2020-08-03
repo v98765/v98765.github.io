@@ -1,5 +1,3 @@
-## Miniconda
-
 [Miniconda install](https://docs.conda.io/en/latest/miniconda.html) и [repo](https://anaconda.org/)
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh

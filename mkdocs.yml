@@ -2,6 +2,7 @@ site_name: My Docs
 nav:
     - home: index.md
     - work:
-        - 'miniconda': work/miniconda.md
+        - 'Miniconda': work/miniconda.md
+        - 'Mkdocs': work/mkdocs.md
 theme:
   name: material
