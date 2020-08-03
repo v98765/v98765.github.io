@@ -1,3 +1,21 @@
+## aux
+
+Наверное, в каждом маршрутизаторе cisco такой порт есть и он позволяет настраивать удаленно через консоль другое оборудование.
+Для этого нужен пачкодр обжатый с одной стороны в обратном порядке. Ну, в общем, rj45 коннектор перевернуть и обжать.
+Скорее всего можно было проще настроить, но вот столько команд в линии сейчас:
+```text
+line aux 0
+ session-timeout 5 
+ exec-timeout 5 0
+ absolute-timeout 60
+ modem InOut
+ no exec
+ transport preferred telnet
+ transport input all
+```
+Узнать порт линии командой `sh line`. Напротив AUX будет номер и чаще это 1. Реже 65. Т.о. надо выполнить telnet на порт 2001 маршрутизатора.
+Сброс линии `clear line aux 0`
+
 ##cisco 4321 throughput
 После пробного периода использования throughput лицензии в 4321 (16.9.4), она становится Life time и RightToUse.
 ```text
@@ -14,6 +32,31 @@ Index 9 Feature: throughput
         License Type: RightToUse
         License State: Active, In Use
         License Count: Non-Counted
+```
+
+## output service-policy
+
+Приоритезировать трафик на сабинтерфейсы в рамках какой-то полосы
+```text
+policy-map myservice
+ class Voip
+  priority 128
+ class class-default
+  fair-queue
+```
+Попытка применить.
+```text
+router(config-subif)#service-policy output myservice
+CBWFQ : Not supported on subinterfaces
+```
+Надо переделать и прописать политику в шейпер дефолтового класса. И уже эту политику применить.
+```text
+policy-map 512k
+ class class-default
+  shape average 512000
+  service-policy myservice
+
+router(config-subif)#service-policy output 512k
 ```
 
 ## eem
