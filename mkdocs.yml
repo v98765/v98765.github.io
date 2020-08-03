@@ -10,7 +10,7 @@ nav:
         - 'DHCP snooping': network/dhcpsnooping.md
         - 'NLB': network/nlb.md
         - 'TCP MSS': network/tcp_mss.md
-        - 'flowcontrol': network/flowcontrol.md
+        - 'Flowcontrol': network/flowcontrol.md
         - 'Switch list for vxlan': network/vxlan_sw.md
         - 'Switch cisco': network/cisco_sw.md
         - 'Switch juniper ex': network/juniper_ex.md
