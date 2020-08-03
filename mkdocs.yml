@@ -2,7 +2,8 @@ site_name: My Docs
 nav:
     - 'About': index.md
     - monitoring:
-        - 'Telegraf vs Vmagent': monitoring/telegraf_vmagent.md
+        - 'Telegraf vs vmagent': monitoring/telegraf_vmagent.md
+        - 'Telegraf snmp': monitoring/telegraf_snmp.md
     - network:
         - 'Interface Errors': network/errors.md
         - 'Switching': network/switching.md
