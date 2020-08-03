@@ -123,3 +123,85 @@ Number of Calls: 1
 
 Cisco IOS Total Bandwidth Needed for 1.0 Calls 10 kbps
 ```
+
+## acl
+
+Было сохранено в качестве памятки откуда-то. Как раз для случаев, когда "permit ip any any" почему-то "не работает".
+
+Here’s a handy list of ACL entries to allow your devices to speak routing protocols, availability protocols, and some other stuff.
+We’ll assume you have ACL 101 applied to your Ethernet inbound; your Ethernet has an IP of 192.168.0.1.
+
+BGP : Runs on TCP/179 between the neighbors
+```text
+access-list 101 permit tcp any host 192.168.0.1 eq 179
+```
+EIGRP : Runs on its own protocol number from the source interface IP to the multicast address of 224.0.0.10
+```text
+access-list 101 permit eigrp any host 224.0.0.10
+```
+OSPF : Runs on its own protocol number from the source interface IP to the multicast address of 224.0.0.5; also talks to 224.0.0.6 for DR/BDR routers
+```text
+access-list 101 permit ospf any host 224.0.0.5
+access-list 101 permit ospf any host 224.0.0.6
+```
+HSRP : Runs on UDP from the source interface IP to the multicast address of 224.0.0.2. I’ve seen in the past that it runs on UDP/1985, but I didn’t find any evidence of that in a quick Google for it. Can someone verify?
+```text
+access-list 101 permit udp any host 224.0.0.2
+```
+RIP : Runs on UDP/520 from the source interface IP to the multicast address of 224.0.0.9
+```text
+access-list 101 permit udp any host 224.0.0.9 eq 520
+```
+VRRP : Runs on its own protocol number from the source interface IP to the multicast address of 224.0.0.18
+```text
+access-list 101 permit 112 any host 224.0.0.18
+```
+GLBP : Runs on UDP from the source interface IP to the multicast address of 224.0.0.102
+```text
+access-list 101 permit udp any host 224.0.0.102
+```
+DHCPD (or bootps) : Runs on UDP/67 from 0.0.0.0 (since the client doesn’t have an address yet) to 255.255.255.255 (the broadcast).
+```text
+access-list 101 permit udp any host 255.255.255.255 eq 67
+```
+
+## session mib
+
+Это вообще времен диалапа и прочего доступа, когда использовались cisco в качестве AS и BRAS.
+Так с сервера доступа Cisco AS5350 можно получить данные о состоянии цифровых модемов и тем самым судить о загрузке модемного пула:
+```text
+cmSystemInstalledModem      1.3.6.1.4.1.9.9.47.1.1.1.0
+cmSystemModemsInUse         1.3.6.1.4.1.9.9.47.1.1.6.0 
+cmSystemModemsAvailable     1.3.6.1.4.1.9.9.47.1.1.7.0
+cmSystemModemsUnavailable   1.3.6.1.4.1.9.9.47.1.1.8.0 
+cmSystemModemsOffline       1.3.6.1.4.1.9.9.47.1.1.9.0
+cmSystemModemsDead          1.3.6.1.4.1.9.9.47.1.1.10.0
+```
+Можно запрашивать информацию, чтобы обработать далее по номеру доступа.
+Нужно будет подсчитать каким-нибудь скриптом количество строк на каждый номер, если номеров доступа несколько
+```text
+cpmActiveLocalPhoneNumber 1.3.6.1.4.1.9.10.19.1.3.1.1.13
+```
+Количество PPPoE-сессий
+```text
+cPppoeSystemCurrSessions 1.3.6.1.4.1.9.9.194.1.1.1
+```
+Количество PPtP-сессий
+```text
+cvpdnSystemSessionTotal  1.3.6.1.4.1.9.10.24.1.1.4.1.3
+```
+Чтобы завершать сессии по протоколу snmp необходимо включить на серверах доступа
+```text
+aaa session-mib disconnect
+```
+И использовать MIB: CISCO-AAA-SESSION-MIB. Вот шаблон, на основе которого можно написать нужный shell-скрипт:
+```text
+export MIBS=+CISCO-AAA-SESSION-MIB
+#список активных пользователей
+snmpwalk -v2c -c public $hostname casnUserId 
+snmpwalk -v2c -c public $hostname casnUserId.$session_id
+# вывод .. = "login"
+# сброс сессии. используется community на запись
+snmpset -v2c -c private $hostname casnDisconnect.$session_id i 1
+# вывод .. = INTEGER: true(1)
+```
