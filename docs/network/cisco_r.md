@@ -1,3 +1,21 @@
+##cisco 4321 throughput
+После пробного периода использования throughput лицензии в 4321 (16.9.4), она становится Life time и RightToUse.
+```text
+license accept end user agreement
+platform hardware throughput level 100000
+```
+Это на прием и передачу. Как мало.
+```text
+c4321#sh ver | in throughput
+The current throughput level is 100000 kbps
+c4321#sh lic | beg throughput
+Index 9 Feature: throughput
+        Period left: Life time
+        License Type: RightToUse
+        License State: Active, In Use
+        License Count: Non-Counted
+```
+
 ## eem
 
 Периодические проблемы с потоком Е1 на голосовом шлюзе Cisco. Cкрипт, выключающий ночью D-канал.
