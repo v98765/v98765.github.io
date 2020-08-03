@@ -50,3 +50,76 @@ kron policy-list reboot
 ```text
 ip tcp adjust-mss <значение>
 ```
+
+## frame-relay, rtp compression
+
+В целом, протокол полезный:
+
+* Frame-relay позволяет создавать виртуальные каналы в пределах одного физического интерфейса. Инкапсуляции HDLC, PPP такого не позволяют;
+* Для каждого логического интерфейса можно выделить полосу, настроить QoS;
+* Один из логических интерфейсов можно включить в bridge-группу с ethernet'ом, к примеру;
+* Можно настроить frame-relay switching и так передавать данные между виртуальными каналами;
+* У VoFR самое эффективное использование полосы при передаче голоса;
+* MFR работает лучше Multilink PPP. Меньше rtt, субъективно стабильнее.
+
+Раньше передача данных осуществлялась по очень дорогим спутниковым каналам или дорогим цифровым междугородним/международным каналам связи.
+Качество "голоса" и рациональное использование полосы за счет мультиплексирования виртуальных каналов позволяли операторам оказывать мультисервисные услуги связи.
+Компрессия заголовков работает только на WAN интерфейсах с PPP,HDLC,FR-инкапсуляцией.
+Пример:
+```text
+interface Serial0/2/0:0.100 point-to-point
+ip unnumbered Loopback0
+frame-relay interface-dlci 100
+frame-relay ip rtp header-compression
+
+interface Serial0/1/0
+ip unnumbered Loopback0
+ip rtp header-compression
+encapsulation ppp
+```
+Из калькулятора:
+```text
+Codec Bit Rate 8 kbps = (Codec Sample Size * 8) / (Codec Sample Interval)
+Codec Sample Size 10 bytes size of each individual codec sample
+Codec Sample Interval 10 msec the time it takes for a single sample
+
+Codec: g729_All_Variants
+Voice Payload Size: 20 bytes
+Voice Protocol: VoIP
+Compression: Not Applicable
+Media Access: Ethernet
+Tunnel/Security/Misc: None
+Number of Calls: 1
+
+Total Bandwidth (including Overhead) 32.76 kbps
+
+Codec: g729_All_Variants
+Voice Payload Size: 20 bytes
+Voice Protocol: VoIP
+Compression: off
+Media Access: Frame-Relay
+Tunnel/Security/Misc: None
+Number of Calls: 1
+
+Total Bandwidth (including Overhead) 28.14 kbps
+
+Codec: g729_All_Variants
+Voice Payload Size: 20 bytes
+Voice Protocol: VoIP
+Compression: on
+Media Access: Frame-Relay
+Tunnel/Security/Misc: None
+Number of Calls: 1
+
+Total Bandwidth (including Overhead) 12.18 kbps
+
+
+Codec: g729_All_Variants
+Voice Payload Size: 30 bytes
+Voice Protocol: VoFR
+Media Access: Not Applicable
+Tunnel/Security/Misc: Not Applicable
+Number of Calls: 1
+
+Cisco IOS Total Bandwidth Needed for 1.0 Calls 10 kbps
+```
