@@ -43,3 +43,10 @@ kron occurrence reboot at 4:00 13 recurring
 kron policy-list reboot
  cli reload
 ```
+
+## tcp-mss
+
+Описано в [/network/tcp_mss/](/network/tcp_mss/)
+```text
+ip tcp adjust-mss <значение>
+```
