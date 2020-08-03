@@ -82,6 +82,13 @@ pi | SUCCESS => {
     "ping": "pong"
 }
 ```
+## Роль ansible
+
+Посмотреть [https://github.com/v98765/ansible-adguardhome](https://github.com/v98765/ansible-adguardhome). Скопировать
+```sh
+$ git clone https://github.com/v98765/ansible-adguardhome
+```
+
 
 ## Проверка 
 
@@ -104,3 +111,8 @@ playbook: play-pi.yml
 (base) vit@a:~/work/home$ ansible-playbook play-pi.yml --check
 ```
 
+## Запуск
+
+```sh
+$ ansible-playbook play-pi.yml
+```
