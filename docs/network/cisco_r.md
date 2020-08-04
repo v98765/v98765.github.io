@@ -1,3 +1,8 @@
+## совет
+
+Вот ссылка на [Guide to Harden Cisco IOS Devices](https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html).
+Там и vstack уже есть для коммутаторов.
+
 ## aux
 
 Наверное, в каждом маршрутизаторе cisco такой порт есть и он позволяет настраивать удаленно через консоль другое оборудование.
@@ -45,6 +50,21 @@ aaa accounting system default
 ```
 Сам tacacs тоже надо прописать. Есть легаси `tacacs-server host ...`, есть рекомендованный вариант с группами.
 
+Для IOS XE все более привычно как было в 12 ветке ios.
+```text
+aaa new-model
+!
+!
+aaa authentication login default group tacacs+ local
+aaa authentication enable default group tacacs+ enable none
+aaa authorization console
+aaa authorization exec default group tacacs+ local 
+aaa accounting commands 15 default start-stop group tacacs+
+aaa accounting network default start-stop group tacacs+
+aaa accounting connection default start-stop group tacacs+
+aaa accounting system default start-stop group tacacs+
+```
+
 ## logging
 
 Про aux писал выше. Если остался кабель, то в устройстве надо выключить логирование в консоль.
@@ -71,6 +91,11 @@ logging host 10.9.8.1 discriminator FIX
 ```
 По `sh logging` можно увидеть активные дискриминаторы и счетчики дропов `message lines dropped-by-MD`.
 
+Время в логах:
+```text
+service timestamps debug datetime msec localtime
+service timestamps log datetime msec localtime
+```
 
 ##cisco 4321 throughput
 После пробного периода использования throughput лицензии в 4321 (16.9.4), она становится Life time и RightToUse.
@@ -351,3 +376,93 @@ access-list 100 permit ip host 0.0.0.0 host 0.0.0.0
 ```text
 ip prefix-list 1 permit 0.0.0.0/0
 ```
+
+## copp
+
+Открытые порты, сессии:
+```text
+show control-plane host open-ports
+```
+
+Была уязвимость на маршрутизаторах, рекомендовали настраивать copp.
+Политика с дропами, поэтому все указанное в acl как permit будет дропнуто.
+В deny указываются ipsec пиры, если такие имеются. Разрешается обращения из приватной сети 10/8 практически без ограничений.
+```text
+access-list 198 deny   tcp 10.0.0.0 0.255.255.255 any
+access-list 198 permit tcp any any eq telnet
+access-list 198 permit tcp any any eq bgp
+access-list 198 permit tcp any any eq 161
+
+access-list 199 permit udp any any eq 18999
+access-list 199 deny   udp 10.0.0.0 0.255.255.255 any
+access-list 199 deny   udp host ipsec-peer-ip any eq non500-isakmp
+access-list 199 permit udp any any eq non500-isakmp
+access-list 199 deny   udp host host ipsec-peer-ip any eq isakmp
+access-list 199 permit udp any any eq isakmp
+access-list 199 permit udp any any eq ntp
+access-list 199 permit udp any any eq snmp
+
+class-map match-all undesirable-tcp
+ match access-group 198
+class-map match-all undesirable-udp
+ match access-group 199
+
+policy-map copp
+ class undesirable-udp
+  drop
+ class undesirable-tcp
+  drop
+
+control-plane
+ service-policy input copp
+```
+copp описан с примерами в rfc 2011 года [rfc6192](https://tools.ietf.org/html/rfc6192).
+
+
+## high cpu usage
+
+Для софтовых маршрутизаторов надо мониторить суммарный pps и сравнивать с графиком загрузки cpu.
+При высокой загрузке надо смотреть `sh proc cpu history`, где фиксирутся на псевдографиках максимальные значения загрузки cpu.
+При появлении override и ignored ошибок на интерфейсах менять маршрутизатор на более производительный, если дальнейшая оптимизация конфигурации невозможна.
+Если загрузка cpu выросла внезапно, то проверить включен ли cef. Он может автоматически выключиться, если закончилась память, например.
+
+## netflow для ios
+
+```text
+ip flow-cache timeout active 5
+ip flow-export source Loopback0
+ip flow-export version 5
+ip flow-export destination <ip> <port>
+ip flow-top-talkers
+ top 50
+ sort-by bytes
+```
+На всех интерфейсах с ip-адресами включить `ip flow ingress`. Проверить сбор данных:
+```
+show ip flow top-talkers
+show ip cache flow
+```
+Есть разные коллекторы для netflow 5. Если ресурсы позвляют, то [elastiflow](https://github.com/robcowart/elastiflow).
+Сложить netflow в tsdb (ifluxdb) это очень плохая идея и трата времени.
+
+## neflow для ios xe
+
+```
+flow exporter DOH
+ destination <ip>
+ source Loopback0
+ transport udp <port>
+ export-protocol netflow-v5
+!
+!
+flow monitor DOH
+ exporter DOH
+ cache timeout active 60
+ record netflow-original
+```
+На всех интерфейсах с ip-адресами включить `ip flow monitor DOH input`. Проверить сбор данных:
+```text
+show flow monitor DOH statistics
+show flow monitor DOH cache sort ipv4 tos format table
+```
+Без коллектора никуда.
