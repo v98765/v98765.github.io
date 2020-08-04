@@ -29,5 +29,6 @@ nav:
         - 'Mkdocs': work/mkdocs.md
         - 'Proxy for app': work/app_proxy.md
         - 'Empty, sshpass': work/empty.md
+        - 'Translit, recode: work/translit.md
 theme:
   name: material
