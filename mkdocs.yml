@@ -11,6 +11,8 @@ nav:
         - 'NLB': network/nlb.md
         - 'TCP MSS': network/tcp_mss.md
         - 'Flowcontrol': network/flowcontrol.md
+        - 'PoE': network/poe.md
+        - 'СКС': network/sks.md
         - 'Switch list for vxlan': network/vxlan_sw.md
         - 'Switch cisco': network/cisco_sw.md
         - 'Switch juniper ex': network/juniper_ex.md
