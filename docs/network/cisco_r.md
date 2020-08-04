@@ -16,6 +16,62 @@ line aux 0
 Узнать порт линии командой `sh line`. Напротив AUX будет номер и чаще это 1. Реже 65. Т.о. надо выполнить telnet на порт 2001 маршрутизатора.
 Сброс линии `clear line aux 0`
 
+## aaa для tacacs
+
+Для версии IOS 15.7
+```text
+aaa new-model
+!
+!
+aaa authentication login default group tacacs+ local
+aaa authentication enable default group tacacs+ enable none
+aaa authorization console
+aaa authorization exec default group tacacs+ local 
+aaa accounting commands 15 default
+ action-type start-stop
+ group tacacs+
+!
+aaa accounting network default
+ action-type start-stop
+ group tacacs+
+!
+aaa accounting connection default
+ action-type start-stop
+ group tacacs+
+!
+aaa accounting system default
+ action-type start-stop
+ group tacacs+
+```
+Сам tacacs тоже надо прописать. Есть легаси `tacacs-server host ...`, есть рекомендованный вариант с группами.
+
+## logging
+
+Про aux писал выше. Если остался кабель, то в устройстве надо выключить логирование в консоль.
+В противном случае в логах такакса будет много чего почитать.
+```text
+no logging console
+```
+В консоли и vty прописать
+```text
+line con 0
+ logging synchronous
+line vty 0 4
+ logging synchronous
+```
+Фильтрация сообщений. Например, трансивер левый показывает некорректную температуру, чем создает сообщения от шасси в логах
+```text
+%SFF8472-5-THRESHOLD_VIOLATION: Te1/2: Temperature low alarm; Operating value: -127.2 C, Threshold value:   -4.0 C.
+%SFF8472-5-THRESHOLD_VIOLATION: Te1/2: Temperature high alarm; Operating value:  118.0 C, Threshold value:   74.0 C.
+```
+```text
+logging discriminator FIX mnemonics drops THRESHOLD_VIOLATION 
+logging buffered discriminator FIX
+logging host 10.9.8.1 discriminator FIX
+```
+По `sh logging` можно увидеть активные дискриминаторы и счетчики дропов `message lines dropped-by-MD`.
+
+
 ##cisco 4321 throughput
 После пробного периода использования throughput лицензии в 4321 (16.9.4), она становится Life time и RightToUse.
 ```text
@@ -247,4 +303,51 @@ snmpwalk -v2c -c public $hostname casnUserId.$session_id
 # сброс сессии. используется community на запись
 snmpset -v2c -c private $hostname casnDisconnect.$session_id i 1
 # вывод .. = INTEGER: true(1)
+```
+
+## backup interface
+
+Фича [backup interface](https://www.cisco.com/c/en/us/td/docs/routers/access/1900/software/configuration/guide/Software_Configuration/backup.html) может пригодится
+в случае, когда ассиметрия недопустима, как например, при включении в маршрутизатор межсетевых экранов asa, где flow должен передаваться через один и тот же интерфейс в обе стороны.
+Писал об этом [тут](http://prosto-seti.blogspot.com/2018/11/blog-post.html). Это был единственный раз когда данный функционал пригодился.
+```text
+interface GigabitEthernet0/0
+ description asa1-eth1
+ ip address 10.1.1.97 255.255.255.252
+!
+interface GigabitEthernet0/1
+ description asa2-eth1
+ ip address 10.1.1.109 255.255.255.252
+!
+interface GigabitEthernet0/2
+ description r2-gi0/2
+ backup interface GigabitEthernet0/1
+ ip address 10.1.1.104 255.255.255.254
+ ip ospf network point-to-point
+
+r1#sh int desc  
+Interface                      Status         Protocol Description
+Em0/0                          admin down     down     
+Gi0/0                          up             up       asa1-eth1
+Gi0/1                          standby mode   down     asa2-eth1
+Gi0/2                          up             up       r2-gi0/2
+```
+
+## object group
+
+Можно использовать в acl, которые используются потом в PBR.
+
+## acl for default route
+
+Стандартный лист
+```text
+access-list 10 permit 0.0.0.0
+```
+Расширенный лист
+```text
+access-list 100 permit ip host 0.0.0.0 host 0.0.0.0
+```
+Префикс лист
+```text
+ip prefix-list 1 permit 0.0.0.0/0
 ```
