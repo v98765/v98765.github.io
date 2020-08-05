@@ -22,7 +22,11 @@ nav:
         - 'Router cisco': network/cisco_r.md
     - voip:
         - 'Softphones': voip/softphone.md
-        - 'Voip cisco': voip/cisco_voip.md
+        - 'Cisco E1 gateway': voip/cisco_e1_gateway.md
+        - 'Cisco CDR for gateway': voip/cisco_gw_cdr.md
+        - 'Cisco CME(CUCME)': voip/cisco_cme.md
+        - 'Cisco COR list': voip/cisco_cor.md
+        - 'Cisco voip notes': voip/cisco_voip.md
     - work:
         - 'AdGuardHome': work/adguardhome.md
         - 'Miniconda': work/miniconda.md
@@ -31,5 +35,6 @@ nav:
         - 'Empty, sshpass': work/empty.md
         - 'Tacacs': work/tacacs.md
         - 'Translit, recode': work/translit.md
+        - 'Speed test': work/speedtest.md
 theme:
   name: material
