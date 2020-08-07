@@ -101,7 +101,7 @@ sum_over_time(share_gt_over_time(rttMonLatestRttOperSense{instance="cisco-router
 sum_over_time(share_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAdminCtrlOwnerIndex="1",nqaAdminCtrlTestName="1"}[1m], 1)[$ivl])
 sum_over_time(share_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAdminCtrlOwnerIndex="1",nqaAdminCtrlTestName="2"}[1m], 1)[$ivl])
 ```
-60*24*31=44640 столько точек в одном временном ряду за 31 день. Поэтому victoriametrics запускается с параметром `-search.maxPointsPerTimeseries=50000`.
+`60 * 24 * 31 = 44640` столько точек в одном временном ряду за 31 день. Поэтому victoriametrics запускается с параметром `-search.maxPointsPerTimeseries=50000`.
 Делаю некорректно, т.к. нужно передать еще и step=60, чтобы корректно отработал share_gt_over_time c интервалом раз в минуту.
 По умолчанию при instant запросе он не передается и не должен, но надо. Поэтому я указал его в опциях датасорса. У vm дефолтовый step=300.
 
@@ -132,7 +132,7 @@ cpmCPUTotal5min{instance="$ip"}
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | graph | timeseries | |
 
 В поле Legend указать `{{cpu5min}}` чтобы не отображать все имеющиеся лейблы временного ряда. Panel -> Axes -> Left Y -> Unit -> Misc -> percent (0-100)
@@ -195,7 +195,7 @@ no | graph | timeseries | |
 В поле Legend указать `$iface recv` и `$iface send` для второго и третьего запроса и `Total recv` для первого.
 Panel -> Axes -> Left Y -> Unit -> Data rate -> bits/sec.
 
-MetricQL позволяет конструировать один запрос для приема и передачи. Ниже сумма счетчиков с двух интерфейсов Gi0/1.100 разных марщрутизаторов для построения одного графика:
+MetricQL позволяет конструировать один запрос для приема и передачи. Ниже сумма счетчиков с двух интерфейсов Gi0/1.100 разных маршрутизаторов для построения одного графика:
 ```text
 WITH (
 	cf = {instance=~"border-1|border-2", ifName="Gi0/1.100" },
