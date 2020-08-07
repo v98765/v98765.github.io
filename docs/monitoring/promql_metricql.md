@@ -41,8 +41,9 @@ ifDescr из ifTable не опрашиваю, поэтому имена толь
 ```text
 sysUpTime{instance="$ip"}*10
 ```
+
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | Stat |  | 1m | 15m
 
 Field -> Standard options -> Units -> Time -> duration (ms), Field -> Standard options -> Decimals -> 3,
@@ -58,7 +59,7 @@ bottomk by (job) (5, (delta(ciscoMemoryPoolFree{ciscoMemoryPoolType!="20"}[7d]))
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | table | 7d | 7d
 
 
@@ -72,7 +73,7 @@ topk(5, (increase(ifOutDiscards{obj="$object"}[8h]))) > 0
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | table | 8d | 8d
 
 Для вывода ошибок по конкретному хосту удобнее видеть таблицу с текущими ошибками и суммой за период:
@@ -81,7 +82,7 @@ increase(ifInErrors{instance="$ip"}[5m])
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | table | timeseries | 5m | 1h
 
 Для timeseries нужно в таблице сделать Transform Reduce с Calculation Last, Total.
@@ -105,7 +106,7 @@ sum_over_time(share_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAd
 По умолчанию при instant запросе он не передается и не должен, но надо. Поэтому я указал его в опциях датасорса. У vm дефолтовый step=300.
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | timeseries | 1m, $ivl |
 
 Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max или Last.
@@ -118,7 +119,7 @@ ciscoMemoryPoolFree{instance="$ip",ciscoMemoryPoolType!="20"}*100/(ciscoMemoryPo
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | graph | timeseries | |
 
 В поле Legend указать `{{ciscoMemoryPoolName}}` чтобы не отображать все имеющиеся лейблы временного ряда. Panel -> Axes -> Left Y -> Unit -> Misc -> percent (0-100)
@@ -149,7 +150,7 @@ sum(increase(ifOutDiscards{instance="$ip"}[5m]))
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | graph | timeseries | |
 
 В поле Legend указать `$iface` для первого запроса и `Total` для второго.
@@ -167,7 +168,7 @@ sum(increase(ifInErrors{instance="$ip"}[5m]))
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | graph | timeseries | |
 
 В поле Legend указать `$iface` для первого запроса и `Total` для второго.
@@ -188,7 +189,7 @@ BPS по выбранному интерфейсу по передаче:
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | graph | timeseries | |
 
 В поле Legend указать `$iface recv` и `$iface send` для второго и третьего запроса и `Total recv` для первого.
@@ -240,7 +241,7 @@ WITH (
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | timeseries | 5m | 5m
 
 В поле Legend указать `{{instance}},{{ifName}}`.
@@ -258,7 +259,7 @@ rate(ifHCOutUcastPkts{instance="$ip",ifName="$iface"}[5m])
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 no | graph | timeseries | |
 
 В поле Legend указать `$iface recv` и `$iface send` для первого и второго запроса.
@@ -275,9 +276,8 @@ topk(10,sum_over_time(changes(ifOperStatus{}[1m])[1h]))
 topk(10,sum_over_time(changes(ifHighSpeed{}[1m])[1h]))
 ```
 
-
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | timeseries | 1m | 1h
 
 В поле Legend указать `{{instance}},{{ifName}}`.
@@ -291,7 +291,7 @@ bottomk(1,dot1dStpPriority) by (obj)
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | timeseries | 1m | 5m
 
 В поле Legend указать `{{instance}}`.
@@ -303,7 +303,7 @@ yes | table | timeseries | 1m | 5m
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | timeseries | 1m | 5m
 
 В поле Legend указать `{{instance}}`.
@@ -315,7 +315,7 @@ sum_over_time(changes(dot1dStpRootPort{})[1h]) >
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | timeseries | 1m | 1h
 
 В поле Legend указать `{{instance}}`.
@@ -330,5 +330,5 @@ cErrDisableIfStatusCause{}[1m]
 ```
 
 instant | panel | format | interval | relative time
---------| -------| ---------| -------------
+---|---|---|---|---
 yes | table | table | 1m | 5m
