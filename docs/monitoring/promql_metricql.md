@@ -4,7 +4,7 @@
 
 ## Список метрик
 
-В меню grafana есть возможность делать запросы в базы через Explore. Для вывода всех метрик, полученных по job'у jobname выполнить:
+В grafana есть возможность делать запросы в базы через Explore. Для вывода всех метрик, полученных по job'у job_name выполнить:
 ```text
 max({job="job_name"}) by (__name__)
 ``` 
@@ -332,3 +332,73 @@ cErrDisableIfStatusCause{}[1m]
 instant | panel | format | interval | relative time
 ---|---|---|---|---
 yes | table | table | 1m | 5m
+
+## Проверка протоколов маршрутизации
+
+Для проверки состояния протоколов маршрутизации можно использовать доступные метрики, создавать алерты средствами grafana или vmalerts+alertmanager.
+
+BGP peer status равен 6, если established. Если не 6, то алерт.
+```text
+bgpPeerState{bgpPeerRemoteAddr="10.9.8.7"}[1m]
+```
+Huawei OSPF nbr state. 8 - OK. Если меньше, то алерт.
+```text
+hwOspfv2NbrState{hwOspfv2NbrIpAddrIndex="10.9.8.7"}[1m]
+```
+
+## Проверка проберов SLA, NQA
+
+NQA для huawei с icmp пробером. 1 - ОК. Если больше, то алерт.
+```text
+nqaResultsCompletions{instance="huawei",nqaAdminCtrlTestName="1"}[1m]`
+```
+Cisco SLA с icmp пробером. 1 - OK. 3 - OK, но сработал трешхолд по rtt. 4 - FAIL.
+```text
+rttMonLatestRttOperSense{instance="cisco",rttMonCtrlAdminIndex="1"}[1m]
+```
+Наличие потерь на канале связи, когда статус периодически изменяется. Если более 4 раз за 15 минут, то алерт.
+```
+changes(rttMonLatestRttOperSense{instance="cisco",rttMonCtrlAdminIndex="1"}[15m])
+```
+
+## Проверка статуса интерфейса
+
+1 - OK. Если больше, то алерт.
+```text
+ifOperStatus{ifName="Gi1/0/1",instance="cisco"}[1m]
+```
+
+## Проверка температуры
+
+Есть датчики на оборудовании Cisco и у большинства старых моделей одинаковый oid, но разные TemperatureStatusIndex для разных моделей, стеков.
+Либо датчиков более одного и нужно выбрать конкретный.
+```text
+ciscoEnvMonTemperatureStatusValue{ciscoEnvMonTemperatureStatusIndex="1",instance="cisco"}[10m]
+```
+Проверка температуры батарей ИБП.
+```text
+upsAdvBatteryTemperature{instance="apc_ups"}
+```
+
+## Проверка ИБП APC
+
+Статус. 2 - ОК. 3 - на батареях. 12 - напряжение выше 250В на входе.
+```text
+upsBasicOutputStatus{instance="apc_ups"}
+```
+
+Enum
+```text
+  1: unknown
+  2: onLine
+  3: onBattery
+  4: onSmartBoost
+  5: timedSleeping
+  6: softwareBypass
+  7: "off"
+  8: rebooting
+  9: switchedBypass
+  10: hardwareFailureBypass
+  11: sleepingUntilPowerReturn
+  12: onSmartTrim
+```
