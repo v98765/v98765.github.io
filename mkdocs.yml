@@ -3,6 +3,7 @@ nav:
     - 'About': index.md
     - monitoring:
         - 'PromQL, MetricQL': monitoring/promql_metricql.md
+        - 'Vmagent, snmp_exporter': monitoring/snmp_exporter.md
         - 'Telegraf vs vmagent': monitoring/telegraf_vmagent.md
         - 'Telegraf snmp': monitoring/telegraf_snmp.md
     - network:
