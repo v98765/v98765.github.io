@@ -92,6 +92,7 @@ $ systemctl status snmp_exporter
    CGroup: /system.slice/snmp_exporter.service
            └─6467 /usr/local/bin/snmp_exporter --config.file /etc/snmp_exporter/snmp.yml
 ``` 
+Установку snmp_expoter делаю с ролью [ansible-snmp-exporter](https://github.com/v98765/ansible-snmp-exporter).
 
 ## vmagent
 
