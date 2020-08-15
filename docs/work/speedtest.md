@@ -7,6 +7,8 @@
 
 [speedtest.net](https://speedtest.net)
 
+[fireprobe.net](https://www.fireprobe.net/) в тч [ping-test.ru](http://ping-test.ru/)
+
 ## сайты для прочих проверок
 
 [help.kontur.ru/check](https://help.kontur.ru/check) для windows и требует установки плагинов. Проверяет наличие mitm сертификатов в антивирусе, прокси.
