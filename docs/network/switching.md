@@ -17,6 +17,20 @@ Type | 2 | Defines the type of protocol listed inside the frame (either length o
 Data and Pad | 46–1500 | Holds data from a higher layer, typically a Layer 3 PDU (generic), and often an IP packet
 Frame Check Sequence (FCS) | 4 | Provides a method for the receiving NIC to determine whether the frame experienced transmission errors
 
+## switching
+
+Два режима: Store-and-Forward и Cut-Through. Во втором случае все фреймы с ошибками, например с FCS, передаются на следующее устройство.
+
+[Цитата](https://community.mellanox.com/s/article/switch-forwarding---160---store-and-forward--vs---cut-through-x)
+
+>Store-and-Forward is used to describe a functionality where a switch receives a complete packet, stores it, and only then forwards it.
+>since the switch make forwarding decisions based on the destination address which is at the header of the packet, the switch can make the forwarding decision before receiving the complete packet, this process is called cut-through, the switch forwards part of the packet before receiving the complete packet.
+>Cut-through allows lower latency and saves buffer space, but if an error occurred in the packet while utilizing cut-through, the packet will be forwarded with an error, alternatively, utilizing store-and-forward allows the switch to drop erroneous packets.
+
+## flow-control
+
+(/img/flow.gif)
+
 ## aging
 
 Время хранения хэша в памяти по умолчанию 5 минут. В хеше обычно хранятся только юникастовые адреса, а для мультикастовых групповых адресов есть igmp-таймеры.
