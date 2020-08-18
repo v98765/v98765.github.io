@@ -22,6 +22,7 @@ nav:
         - 'Switch eltex': network/eltex.md
         - 'Switch tfortis': network/tfortis.md
         - 'Router cisco': network/cisco_r.md
+        - 'Router vyos': network/vyos.md
     - voip:
         - 'Softphones': voip/softphone.md
         - 'Cisco E1 gateway': voip/cisco_e1_gateway.md

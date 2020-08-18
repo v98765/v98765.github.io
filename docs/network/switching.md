@@ -27,10 +27,6 @@ Frame Check Sequence (FCS) | 4 | Provides a method for the receiving NIC to dete
 >since the switch make forwarding decisions based on the destination address which is at the header of the packet, the switch can make the forwarding decision before receiving the complete packet, this process is called cut-through, the switch forwards part of the packet before receiving the complete packet.
 >Cut-through allows lower latency and saves buffer space, but if an error occurred in the packet while utilizing cut-through, the packet will be forwarded with an error, alternatively, utilizing store-and-forward allows the switch to drop erroneous packets.
 
-## flow-control
-
-![flow-control](/img/flow.gif)
-
 ## aging
 
 Время хранения хэша в памяти по умолчанию 5 минут. В хеше обычно хранятся только юникастовые адреса, а для мультикастовых групповых адресов есть igmp-таймеры.
