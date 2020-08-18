@@ -29,7 +29,8 @@ Frame Check Sequence (FCS) | 4 | Provides a method for the receiving NIC to dete
 
 ## flow-control
 
-(/img/flow.gif)
+![flow-control][1]
+[1](/img/flow.gif)
 
 ## aging
 
