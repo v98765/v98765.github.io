@@ -79,6 +79,8 @@ ifHighSpeed | скорость интерфейса для расчета % ут
 ifName | имя интерфейса из ifxtable вместо ifIndex, который удален `drop_source_indexes: true`
 ifType | тип интерфейса для фильтрации метрик в vmagent'е, чтобы исключить сбор данных по логическим интерфейсам
 
+Дропать индекс интерфейсов для некторых маршрутизаторов cisco нельзя.
+
 ## Запуск snmp_exporter
 
 Необходим конфигурационный файл /etc/snmp_exporter/snmp.yml и запустить snmp_exporter.
@@ -144,3 +146,19 @@ scrape_configs:
 curl http://localhost:8429/targets
 ```
 Установку vmagent делаю с ролью [ansible-vmagent](https://github.com/v98765/ansible-vmagent).
+
+Для маршрутизаторов нужны в т.ч. логические интерфейсы, поэтому для цисок удаляются какие-то конкретные iftype:
+```text
+    metric_relabel_configs:
+    - action: drop
+      regex: ^1$|22|24|32|33|39|53|63|77
+      source_labels:
+      - ifType
+```
+
+Мониторинг huawei nqa осложняется наличием меняющихся индексов истории, которые надо удалить:
+```text
+    metric_relabel_configs:
+    - action: labeldrop
+      regex: nqaResultsIndex|nqaResultsHopIndex
+```
