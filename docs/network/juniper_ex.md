@@ -140,6 +140,7 @@ Aggregated interface: ae0
 ```
 
 ## virtual-chassis
+
 В основном стекируются через sfp+ порты 2300 и 3300, либо через медные в ex2200. Бывают stack интерфейсы у 4200 серии.
 Читайте документацию на модель.
 Для 2200 написано "We recommend that you physically cable the ports as the final step of this procedure."
@@ -325,6 +326,31 @@ interfaces {
 ```
 
 ## tacacs
+
+```text
+system {
+   authentication-order [ tacplus password ];
+    tacplus-server {
+        10.8.7.6 {
+            secret "key";
+            single-connection;
+        }
+    }
+    accounting {
+        events [ login interactive-commands ];
+        destination {
+            tacplus {
+                server {
+                    10.8.7.6 {
+                        secret "key";
+                        single-connection;
+                    }
+                }
+            }
+        }
+    }
+}
+```
 
 ## dhcp-snooping на Juniper EX, кроме EX9200
 
@@ -713,9 +739,34 @@ Queue: 7, Forwarding classes: network-control
 ```
 Классы можно мониторить по snmp.
 
+## spanning-tree
+
+На разных моделях в разных версиях может отличаться. Например в 2300 stp работает на указанных в настройках портах.
+В старых версиях и моделях 2200 3300 4200 работает везде, надо в конфиге наоборот отключать.
+```text
+> show configuration protocols mstp 
+configuration-name abc;
+revision-level 1;
+bridge-priority 24k;
+interface ge-0/0/1.0 {
+    disable;
+}
+interface ge-0/0/2.0 {
+    mode point-to-point;
+}
+msti 1 {
+    bridge-priority 24k;
+    vlan 1-4094;
+}
+
+{master:0}
+```
+
 ## bpdufilter, bpduguard
 
-Я не знаю, фильтруют ли производители своими bpdufilter'ами цисковский 01:00:0C:CC:CC:CD или нет. В общем случае, рекомендуется написать фильтр с указанием двух мак-адресов и повесить по входу, например, такой:
+Я не знаю, фильтруют ли производители своими bpdufilter'ами цисковский 01:00:0C:CC:CC:CD или нет.
+В общем случае, рекомендуется написать фильтр с указанием двух мак-адресов и повесить по входу, например, такой:
+```text
 firewall {
     family inet {
         filter bpdufilter {
@@ -738,10 +789,11 @@ firewall {
         }
     }
 }
+```
 Согласно документации, на мелких коммутаторах, кроме ex9200, можно глобально включить фильтр для портов, где spanning-tree отключен.
 В примере ниже для всех интерфейсов отключен spanning-tree и включена фильтрация bpdu, но это работало в старых версиях junos.
 В 12.3R12.4 надо в явном виде в bpdu-block прописывать интерфейсы, где stp работает, иначе зафильтрует bpdu на всех интерфейсах. Нежданчик.
-```
+```text
 ex2200> show configuration protocols mstp                
 configuration-name abc;
 revision-level 1;
@@ -802,30 +854,40 @@ vlan all {
 {master:0}
 ```
 
-## spanning-tree
-
-На разных моделях в разных версиях может отличаться. Например в 2300 stp работает на указанных в настройках портах.
-В старых версиях и моделях 2200 3300 4200 работает везде, надо в конфиге наоборот отключать.
-```text
-> show configuration protocols mstp 
-configuration-name abc;
-revision-level 1;
-bridge-priority 24k;
-interface ge-0/0/1.0 {
-    disable;
-}
-interface ge-0/0/2.0 {
-    mode point-to-point;
-}
-msti 1 {
-    bridge-priority 24k;
-    vlan 1-4094;
-}
-
-{master:0}
-```
-
 ## storm-control
 
 Хорошая штука, но на своих аплинках надо выключать
+```text
+ethernet-switching-options {
+    storm-control {
+        action-shutdown;
+        interface ge-1/0/1.0 {
+            no-broadcast;
+            no-unknown-unicast;
+            no-multicast;
+        }
+}
+```
 
+## SPAN
+
+Количество dst интерфейсов ограничено. От 1 в до 4.
+```text
+ethernet-switching-options {
+    analyzer span {
+        input {
+            ingress {
+                vlan 100;
+                vlan 200;
+                vlan 300;
+            }
+        }
+        output {
+            interface {
+                ge-0/0/47.0;
+            }
+        }
+    }
+
+}
+```
