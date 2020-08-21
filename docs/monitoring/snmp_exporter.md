@@ -162,3 +162,7 @@ curl http://localhost:8429/targets
     - action: labeldrop
       regex: nqaResultsIndex|nqaResultsHopIndex
 ```
+
+## links
+
+[https://www.robustperception.io/numbers-from-displaystrings-with-the-snmp_exporter](https://www.robustperception.io/numbers-from-displaystrings-with-the-snmp_exporter)
