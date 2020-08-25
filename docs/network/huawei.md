@@ -42,7 +42,7 @@ interface GigabitEthernet0/0/1
  port vlan-stacking vlan 10 stack-vlan 99
  port vlan-stacking vlan 20 stack-vlan 99
  port vlan-stacking vlan 30 stack-vlan 99
-```text
+```
 
 ## qos
 
@@ -66,6 +66,7 @@ interface Vlanif110
  dhcp select relay
  dhcp relay server-select 0
 ```
+
 По умолчанию интерфейсы недоверенные, поэтому `dhcp snooping trusted` там где нужно.
 
 ## Фильтр pvst на коммутаторах huawei
