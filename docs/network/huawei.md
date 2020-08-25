@@ -208,9 +208,6 @@ traffic policy 35 match-order config
 Применить к интерфейсу
 ```text
 interface GigabitEthernet0/0/1
- undo portswitch
- description TTK_vlan2943_p1
- ip address 10.1.46.49 255.255.255.254
  traffic-policy 31 inbound
  traffic-policy 35 outbound
 ```
