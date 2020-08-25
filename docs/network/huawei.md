@@ -186,7 +186,7 @@ acl number 3500
 ```
 
 Классы
-```
+```text
 traffic classifier 3100 operator or
  if-match acl 3100
 traffic classifier 3500 operator or
@@ -198,7 +198,7 @@ traffic behavior tbstat
 ```
 
 Политики, где может быть более одного класса.
-```
+```text
 traffic policy 31 match-order config
  classifier 3100 behavior tbstat
 traffic policy 35 match-order config
@@ -240,7 +240,7 @@ interface GigabitEthernet0/0/1
 ```
 
 Смотреть счетчики в классах
-```
+```text
 >disp traffic policy statistics interface g0/0/1 inbound verbose classifier-base class 3100
 
  Interface: GigabitEthernet0/0/1
