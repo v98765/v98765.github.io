@@ -390,3 +390,14 @@ queue:    threshold1   threshold2   threshold3
 
 Policer: Inprofile:            0 OutofProfile:            0
 ```
+
+## qos на 4900M
+
+Полисеры для маркировки, полисеры для ограничения полосы в классе настраиваются немного иначе
+```text
+vlan configuration 100
+  service-policy output MARK
+vlan configuration 200,300
+  service-policy input LIMIT
+```
+Смотреть `sh policy-map vlan`
