@@ -95,19 +95,16 @@ no | table | timeseries | 5m | 1h
 Для каждого пробера в одной таблице создается отдельный запрос, чтобы понятными буквами в легенде описать название канала связи.
 Каждая строка - отдельный запрос: A,B и т.д.
 ```text
-sum_over_time(share_gt_over_time(rttMonLatestRttOperSense{instance="cisco-router-1",rttMonCtrlAdminIndex="1"}[1m], 3)[$ivl])
-sum_over_time(share_gt_over_time(rttMonLatestRttOperSense{instance="cisco-router-1",rttMonCtrlAdminIndex="2"}[1m], 3)[$ivl])
+count_gt_over_time(rttMonLatestRttOperSense{instance="cisco-router-1",rttMonCtrlAdminIndex="1"}[$ivl], 3)
+count_gt_over_time(rttMonLatestRttOperSense{instance="cisco-router-1",rttMonCtrlAdminIndex="2"}[$ivl], 3)
 ..
-sum_over_time(share_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAdminCtrlOwnerIndex="1",nqaAdminCtrlTestName="1"}[1m], 1)[$ivl])
-sum_over_time(share_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAdminCtrlOwnerIndex="1",nqaAdminCtrlTestName="2"}[1m], 1)[$ivl])
+count_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAdminCtrlOwnerIndex="1",nqaAdminCtrlTestName="1"}[$ivl], 1)
+count_gt_over_time(nqaResultsCompletions{instance="huawei-1",nqaAdminCtrlOwnerIndex="1",nqaAdminCtrlTestName="2"}[$ivl], 1)
 ```
-`60 * 24 * 31 = 44640` столько точек в одном временном ряду за 31 день. Поэтому victoriametrics запускается с параметром `-search.maxPointsPerTimeseries=50000`.
-Делаю некорректно, т.к. нужно передать еще и step=60, чтобы корректно отработал share_gt_over_time c интервалом раз в минуту.
-По умолчанию при instant запросе он не передается и не должен, но надо. Поэтому я указал его в опциях датасорса. У vm дефолтовый step=300.
 
 instant | panel | format | interval | relative time
 ---|---|---|---|---
-yes | table | timeseries | 1m, $ivl |
+yes | table | timeseries | $ivl |
 
 Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max или Last.
 
