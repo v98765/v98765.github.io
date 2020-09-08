@@ -3,7 +3,7 @@
 
 Раздел | Описание
 --- | ---
-monitoring | про victoriametrics, prometheus, telegraf
+monitoring | про victoriametrics, prometheus, telegraf, netflow
 network | заметки о настройке сетевого оборудования
 voip | телефония
 work | прочее
