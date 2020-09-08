@@ -68,6 +68,8 @@ router1 has Status:    OK
 router2 has Status:    OK
 switch1 has Status:    OK
 switch2 has Status:    OK
+
+root@flows:/var/lib/flows# for i in `ls` ; do nfexpire -u $i -s 5g -t 8w ; done
 ```
 
 Можно ставить node_exporter с collector.textfile и генерить метрики
