@@ -6,6 +6,7 @@ nav:
         - 'Vmagent, snmp_exporter': monitoring/snmp_exporter.md
         - 'Telegraf vs vmagent': monitoring/telegraf_vmagent.md
         - 'Telegraf snmp': monitoring/telegraf_snmp.md
+        - 'netflow, sflow': monitoring/sflow.md
     - network:
         - 'Interface Errors': network/errors.md
         - 'Switching': network/switching.md
