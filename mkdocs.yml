@@ -34,6 +34,7 @@ nav:
         - 'Cisco voip notes': voip/cisco_voip.md
     - work:
         - 'AdGuardHome': work/adguardhome.md
+        - 'Ansible for ntwrk': work/ansible_ntwrk.md
         - 'Miniconda': work/miniconda.md
         - 'Mkdocs': work/mkdocs.md
         - 'Proxy for app': work/app_proxy.md
