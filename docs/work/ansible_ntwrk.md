@@ -20,7 +20,7 @@ $ sudo apt install ansible
 $ sudo apt install python-scp
 ```
 
-В centos 7 c python-scp.noarch 0:0.7.1-3.el7 не работает, поэтому pip `pip install scp` или miniconda.
+В centos 7 c python-scp.noarch 0:0.7.1-3.el7 не работает, поэтому pip `pip install scp` или [miniconda](https://v98765.github.io/work/miniconda/).
 
 ## Сохранение конфигурации
 

@@ -9,4 +9,5 @@ conda install -c conda-forge molecule
 conda install -c conda-forge mkdocs
 conda install -c conda-forge mkdocs-material
 conda install -c conda-forge mkdocs-material-extensions
+conda install scp
 ```
