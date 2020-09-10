@@ -5,7 +5,7 @@
 
 ## Установка ansible в ubuntu
 
-Есть так себе причины, почему не через pip, а через apt 
+Есть так себе причины, почему не через pip, а через apt. Лучше через pip или miniconda.
 [installing-ansible-on-ubuntu](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
 
 ```sh
@@ -20,7 +20,7 @@ $ sudo apt install ansible
 $ sudo apt install python-scp
 ```
 
-В centos 7 c python-scp.noarch 0:0.7.1-3.el7 не работает, поэтому pip `pip install scp` или [miniconda](https://v98765.github.io/work/miniconda/) `conda install scp`.
+В centos 7 c python-scp.noarch 0:0.7.1-3.el7 не работает, поэтому [pip в venv](https://v98765.github.io/work/venv/) `pip install scp` или [miniconda](https://v98765.github.io/work/miniconda/) `conda install scp`.
 
 ## Сохранение конфигурации
 
