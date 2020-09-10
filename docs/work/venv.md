@@ -17,8 +17,8 @@ Successfully installed MarkupSafe-1.1.1 PyYAML-5.3.1 ansible-2.9.13 bcrypt-3.2.0
 ```
 Проверка
 ```sh
-(env) ~$ whereis ansible-playbook
-ansible-playbook: /home/user/env/bin/ansible-playbook
+(env) ~$ ansible --version | grep exe
+  executable location = /home/user/env/bin/ansible
 ```
 Выход из env `deactivate`
 
