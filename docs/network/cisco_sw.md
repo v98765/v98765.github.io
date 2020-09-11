@@ -401,3 +401,23 @@ vlan configuration 200,300
   service-policy input LIMIT
 ```
 Смотреть `sh policy-map vlan`
+
+## eem high cpu
+
+От cisco tac 
+```text
+process cpu threshold type total rising 60 interval 5
+
+event manager applet HIGH_CPU
+event syslog pattern "CPURISINGTHRESHOLD"
+action 0.0 syslog msg "High CPU Detected"
+action 0.1 cli command "enable"
+action 0.2 cli command "show clock | append nvram:HIGHCPU.txt"
+action 0.2 cli command "show process cpu sort | append nvram:HIGHCPU.txt"
+action 0.2 cli command "debug platform packet all receive"
+action 0.3 cli command "show platform cpu packet buffered | append nvram:HIGHCPU.txt"
+action 0.4 cli command "show ip arp | append nvram:HIGHCPU.txt"
+action 0.9 cli command "show platform cpu packet statistics | append nvram:HIGHCPU.txt"
+action 0.9 cli command "undebug all"
+action 1.1 cli command "end"
+```
