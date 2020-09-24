@@ -22,12 +22,12 @@ switch# install all nxos bootflash:nxos.7.0.3.I7.7.bin
 
 Взято за основу [эта заметка](https://community.cisco.com/t5/data-center-documents/getting-winscp-on-n9k-to-work-settings-config-required/ta-p/3818490)
 где используется winscp для копирования файлов на nexus. В настройках winscp Enviroment\Directories указать Remote directory `/bootflash`,
-в Enviroment\SCP/Shell указать Shell `run bash`
+в Enviroment\SCP/Shell указать Shell `run bash`. Эти пункты доступны при подключении по SCP протоколу к удаленному устройству.
 
 На коммутаторе в режиме конфигурирования включить сервисы
 ```text
 feature bash-shell
-feature sftp-server
+feature sсp-server
 ```
 
 Скачать файл , посмотреть MD5 на сайте cisco (клик на имя файла)
