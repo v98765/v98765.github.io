@@ -13,8 +13,12 @@
 ```text
 switch# install all system n3000-uk9.6.0.2.U6.3.bin kickstart n3000-uk9-kickstart.6.0.2.U6.3.bin
 ```
-Перезагрузка, установка рекомендуемой версии в варианте Guidelines for Upgrading in Non-Fast Reload Scenarios
+Проверка
+```text
+switch# show install all impact nxos bootflash:nxos.7.0.3.I7.7.bin
 ```
+Перезагрузка, установка рекомендуемой версии в варианте Guidelines for Upgrading in Non-Fast Reload Scenarios
+```text
 switch# install all nxos bootflash:nxos.7.0.3.I7.7.bin
 ```
 
