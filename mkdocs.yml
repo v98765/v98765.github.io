@@ -21,6 +21,7 @@ nav:
         - 'Switch juniper ex': network/juniper_ex.md
         - 'Switch huawei s57': network/huawei.md
         - 'Switch eltex': network/eltex.md
+        - 'Switch extreme': network/extreme.md
         - 'Switch tfortis': network/tfortis.md
         - 'Router cisco': network/cisco_r.md
         - 'Router vyos': network/vyos.md
