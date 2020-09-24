@@ -18,6 +18,7 @@ nav:
         - 'СКС': network/sks.md
         - 'Switch list for vxlan': network/vxlan_sw.md
         - 'Switch cisco': network/cisco_sw.md
+        - 'Switch cisco nexus3k': network/nexus3k.md
         - 'Switch juniper ex': network/juniper_ex.md
         - 'Switch huawei s57': network/huawei.md
         - 'Switch eltex': network/eltex.md
