@@ -100,3 +100,72 @@ $ ansible-playbook ciscocopy.yml -u ciscologin -k --tag ciscocopy_backup
 ```sh
 $ ansible-playbook ciscocopy.yml -u ciscologin -k --limit cisco-switch2
 ```
+
+## junos
+
+Ниже все для примера, без доп. проверок на что-либо.
+
+В инвентори
+```text
+[all:children]
+juniper_l2
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[juniper_l2]
+juniper-switch1 ansible_host=10.0.0.1
+
+[juniper_l2:vars]
+ansible_become=no
+ansible_network_os=junos
+```
+
+Скопировать текущую конфигурацию. Надо подумать как быть с архивом, потому что повторно модуль не работает. С текстом ок.
+```yaml
+---
+- name: copy config
+  hosts: juniper_l2
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: copy file from the network device to localhost
+      net_get:
+        src: /config/juniper.conf.gz
+        dest: "~/config/{{ inventory_hostname_short }}.conf.gz"
+        protocol: scp
+```
+Положить текстовый файл конфигурации на оборудование  не было.
+```yaml
+---
+- name: copy config
+  hosts: juniper_l2
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: copy file from the network device to localhost
+      net_get:
+        src: /config/juniper.conf.gz
+        dest: "~/config/{{ inventory_hostname_short }}.conf.gz"
+        protocol: scp
+```
+Загрузить текстовую конфигурацию на оборудование, либо сравнить с текущей, если `--check` указать при запуске плея.
+При выполнении конфигурации она загружается через `load override`, выполняется `show | compare`. Нет изменений, то `rollback 0` и отключение.
+Если `show | compare` с изменениями, то `commit and-quit`. Необходимо учесть, что есть малопроизводительное оборудование, которое долго делает commit.
+Если `commit` делается более 30 сек, то отработает дефолтовый таймаут на операцию. Документация на модуль [cli_config](https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/cli_config_module.html)
+с примерами.
+
+```yaml
+---
+- name: copy config
+  hosts: juniper_l2
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: junos replace config
+      cli_config:
+        replace: "/var/tmp/{{ inventory_hostname_short }}.conf"
+```
