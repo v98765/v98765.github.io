@@ -41,6 +41,7 @@ nav:
         - 'Miniconda': work/miniconda.md
         - 'Pip, venv': work/venv.md
         - 'Mkdocs': work/mkdocs.md
+        - 'Msys2': work/msys2.md
         - 'Proxy for app': work/app_proxy.md
         - 'Empty, sshpass': work/empty.md
         - 'Tacacs': work/tacacs.md

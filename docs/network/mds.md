@@ -12,3 +12,70 @@ If your switch is running software that is earlier than Cisco NX-OS Release 5.2(
 * Release 4.1(x) or release 4.2(x): upgrade to Release 5.0(x), upgrade to Release 5.2(x) and then upgrade to Release 6.2(x).
 * Release 3.3(2), Release 3.3(3), Release 3.3(4x), and Release 3.3(5x), upgrade to release 4.1(x) or Release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).
 * Release 3.3(1c), all Release 3.2(x), all Release 3.1(x), and all Release 3.0(x), upgrade to release 3.3(5b), then upgrade to release 4.1(x) or release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).
+
+[Документация на 6.2х Cisco MDS 9000 Family NX-OS Fabric Configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/configuration/guides/fabric/nx-os/nx_os_fabric.html)
+
+Полезные команды:
+
+flogi - fabric login
+```text
+MDS# show flogi database interface fc1/22
+--------------------------------------------------------------------------------
+INTERFACE        VSAN    FCID           PORT NAME               NODE NAME
+--------------------------------------------------------------------------------
+fc1/22           1     0x693c00  21:00:00:24:ff:33:55:ee 20:00:00:24:ff:33:55:ee
+
+Total number of flogi = 1.
+```
+FCNS (Fibre Channel Name Server). Смотреть на любом коммутаторе сети. Покажет свич и порт с нужным fcid.
+На другом коммутаторе если смотреть, то будет type/feature `scsi-fcp`
+```text
+MDS# show fcns database fcid 0x693c00 detail vsan 1
+------------------------
+VSAN:1     FCID:0x693c00
+------------------------
+port-wwn (vendor)           :21:00:00:24:ff:33:55:ee
+node-wwn                    :20:00:00:24:ff:33:55:ee
+class                       :3
+node-ip-addr                :0.0.0.0
+ipa                         :ff ff ff ff ff ff ff ff
+fc4-types:fc4_features      :scsi-fcp:init
+symbolic-port-name          :
+symbolic-node-name          :QLE2562 FW:v5 DVR:v1
+port-type                   :N
+port-ip-addr                :0.0.0.0
+fabric-port-wwn             :20:16:00:05:73:ee:11:55
+hard-addr                   :0x000000
+permanent-port-wwn (vendor) :21:00:00:24:ff:33:55:ee
+connected interface         :fc1/22
+switch name (IP address)    :MDS (10.9.8.7)
+
+Total number of entries = 1
+```
+В каких зонах есть или нет. Если пусто, то нет настроек.
+```text
+MDS# show zone member pwwn 21:00:00:24:ff:33:55:ee
+pwwn 21:00:00:24:ff:33:55:ee vsan 1
+  fcalias aliasid
+      zone zonename
+```
+Алиас
+```text
+MDS# sh fcalias name [aliasid]
+fcalias name aliasid vsan 1
+  pwwn 21:00:00:24:ff:33:55:ee
+```
+Зона
+```text
+MDS# show zone name [zonename] vsan 1
+* fcid 0x693c00 [pwwn 21:00:00:24:ff:33:55:ee]
+```
+Применить изменения в зонах
+```text
+MDS(config)# zoneset activate name [zonesetname] vsan 1
+```
+В домене
+```text
+MDS# show fcdomain fcid persistent | in 0x693c00
+   1 21:00:00:24:ff:33:55:ee 0x693c00 SINGLE  YES  DYNAMIC    --
+```
