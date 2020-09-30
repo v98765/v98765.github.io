@@ -26,6 +26,7 @@ nav:
         - 'Switch extreme': network/extreme.md
         - 'Switch tfortis': network/tfortis.md
         - 'Router cisco': network/cisco_r.md
+        - 'Router juniper': network/juniper_mx.md
         - 'Router vyos': network/vyos.md
     - voip:
         - 'Softphones': voip/softphone.md
