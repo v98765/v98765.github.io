@@ -52,3 +52,23 @@ extreme4 # configure vlan v100 add ports 1,48 tagged
 * extreme3 # save
 * extreme4 # save
 ```
+
+## redundant port
+
+Первый порт активный, второй отключен.
+```text
+extreme #configure port 1 redundant 2 link off
+```
+
+Ниже нет линка с 1 портом, потом 1 порт включается, а 2 автоматом отключается.
+```text
+extreme # sh ports redundant
+
+Primary: 1,             Redundant: *2,   Link on/off option: OFF
+        Flags: (*)Active, (!) Disabled, (g) Load Share Group
+
+extreme # sh ports redundant
+
+Primary: *1,            Redundant: 2,    Link on/off option: OFF
+        Flags: (*)Active, (!) Disabled, (g) Load Share Group
+```
