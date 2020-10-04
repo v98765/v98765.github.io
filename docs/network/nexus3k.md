@@ -24,6 +24,33 @@ switch# show install all impact nxos bootflash:nxos.7.0.3.I7.7.bin
 switch# install all nxos bootflash:nxos.7.0.3.I7.7.bin
 ```
 
+Когда места нет, удалить текущий image 7 версии нельзя
+```text
+Switch is booted with 'nxos.7.0.3.I4.7.bin'. Overwriting/deleting this image is not allowed
+``` 
+Есть параметр [compact](https://www.cisco.com/c/en/us/support/docs/switches/nexus-3000-series-switches/215781-nexus-3000-3100-and-3500-nx-os-compact.html) для такого случая.
+```text
+switch# install all nxos bootflash:nxos.7.0.3.I4.7.bin compact
+Installer will perform compatibility check first. Please wait.
+Compacting currently loaded image bootflash:/nxos.7.0.3.I4.7.bin
+..................................................
+Compact bootflash:/nxos.7.0.3.I4.7.bin done
+```
+До
+```text
+Usage for bootflash://
+  798937088 bytes used
+  849686528 bytes free
+ 1648623616 bytes total
+```
+После
+```text
+Usage for bootflash://
+  514617344 bytes used
+ 1134006272 bytes free
+ 1648623616 bytes total
+
+```
 
 ## работа с файлами nx-os на флешке
 
