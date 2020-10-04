@@ -1,8 +1,12 @@
 MDS 9000 и 9148 в частности
 
 [Cisco MDS 9000 Series Release Notes for Cisco MDS NX-OS Release 6.2(29)](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/release/notes/nx-os/mds_nxos_rn_6_2_29.html)
-Рекомендуемый релиз из того что есть [m9100-s3ek9-mz.6.2.29.bin](https://software.cisco.com/download/home/282867260/type/282088129/release/6.2(29)) `md5 60891b50b773222ecfef778f263f0af3` и 
-[m9100-s3ek9-kickstart-mz.6.2.29.bin](https://software.cisco.com/download/home/282867260/type/282088130/release/6.2(29)) `md5 227276a329ffca6cbabd5264df40762d`
+Рекомендуемый релиз из того что есть 
+
+file | md5
+---|---
+[m9100-s3ek9-mz.6.2.29.bin](https://software.cisco.com/download/home/282867260/type/282088129/release/6.2(29)) | `md5 60891b50b773222ecfef778f263f0af3` 
+[m9100-s3ek9-kickstart-mz.6.2.29.bin](https://software.cisco.com/download/home/282867260/type/282088130/release/6.2(29)) | `md5 227276a329ffca6cbabd5264df40762d`
 
 [Cisco MDS 9000 NX-OS Software Upgrade and Downgrade Guide](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/upgrade/guides/nx-os/upgrade.html)
 

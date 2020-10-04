@@ -15,12 +15,15 @@ switch# install all system n3000-uk9.6.0.2.U6.3.bin kickstart n3000-uk9-kickstar
 ```
 Проверка
 ```text
+switch# show file bootflash:nxos.7.0.3.I7.7.bin md5sum
+a9d40fbfaf43c214c3d97cb290788d06
 switch# show install all impact nxos bootflash:nxos.7.0.3.I7.7.bin
 ```
 Перезагрузка, установка рекомендуемой версии в варианте Guidelines for Upgrading in Non-Fast Reload Scenarios
 ```text
 switch# install all nxos bootflash:nxos.7.0.3.I7.7.bin
 ```
+
 
 ## работа с файлами nx-os на флешке
 
