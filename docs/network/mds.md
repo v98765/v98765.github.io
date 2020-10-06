@@ -17,7 +17,46 @@ If your switch is running software that is earlier than Cisco NX-OS Release 5.2(
 * Release 3.3(2), Release 3.3(3), Release 3.3(4x), and Release 3.3(5x), upgrade to release 4.1(x) or Release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).
 * Release 3.3(1c), all Release 3.2(x), all Release 3.1(x), and all Release 3.0(x), upgrade to release 3.3(5b), then upgrade to release 4.1(x) or release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).
 
-[Документация на 6.2х Cisco MDS 9000 Family NX-OS Fabric Configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/configuration/guides/fabric/nx-os/nx_os_fabric.html)
+[Документация на 6.2х Cisco MDS 9000 Family NX-OS Fabric Configuration Guide]
+(https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/configuration/guides/fabric/nx-os/nx_os_fabric.html)
+
+Включить scp-server на mds
+```text
+feature scp-server
+```
+
+Скопировать файлы по scp
+```text
+C:\>pscp.exe -scp m9100-s3ek9-kickstart-mz.6.2.29.bin user@mds_ip:/
+Keyboard-interactive authentication prompts from server:
+| Password:
+End of keyboard-interactive prompts from server
+m9100-s3ek9-kickstart-mz. | 21361 kB | 5340.3 kB/s | ETA: 00:00:00 | 100%
+
+C:\>pscp.exe -scp m9100-s3ek9-mz.6.2.29.bin user@mds_ip:/
+Keyboard-interactive authentication prompts from server:
+| Password:
+End of keyboard-interactive prompts from server
+m9100-s3ek9-mz.6.2.29.bin | 73713 kB | 3204.9 kB/s | ETA: 00:00:00 | 100%
+```
+
+Проверить md5 и должно совпасть.
+```text
+mds# show file m9100-s3ek9-kickstart-mz.6.2.29.bin md5sum
+227276a329ffca6cbabd5264df40762d
+mds# show file m9100-s3ek9-mz.6.2.29.bin md5sum
+60891b50b773222ecfef778f263f0af3
+```
+
+Предварительная проверка перед установкой
+```text
+mds# show install all impact kickstart m9100-s3ek9-kickstart-mz.6.2.29.bin system 9100-s3ek9-mz.6.2.29.bin
+```
+
+Установка
+```text
+mds# install all kickstart  m9100-s3ek9-kickstart-mz.6.2.29.bin system m9100-s3ek9-mz.6.2.29.bin
+```
 
 Полезные команды:
 
