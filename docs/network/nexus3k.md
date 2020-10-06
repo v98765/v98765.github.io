@@ -83,3 +83,15 @@ switch# show file bootflash:nxos.7.0.3.I7.7.bin md5sum
 a9d40fbfaf43c214c3d97cb290788d06
 ```
 
+## snmp
+
+acl с адресом nms. В конфигурации отобразится иначе.
+```
+ip access-list snmp-acl
+  permit udp host [snmp-ip] any eq snmp
+```
+community public
+```
+snmp-server community public group network-operator
+snmp-server community public use-ipv4acl snmp-acl
+```
