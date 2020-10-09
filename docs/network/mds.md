@@ -39,6 +39,11 @@ Keyboard-interactive authentication prompts from server:
 End of keyboard-interactive prompts from server
 m9100-s3ek9-mz.6.2.29.bin | 73713 kB | 3204.9 kB/s | ETA: 00:00:00 | 100%
 ```
+В 5 версии нет scp-server но можно скопировать с любого хоста, подключившись к ноуту через mgmt интерфейс
+```text
+copy scp://username@192.168.1.181/home/v98765/soft/m9100-s3ek9-kickstart-mz.6.2.29.bin bootflash:/
+copy scp://username@192.168.1.181/home/v98765/soft/m9100-s3ek9-mz.6.2.29.bin bootflash:/
+```
 
 Проверить md5 и должно совпасть.
 ```text

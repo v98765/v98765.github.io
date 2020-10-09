@@ -11,6 +11,10 @@
 
 Скопировать, установить 6.0.2.U6(3), когда софт на коммутаторе слишком старый
 ```text
+witch# show file n3000-uk9-kickstart.6.0.2.U6.3a.bin md5
+f0b67d113c1d9adafc16349e7ae36cd4
+switch# show file n3000-uk9.6.0.2.U6.3a.bin md5
+cde4522663172733c15a15855d90d303
 switch# install all system n3000-uk9.6.0.2.U6.3.bin kickstart n3000-uk9-kickstart.6.0.2.U6.3.bin
 ```
 Проверка
@@ -94,4 +98,13 @@ community public
 ```
 snmp-server community public group network-operator
 snmp-server community public use-ipv4acl snmp-acl
+```
+
+## password recovery
+
+При включении питания жать crtl ] или ctrl+c
+```text
+switch(boot)# config terminal
+switch(boot)(config)# admin-password [newpass]
+switch(boot)# load-nxos
 ```
