@@ -23,3 +23,21 @@ Successfully installed MarkupSafe-1.1.1 PyYAML-5.3.1 ansible-2.9.13 bcrypt-3.2.0
 Выход из env `deactivate`
 
 Установка нескольких пакетов [using-requirements-files](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#using-requirements-files) c `pip install -r requirements.txt`
+
+## centos 8
+
+Установить python3
+```sh
+dnf install python3
+```
+Настроить и активировать окружение
+```sh
+python3 -m venv base
+source base/bin/activate
+```
+В окружении обновить pip и установить пакеты
+```sh
+pip install --upgrade pip
+pip install ansible scp
+```
+
