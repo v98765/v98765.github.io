@@ -63,20 +63,77 @@ mds# show install all impact kickstart m9100-s3ek9-kickstart-mz.6.2.29.bin syste
 mds# install all kickstart  m9100-s3ek9-kickstart-mz.6.2.29.bin system m9100-s3ek9-mz.6.2.29.bin
 ```
 
-Полезные команды:
+## настройка портов
 
-flogi - fabric login
+В общем случае не нужно, но порты с fc картами настраиваются как `F`, а линк до коммутатора san - `E`.
+Если подключается СХД с несколькими pwwn, но на коммутаторне необходимо включить `feature npiv`.
 ```text
-MDS# show flogi database interface fc1/22
---------------------------------------------------------------------------------
-INTERFACE        VSAN    FCID           PORT NAME               NODE NAME
---------------------------------------------------------------------------------
-fc1/22           1     0x693c00  21:00:00:24:ff:33:55:ee 20:00:00:24:ff:33:55:ee
+interface fc1/1
+  switchport mode F
+  switchport description "[hostname]"
+  switchport trunk mode off
 
-Total number of flogi = 1.
+interface fc1/48
+  switchport description "[another fc switch]"
+  switchport mode E
 ```
-FCNS (Fibre Channel Name Server). Смотреть на любом коммутаторе сети. Покажет свич и порт с нужным fcid.
-На другом коммутаторе если смотреть, то будет type/feature `scsi-fcp`
+
+## zone, zoneset
+
+Зоны на коммутаторах могут быть различными, но включенные в zoneset зоны должны быть идентичны на всей сети.
+Поэтому необходимо при подклчючении нового коммутатора вывести `show zoneset` и добиться идентичного вывода вплоть до порядка строк pwwwn на вновь подключаемом коммутаторе.
+В этом поможет `vimdiff`, например. При подключении коммутатора с различными zoneset, когда merge зон невозможен,
+происходит блокировка линка со статусом `isolated` и соотвествующими сообщениями в логах.
+
+## подключение нового устройства
+
+По разным советам необходимо для каждого (одного) "инициатора" создавать отдельную зону, где будет только он и доступные для него схд "таргеты".
+
+Посмотреть данные по устройству на портах
+```text
+show flogi database
+```
+Создать fcalias для инициатора.
+```text
+fcalias name [init] vsan 1
+ member pwwwn [pwwn]
+```
+Если это дополнительное хранилище, то добавить все его pwwn в существующий алиас таргетов.
+```text
+fcalias name [targets] vsan 1
+ member pwwwn [pwwn]
+```
+Создать новую зону
+```text
+zone name [init_and_targets] vsan 1
+ member fcalias [init]
+ member fcalias [targets]
+```
+Добавить зону в zoneset
+```text
+zoneset name [zonesetname] vsan 1
+ member [init_and_targets]
+```
+Активировать изменения в режиме конфигурирования. Кстати, `show` тоже работает и необязательно переключаться из режима конфигурирования.
+```text
+MDS(config)# zoneset activate name [zonesetname] vsan 1
+```
+
+## Полезные команды
+
+Что подключено
+```text
+show flogi database
+```
+Список инициаторов и таргетов. Если нужны только локальные то с `local`
+```text
+show fcns database
+``
+Прописан ли pwwn. Пусто, если не прописан.
+```text
+show zone member pwwn [pwwn]
+```
+Где подключено устройство
 ```text
 MDS# show fcns database fcid 0x693c00 detail vsan 1
 ------------------------
@@ -100,30 +157,25 @@ switch name (IP address)    :MDS (10.9.8.7)
 
 Total number of entries = 1
 ```
-В каких зонах есть или нет. Если пусто, то нет настроек.
+
+## проблемы
+
+Смотреть интерфейсы кратко
 ```text
-MDS# show zone member pwwn 21:00:00:24:ff:33:55:ee
-pwwn 21:00:00:24:ff:33:55:ee vsan 1
-  fcalias aliasid
-      zone zonename
+show int bri
 ```
-Алиас
+Смотреть состояние порта на предмет ошибок (errors), когда скорее всего надо менять трансивер. Из-за битовых ошибок порт может отключиться и в статусе будет `errdisabled`
 ```text
-MDS# sh fcalias name [aliasid]
-fcalias name aliasid vsan 1
-  pwwn 21:00:00:24:ff:33:55:ee
+show int fc1/1
 ```
-Зона
+Смотреть какой трансивер установлен. Т.к. они перешиваются, то не факт что это полезно.
 ```text
-MDS# show zone name [zonename] vsan 1
-* fcid 0x693c00 [pwwn 21:00:00:24:ff:33:55:ee]
+show port internal info interface fc1/1
 ```
-Применить изменения в зонах
+Смотреть сообщения о нехватке rxbbcredits и других ошибках. Эта и другие команды в [MDS 9148 Slow Drain Counters and Commands](https://www.cisco.com/c/en/us/support/docs/storage-networking/mds-9100-series-multilayer-fabric-switches/116401-trouble-mds9148-00.html)
 ```text
-MDS(config)# zoneset activate name [zonesetname] vsan 1
+show logging onboard error-stats
 ```
-В домене
-```text
-MDS# show fcdomain fcid persistent | in 0x693c00
-   1 21:00:00:24:ff:33:55:ee 0x693c00 SINGLE  YES  DYNAMIC    --
-```
+В частности нехватка буферов это FCP_CNTR_RX_WT_AVG_B2B_ZERO
+
+> This counter increments when the remaining Rx B2B value is at zero for 100ms or more. This typically indicates the switch is withholding R_RDYs (B2B credits) from the attached device due to upstream congestion (congestion away from this port).
