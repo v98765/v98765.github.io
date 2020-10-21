@@ -1,3 +1,5 @@
+[Документация extreme](https://www.extremenetworks.com/support/documentation/) и [ExtremeXOS 30.7](https://www.extremenetworks.com/support/documentation/extremexos-30-7/) 
+
 ## erps
 
 Прокотол защиты от петель ERPS. Чаcть документации взято с сайта [h3c ERPS configuration](http://www.h3c.com/en/Support/Resource_Center/Technical_Documents/Home/Switches/00-Public/Configure/Configuration_Guides/H3C_S5560S-EI_S5560S-SI_S5500V3-SI_CG-6W102/10/201909/1227821_294551_0.htm)
@@ -72,3 +74,57 @@ extreme # sh ports redundant
 Primary: *1,            Redundant: 2,    Link on/off option: OFF
         Flags: (*)Active, (!) Disabled, (g) Load Share Group
 ```
+
+## mtu
+
+```text
+extreme # configure jumbo-frame-size 9216
+* extreme # enable jumbo-frame ports all
+* extreme # configure ip-mtu 9216 vlan p2p
+Warning: The IP-MTU size 9216 may be too large for jumbo-frame-size 9216
+IP packets larger than 9194 bytes may be lost.
+configure ip-mtu 9194 vlan p2p
+```
+
+## bgp
+
+[How to enable Bidirectional Forwarding Detection (BFD) protection of BGP peering sessions](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-enable-Bidirectional-Forwarding-Detection-BFD-protection-of-BGP-peering-sessions)
+Настроить bgp, bfd, включить пира.
+```text
+configure bgp AS-number 65010
+configure bgp routerid 10.10.10.10
+configure bgp maximum-paths 2
+configure bgp add network 10.10.10.10/32
+configure bgp add network 10.100.0.0/30
+configure bgp add network 10.200.0.0/30
+create bgp neighbor 10.100.0.1 remote-AS-number 65100
+configure bgp neighbor 10.100.0.1 bfd on
+enable bgp neighbor 10.100.0.1
+create bgp neighbor 10.200.0.1 remote-AS-number 65200
+configure bgp neighbor 10.200.0.1 bfd on
+enable bgp neighbor 10.200.0.1
+configure bgp neighbor 10.100.0.1 next-hop-self
+configure bgp neighbor 10.200.0.1 next-hop-self
+enable bgp
+```
+Смотреть
+```
+extreme # show bfd session
+Neighbor         Interface      Clients  Detection  Status       VR
+=============================================================================
+10.100.0.1       p2p_100        -b----     750      Up           VR-Default
+10.200.0.1       p2p_200        -b----     750      Up           VR-Default
+=============================================================================
+Clients Flag: b - BGP, m - MPLS, o - OSPF, s - Static, t - OTM
+NOTE: All timers in milliseconds.
+```
+Команды для bgp
+```text
+show bgp neighbor
+show bgp neighbor [peer_ip] received-routes all
+show bgp neighbor [peer_ip] transmitted-routes all
+```
+
+## evpn
+
+[EVPN with iBGP Configuration Example](https://documentation.extremenetworks.com/exos_30.7/GUID-2E5C4051-51F8-4B1C-B4ED-760D1BB9C494.shtml)

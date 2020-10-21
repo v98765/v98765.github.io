@@ -18,3 +18,60 @@ Name                                                Bytes              Packets
 __default_arp_policer__                                 0                    0
 arp_limit-xe-0/0/0.100-inet-arp                        46                    1
 ```
+
+## sflow
+
+[Example: Configuring sFlow Technology to Monitor Network Traffic on MX Series Routers
+](https://www.juniper.net/documentation/en_US/junos/topics/example/sflow-configuring-mx-series.html)
+
+Смотреть индексы интерфейсов c дескрипшенами, чтобы добавить их в описание `annotate interfaces ..`
+```text
+show snmp mib walk ifAlias | match =
+```
+Есть ограничение в один сабинтерфейс на один физический интерфейс.
+```text
+> show configuration protocols sflow
+polling-interval 60;
+sample-rate {
+    ingress 2048;
+    egress 2048;
+}
+source-ip 10.9.8.7;
+collector 10.0.0.1 {
+    forwarding-class best-effort;
+}
+/* 550.peer1 */
+interfaces xe-0/1/1.100;
+/* 560.peer2 */
+inactive: interfaces xe-0/1/1.200;
+/* 570.peer3 */
+inactive: interfaces xe-0/1/1.300;
+/* 580.peer4 */
+interfaces xe-0/1/2.100;
+```
+
+## load-balancing
+
+> You can configure Junos OS so that, for the active route, all next-hop addresses for a destination are installed in the forwarding table. This feature is called per-packet load balancing. The naming may be counter-intuitive. However, Junos per-packet load balancing is functionally equivalent to what other vendors may term per-flow load balancing. You can use load balancing to spread traffic across multiple paths between routers.
+
+> To enable per-flow load balancing, you must set the load-balance per-packet action in the routing policy configuration.
+
+Полиси
+```text
+> show configuration policy-options policy-statement balance
+from protocol bgp;
+then {
+    load-balance per-packet;
+}
+> show configuration routing-options forwarding-table
+export balance;
+```
+В группу bgp peer-ов добавить `multipath multiple-as`
+```text
+> show configuration protocols bgp group upstream
+type external;
+multipath {
+    multiple-as;
+}
+...
+```
