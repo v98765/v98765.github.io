@@ -3,6 +3,8 @@
 [fast.com](https://fast.com) удобен для тестирования интернета на спутниковых каналах.
 После первого измерения скорости доступны настройки (Show more/Settings), где можно указать минимальное количество параллельных соединений.
 
+[speed.cloudflare.com](https://speed.cloudflare.com/)
+
 [yandex.ru/internet](https://yandex.ru/internet)
 
 [speedtest.net](https://speedtest.net)
