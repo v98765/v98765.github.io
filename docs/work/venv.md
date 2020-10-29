@@ -1,7 +1,7 @@
 ## venv в ubuntu
 
 ```sh
-$ sudo apt install python3-pip python3-venv
+sudo apt install python3-pip python3-venv
 ```
 ## centos 8
 

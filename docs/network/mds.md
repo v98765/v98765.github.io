@@ -1,4 +1,6 @@
-MDS 9000 и 9148 в частности
+[Документация на 6.2х Cisco MDS 9000 Family NX-OS Fabric Configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/configuration/guides/fabric/nx-os/nx_os_fabric.html)
+
+## обновление nxos
 
 [Cisco MDS 9000 Series Release Notes for Cisco MDS NX-OS Release 6.2(29)](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/release/notes/nx-os/mds_nxos_rn_6_2_29.html)
 Рекомендуемый релиз из того что есть 
@@ -17,8 +19,6 @@ If your switch is running software that is earlier than Cisco NX-OS Release 5.2(
 * Release 3.3(2), Release 3.3(3), Release 3.3(4x), and Release 3.3(5x), upgrade to release 4.1(x) or Release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).
 * Release 3.3(1c), all Release 3.2(x), all Release 3.1(x), and all Release 3.0(x), upgrade to release 3.3(5b), then upgrade to release 4.1(x) or release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).
 
-[Документация на 6.2х Cisco MDS 9000 Family NX-OS Fabric Configuration Guide]
-(https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/configuration/guides/fabric/nx-os/nx_os_fabric.html)
 
 Включить scp-server на mds
 ```text
