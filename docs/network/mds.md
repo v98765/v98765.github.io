@@ -81,13 +81,107 @@ interface fc1/48
 ## zone, zoneset
 
 Зоны на коммутаторах могут быть различными, но включенные в zoneset зоны должны быть идентичны на всей сети.
-Поэтому необходимо при подклчючении нового коммутатора вывести `show zoneset` и добиться идентичного вывода вплоть до порядка строк pwwn на вновь подключаемом коммутаторе.
+Поэтому необходимо при подключении нового коммутатора вывести `show zoneset` и добиться идентичного вывода вплоть до порядка строк pwwn на вновь подключаемом коммутаторе.
 В этом поможет `vimdiff`, например. При подключении коммутатора с различными zoneset, когда merge зон невозможен,
 происходит блокировка линка со статусом `isolated` и соотвествующими сообщениями в логах.
 
-## подключение нового устройства
+## netapp
 
-По разным советам необходимо для каждого (одного) "инициатора" создавать отдельную зону, где будет только он и доступные для него схд "таргеты".
+> Physical WWPNs (beginning with 50:0a:09:8x) do not present a SCSI target
+> service and should not be included in any zone configurations on the FC fabric, though they show as logged in to the fabric.
+> Instead, use only virtual WWPNs (WWPNs  starting  with 20:)
+
+## single initiator and single targets
+
+Цитата с [cisco](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/7_3/configuration/config_limits/cisco_mds9000_config_limits_7x.html):
+
+> The preferred number of members per zone is 2, and the maximum recommended limit is 50.
+
+Т.к. зон будет много, то настаивать необходимо с применением средств автоматизации.
+Есть модуль [zone_zoneset](https://github.com/ansible-collections/cisco.nxos/blob/main/docs/cisco.nxos.nxos_zone_zoneset_module.rst) в коллекции cisco.nxos. В примере описан task, который является частью playbook'а.
+Модуль не идемпотентный, т.е. изменения будут применяться каждый раз и каждый раз активироваться zoneset. В частности поэтому ниже в примере не будет handler'а, записывающего конфигурацию на коммутаторе фабрики.
+Как установить ansible и коллекцию описано в разделе [work/venv](https://v98765.github.io/work/venv/)
+
+В рабочем каталоге создать файл `ansible.cfg`
+```text
+[defaults]
+host_key_checking = False
+inventory=./inventory
+[ssh_connection]
+pipelining = true
+```
+Создать файл для описания коммутаторов фабрик `inventory`
+```text
+[all:vars]
+
+ansible_network_os=nxos
+ansible_become=no
+ansible_connection=network_cli
+ansible_python_interpreter=~/base/bin/python
+
+[fabric_a]
+mdsA ansible_host=10.0.0.1
+[fabric_b]
+mdsB ansible_host=10.0.0.2
+```
+Проверить доступность устройств по ssh с хоста. `-k` для ввода пароля. `-vv` для отладки. `all` - все хосты в inventory.
+```sh
+ansible all -m ping -u [username] -k -vv
+```
+Создать файл `fabric-A.yml`. В `[]` указано что нужно прописать в этом месте. Посмотреть еще раз пример task'а в описании модуля в ссылке выше.
+```text
+---
+- name: configure zoneset on A
+  hosts: fabric_a
+  gather_facts: false
+
+  tasks:
+  - name: task configure zoneset on A
+    cisco.nxos.nxos_zone_zoneset:
+      zone_zoneset_details:
+      - mode: enhanced
+        vsan: 1
+        zone:
+        - members:
+          - pwwn: [netapp pwwn]
+          - pwwn: [esxi pwwn]
+          name: [zone name]
+        zoneset:
+        - action: activate
+          members:
+          - name: [zone name]
+          name: [zoneset name]
+```
+Проверить синтаксис
+```sh
+ansible-playbook fabric-A.yml --syntax-check
+```
+Проверить применение на коммутаторе фабрики
+```sh
+ansible-playbook fabric-A.yml -u [username] -k --check
+```
+Запустить без `--check`
+
+Для сохранения кофигурации отдельный playbook `mds-save.yml`
+```text
+---
+- name: save configuration
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: copy running-config startup-config
+      cli_command:
+        command: copy running-config startup-config
+```
+Запуск
+```sh
+ansible-playbook mds-save.yml -u [username] -k
+```
+
+## single initiator and multiple targets
+
+Для случая, когда зоны настраиваются по принципу single initiator and multiple targets.
 
 Посмотреть данные по устройству на портах
 ```text
@@ -157,6 +251,10 @@ switch name (IP address)    :MDS (10.9.8.7)
 
 Total number of entries = 1
 ```
+
+## smart zoning
+
+Решешие от cisco [smart zoning](https://www.cisco.com/c/en/us/support/docs/storage-networking/zoning/116390-technote-smartzoning-00.html) подразумевает одну зону, но с функионалом Single Initiator and Single Targets.
 
 ## проблемы
 
