@@ -108,3 +108,33 @@ switch(boot)# config terminal
 switch(boot)(config)# admin-password [newpass]
 switch(boot)# load-nxos
 ```
+
+## logging
+
+По умолчанию включено логирование авторизаций но не хватает привилегий
+```text
+logging level authpriv 6
+```
+
+
+## ecmp
+
+[Configuring ECMP for Host Routes](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus3000/sw/unicast/7x/b_Cisco_Nexus_3000_Series_NX-OS_Unicast_Routing_Configuration_Guide_Release_7_x/b_Cisco_Nexus_3000_Series_NX-OS_Unicast_Routing_Configuration_Guide_Release_7_x_chapter_01101.html)
+
+Требуется перезагрузка, о чем будет написано после каждой команды с напоминанием сохранить конфигурацию.
+```text
+system urpf disable
+hardware profile unicast enable-host-ecmp
+```
+Было в `show hardware profile status`
+```text
+Total LPM Entries = 8191.
+Used Host Entries in LPM (Total) = 0.
+Used Host Entries in Host (Total) = 139.
+```
+Стало
+```text
+Total LPM Entries = 16383.
+Used Host Entries in LPM (Total) = 116.
+Used Host Entries in Host (Total) = 0.
+```

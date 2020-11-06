@@ -86,6 +86,11 @@ IP packets larger than 9194 bytes may be lost.
 configure ip-mtu 9194 vlan p2p
 ```
 
+## forwarding
+```text
+enable ipforwarding
+```
+
 ## bgp
 
 [How to enable Bidirectional Forwarding Detection (BFD) protection of BGP peering sessions](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-enable-Bidirectional-Forwarding-Detection-BFD-protection-of-BGP-peering-sessions)
@@ -123,6 +128,13 @@ NOTE: All timers in milliseconds.
 show bgp neighbor
 show bgp neighbor [peer_ip] received-routes all
 show bgp neighbor [peer_ip] transmitted-routes all
+```
+
+## ecmp
+
+Включить, указав нужный vr
+```text
+enable iproute sharing vr VR-Default
 ```
 
 ## evpn
