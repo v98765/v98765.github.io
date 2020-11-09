@@ -40,15 +40,16 @@ nav:
     - work:
         - 'AdGuardHome': work/adguardhome.md
         - 'Ansible for ntwrk': work/ansible_ntwrk.md
+        - 'Empty, sshpass': work/empty.md
         - 'Miniconda': work/miniconda.md
-        - 'Pip, venv': work/venv.md
         - 'Mkdocs': work/mkdocs.md
         - 'Msys2': work/msys2.md
+        - 'Pip, venv': work/venv.md
         - 'Proxy for app': work/app_proxy.md
-        - 'Empty, sshpass': work/empty.md
         - 'Routing info': work/routing_info.md
+        - 'Speed test': work/speedtest.md
         - 'Tacacs': work/tacacs.md
         - 'Translit, recode': work/translit.md
-        - 'Speed test': work/speedtest.md
+        - 'USB writer': work/usbwrite.md
 theme:
   name: material
