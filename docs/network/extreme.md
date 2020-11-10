@@ -140,3 +140,11 @@ enable iproute sharing vr VR-Default
 ## evpn
 
 [EVPN with iBGP Configuration Example](https://documentation.extremenetworks.com/exos_30.7/GUID-2E5C4051-51F8-4B1C-B4ED-760D1BB9C494.shtml)
+
+## packet drops
+
+```text
+show port congestion
+```
+
+[Prevent packet drops](https://gtacknowledge.extremenetworks.com/articles/Solution/Prevent-packet-drops)
