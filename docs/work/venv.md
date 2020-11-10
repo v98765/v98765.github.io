@@ -36,6 +36,7 @@ pip -V
 
 Установка ansible
 ```sh
+pip install wheel
 pip install ansible scp
 ```
 Установка коллекций
