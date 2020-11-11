@@ -1,5 +1,14 @@
 [Документация extreme](https://www.extremenetworks.com/support/documentation/) и [ExtremeXOS 30.7](https://www.extremenetworks.com/support/documentation/extremexos-30-7/) 
 
+## reset
+
+Сбросить конфигурацию. Сразу после ввода команды требуется перезагрузка.
+
+```text
+unconfigure switch all
+```
+
+
 ## erps
 
 Прокотол защиты от петель ERPS. Чаcть документации взято с сайта [h3c ERPS configuration](http://www.h3c.com/en/Support/Resource_Center/Technical_Documents/Home/Switches/00-Public/Configure/Configuration_Guides/H3C_S5560S-EI_S5560S-SI_S5500V3-SI_CG-6W102/10/201909/1227821_294551_0.htm)
@@ -140,6 +149,28 @@ enable iproute sharing vr VR-Default
 ## evpn
 
 [EVPN with iBGP Configuration Example](https://documentation.extremenetworks.com/exos_30.7/GUID-2E5C4051-51F8-4B1C-B4ED-760D1BB9C494.shtml)
+
+Для случая, когда надо только L2 и не нужен mlag
+
+ * создать p2p вланы, включить для них bfd
+ * включить ipforwarding и ecmp
+ * настроить ospf + bfd
+ * настроить ibgp с capability l2vpn-EVPN
+ * создать влан tenant, ipaddress для него не нужен
+ * отключить igmp snooping для tenant
+ * `virtual-network local-endpoint ipaddress` указать адрес на лупбеке.
+ * добавить tenant в vni
+ * `configure vlan tenant suppress arp-only` только после добавления в vni возможно
+ * добавить tenant в порты
+
+Смотреть
+```text
+show iproute
+show ospf neighbor
+show bgp neighbor
+show bgp evpn evi
+show bgp evpn mac
+```
 
 ## packet drops
 
