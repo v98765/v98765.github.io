@@ -152,8 +152,10 @@ enable iproute sharing vr VR-Default
 
 Для случая, когда надо только L2 и не нужен mlag
 
+ * `enable jumbo-frame ports all`
  * создать p2p вланы, включить для них bfd
  * включить ipforwarding и ecmp
+ * `configure ip-mtu 9194 vlan p2p`
  * настроить ospf + bfd
  * настроить ibgp с capability l2vpn-EVPN
  * создать влан tenant, ipaddress для него не нужен
