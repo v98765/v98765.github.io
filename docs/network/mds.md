@@ -279,3 +279,21 @@ show logging onboard error-stats
 В частности нехватка буферов это FCP_CNTR_RX_WT_AVG_B2B_ZERO
 
 > This counter increments when the remaining Rx B2B value is at zero for 100ms or more. This typically indicates the switch is withholding R_RDYs (B2B credits) from the attached device due to upstream congestion (congestion away from this port).
+
+## snmp monitoring
+
+[Appendix D: Cisco MDS 9000 Family Slow-Drain–Specific SNMP MIBs](https://www.cisco.com/c/dam/en/us/products/collateral/storage-networking/mds-9700-series-multilayer-directors/whitepaper-c11-737315.pdf)
+
+---|---
+SNMP Object | Description
+fcIfTxWaitCount (1.3.6.1.4.1.9.9.289.1.2.1.1.15) | TxWait counter
+fcHCIfBBCreditTransistionFromZero (1.3.6.1.4.1.9.9.289.1.2.1.1.40) | Tx B2B credit transition to zero
+fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41) | Rx B2B credit transition to zero
+fcIfTxWtAvgBBCreditTransitionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.38) | Credit unavailability at 100 ms
+fcIfCreditLoss (1.3.6.1.4.1.9.9.289.1.2.1.1.37) | Credit Loss (recovery)
+fcIfTimeOutDiscards (1.3.6.1.4.1.9.9.289.1.2.1.1.35) | Timeout discards
+fcIfOutDiscard (1.3.6.1.4.1.9.9.289.1.2.1.1.36) | Total number of frames discarded in egress direction, which includes timeout discards
+fcIfLinkResetIns (1.3.6.1.4.1.9.9.289.1.2.1.1.9) | Number of link reset protocol errors received by the FC port from the attached FC port
+fcIfLinkResetOuts (1.3.6.1.4.1.9.9.289.1.2.1.1.10) | Number of link reset protocol errors issued by the FC port to the attached FC port.
+fcIfSlowportCount (1.3.6.1.4.1.9.9.289.1.2.1.1.44) | Duration for which Tx B2B credits were unavailable on a port
+fcIfSlowportOperDelay (1.3.6.1.4.1.9.9.289.1.2.1.1.45) | Number of times for which Tx B2B credits were unavailable on a port for a duration longer than the configured admin-delay value in slowport-monitor
