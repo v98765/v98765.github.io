@@ -1,3 +1,14 @@
+[Документация v3](http://distkontrol.ru/upload/RukovodstvoUSBoverIPv3.pdf).
+[История изменений](http://distkontrol.ru/index.php/history-dk).
+Информация по прошивке:
+
+---|---
+name | DistKontrolUSB.3.14
+url | http://www.distkontrol.ru/img/distkontrolusb.img
+description | USB over IP / v.3.14
+sha1 | `4ba84db362ed11f105aaad742d0ea2776f66357c`
+size | 688017440
+
 Настройка отказоустойчивого включения [diskkintrol](http://www.distkontrol.ru/) двумя портами.
 
 нерабочий вариант:
@@ -19,3 +30,4 @@
 Иногда помогает применить настройки корректно отключение по питанию.
 
 В режиме active-backup mac-адреса сетевых карт устройства одинаковые. Интерфейсу vlan присвается тот же mac-адрес.
+
