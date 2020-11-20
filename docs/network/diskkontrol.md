@@ -2,6 +2,7 @@
 [История изменений](http://distkontrol.ru/index.php/history-dk).
 Информация по прошивке:
 
+name | data
 ---|---
 name | DistKontrolUSB.3.14
 url | http://www.distkontrol.ru/img/distkontrolusb.img
