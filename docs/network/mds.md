@@ -284,8 +284,8 @@ show logging onboard error-stats
 
 [Appendix D: Cisco MDS 9000 Family Slow-Drain–Specific SNMP MIBs](https://www.cisco.com/c/dam/en/us/products/collateral/storage-networking/mds-9700-series-multilayer-directors/whitepaper-c11-737315.pdf)
 
----|---
 SNMP Object | Description
+---|---
 fcIfTxWaitCount (1.3.6.1.4.1.9.9.289.1.2.1.1.15) | TxWait counter
 fcHCIfBBCreditTransistionFromZero (1.3.6.1.4.1.9.9.289.1.2.1.1.40) | Tx B2B credit transition to zero
 fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41) | Rx B2B credit transition to zero
