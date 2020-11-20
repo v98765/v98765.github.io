@@ -16,7 +16,7 @@ nav:
         - 'Flowcontrol': network/flowcontrol.md
         - 'PoE': network/poe.md
         - 'СКС': network/sks.md
-        - 'Device DiskKontrol': network/diskkontrol.md
+        - 'Device DistKontrol': network/distkontrol.md
         - 'Switch list for vxlan': network/vxlan_sw.md
         - 'Switch cisco': network/cisco_sw.md
         - 'Switch cisco nexus3k': network/nexus3k.md
