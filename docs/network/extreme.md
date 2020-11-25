@@ -181,3 +181,12 @@ show port congestion
 ```
 
 [Prevent packet drops](https://gtacknowledge.extremenetworks.com/articles/Solution/Prevent-packet-drops)
+
+
+## edp
+
+Помимо cdp и lldp есть протокол edp, который позволяет посмотреть соседей (ports all), а так же список vlan, которые прописаны на удаленном коммутаторе extreme (ports 1 detail).
+```text
+show edp ports all
+show edp ports 1 detail
+```
