@@ -214,6 +214,12 @@ zoneset name [zonesetname] vsan 1
 ```text
 MDS(config)# zoneset activate name [zonesetname] vsan 1
 ```
+Когда номер vsan отличается, то помимо указания его номера в зонах, необходимо включить соотв порт в нужный vsan.
+```text
+vsan database
+ vsan 2 interface fc1/33
+```
+
 
 ## Полезные команды
 
@@ -221,7 +227,7 @@ MDS(config)# zoneset activate name [zonesetname] vsan 1
 ```text
 show flogi database
 ```
-Список инициаторов и таргетов. Если нужны только локальные то с `local`
+Список инициаторов и таргетов. Если нужны только локальные то с `local`. Обязательно к просмотру, если номера vsan отличные от 1.
 ```text
 show fcns database
 ```
@@ -287,8 +293,9 @@ show logging onboard error-stats
 SNMP Object | Description
 ---|---
 fcIfTxWaitCount (1.3.6.1.4.1.9.9.289.1.2.1.1.15) | TxWait counter
-fcHCIfBBCreditTransistionFromZero (1.3.6.1.4.1.9.9.289.1.2.1.1.40) | Tx B2B credit transition to zero
-fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41) | Rx B2B credit transition to zero
+fcHCIfBBCreditTransistionFromZero (1.3.6.1.4.1.9.9.289.1.2.1.1.40) | Tx B2B credit transition to zero. Tx B2B credit transition to zero indicates that the port on the other end of the link is not returning R_RDY.
+fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41) | Rx B2B credit transition to zero. Rx B2B credit transition to zero indicates that the port is not able to return R_RDY to the device on the other end of the link. This
+may happen if frames cannot be switched to another port on the same switch fast enough.
 fcIfTxWtAvgBBCreditTransitionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.38) | Credit unavailability at 100 ms
 fcIfCreditLoss (1.3.6.1.4.1.9.9.289.1.2.1.1.37) | Credit Loss (recovery)
 fcIfTimeOutDiscards (1.3.6.1.4.1.9.9.289.1.2.1.1.35) | Timeout discards
@@ -297,3 +304,20 @@ fcIfLinkResetIns (1.3.6.1.4.1.9.9.289.1.2.1.1.9) | Number of link reset protocol
 fcIfLinkResetOuts (1.3.6.1.4.1.9.9.289.1.2.1.1.10) | Number of link reset protocol errors issued by the FC port to the attached FC port.
 fcIfSlowportCount (1.3.6.1.4.1.9.9.289.1.2.1.1.44) | Duration for which Tx B2B credits were unavailable on a port
 fcIfSlowportOperDelay (1.3.6.1.4.1.9.9.289.1.2.1.1.45) | Number of times for which Tx B2B credits were unavailable on a port for a duration longer than the configured admin-delay value in slowport-monitor
+
+
+fcHCIfBBCreditTransistionFromZero и fcIfBBCreditTransistionToZero это что-то вроде flow-control
+[Check Transitions to Zero counters лист 164](https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2017/pdf/BRKSAN-3446.pdf)
+
+В данный порт включена СХД и рост `Rx B2B credit transition to zero`, т.к. недостаточно быстро удается передавать данные в прочие порты.
+```text
+MDS# show interface fc1/1 counters | in transitions
+     852 Transmit B2B credit transitions to zero
+     308015715 Receive B2B credit transitions to zero
+```
+Это аплинк. Тут рост `Tx B2B credit transition to zero`. Описание в таблице.
+```text
+MDS# show interface fc1/48 counters | in transitions
+     50532726 Transmit B2B credit transitions to zero
+     845047928 Receive B2B credit transitions to zero
+```
