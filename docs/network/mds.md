@@ -294,8 +294,7 @@ SNMP Object | Description
 ---|---
 fcIfTxWaitCount (1.3.6.1.4.1.9.9.289.1.2.1.1.15) | TxWait counter
 fcHCIfBBCreditTransistionFromZero (1.3.6.1.4.1.9.9.289.1.2.1.1.40) | Tx B2B credit transition to zero. Tx B2B credit transition to zero indicates that the port on the other end of the link is not returning R_RDY.
-fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41) | Rx B2B credit transition to zero. Rx B2B credit transition to zero indicates that the port is not able to return R_RDY to the device on the other end of the link. This
-may happen if frames cannot be switched to another port on the same switch fast enough.
+fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41) | Rx B2B credit transition to zero. Rx B2B credit transition to zero indicates that the port is not able to return R_RDY to the device on the other end of the link. This may happen if frames cannot be switched to another port on the same switch fast enough.
 fcIfTxWtAvgBBCreditTransitionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.38) | Credit unavailability at 100 ms
 fcIfCreditLoss (1.3.6.1.4.1.9.9.289.1.2.1.1.37) | Credit Loss (recovery)
 fcIfTimeOutDiscards (1.3.6.1.4.1.9.9.289.1.2.1.1.35) | Timeout discards
@@ -309,7 +308,7 @@ fcIfSlowportOperDelay (1.3.6.1.4.1.9.9.289.1.2.1.1.45) | Number of times for whi
 fcHCIfBBCreditTransistionFromZero и fcIfBBCreditTransistionToZero это что-то вроде flow-control
 [Check Transitions to Zero counters лист 164](https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2017/pdf/BRKSAN-3446.pdf)
 
-В данный порт включена СХД и рост `Rx B2B credit transition to zero`, т.к. недостаточно быстро удается передавать данные в прочие порты.
+В данный порт включена СХД и тут рост `Rx B2B credit transition to zero`. Описание в таблице.
 ```text
 MDS# show interface fc1/1 counters | in transitions
      852 Transmit B2B credit transitions to zero
