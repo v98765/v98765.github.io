@@ -47,10 +47,13 @@ nav:
         - 'Msys2': work/msys2.md
         - 'Pip, venv': work/venv.md
         - 'Proxy for app': work/app_proxy.md
-        - 'Routing info': work/routing_info.md
         - 'Speed test': work/speedtest.md
         - 'Tacacs': work/tacacs.md
         - 'Translit, recode': work/translit.md
         - 'USB writer': work/usbwrite.md
+    - info:
+        - 'Mac address': info/mac_info.md
+        - 'Phone number': info/phone_info.md
+        - 'Routing': info/routing_info.md
 theme:
   name: material
