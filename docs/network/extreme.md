@@ -190,3 +190,26 @@ show port congestion
 show edp ports all
 show edp ports 1 detail
 ```
+
+## mac-lock
+
+[По инструкции](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-bind-a-single-mac-address-to-a-port)
+ограничить кол-во мак-адресов на порту, указать статикой нужный
+
+```text
+enable mac-locking
+enable mac-locking ports 5
+configure mac-locking ports 5 first-arrival limit-learning 0
+configure mac-locking ports 5 static add station d4:ca:6d:88:f5:50
+```
+
+## elrp
+
+[По инструкции](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-configure-ELRP-to-disable-ports)
+Отключить блокировку аплинков ( порт 1 ), включить рассылку фреймов для обнаружение петли в 10 влане
+
+```text
+enable elrp-client
+configure elrp-client periodic vlan VLAN-10 ports 5 disable-port duration 30
+configure elrp-client disable-port exclude 1
+```
