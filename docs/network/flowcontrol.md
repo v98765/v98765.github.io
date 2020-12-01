@@ -26,3 +26,10 @@ QoS: ensure flow-control on all interfaces are OFF for proper operation.
 ```
 QoS и flowcontrol - это взаимоисключающие настройки сетевого оборудования.
 Отключение может привести к деградации прочих сервисов, если окажется что буфера коммутатора недостаточно.
+
+
+## monitoring
+
+[EtherLike-MIB::dot3PauseTable](http://www.circitor.fr/Mibs/Html/E/EtherLike-MIB.php#dot3PauseTable). Не во всех коммутаторах есть эти счетчики.
+При получении pause от устройства увеличивается счетчик dot3InPauseFrames и dot3HCInPauseFrames
+
