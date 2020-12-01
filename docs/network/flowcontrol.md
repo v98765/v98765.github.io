@@ -33,3 +33,9 @@ QoS и flowcontrol - это взаимоисключающие настройк�
 [EtherLike-MIB::dot3PauseTable](http://www.circitor.fr/Mibs/Html/E/EtherLike-MIB.php#dot3PauseTable). Не во всех коммутаторах есть эти счетчики.
 При получении pause от устройства увеличивается счетчик dot3InPauseFrames и dot3HCInPauseFrames
 
+## рекомендации netapp
+
+[vmware-netapp-and-vmware-vsphere-storage-best-practices.pdf](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/partners/netapp/vmware-netapp-and-vmware-vsphere-storage-best-practices.pdf) стр 25. 
+
+> For modern network equipment, especially 10GbE equipment, NetApp recommends turning off flow control and allowing congestion management to be performed higher in the network stack.
+> For older equipment, typically GbE with smaller buffers and weaker buffer management, NetApp recommends configuring the endpoints, ESX servers, and NetApp arrays with the flow control set to "send."
