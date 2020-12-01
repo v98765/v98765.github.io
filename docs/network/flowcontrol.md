@@ -39,3 +39,18 @@ QoS и flowcontrol - это взаимоисключающие настройк�
 
 > For modern network equipment, especially 10GbE equipment, NetApp recommends turning off flow control and allowing congestion management to be performed higher in the network stack.
 > For older equipment, typically GbE with smaller buffers and weaker buffer management, NetApp recommends configuring the endpoints, ESX servers, and NetApp arrays with the flow control set to "send."
+
+
+[Configuring your network for best performance](https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.exp-iscsi-esx-cpg%2FGUID-BE5FD8D6-C2E4-49F3-9040-DF1373A2E325.html)
+
+> Connect the host and storage ports to the same network.
+> It is best to connect to the same switches. Routing should never be used.
+
+> Select the highest speed ports available, and dedicate them to iSCSI.
+> 10 GbE ports are best. 1 GbE ports are the minimum.
+
+> Disable Ethernet flow control for all ports.
+> You should see the ONTAP 9 Network Management Guide for using the CLI to configure Ethernet port flow control.
+
+> Enable jumbo frames (typically MTU of 9000).
+> All devices in the data path, including initiators, targets, and switches, must support jumbo frames. Otherwise, enabling jumbo frames actually reduces network performance substantially.
