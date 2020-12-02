@@ -54,3 +54,13 @@ QoS и flowcontrol - это взаимоисключающие настройк�
 
 > Enable jumbo frames (typically MTU of 9000).
 > All devices in the data path, including initiators, targets, and switches, must support jumbo frames. Otherwise, enabling jumbo frames actually reduces network performance substantially.
+
+Предположу что требование размещать инициаторов и таргет в одном сегменте было вызвано как раз наличием гигабитных интерфейсов, на которых включен, flow-control.
+Без него сеть была бы неработоспособна.
+Когда инициаторы и таргеты в разных подсетиях, когда интерфейсы 10ге, то имеет смысл отключить flowcontrol,
+т.к. фреймы pause рассылаются в пределах l2 сегмента и маршрутизирующий коммутатор никоим образом его не сможет передать инициаторам в других подсетях.
+Поэтому "turning off flow control and allowing congestion management to be performed higher in the network stack".
+
+## vmware
+
+> Note: By default, flow control is enabled on all network interfaces in VMware ESXi and ESX.
