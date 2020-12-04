@@ -174,6 +174,13 @@ show bgp evpn evi
 show bgp evpn mac
 ```
 
+Несовместимо с mac-locking
+```
+Error: The VLAN cannot be added to the virtual network due to the following incompatibilities:
+At least one of the member ports has MAC Locking feature enabled
+```
+
+
 ## packet drops
 
 ```text
