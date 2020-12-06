@@ -1,5 +1,7 @@
 [MetricQL](https://victoriametrics.github.io/MetricsQL.html) и [PromQL](https://prometheus.io/docs/prometheus/latest/querying/functions/)
 
+[Expand VictoriaMetrics WITH templates to canonical PromQL](https://play.victoriametrics.com/promql/expand-with-exprs)
+
 Все описанные метрики получены vmagent'ом с snmp_exporter'а, записаны в базу VictoriaMetrics.
 
 ## Список метрик
