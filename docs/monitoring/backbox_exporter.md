@@ -1,3 +1,7 @@
+[Параметры в конфигурации](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md)
+[Отладка с примерами](https://www.robustperception.io/debugging-blackbox-exporter-failures)
+[Пример конфига](https://github.com/prometheus/blackbox_exporter/blob/master/example.yml)
+
 ## почта
 
 Проверка ssl клиентом, чтобы составить правила c send/expect для blackbox. 143,993 - это порты IMAP. 587 - SMTP
