@@ -81,6 +81,51 @@ ifType | тип интерфейса для фильтрации метрик в
 
 Дропать индекс интерфейсов для некторых маршрутизаторов cisco нельзя.
 
+У snmp_exporter'а есть функционал overrides, который можеть дропать метрики:
+```text
+    overrides:
+      entSensorStatus:
+        ignore: true
+```
+Переписать строки в числа, иначе будет значение 1, а строковое значение, например, загрузка cpu или кол-во свободной памяти,
+будет в label, что плохо скажется на производительности, т.к. увеличивается кардинальность метрик:
+```text
+    overrides:
+      extremeCpuMonitorSystemUtilization1min:
+        regex_extracts:
+          '':
+            - regex: '(.*)'
+              value: '$1'
+      extremeMemoryMonitorSystemTotal:
+        regex_extracts:
+          '':
+            - regex: '(.*)'
+              value: '$1'
+      extremeMemoryMonitorSystemFree:
+        regex_extracts:
+          '':
+            - regex: '(.*)'
+              value: '$1'
+      extremeMemoryMonitorSystemUsage:
+        regex_extracts:
+          '':
+            - regex: '(.*)'
+              value: '$1'
+      extremeMemoryMonitorUserUsage:
+        regex_extracts:
+          '':
+            - regex: '(.*)'
+              value: '$1'
+```
+Ссылки по теме:
+[https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string](https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string)
+[EXTREME-SOFTWARE-MONITOR-MIB](http://www.circitor.fr/Mibs/Html/E/EXTREME-SOFTWARE-MONITOR-MIB.php)
+[Numbers from DisplayStrings with the snmp_exporter](https://www.robustperception.io/numbers-from-displaystrings-with-the-snmp_exporter)
+
+Примеры:
+[github.com/prometheus/snmp_exporter/tree/master/generator](https://github.com/prometheus/snmp_exporter/tree/master/generator)
+[github.com/v98765/ansible-snmp-exporter/blob/master/files/generator.yml](https://github.com/v98765/ansible-snmp-exporter/blob/master/files/generator.yml)
+
 ## Запуск snmp_exporter
 
 Необходим конфигурационный файл /etc/snmp_exporter/snmp.yml и запустить snmp_exporter.
