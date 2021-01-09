@@ -123,6 +123,7 @@ configure ip-mtu 9194 vlan p2p
 ## forwarding
 ```text
 enable ipforwarding
+enable ipforwarding p2p
 ```
 
 ## bgp
@@ -130,7 +131,8 @@ enable ipforwarding
 [How to enable Bidirectional Forwarding Detection (BFD) protection of BGP peering sessions](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-enable-Bidirectional-Forwarding-Detection-BFD-protection-of-BGP-peering-sessions)
 Настроить bgp, bfd, включить пира.
 ```text
-
+enable bfd vlan p2p
+configure bfd vlan p2p receive-interval 250 transmit-interval 250
 ```
 
 ```text
