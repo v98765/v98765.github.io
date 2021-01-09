@@ -72,10 +72,6 @@ User break into bootloader
 
 loader> boot usb1:nxos.7.0.3.I7.7.bin
 ```
-7.0(3)I4(7)
-install all nxos usb1:nxos.7.0.3.I7.7.bin compact
-copy usb1:nxos.7.0.3.I7.7.bin bootflash:
-install all nxos nxos.7.0.3.I7.7.bin
 
 ## работа с файлами nx-os на флешке
 
