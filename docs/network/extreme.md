@@ -180,25 +180,21 @@ enable iproute sharing vr VR-Default
 ## evpn
 
 Ограничения:
-
-> The following are limitations for EVPN:
->	EVPN functionality is not supported between switches running ExtremeXOS 30.2 and switches running earlier ExtremeXOS versions. The earlier versions rely on auto-creation of IBGP peers, which is disabled functionality in ExtremeXOS 30.2. However, the proprietary AFI are supported and can be used to establish tunnels to RTEPs so that native VXLAN functionality using data plane learning functions is supported.
->	A maximum of 1,024 EVI instances are supported.
->	IPv6 Type 2 routes are not supported.
->	Stacking is not supported.
->	ExtremeXOS only supports asymmetric routing model.
->	Configuring VMANs as VXLAN tenant VLANs is not supported.
->	Anycast gateway is not supported.
->	ExtremeXOS does not advertise default gateway extended community.
->	Multi-hop BFD is not supported.
->	Peer-group configuration for L2VPN-EVPN address family is not supported.
->	If silent hosts are expected, static ARP/FDB should be created on tenant VLANs for these hosts. To configure static ARP entries it is necessary to configure IP address on tenant VLANs.
-> For Type 5 routes, the following are not supported:
->	Switching through a VXLAN tunnel to a remote L3 Anycast gateway.
->	Default VRs.
-
-
-
+The following are limitations for EVPN:
+	EVPN functionality is not supported between switches running ExtremeXOS 30.2 and switches running earlier ExtremeXOS versions. The earlier versions rely on auto-creation of IBGP peers, which is disabled functionality in ExtremeXOS 30.2. However, the proprietary AFI are supported and can be used to establish tunnels to RTEPs so that native VXLAN functionality using data plane learning functions is supported.
+	A maximum of 1,024 EVI instances are supported.
+	IPv6 Type 2 routes are not supported.
+	Stacking is not supported.
+	ExtremeXOS only supports asymmetric routing model.
+	Configuring VMANs as VXLAN tenant VLANs is not supported.
+	Anycast gateway is not supported.
+	ExtremeXOS does not advertise default gateway extended community.
+	Multi-hop BFD is not supported.
+	Peer-group configuration for L2VPN-EVPN address family is not supported.
+	If silent hosts are expected, static ARP/FDB should be created on tenant VLANs for these hosts. To configure static ARP entries it is necessary to configure IP address on tenant VLANs.
+ For Type 5 routes, the following are not supported:
+	Switching through a VXLAN tunnel to a remote L3 Anycast gateway.
+	Default VRs.
 
 [EVPN with iBGP Configuration Example](https://documentation.extremenetworks.com/exos_30.7/GUID-2E5C4051-51F8-4B1C-B4ED-760D1BB9C494.shtml)
 
@@ -233,28 +229,23 @@ At least one of the member ports has MAC Locking feature enabled
 ```
 
 ## vxlan flood mode
+Цитата:
+In ExtremeXOS, a virtual network operates in one of the following flood modes:
+	Flood mode standard (default)
+ 	Flood mode explicit
 
-> In ExtremeXOS, a virtual network operates in one of the following flood modes:
->
->	Flood mode standard (default)
->
-> 	Flood mode explicit
->
-> 	These modes determine the way the remote endpoints are created/learned, and the way the tenant BUM traffic is handled.
->
-> Flood Mode Standard
->
->	The remote endpoints dynamically are learned using OSPF VXLAN extensions (see OSPFv2 VXLAN Extensions) or Multiprotocol BGP (MBGP) support for VXLAN (see Multiprotocol Border Gateway Protocol (MBGP) Support for VXLAN). Alternately, remote endpoints can be statically configured and attached to a virtual network using the CLI.
->
->	The tenant BUM traffic is head-end replicated to each of the configured/learned remote endpoints on that virtual network.
->
-> Flood Mode Explicit
->
->	The remote endpoints can only be statically configured by attaching them to BUM FDB entries using the CLI.
->
->	The tenant BUM traffic is head-end replicated to each of the configured remote endpoints for the corresponding FDB entry.
->
->	By explicitly adding BUM FDB entries, this mode provides flexibility in splitting the BUM entries to individual broadcast, unknown unicast, and unknown multicast entries.
+These modes determine the way the remote endpoints are created/learned, and the way the tenant BUM traffic is handled.
+
+Flood Mode Standard
+
+The remote endpoints dynamically are learned using OSPF VXLAN extensions (see OSPFv2 VXLAN Extensions) or Multiprotocol BGP (MBGP) support for VXLAN (see Multiprotocol Border Gateway Protocol (MBGP) Support for VXLAN). Alternately, remote endpoints can be statically configured and attached to a virtual network using the CLI.
+The tenant BUM traffic is head-end replicated to each of the configured/learned remote endpoints on that virtual network.
+
+Flood Mode Explicit
+
+The remote endpoints can only be statically configured by attaching them to BUM FDB entries using the CLI.
+The tenant BUM traffic is head-end replicated to each of the configured remote endpoints for the corresponding FDB entry.
+By explicitly adding BUM FDB entries, this mode provides flexibility in splitting the BUM entries to individual broadcast, unknown unicast, and unknown multicast entries.
 
 
 Точка А
