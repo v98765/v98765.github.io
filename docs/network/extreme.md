@@ -235,15 +235,25 @@ At least one of the member ports has MAC Locking feature enabled
 ## vxlan flood mode
 
 > In ExtremeXOS, a virtual network operates in one of the following flood modes:
+>
 >	Flood mode standard (default)
+>
 > 	Flood mode explicit
+>
 > 	These modes determine the way the remote endpoints are created/learned, and the way the tenant BUM traffic is handled.
+>
 > Flood Mode Standard
+>
 >	The remote endpoints dynamically are learned using OSPF VXLAN extensions (see OSPFv2 VXLAN Extensions) or Multiprotocol BGP (MBGP) support for VXLAN (see Multiprotocol Border Gateway Protocol (MBGP) Support for VXLAN). Alternately, remote endpoints can be statically configured and attached to a virtual network using the CLI.
+>
 >	The tenant BUM traffic is head-end replicated to each of the configured/learned remote endpoints on that virtual network.
+>
 > Flood Mode Explicit
+>
 >	The remote endpoints can only be statically configured by attaching them to BUM FDB entries using the CLI.
+>
 >	The tenant BUM traffic is head-end replicated to each of the configured remote endpoints for the corresponding FDB entry.
+>
 >	By explicitly adding BUM FDB entries, this mode provides flexibility in splitting the BUM entries to individual broadcast, unknown unicast, and unknown multicast entries.
 
 
