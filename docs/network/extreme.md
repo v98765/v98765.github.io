@@ -179,22 +179,23 @@ enable iproute sharing vr VR-Default
 
 ## evpn
 
-Ограничения:
 The following are limitations for EVPN:
-	EVPN functionality is not supported between switches running ExtremeXOS 30.2 and switches running earlier ExtremeXOS versions. The earlier versions rely on auto-creation of IBGP peers, which is disabled functionality in ExtremeXOS 30.2. However, the proprietary AFI are supported and can be used to establish tunnels to RTEPs so that native VXLAN functionality using data plane learning functions is supported.
-	A maximum of 1,024 EVI instances are supported.
-	IPv6 Type 2 routes are not supported.
-	Stacking is not supported.
-	ExtremeXOS only supports asymmetric routing model.
-	Configuring VMANs as VXLAN tenant VLANs is not supported.
-	Anycast gateway is not supported.
-	ExtremeXOS does not advertise default gateway extended community.
-	Multi-hop BFD is not supported.
-	Peer-group configuration for L2VPN-EVPN address family is not supported.
-	If silent hosts are expected, static ARP/FDB should be created on tenant VLANs for these hosts. To configure static ARP entries it is necessary to configure IP address on tenant VLANs.
- For Type 5 routes, the following are not supported:
-	Switching through a VXLAN tunnel to a remote L3 Anycast gateway.
-	Default VRs.
+
+* EVPN functionality is not supported between switches running ExtremeXOS 30.2 and switches running earlier ExtremeXOS versions. The earlier versions rely on auto-creation of IBGP peers, which is disabled functionality in ExtremeXOS 30.2. However, the proprietary AFI are supported and can be used to establish tunnels to RTEPs so that native VXLAN functionality using data plane learning functions is supported.
+* A maximum of 1,024 EVI instances are supported.
+* IPv6 Type 2 routes are not supported.
+* Stacking is not supported.
+* ExtremeXOS only supports asymmetric routing model.
+* Configuring VMANs as VXLAN tenant VLANs is not supported.
+* Anycast gateway is not supported.
+* ExtremeXOS does not advertise default gateway extended community.
+* Multi-hop BFD is not supported.
+* Peer-group configuration for L2VPN-EVPN address family is not supported.
+* If silent hosts are expected, static ARP/FDB should be created on tenant VLANs for these hosts. To configure static ARP entries it is necessary to configure IP address on tenant VLANs.
+
+For Type 5 routes, the following are not supported:
+* Switching through a VXLAN tunnel to a remote L3 Anycast gateway.
+* Default VRs.
 
 [EVPN with iBGP Configuration Example](https://documentation.extremenetworks.com/exos_30.7/GUID-2E5C4051-51F8-4B1C-B4ED-760D1BB9C494.shtml)
 
@@ -230,9 +231,11 @@ At least one of the member ports has MAC Locking feature enabled
 
 ## vxlan flood mode
 Цитата:
+
 In ExtremeXOS, a virtual network operates in one of the following flood modes:
-	Flood mode standard (default)
- 	Flood mode explicit
+
+* Flood mode standard (default)
+* Flood mode explicit
 
 These modes determine the way the remote endpoints are created/learned, and the way the tenant BUM traffic is handled.
 
