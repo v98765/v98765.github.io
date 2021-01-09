@@ -56,6 +56,27 @@ Usage for bootflash://
 
 ```
 
+Иногда проще вставить usb и сделать компактный имадж там
+```text
+install all nxos usb1:nxos.7.0.3.I4.7.bin compact
+```
+Полученный в итоге софт будет примерно 400гб и спокойно скопируется на bootflash
+```text
+copy usb1:nxos.7.0.3.I4.7.bin bootflash:compactnxos.7.0.3.I4.7.bin
+```
+Как загрузиться с флешки при включении питания
+```text
+Press  ctrl L to go to loader prompt in 2 secs
+
+User break into bootloader
+
+loader> boot usb1:nxos.7.0.3.I7.7.bin
+```
+7.0(3)I4(7)
+install all nxos usb1:nxos.7.0.3.I7.7.bin compact
+copy usb1:nxos.7.0.3.I7.7.bin bootflash:
+install all nxos nxos.7.0.3.I7.7.bin
+
 ## работа с файлами nx-os на флешке
 
 Взято за основу [эта заметка](https://community.cisco.com/t5/data-center-documents/getting-winscp-on-n9k-to-work-settings-config-required/ta-p/3818490)
@@ -114,6 +135,7 @@ switch(boot)# load-nxos
 По умолчанию включено логирование авторизаций но не хватает привилегий
 ```text
 logging level authpriv 6
+login on-success log
 ```
 
 
@@ -138,3 +160,59 @@ Total LPM Entries = 16383.
 Used Host Entries in LPM (Total) = 116.
 Used Host Entries in Host (Total) = 0.
 ```
+
+## mtu
+
+```text
+policy-map type network-qos jumbo-nq
+  class type network-qos class-default
+    mtu 9216
+system qos
+  service-policy type network-qos jumbo-nq
+```
+
+Проверить
+```text
+switch# sh queuing interface eth1/2 | in MTU
+HW MTU of Ethernet1/2 : 9216 bytes
+```
+По sh int будет все равно 1500 и по cdp будут видеть 1500
+
+## сброс в дефолт
+
+```text
+write erase
+```
+
+## bfd
+
+```text
+feature bfd
+interface Ethernet1/1
+  no switchport
+  bfd interval 250 min_rx 250 multiplier 3
+  no ip redirects
+  ip address 10.0.0.1/30
+```
+bfd сессия устанавливается когда будет соотв. настройка в протоколе маршрутизации
+
+## vlan
+
+Для создания интерфейсов необходима фича `feature interface-vlan`
+
+## bgp
+
+```text
+router bgp 65000
+ router-id 10.10.10.10
+  log-neighbor-changes
+  address-family ipv4 unicast
+    network 10.0.0.0/8
+  neighbor 10.0.0.2 remote-as 65001
+    bfd
+    address-family ipv4 unicast
+      route-map test-map out
+	  next-hop-self
+      soft-reconfiguration inbound
+```
+фильтрация применяется сразу по факту применения route-map
