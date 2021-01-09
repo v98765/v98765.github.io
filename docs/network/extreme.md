@@ -8,6 +8,32 @@
 unconfigure switch all
 ```
 
+## vlan
+
+Создать
+```text
+create vlan myvlan tag 10
+```
+Переименовать
+```text
+configure vlan myvlan name notmyvlan
+```
+Добавить в порт нетегированным. untagged по умолчанию
+```text
+configure vlan myvlan add port 1 [untagged]
+```
+Добавить тегированным
+```text
+configure vlan myvlan add port 1 tagged
+```
+Посмотреть в каких портах влан
+```text
+show vlan myvlan
+```
+Посмотреть какие вланы в порту
+```text
+show vlan port 1
+```
 
 ## erps
 
@@ -87,11 +113,10 @@ Primary: *1,            Redundant: 2,    Link on/off option: OFF
 ## mtu
 
 ```text
-extreme # configure jumbo-frame-size 9216
-* extreme # enable jumbo-frame ports all
-* extreme # configure ip-mtu 9216 vlan p2p
+configure jumbo-frame-size 9216
+enable jumbo-frame ports all
+configure ip-mtu 9216 vlan p2p
 Warning: The IP-MTU size 9216 may be too large for jumbo-frame-size 9216
-IP packets larger than 9194 bytes may be lost.
 configure ip-mtu 9194 vlan p2p
 ```
 
@@ -104,6 +129,10 @@ enable ipforwarding
 
 [How to enable Bidirectional Forwarding Detection (BFD) protection of BGP peering sessions](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-enable-Bidirectional-Forwarding-Detection-BFD-protection-of-BGP-peering-sessions)
 Настроить bgp, bfd, включить пира.
+```text
+
+```
+
 ```text
 configure bgp AS-number 65010
 configure bgp routerid 10.10.10.10
@@ -148,6 +177,27 @@ enable iproute sharing vr VR-Default
 
 ## evpn
 
+Ограничения:
+
+> The following are limitations for EVPN:
+>	EVPN functionality is not supported between switches running ExtremeXOS 30.2 and switches running earlier ExtremeXOS versions. The earlier versions rely on auto-creation of IBGP peers, which is disabled functionality in ExtremeXOS 30.2. However, the proprietary AFI are supported and can be used to establish tunnels to RTEPs so that native VXLAN functionality using data plane learning functions is supported.
+>	A maximum of 1,024 EVI instances are supported.
+>	IPv6 Type 2 routes are not supported.
+>	Stacking is not supported.
+>	ExtremeXOS only supports asymmetric routing model.
+>	Configuring VMANs as VXLAN tenant VLANs is not supported.
+>	Anycast gateway is not supported.
+>	ExtremeXOS does not advertise default gateway extended community.
+>	Multi-hop BFD is not supported.
+>	Peer-group configuration for L2VPN-EVPN address family is not supported.
+>	If silent hosts are expected, static ARP/FDB should be created on tenant VLANs for these hosts. To configure static ARP entries it is necessary to configure IP address on tenant VLANs.
+> For Type 5 routes, the following are not supported:
+>	Switching through a VXLAN tunnel to a remote L3 Anycast gateway.
+>	Default VRs.
+
+
+
+
 [EVPN with iBGP Configuration Example](https://documentation.extremenetworks.com/exos_30.7/GUID-2E5C4051-51F8-4B1C-B4ED-760D1BB9C494.shtml)
 
 Для случая, когда надо только L2 и не нужен mlag
@@ -175,11 +225,44 @@ show bgp evpn mac
 ```
 
 Несовместимо с mac-locking
-```
+```text
 Error: The VLAN cannot be added to the virtual network due to the following incompatibilities:
 At least one of the member ports has MAC Locking feature enabled
 ```
 
+## vxlan flood mode
+
+> In ExtremeXOS, a virtual network operates in one of the following flood modes:
+>	Flood mode standard (default)
+> 	Flood mode explicit
+> 	These modes determine the way the remote endpoints are created/learned, and the way the tenant BUM traffic is handled.
+> Flood Mode Standard
+>	The remote endpoints dynamically are learned using OSPF VXLAN extensions (see OSPFv2 VXLAN Extensions) or Multiprotocol BGP (MBGP) support for VXLAN (see Multiprotocol Border Gateway Protocol (MBGP) Support for VXLAN). Alternately, remote endpoints can be statically configured and attached to a virtual network using the CLI.
+>	The tenant BUM traffic is head-end replicated to each of the configured/learned remote endpoints on that virtual network.
+> Flood Mode Explicit
+>	The remote endpoints can only be statically configured by attaching them to BUM FDB entries using the CLI.
+>	The tenant BUM traffic is head-end replicated to each of the configured remote endpoints for the corresponding FDB entry.
+>	By explicitly adding BUM FDB entries, this mode provides flexibility in splitting the BUM entries to individual broadcast, unknown unicast, and unknown multicast entries.
+
+
+Точка А
+```text
+create virtual-network "vni2" flooding explicit-remotes
+configure virtual-network "vni2" vxlan vni 101
+configure virtual-network "vni2" add vlan tenant_a_b
+create fdb broadcast vlan tenant_a_b vxlan ipaddress 10.0.0.Б
+create fdb unknown-multicast vlan tenant_a_b vxlan ipaddress 10.0.0.Б
+create fdb unknown-unicast vlan tenant_a_b vxlan ipaddress 10.0.0.Б
+```
+Точка Б
+```text
+create virtual-network "vni2" flooding explicit-remotes
+configure virtual-network "vni2" vxlan vni 101
+configure virtual-network "vni2" add vlan tenant_a_b
+create fdb broadcast vlan tenant_a_b vxlan ipaddress  10.0.0.А
+create fdb unknown-multicast vlan tenant_a_b vxlan ipaddress 10.0.0.А
+create fdb unknown-unicast vlan tenant_a_b vxlan ipaddress 10.0.0.А
+```
 
 ## packet drops
 
@@ -220,3 +303,97 @@ enable elrp-client
 configure elrp-client periodic vlan VLAN-10 ports 5 disable-port duration 30
 configure elrp-client disable-port exclude 1
 ```
+
+## passwd
+
+Для информации, что подобное настраивается
+```text
+configure account all password-policy lockout-on-login-failures off
+configure account all password-policy char-validation none
+configure account all password-policy min-length none
+```
+Для смены пароля локального пользователя необходимо знать текущий пароль, либо удалить учетку целиком.
+При этом на коммутаторе должна до этого быть как минимум еще одна учетка с административными правами.
+```text
+extreme# configure account admin
+Current user's password:
+New password:
+Reenter password:
+```
+
+## radius
+
+```text
+configure radius mgmt-access primary server [radius-ip] 1812 client-ip [my-ip] vr VR-Default
+```
+Ввести ключ
+```text
+configure radius mgmt-access primary shared-secret
+Note: Shared secrets created with this version of EXOS are not compatible with EXOS 21.x and earlier.
+Secret:
+Reenter Secret:
+```
+Включить радиус для mgmt-access
+```text
+enable radius mgmt-access
+```
+
+## ntp
+
+Через какой влан доступен ntp сервер. Проще через все
+
+```text
+enable ntp vlan all
+configure ntp server add [ntp1-ip] vr VR-Default
+configure ntp server add [ntp2-ip] vr VR-Default
+```
+
+## sntp
+
+```text
+configure sntp-client primary [ntp1-ip] vr VR-Default
+configure sntp-client secondary [ntp2-ip] vr VR-Default
+enable sntp-client
+
+
+## ansible
+
+[Manage Extreme Networks EXOS](https://docs.ansible.com/ansible/latest/collections/community/network/exos_config_module.html)
+
+Инвентори файл inventory
+```text
+[extreme:vars]
+ansible_network_os=exos
+ansible_become=no
+ansible_connection=network_cli
+ansible_python_interpreter=~/base/bin/python
+
+[extreme]
+extreme_switch1 ansible_host=10.9.8.7
+```
+Playbook для проверки разного в качестве примера.
+```yaml
+---
+- name: must have configuration
+  hosts: extreme
+  gather_facts: false
+
+  tasks:
+
+    - name: sntp clinet
+      community.network.exos_config:
+        lines:
+          - configure sntp-client primary 10.0.0.1 vr VR-Default
+          - configure sntp-client secondary 10.0.0.2 vr VR-Default
+          - enable sntp-client
+
+    - name: timezone
+      community.network.exos_config:
+        lines: configure timezone name MSK 3 autodst
+
+    - name: Save running to startup when modified
+      community.network.exos_config:
+        save_when: changed
+```
+
+`gather_facts: false` т.к. если true, то проверяет вланы и тп.
