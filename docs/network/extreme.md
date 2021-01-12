@@ -360,7 +360,7 @@ configure ntp server add [ntp2-ip] vr VR-Default
 configure sntp-client primary [ntp1-ip] vr VR-Default
 configure sntp-client secondary [ntp2-ip] vr VR-Default
 enable sntp-client
-
+```
 
 ## ansible
 
@@ -403,3 +403,13 @@ Playbook для проверки разного в качестве пример
 ```
 
 `gather_facts: false` т.к. если true, то проверяет вланы и тп.
+
+## stacking
+
+`disable stacking-support` чтоб 2 последние порта 40ge можно использовать было.
+
+Если разбирать стек, то это сбросит свич в дефолт.
+```text
+disable stacking node-address [node-mac]
+reboot node-address [node-mac]
+```
