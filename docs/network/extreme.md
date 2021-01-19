@@ -413,3 +413,40 @@ Playbook для проверки разного в качестве пример
 disable stacking node-address [node-mac]
 reboot node-address [node-mac]
 ```
+
+## acl
+
+[ACL_Solutions_Guide](https://documentation.extremenetworks.com/PDFs/EXOS/ACL_Solutions_Guide.pdf) 
+[ACL коммутаторов в деталях](https://habr.com/ru/company/extremenetworks/blog/486070/) 
+[ACL:Списки контроля доступа в коммутаторах Extreme](https://shop.nag.ru/article/spiski-kontrolya-dostupa-v-kommutatorah-extreme)
+
+
+Завершающее правило - permit. Для работы с политиками/acl используется редактор vim, команды для работы с файлами: cp, ls и тп.
+```text
+vi [filenameIn.pol]
+cp [filenameIn.pol] [filenameOut.pol]
+```
+Проверить синтаксис. aclname - имя листа без расширения .pol
+```text
+check policy [aclname]
+check policy [aclname] access-list
+```
+
+Применить политику/acl на интерфейс
+```text
+configure access-list [filename1] ports [num] egress
+configure access-list [filename2] ports [num] ingress
+```
+После исправления уже примененного acl необходимо
+```text
+refresh policy [aclname]
+```
+Смотреть счетчики
+```text
+sh access-list counter ingress
+sh access-list counter egress
+```
+Удалить acl с порта
+```text
+unconfigure access-list [aclname]
+```
