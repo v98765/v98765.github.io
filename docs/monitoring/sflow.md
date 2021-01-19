@@ -97,6 +97,16 @@ Skipped reloading firewall
 # ufw allow from any to any app nfdump
 ```
 
+## агрегация статистики
+
+С сохранением в файл в формате nfdump
+```sh
+for day in `ls` ; do cd $day;
+for file in `find . -name 'nfcapd.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'` ; do  nfdump -A srcip,dstip -a -r ${file} -w ${file}.a ; rm -f ${file} ; done;
+cd ../;
+done
+```
+
 ## vmware
 
 Помимо телекоммуникационного оборудования, для сбора статистики по трафику можно использовать возможности vmware
