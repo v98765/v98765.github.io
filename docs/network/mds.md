@@ -328,6 +328,7 @@ MDS# show interface fc1/48 counters | in transitions
 В каждой модели конечное число forwarding engines (Table 4. Ports to Forwarding Engines Mapping) и у каждого свой диапазон портов.
 Выбор портов целиком зависит от конкретной модели. Для 9148 выбрал порты 23,35
 
+```text
 mds(config)# int fc1/23
 mds(config-if)# channel-group 1 force
 fc1/23 added to port-channel 1 and disabled
@@ -350,4 +351,4 @@ mds# sh port-channel summary
 Interface                 Total Ports        Oper Ports        First Oper Port
 ------------------------------------------------------------------------------
 port-channel 1                 2                 0                  --
-
+```
