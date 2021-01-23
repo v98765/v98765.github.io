@@ -352,3 +352,60 @@ Interface                 Total Ports        Oper Ports        First Oper Port
 ------------------------------------------------------------------------------
 port-channel 1                 2                 0                  --
 ```
+
+Практики от циски.
+Consequently, most of the best practices followed for the F and TF port channels should be followed to ensure that TCAM
+is utilized as efficiently as possible for the following purposes:
+
+* Distribute port-channel member interfaces into different forwarding engines, especially on fabric switches.
+* Distribute member interfaces into different linecards on director-class switches.
+* Distribute member interfaces into forwarding engines with lower TCAM zoning region usage.
+* Use single-initiator zones, single-target zones, or Smart Zoning.
+
+Это про brocade. To avoid congestion ISL Trunking can be used. With ISL Trunking several ISLs are grouped into a logical ISL.
+When using Brocade switches, a license has to be installed on all switches, that use ISL Trunking.
+An ISL Trunk is automatically formed, when two or more (up to 8) adjacent ports are used to connect two switches.
+The adjacent ports must belong to the same port group. That’s the cause why you can’t add more than 8 ports to an ISL Trunk.
+Instead of using an exchange-based distribution, a frame-based distribution is used for ISL Trunks.
+This method is more finer and allows a better distribution. The Ports, that belongs to an ISL Trunk, are known as trunking members.
+One port of the trunking members is the trunking master. This port has a special function, because it assigns traffic to the other trunking members.
+Even if an ISL Trunk is an logical ISL, it preserves “in-order delivery” of frames.
+
+## FSPF
+
+FSPF: “Fabric shortest path first” is a routing protocol used in Fibre Channel fabrics.
+It’s used to establish routes accross the fabric and to re-calculate this routes, if a topology change occurs (e.g. link failures).
+
+ISL: An ISL is an inter-switch link. It’s a connection between two Fibre Channel switches.
+
+Как минимум можно посмотреть номер удаленного порта. Ниже cost is 125 для 8Gb порта, а cost is 62 для port-channel из двух портов 8Gb
+
+```text
+mds# show fspf interface
+FSPF interface fc1/48 in VSAN 1
+FSPF routing administrative state is active
+Interface cost is 125
+Timer intervals configured, Hello 20 s, Dead 80 s, Retransmit 5 s
+FSPF State is FULL
+Neighbor Domain Id is 0x01(1)
+Neighbor Interface is Port 23  (0x00000017 )
+
+Statistics counters :
+   Number of packets received : LSU  10385  LSA  3464  Hello 311486  Error packets 0
+   Number of packets transmitted : LSU  3464  LSA  10385  Hello 311492  Retransmitted LSU  0
+  Number of times inactivity timer expired for the interface = 0
+
+FSPF interface port-channel1 in VSAN 1
+FSPF routing administrative state is active
+Interface cost is 62
+Timer intervals configured, Hello 20 s, Dead 80 s, Retransmit 5 s
+FSPF State is FULL
+Neighbor Domain Id is 0x69(105)
+Neighbor Interface is port-channel1 (0x00040000 )
+
+Statistics counters :
+   Number of packets received : LSU  3  LSA  3  Hello 3  Error packets 0
+   Number of packets transmitted : LSU  3  LSA  3  Hello 3  Retransmitted LSU  0
+  Number of times inactivity timer expired for the interface = 0
+
+```
