@@ -320,3 +320,34 @@ MDS# show interface fc1/48 counters | in transitions
      50532726 Transmit B2B credit transitions to zero
      845047928 Receive B2B credit transitions to zero
 ```
+
+## port channel
+
+[Configuring Port Channels](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/8_x/config/interfaces/cisco_mds9000_interfaces_config_guide_8x/configuring_portchannels.html)
+
+В каждой модели конечное число forwarding engines (Table 4. Ports to Forwarding Engines Mapping) и у каждого свой диапазон портов.
+Выбор портов целиком зависит от конкретной модели. Для 9148 выбрал порты 23,35
+
+mds(config)# int fc1/23
+mds(config-if)# channel-group 1 force
+fc1/23 added to port-channel 1 and disabled
+please do the same operation on the switch at the other end of the port-channel,
+then do "no shutdown" at both ends to bring it up
+mds(config)# int fc1/35
+mds(config-if)#channel-group 1 force
+
+mds# sh port-channel database
+port-channel1
+    Administrative channel mode is on
+    Operational channel mode is on
+    Last membership update succeeded
+    2 ports in total, 0 ports up
+    Ports:   fc1/35   [down]
+             fc1/23   [down]
+
+mds# sh port-channel summary
+------------------------------------------------------------------------------
+Interface                 Total Ports        Oper Ports        First Oper Port
+------------------------------------------------------------------------------
+port-channel 1                 2                 0                  --
+
