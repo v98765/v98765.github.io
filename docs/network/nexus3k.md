@@ -125,6 +125,11 @@ switch(boot)# config terminal
 switch(boot)(config)# admin-password [newpass]
 switch(boot)# load-nxos
 ```
+Либо сбросить в дефолт в этом же режиме, если софт старый
+```text
+write erase
+reload
+```
 
 ## logging
 

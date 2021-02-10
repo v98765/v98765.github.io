@@ -32,7 +32,7 @@ show vlan myvlan
 ```
 Посмотреть какие вланы в порту
 ```text
-show vlan port 1
+show port 1 vlan
 ```
 
 ## erps
@@ -449,4 +449,13 @@ sh access-list counter egress
 Удалить acl с порта
 ```text
 unconfigure access-list [aclname]
+```
+## 40G
+
+В 480g2-48x-4q
+```text
+configure port 49 partition 1x40G
+configure port 52 partition 1x40G
+configure port 57 partition 1x40G
+configure port 61 partition 1x40G
 ```

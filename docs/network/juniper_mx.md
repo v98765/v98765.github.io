@@ -75,3 +75,9 @@ multipath {
 }
 ...
 ```
+
+## pic
+
+[pic-mode](https://www.juniper.net/documentation/en_US/junos/topics/reference/configuration-statement/pic-mode-edit-chassis-mx-series.html)
+[Port Checker](https://apps.juniper.net/home/port-checker/index.html)
+[Port Speed](https://www.juniper.net/documentation/en_US/junos/topics/topic-map/port-speed-configuration.html#id-configuring-rate-selectability)

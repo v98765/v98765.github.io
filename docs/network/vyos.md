@@ -210,3 +210,11 @@ set service snmp location '[location]'
 ```text
 set interfaces ethernet [ifname] ip source-validation 'strict'
 ```
+
+## ansible
+
+[vyos.vyos.vyos_config](https://docs.ansible.com/ansible/latest/collections/vyos/vyos/vyos_config_module.html)
+
+## fastnetmon
+
+(краткое описание)[https://fastnetmon.com/fastnetmon-community-on-vyos-rolling-1-3/]
