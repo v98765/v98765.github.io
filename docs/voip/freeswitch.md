@@ -55,3 +55,18 @@ greedy, чтоб было только с указанным ptime 20, и не �
 <!--set to 'greedy' if you want your codec list to take precedence -->
 <param name="inbound-codec-negotiation" value="greedy"/>
 ```
+
+## fs_cli
+
+Пароль в файле `autoload_configs/event_socket.conf.xml`
+```text
+<configuration name="event_socket.conf" description="Socket Client">
+  <settings>
+    <param name="listen-ip" value="127.0.0.1"/>
+    <param name="listen-port" value="8021"/>
+    <param name="password" value="123"/>
+  </settings>
+</configuration>
+```
+Подключение `fs_cli -p 123`
+ 
