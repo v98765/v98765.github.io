@@ -20,7 +20,7 @@ As a Certificate Authority in RPKI, we are required to publish a CPS. In this do
 
 * How certificates are issued, managed, and revoked;
 * How we perform the key management;
-* The kind of certificates we issue. 
+* The kind of certificates we issue.
 
 The CPS is an update to RIPE-549 and is published as RIPE-751:
 [www.ripe.net/publications/docs/ripe-751](https://www.ripe.net/publications/docs/ripe-751/)

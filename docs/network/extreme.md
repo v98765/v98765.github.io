@@ -459,3 +459,15 @@ configure port 52 partition 1x40G
 configure port 57 partition 1x40G
 configure port 61 partition 1x40G
 ```
+
+## scp upgrade
+
+[How to upgrade EXOS using SCP](https://extremeportal.force.com/ExtrArticleDetail?an=000081793)
+```text
+scp2 vr VR-Default user@[ip-address]:firmware/summitX-31.1.1.3-patch1-1.xos summitX-31.1.1.3-patch1-1.xos
+
+```
+Инcталл в primary. Если нужно иное, то параметр в конце добавить.
+```text
+install image summitX-31.1.1.3-patch1-1.xos
+```
