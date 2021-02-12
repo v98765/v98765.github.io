@@ -401,3 +401,82 @@ Enum
   11: sleepingUntilPowerReturn
   12: onSmartTrim
 ```
+
+## alerts ifmib
+
+flapping физического интерфейса, который в up, но его состояние изменилось до этого
+```text
+(changes(ifLastChange{ifType="6"}[15m]) > 0) and (ifOperStatus == 1)
+```
+Нет линка на административно включенном интерфейсе
+```text
+(ifAdminStatus == 1) and (ifOperStatus == 2)
+```
+Включился flowcontrol. Полезно для портов, куда подключены стораджи
+```text
+rate(dot3HCInPauseFrames[5m]) > 5
+```
+Входящие ошибки
+```text
+rate(ifInErrors[15m]) > 5
+```
+Дискарды
+```text
+rate(ifOutDiscards[15m]) > 100
+```
+Утилизация пропускной полосы в зависимости от указанной bw или физической скорости интерфейса. 62500 = 1e6 / 8 / 2, где 2 - rate 50%.
+В примере ниже 72% потому что круглое число
+```text
+rate(ifHCOutOctets{ifType="6"}[10m]) > ((ifHighSpeed{ifType="6"})*90000)
+```
+
+## alerts fiber channel
+
+Редко. не видел
+```text
+rate(fcIfCreditLoss[5m]) > 0
+rate(fcIfTxWaitCount[5m]) > 0
+```
+Физика, например, вкл/выкл
+```text
+rate(fcIfLinkResetIns[5m]) > 0
+rate(fcIfLinkResetOuts[5m]) > 0
+```
+Нормальная работа FC сети, когда заканчиваются bbcredits
+```text
+rate(fcHCIfBBCreditTransistionToZero[5m]) > 500000
+rate(fcHCIfBBCreditTransistionFromZero[5m]) > 500000
+```
+Серьезные проблемы. Что-то отвалилилось и данные не были доставлены.
+```text
+rate(fcIfTimeOutDiscards[5m]) > 0
+rate(fcIfOutDiscards[5m]) > 0
+```
+Более 100мс не было ресурсов на порту. Переделать порт-группу, добавить кредитов на порт.
+```text
+rate(fcIfTxWtAvgBBCreditTransitionToZero[5m]) > 0
+```
+Не хватает полосы. Нужен port-channel, дополнительные линки
+```
+rate(fcIfC3InOctets[10m]) > ((ifHighSpeed)*90000)
+rate(fcIfC3OutOctets[10m]) > ((ifHighSpeed)*90000)
+```
+
+## alerts exos
+
+Питание
+```text
+extremePowerSupplyStatus !=2
+```
+Блок вентиляторов
+```text
+extremeFanOperational > 1
+```
+Перегрев
+```text
+extremeOverTemperatureAlarm < 2
+```
+cpu
+```text
+extremeCpuMonitorSystemUtilization1min > 15
+```
