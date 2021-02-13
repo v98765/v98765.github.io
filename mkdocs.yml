@@ -45,6 +45,7 @@ nav:
         - 'Empty, sshpass': work/empty.md
         - 'Miniconda': work/miniconda.md
         - 'Mkdocs': work/mkdocs.md
+        - 'Molecule': work/molecule.md
         - 'Msys2': work/msys2.md
         - 'Pip, venv': work/venv.md
         - 'Proxy for app': work/app_proxy.md
