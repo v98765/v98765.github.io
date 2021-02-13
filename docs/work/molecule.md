@@ -12,6 +12,10 @@ graphroot="$HOME/.local/share/containers/storage"
 runroot="$XDG_RUNTIME_DIR/containers"
 ```
 
+## venv
+
+Настроить окружение [v98765.github.io/work/venv/](https://v98765.github.io/work/venv/)
+
 ## molecule
 
 Установка
@@ -160,9 +164,9 @@ a9d4b2366016  docker.io/geerlingguy/docker-ubuntu2004-ansible:latest  /lib/syste
 
 
 ## Ссылки
-[Developing and Testing Ansible Roles with Molecule and Podman - Part 1](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-1)
-[Developing and Testing Ansible Roles with Molecule and Podman - Part 2](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-2)
-[Разработка и тестирование Ansible-ролей с использованием Molecule и Podman](https://habr.com/ru/company/redhatrussia/blog/519452/)
-[Podman Installation Instructions](https://podman.io/getting-started/installation)
-[Basic Setup and Use of Podman](https://github.com/containers/podman/blob/master/docs/tutorials/podman_tutorial.md)
+[Developing and Testing Ansible Roles with Molecule and Podman - Part 1](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-1), 
+[Developing and Testing Ansible Roles with Molecule and Podman - Part 2](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-2), 
+[Разработка и тестирование Ansible-ролей с использованием Molecule и Podman](https://habr.com/ru/company/redhatrussia/blog/519452/), 
+[Podman Installation Instructions](https://podman.io/getting-started/installation), 
+[Basic Setup and Use of Podman](https://github.com/containers/podman/blob/master/docs/tutorials/podman_tutorial.md), 
 [Basic Setup and Use of Podman in a Rootless environment](https://github.com/containers/podman/blob/master/docs/tutorials/rootless_tutorial.md)
