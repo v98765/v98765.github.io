@@ -406,7 +406,7 @@ Enum
 
 flapping физического интерфейса, который в up, но его состояние изменилось до этого
 ```text
-(changes(ifLastChange{ifType="6"}[15m]) > 0) and (ifOperStatus == 1)
+(changes(ifLastChange{ifType="6"}[15m]) > 0) and (ifOperStatus == 1) and ON(instance) (sysUpTime > 150000)
 ```
 Нет линка на административно включенном интерфейсе
 ```text
