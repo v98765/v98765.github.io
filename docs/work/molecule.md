@@ -1,6 +1,6 @@
 ## podman
 
-Ниже все для убунты 2.10, где можно установить podman
+Ниже все для убунты 2.10, где можно установить podman.
 Чтобы обновить 20.04 необходимо в /etc/update-manager/release-upgrades указать `normal`. Далее в `screen` выполнить `do-release-upgrade`.
 В 20.10 выполнить:
 ```text
@@ -161,6 +161,13 @@ a9d4b2366016  docker.io/geerlingguy/docker-ubuntu2004-ansible:latest  /lib/syste
 При разработке роли Molecule использует запущенные инстансы для ее тестирования.
 Если тест проваливается или какая-то ошибка приводит к необратимым изменениям, из-за которых все надо начинать сначала,
 вы можете в любое время убить эти инстансы командой `molecule destroy` и создать их заново командной `molecule create`.
+
+Подключиться
+```text
+$ molecule login -h ubuntu
+INFO     Running default > login
+root@ubuntu:/#
+```
 
 
 ## Ссылки
