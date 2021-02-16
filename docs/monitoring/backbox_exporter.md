@@ -79,3 +79,21 @@ openssl s_client -starttls smtp -crlf -connect domain:587
     prober: http
     timeout: 5s
 ```
+Для самоподписанного сертификата и списком допустимых/валидных кодов ответа
+```text
+  https_self:
+    prober: http
+    timeout: 5s
+    http:
+      method: GET
+      no_follow_redirects: false
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      preferred_ip_protocol: "ipv4"
+      valid_status_codes:
+        - 200
+        - 401
+        - 403
+      tls_config:
+        insecure_skip_verify: true
+```
