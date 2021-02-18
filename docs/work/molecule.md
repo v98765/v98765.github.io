@@ -168,6 +168,8 @@ $ molecule login -h ubuntu
 INFO     Running default > login
 root@ubuntu:/#
 ```
+Применить роль `molecule converge` и подключиться повторно, проверить работу установленных приложений.
+Если все работает, то `molecule test`.
 
 
 ## Ссылки
