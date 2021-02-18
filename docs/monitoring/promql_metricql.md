@@ -408,6 +408,11 @@ flapping физического интерфейса, который в up, но
 ```text
 (changes(ifLastChange{ifType="6"}[15m]) > 0) and (ifOperStatus == 1) and ON(instance) (sysUpTime > 150000)
 ```
+Перезагружался коммутатор. Иначе есть шанс что какой-то ifLastChange больше, а каунтер sysUpTime обнулился.
+Если еще были labels, как у меня, например, rack, то by (instance,rack)
+```text
+(max(ifLastChange{ifType="6"} < 20000) by (instance)) and ON(instance) (sysUpTime < 150000)
+```
 Нет линка на административно включенном интерфейсе
 ```text
 (ifAdminStatus == 1) and (ifOperStatus == 2)
