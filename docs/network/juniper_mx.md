@@ -81,3 +81,77 @@ multipath {
 [pic-mode](https://www.juniper.net/documentation/en_US/junos/topics/reference/configuration-statement/pic-mode-edit-chassis-mx-series.html)
 [Port Checker](https://apps.juniper.net/home/port-checker/index.html)
 [Port Speed](https://www.juniper.net/documentation/en_US/junos/topics/topic-map/port-speed-configuration.html#id-configuring-rate-selectability)
+
+## ЦМУ
+
+Делается в рамках инструкции для передачи данных в ЦМУ. Написал ниже cmo, переделывать уже не стану. Адрес ЦМУ реальный из инструкции. Интернет в инстансе для примера `as1234`.
+
+Для snmp хотят:
+
+> IP-адрес системы (на стороне ЦМУ) для SNMP  (от данного адреса будут приходит запросы);77.95.132.140 Запросы направляются на стандарт-ный порт (161).
+> Опрашиваются IF-MIB, IP-FORWARD-MIB,  BGP4-MIB,  SNMPv2-MIB. Перио-дичность опросов по умолчанию 60 минут (может быть скорректирована).
+
+```text
+set snmp view CMO oid 1.3.6.1.2.1.2.2 include
+set snmp view CMO oid 1.3.6.1.2.1.15 include
+set snmp view CMO oid 1.3.6.1.6.3.1 include
+set snmp view CMO oid 1.3.6.1.2.1.4.24 include
+set snmp community cmo view CMO
+set snmp community cmo authorization read-only
+set snmp community cmo routing-instance as1234 clients 77.95.132.140/32
+set snmp community cmo routing-instance as1234 clients [test-ip]/32
+set snmp routing-instance-access
+```
+С тестового хоста с адресом `test-ip` проверить доступность
+```sh
+snmpwalk -c as1234@cmo -v2c router
+```
+
+Для bgp хотят:
+
+> IP-адрес системы (на стороне ЦМУ) для BGP соединений;	Необходимо использовать eBGP Multihop соединение.
+> Если для установления BGP соединения НЕ используется MD5 (рекомендуется), для конфигурации использовать адрес: 77.95.132.140
+> Если для установления BGP соединения используется MD5 (НЕ рекомендуется), адрес для конфигурации необходимо запросить и согласовать с ЦМУ (будет предложен адрес из диапазона 185.224.228.0/24)
+> Внимание! В связи с техническими возможностями ЦМУ используемый в данном документе адрес со временем будет меняться.
+> В связи с этим, при передаче заполненной таблицы следует запросить у ЦМУ корректный на момент отправки таблицы  IP-адресс.
+> Обратите внимание, ПО на стороне ЦМУ не является маршрутизатором, расположено за межсетевым экраном и NAT трансляцией, поэтому установка сес-сии может быть инициирована только со стороны ЦМУ,
+> соединение устанавливается на 179 порт с порта из диапазона >1024. Большая просьба учиты-вать данную информации при конфигурировании сессии BGP и фильтров (ACL) на Вашей стороне.
+> Ес-ли поддерживается маршрутизатором, конфигури-руйте сессию с ЦМУ в режиме passive.
+> Номер AS на стороне ЦМУ 	По умолчанию 65211 либо может быть любым, предполагается использование Private Space Number.
+
+```text
+set routing-instances as1234 protocols bgp group cmo type external
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 multihop
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 local-address [local-ip]
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 passive
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 import RF-reject
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 export RF-default-export
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 peer-as 65211
+```
+
+Хотят netflow. Есть sflow только с багами в определении длины пакета. PR1487876
+
+> 77.95.132.140. Порт UDP 9080
+
+```text
+set protocols sflow polling-interval 60
+set protocols sflow sample-rate ingress 10000
+set protocols sflow sample-rate egress 10000
+set protocols sflow source-ip [local-ip]
+set protocols sflow collector 77.95.132.140 udp-port 9080
+set protocols sflow interfaces xe-0/1/4
+```
+
+By default, Junos will use the default routing instance to send sFlow packets. 
+```text
+set routing-options static route 77.95.132.140/32 next-table as1234.inet.0
+```
+
+Фильтр с каунтером для проверки отправки flows
+```text
+set firewall family inet filter cmo term cmo from destination-address 77.95.132.140/32
+set firewall family inet filter cmo term cmo from destination-port 9080
+set firewall family inet filter cmo term cmo then count cmo
+set firewall family inet filter cmo term cmo then accept
+set firewall family inet filter cmo term all then accept
+```
