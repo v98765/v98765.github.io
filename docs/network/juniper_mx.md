@@ -129,7 +129,7 @@ set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 expo
 set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 peer-as 65211
 ```
 
-Хотят netflow. Есть sflow только с багами в определении длины пакета. PR1487876
+Хотят netflow. Есть sflow с PR1487876.
 
 > 77.95.132.140. Порт UDP 9080
 
