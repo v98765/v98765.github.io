@@ -1,6 +1,7 @@
 ## Установка
 
-Установка коллектора netflow, sflow с ролью [ansible-flow](https://github.com/v98765/ansible-flow). Пакеты есть для ubuntu,debian. Роль только для этих ОС с systemd.
+Установка коллектора netflow, sflow с ролью [v98765_nfdump](https://github.com/v98765/v98765_nfdump). Пакеты есть для ubuntu,debian. Роль только для этих ОС с systemd.
+Каталоги в примерах ниже от старой роли.
 
 ## Примеры использования
 
