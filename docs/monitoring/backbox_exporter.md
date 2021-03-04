@@ -53,6 +53,7 @@ openssl s_client -starttls smtp -crlf -connect domain:587
     icmp:
       preferred_ip_protocol: ip4
     prober: icmp
+    timeout: 1s
 ```
 
 ## http и https
