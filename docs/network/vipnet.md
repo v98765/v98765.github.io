@@ -275,7 +275,7 @@ firewall local add src @any dst @local tcp dport 22 pass
 firewall local add src @any dst @local tcp dport 8080 pass
 ```
 
-Проверка подлкючения на публичный адрес пользователем user
+Проверка подключения на публичный адрес пользователем user
 ```text
 ssh user@893.888.43.125
 user@893.888.43.125's password: 
