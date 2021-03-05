@@ -290,3 +290,5 @@ Loading command shell, please wait...
 Starting the command line interface of Platform: HW50
 hw50-1167006a> 
 ```
+Выключение производится кратковременным нажатием на кнопку питания. Далее как обычном ПК происходит автоматическое отключение с выключением сервисов linux
+
