@@ -30,6 +30,7 @@ nav:
         - 'Router cisco': network/cisco_r.md
         - 'Router juniper': network/juniper_mx.md
         - 'Router vyos': network/vyos.md
+        - 'FW vipnet': network/vipnet.md
     - voip:
         - 'Softphones': voip/softphone.md
         - 'Freeswitch': voip/freeswitch.md
