@@ -2,17 +2,33 @@
 устройства по протоколу snmp и записывает полученные метрики в базу VictoriaMetrics.
 
 
-## Установка go
+## Установка go и зависимостей для генератора
 
 [ubuntu golang wiki](https://github.com/golang/go/wiki/Ubuntu)
-```text
+```sh
 curl -LO https://get.golang.org/$(uname)/go_installer && chmod +x go_installer && ./go_installer && rm go_installer
+source ${HOME}/.bash_profile
+```
+Зависимости, кроме snmp, который нужен все равно
+```sh
+sudo apt install unzip build-essential libsnmp-dev p7zip-full snmp
 ```
 
 ## Установка генератора
 
 [generator readme](https://github.com/prometheus/snmp_exporter/tree/master/generator) ставить по инструкции, кроме установки мибов.
-Их положить в домашний каталог ~/.snmp/mibs
+```sh
+go get github.com/prometheus/snmp_exporter/generator
+cd ${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/generator
+go build
+cp generator ${HOME}/bin
+```
+Все мибы положить в домашний каталог ~/.snmp/mibs
+Настроить переменные, чтобы самому пользоваться этими мибами с snmptranslate
+```text
+export MIBDIRS=$HOME/.snmp/mibs:/usr/share/snmp/mibs
+export MIBS=ALL
+```
 
 ## Запуск генератора
 
@@ -207,6 +223,10 @@ curl http://localhost:8429/targets
     - action: labeldrop
       regex: nqaResultsIndex|nqaResultsHopIndex
 ```
+
+mkdir snmp
+https://raw.githubusercontent.com/prometheus/snmp_exporter/master/generator/Dockerfile
+podman build -t snmp-generator .
 
 ## links
 
