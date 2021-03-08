@@ -1,5 +1,6 @@
 [vmagent](https://victoriametrics.github.io/) периодически опрашивает через [snmp_exporter](https://github.com/prometheus/snmp_exporter)
 устройства по протоколу snmp и записывает полученные метрики в базу VictoriaMetrics.
+После 0.20.0 заявлены изменения и snmp_exporter возможно пеередет [github.com/prometheus-community/snmp](https://github.com/prometheus-community/snmp)
 
 ## Генератор конфигурации
 
