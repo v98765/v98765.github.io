@@ -1,8 +1,15 @@
 ## looking glass
 
-[cirex](http://lg.cirex.ru/),
-[m9](https://msk-ix.ru/lookingglass/), [mastertel](http://lg.mastertel.ru/), [mts](http://lg.mtu.ru/),
-[retn](https://lg.retn.net/), [telia](https://lg.telia.net/),[eurasia-ix](https://www.eurasiapeering.com/looking-glass/),[pitex-ix](https://lg.piter-ix.ru/)
+link | descr
+---|---
+[cirex](http://lg.cirex.ru/) | телекомбиржа (не работает)
+[mastertel](http://lg.mastertel.ru/) | мастертел
+[mts](http://lg.mtu.ru/) | мтс
+[retn](https://lg.retn.net/) | РЕТН
+[telia](https://lg.telia.net/) | Telia
+[m9](https://msk-ix.ru/lookingglass/) | msk-ix
+[eurasia-ix](https://www.eurasiapeering.com/looking-glass/) | eurasia-ix
+[pitex-ix](https://lg.piter-ix.ru/) | piter-ix
 
 ## route info
 
@@ -26,3 +33,7 @@ The CPS is an update to RIPE-549 and is published as RIPE-751:
 [www.ripe.net/publications/docs/ripe-751](https://www.ripe.net/publications/docs/ripe-751/)
 
 The document follows the "Template for a CPS for the RPKI" as defined in RFC7382.
+
+## Прочее
+
+[peeringdb.com](http://peeringdb.com/)
