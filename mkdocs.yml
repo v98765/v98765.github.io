@@ -9,6 +9,8 @@ nav:
         - 'Telegraf vs vmagent': monitoring/telegraf_vmagent.md
         - 'Telegraf snmp': monitoring/telegraf_snmp.md
         - 'netflow, sflow': monitoring/sflow.md
+        - 'logs': monitoring/logs.md
+
     - network:
         - 'Interface Errors': network/errors.md
         - 'Switching': network/switching.md
@@ -61,3 +63,6 @@ nav:
         - 'Routing': info/routing_info.md
 theme:
   name: material
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
