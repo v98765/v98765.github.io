@@ -112,11 +112,11 @@ configure log target syslog [vector-ip]:514 vr VR-Default local7 format timestam
 Т.к cisco не поддерживает по большей части rfc5424, то необходимо назначить разным устройствам различные facility.
 local7 оставить для ненастроенного оборудования
 
-rfc-soft | facility
----|---
-3164-nxos | local6
-5424-exos | local5
-5424-junos | local4
+ОС | дефолтовый rfc логов | предлагаемый facility
+---|---|---
+nxos | 3164 | local6
+exos |5424 | local5
+junos | 5424 | local4
 
 ## ansible коллекции
 
@@ -236,7 +236,7 @@ with_item тут не применить из-за ограничений мод
         command: copy running-config startup-config
 ```
 
-## junos
+## junos playbook
 
 Какие-то специфичные модули не работали, поэтому пока так, как и в предыдущих примерах.
 Из-за команды delete будут изменения в конфигурации всегда и коммит, поэтому для примера добавил теги и
