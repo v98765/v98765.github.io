@@ -6,7 +6,7 @@
 
 https://vector.dev/docs/setup/installation/package-managers/apt/
 Создать каталог /var/log/vector/ с правами на запись пользователю vector
-```sh
+```bash
 mkdir -p /var/log/vector
 chown vector /var/log/vector
 ```
@@ -48,7 +48,7 @@ sinks:
 ```
 ## centos
 
-```sh
+```bash
 yum install rsyslog
 systemctl enable rsyslog
 systemctl start rsyslog
