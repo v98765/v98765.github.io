@@ -112,11 +112,13 @@ configure log target syslog [vector-ip]:514 vr VR-Default local7 format timestam
 Т.к cisco не поддерживает по большей части rfc5424, то необходимо назначить разным устройствам различные facility.
 local7 оставить для ненастроенного оборудования
 
-ОС | дефолтовый rfc логов | предлагаемый facility
+ОС | формат логов | предлагаемый facility
 ---|---|---
 nxos | 3164 | local6
-exos |5424 | local5
+exos | 5424 | local5
 junos | 5424 | local4
+
+В junos 3164 по умолчанию, однако надо настроить 5424. Логи cisco придется переделывать.
 
 ## ansible коллекции
 
