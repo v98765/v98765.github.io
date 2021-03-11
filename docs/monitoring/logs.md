@@ -121,11 +121,16 @@ rfc-soft | facility
 ## ansible коллекции
 
 Необходимые коллекции для exos, cisco. В марте 2021 вышла ansible.netcommon 2.0.
-Для junos нужен [junos_netconf_module](https://docs.ansible.com/ansible/latest/collections/junipernetworks/junos/junos_netconf_module.html), настроеный netconf на оборудовании.
+Для junos нужен ncclient, [junos_netconf_module](https://docs.ansible.com/ansible/latest/collections/junipernetworks/junos/junos_netconf_module.html), настроеный netconf на оборудовании.
+
+Все ставится в [окружении](https://v98765.github.io/work/venv/) пользователя.
 ```sh
+pip install wheel
+pip install ansible scp ncclient
 ansible-galaxy collection install -f ansible.netcommon junipernetworks.junos cisco.nxos
+
 ```
-Сконвертировать старый инветнори в yaml формат, поверить переменные.
+Сконвертировать старый inventory в yaml формат, поверить переменные.
 ```sh
 ansible-inventory -i inventory -y --list > inventory.yaml
 ```
@@ -140,9 +145,19 @@ roles_path = ~/.ansible/roles
 pipelining = true
 ```
 
+## проверка playbook
+
+```sh
+ansible-playbook syslog.yml --syntax-check
+ansible-playbook -v syslog.yml  -u [username] -k --limit [test_device] --check
+```
+
 ## exos playbook
 
-При логирования через OOBM меняется VR-Default на VR-Mgmt
+При логирования через OOBM меняется VR-Default на VR-Mgmt.
+Идемпотентности тут нет, как в прочем и других playbook для exos, т.к. удаление/отключение команд,
+которые в конфигурации не отображаюстся все равно приводит к модификации, поэтому тут запись, а не handler.
+Команды должны быть написаны в том же виде, как и в конфигурации, без сокращений.
 
 ```yaml
 ---
@@ -178,3 +193,111 @@ pipelining = true
       community.network.exos_config:
         save_when: modified
 ```
+
+## cisco playbook
+
+Цитата при запуске о том, что команды должны быть в том же виде, что и в текущем конфиге. Только в этом случае гарантируется идемпотентность.
+
+> [WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present in
+the running configuration on device including the indentation
+
+with_item тут не применить из-за ограничений модуля, поэтому jinja шаблон.
+
+```yaml
+---
+- name: configure syslog for nexus
+  hosts: cisco_n3k
+  gather_facts: false
+  vars:
+    Facility: 6
+    LogServers:
+      - 10.1.0.1
+      - 10.2.0.1
+
+  tasks:
+
+    - name: syslog servers for n3k
+      ansible.netcommon.cli_config:
+        config: |
+            #jinja2: lstrip_blocks: True
+            {% for ip in LogServers %}
+            logging server {{ ip }} {{ Facility}}
+            {% endfor %}
+            logging source-interface loopback0
+            logging level authpri 6
+            login on-success log
+      notify:
+        - SAVE CONFIGURATION
+
+  handlers:
+
+    - name: SAVE CONFIGURATION
+      cli_command:
+        command: copy running-config startup-config
+```
+
+## junos
+
+Какие-то специфичные модули не работали, поэтому пока так, как и в предыдущих примерах.
+Из-за команды delete будут изменения в конфигурации всегда и коммит, поэтому для примера добавил теги и
+ограничение на последовательное выполнение таска по хостам с паузой на 60 секунд между удалением и добавлением строк,
+т.к. коммиты каждый раз, как показано ниже.
+```text
+0   2021-03-12 00:35:09 MSK by [username] via netconf
+    set syslog hosts
+1   2021-03-12 00:35:06 MSK by [username] via netconf
+    set syslog hosts
+2   2021-03-12 00:34:01 MSK by [username] via netconf
+    delete syslog hosts
+3   2021-03-12 00:33:58 MSK by [username] via netconf
+    delete syslog hosts
+```
+Ниже запуск плея с тегом junos_set. Коммита не будет, если такие команды уже есть в конфигурации,
+т.е. идемпотентность обеспечена.
+```sh
+ansible-playbook syslog_junos.yml -u [username] -k -t junos_set
+```
+playbook
+```yaml
+---
+- name: configure syslog for juniper
+  hosts: junos
+  serial: 1
+  gather_facts: false
+  vars:
+    Facility: local4
+    LogServers:
+      - 10.1.0.1
+      - 10.2.0.1
+
+  tasks:
+
+    - name: delete syslog servers for junos
+      junipernetworks.junos.junos_config:
+        lines:
+          - "delete system syslog host {{ item }}"
+        comment: delete syslog hosts
+      with_items: "{{ LogServers }}"
+      tags:
+        - junos_delete
+
+    - name: pause for 60 seconds
+      pause:
+        seconds: 60
+      tags:
+        - junos_delete
+
+    - name: syslog servers for junos
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set system syslog host {{ item }} any any"
+          - "set system syslog host {{ item }} facility-override {{ Facility }}"
+          - "set system syslog host {{ item }} explicit-priority"
+          - "set system syslog host {{ item }} structured-data brief"
+        comment: set syslog hosts
+      with_items: "{{ LogServers }}"
+      tags:
+        - junos_set
+```
+Ничего страшного в `any any` нет, т.к. debug удаляется vector'ом.
+Потом эти правила могут быть расширены только для сообщений с local4, например.
