@@ -13,7 +13,9 @@ chown vector /var/log/vector
 
 ## vector.yaml
 
-Для версии не ниже 0.12.
+Для версии не ниже 0.12. возможна настройка конфига в yaml формате.
+Конвертер [toml-yaml](https://www.convertsimple.com/convert-toml-to-yaml/) для преобразования примеров из документации.
+
 Конфиг для запуска и проверки работы с фильтром по `debug`.
 
 ```yaml
@@ -38,6 +40,11 @@ sinks:
     healthcheck: true
     path: "/var/log/vector/vector-%Y-%m-%d.log"
     encoding: "ndjson"
+```
+
+Валидация конфига
+```sh
+vector validate --config-yaml vector.yaml
 ```
 
 ## логирование в ubuntu
@@ -211,7 +218,7 @@ with_item тут не применить из-за ограничений мод
   hosts: cisco_n3k
   gather_facts: false
   vars:
-    Facility: 6
+    Facility: local6
     LogServers:
       - 10.1.0.1
       - 10.2.0.1
@@ -223,7 +230,7 @@ with_item тут не применить из-за ограничений мод
         config: |
             #jinja2: lstrip_blocks: True
             {% for ip in LogServers %}
-            logging server {{ ip }} {{ Facility}}
+            logging server {{ ip }} 7 use-vrf default facility {{ Facility }}
             {% endfor %}
             logging source-interface loopback0
             logging level authpri 6
@@ -237,6 +244,13 @@ with_item тут не применить из-за ограничений мод
       cli_command:
         command: copy running-config startup-config
 ```
+
+Для mds команда попроще
+```text
+logging server {{ ip }} 7 facility {{ Facility }}
+```
+В итоге в логах все равно нет facility.
+
 
 ## junos playbook
 
