@@ -188,8 +188,8 @@ set forwarding-options sampling instance ipfix family inet output inline-jflow s
 
 ## junos upgrade
 
-[VM Host Overview](https://www.juniper.net/documentation/en_US/junos/topics/topic-map/vm-host-overview.html), [](https://www.juniper.net/documentation/en_US/junos/topics/concept/vm-host-operations-management.html), 
-[](https://www.juniper.net/documentation/en_US/junos/topics/concept/installation_upgrade.html)
+[VM Host Overview](https://www.juniper.net/documentation/en_US/junos/topics/topic-map/vm-host-overview.html), [vm-host-operations-management](https://www.juniper.net/documentation/en_US/junos/topics/concept/vm-host-operations-management.html), 
+[installation_upgrade](https://www.juniper.net/documentation/en_US/junos/topics/concept/installation_upgrade.html)
 
 С 17.x до 20.2 обновиться сразу не получится
 ```text
