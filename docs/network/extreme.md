@@ -471,3 +471,11 @@ scp2 vr VR-Default user@[ip-address]:firmware/summitX-31.1.1.3-patch1-1.xos summ
 ```text
 install image summitX-31.1.1.3-patch1-1.xos
 ```
+
+## vlan translation
+
+[Basic VLAN Translation](https://documentation.extremenetworks.com/exos_30.7/GUID-0DE9110F-43DD-435D-A8F0-2294D8A70C29.shtml)
+```text
+extreme# configure vlan A vlan-translation add member-vlan B
+Error: VLAN translation services can't be added to virtual-network associated VLAN A
+```
