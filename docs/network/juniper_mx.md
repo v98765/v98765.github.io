@@ -185,3 +185,103 @@ set forwarding-options sampling instance ipfix family inet output flow-server 19
 set forwarding-options sampling instance ipfix family inet output flow-server 192.168.0.10 version-ipfix template vflow
 set forwarding-options sampling instance ipfix family inet output inline-jflow source-address 192.168.0.1
 ```
+
+## junos upgrade
+
+[VM Host Overview](https://www.juniper.net/documentation/en_US/junos/topics/topic-map/vm-host-overview.html), [](https://www.juniper.net/documentation/en_US/junos/topics/concept/vm-host-operations-management.html), 
+[](https://www.juniper.net/documentation/en_US/junos/topics/concept/installation_upgrade.html)
+
+С 17.x до 20.2 обновиться сразу не получится
+```text
+
+ERROR: estimate of space required: 4035098 Kbytes, available: 3994154 Kbytes
+```
+Обновление с 17.x до 19.4 возможно, но потребуется дополнительный ребут после первой загрузки 19.4.
+```text
+Chassis control process: <xnm:warning xmlns="http://xml.juniper.net/xnm/1.1/xnm" xmlns:xnm="http://xml.juniper.net/xnm/1.1/xnm">
+Chassis control process: <source-daemon>chassisd</source-daemon>
+Chassis control process: <edit-path>[edit groups junos-defaults]</edit-path>
+Chassis control process: <statement>chassis</statement>
+Chassis control process: <message>Chassis configuration for network services has been changed. A system reboot is mandatory.  Please reboot *ALL* routing engines NOW. >
+Chassis control process: </xnm:warning>
+```
+Предварительная копия в /var/tmp/
+```text
+file copy http://[host]/fw/junos/junos-vmhost-install-mx-x86-64-19.4R3-S2.2.tgz /var/tmp/
+```
+Обновление с перезагрузкой
+```text
+request vmhost software add no-validate reboot /var/tmp/junos-vmhost-install-mx-x86-64-19.4R3-S2.2.tgz
+```
+Перезагрузка RE по причине выше
+```text
+request vmhost reboot
+```
+Обновление с 19.4 до 20.2 штатно
+```text
+request vmhost software add no-validate http://[host]/fw/junos/junos-vmhost-install-mx-x86-64-20.2R2-S2.6.tgz
+```
+После сообщения выполнить указанную команду
+```text
+A REBOOT IS REQUIRED TO LOAD THIS SOFTWARE CORRECTLY.
+Use the 'request vmhost reboot' command to reboot the system.
+```
+
+## vmhost rollback
+
+```text
+mx> show vmhost version
+Current root details,           Device sda, Label: jrootp_P, Partition: sda3
+Current boot disk: Primary
+Current root set: p
+UEFI    Version: CBEP_P_SUM1_00.13.01
+
+Primary Disk, Upgrade Time: Wed Mar 17 12:30:11 UTC 2021
+
+Version: set p
+VMHost Version: 5.2268
+VMHost Root: vmhost-x86_64-20.2R2-S1-20201210_1323_builder
+VMHost Core: vmhost-core-x86-64-20.2R2-S2.6
+kernel: 4.8.28-rt10-WR9.0.0.24_ovp
+Junos Disk: junos-install-mx-x86-64-20.2R2-S2.6
+
+Version: set b
+VMHost Version: 5.2225
+VMHost Root: vmhost-x86_64-19.4R3-S2-20210118_0229_builder
+VMHost Core: vmhost-core-x86-64-19.4R3-S2.2
+kernel: 4.8.28-rt10-WR9.0.0.20_ovp
+Junos Disk: junos-install-mx-x86-64-19.4R3-S2.2
+```
+
+
+```text
+request vmhost software rollback
+```
+
+```text
+mx> show vmhost version
+Current root details,           Device sda, Label: jrootb_P, Partition: sda4
+Current boot disk: Primary
+Current root set: b
+UEFI    Version: CBEP_P_SUM1_00.13.01
+
+Primary Disk, Upgrade Time: Wed Mar 17 12:30:11 UTC 2021
+
+Version: set p
+VMHost Version: 5.2268
+VMHost Root: vmhost-x86_64-20.2R2-S1-20201210_1323_builder
+VMHost Core: vmhost-core-x86-64-20.2R2-S2.6
+kernel: 4.8.28-rt10-WR9.0.0.24_ovp
+Junos Disk: junos-install-mx-x86-64-20.2R2-S2.6
+
+Version: set b
+VMHost Version: 5.2225
+VMHost Root: vmhost-x86_64-19.4R3-S2-20210118_0229_builder
+VMHost Core: vmhost-core-x86-64-19.4R3-S2.2
+kernel: 4.8.28-rt10-WR9.0.0.20_ovp
+Junos Disk: junos-install-mx-x86-64-19.4R3-S2.2
+
+mx> show version
+Model: mx204
+Junos: 19.4R3-S2.2
+```
