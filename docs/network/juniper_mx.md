@@ -50,6 +50,12 @@ inactive: interfaces xe-0/1/1.300;
 interfaces xe-0/1/2.100;
 ```
 
+В 20.2
+```text
+Alarm cleared: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+Alarm set: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+```
+
 ## load-balancing
 
 > You can configure Junos OS so that, for the active route, all next-hop addresses for a destination are installed in the forwarding table. This feature is called per-packet load balancing. The naming may be counter-intuitive. However, Junos per-packet load balancing is functionally equivalent to what other vendors may term per-flow load balancing. You can use load balancing to spread traffic across multiple paths between routers.
@@ -129,7 +135,12 @@ set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 expo
 set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 peer-as 65211
 ```
 
-Хотят netflow. Есть sflow с PR1487876.
+Хотят netflow. Есть sflow с PR1487876. В 20.2 хочет лицензию какую-то, чего в 18 и в 19 нет.
+
+```text
+Alarm cleared: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+Alarm set: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+```
 
 > 77.95.132.140. Порт UDP 9080
 
