@@ -60,6 +60,7 @@ nav:
     - info:
         - 'Mac address': info/mac_info.md
         - 'Phone number': info/phone_info.md
+        - 'dns servers': info/dns_info.md
         - 'Routing': info/routing_info.md
 theme:
   name: material
