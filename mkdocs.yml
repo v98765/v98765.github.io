@@ -47,6 +47,7 @@ nav:
         - 'AdGuardHome': work/adguardhome.md
         - 'Ansible for ntwrk': work/ansible_ntwrk.md
         - 'Empty, sshpass': work/empty.md
+        - 'github': work/github.md
         - 'Miniconda': work/miniconda.md
         - 'Mkdocs': work/mkdocs.md
         - 'Molecule': work/molecule.md
