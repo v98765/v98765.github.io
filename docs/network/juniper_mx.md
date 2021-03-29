@@ -19,6 +19,14 @@ __default_arp_policer__                                 0                    0
 arp_limit-xe-0/0/0.100-inet-arp                        46                    1
 ```
 
+## ddos
+
+```text
+show ddos-protection protocol statistics terse
+show ddos-protection protocols culprit-flows
+show ddos-protection protocols violations
+```
+
 ## sflow
 
 [Example: Configuring sFlow Technology to Monitor Network Traffic on MX Series Routers
