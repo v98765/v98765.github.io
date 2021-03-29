@@ -2,6 +2,8 @@
 
 [Example: Configuring ARP Policer](https://www.juniper.net/documentation/en_US/junos/topics/example/example-configuring-arp-policer.html)
 
+> NOTE: A default arp policer named __default_arp_policer__ is used and **shared** by all ethernet interfaces with family inet configured, by default.
+
 Проблема в дефолтовом полисере. На бордерах, подключенных к точкам обмена, его необходимо настраивать
 ```text
 > show policer
