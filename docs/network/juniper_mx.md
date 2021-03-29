@@ -22,7 +22,7 @@ arp_limit-xe-0/0/0.100-inet-arp                        46                    1
 ## ddos
 
 ```text
-show ddos-protection protocol statistics terse
+show ddos-protection protocols statistics terse
 show ddos-protection protocols culprit-flows
 show ddos-protection protocols violations
 ```
