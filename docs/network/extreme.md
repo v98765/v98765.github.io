@@ -472,6 +472,12 @@ scp2 vr VR-Default user@[ip-address]:firmware/summitX-31.1.1.3-patch1-1.xos summ
 install image summitX-31.1.1.3-patch1-1.xos
 ```
 
+## http upgrade
+
+```text
+download url http://[ip-address]/firmware/summitX-16.2.5.4-patch1-29.xos vr "VR-Default" inactive
+```
+
 ## vlan translation
 
 [Basic VLAN Translation](https://documentation.extremenetworks.com/exos_30.7/GUID-0DE9110F-43DD-435D-A8F0-2294D8A70C29.shtml)
