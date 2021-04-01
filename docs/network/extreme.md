@@ -452,6 +452,7 @@ reboot node-address [node-mac]
 ```
 Для 670v с модулем vim4-40g4x понадобилось расконфигурировать стек, чтобы активировать порты.
 Т.е. если Yes, а не No как ниже
+```text
 # show stacking-support
 
 Stack    Available Ports
