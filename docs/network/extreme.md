@@ -170,6 +170,44 @@ show bgp neighbor [peer_ip] received-routes all
 show bgp neighbor [peer_ip] transmitted-routes all
 ```
 
+## bgp policy
+
+Создание политики
+```text
+edit policy ibgp
+```
+Откроется файл в редакторе vi
+```text
+entry limit {
+if match any {
+        nlri 10.0.6.0/24;
+        nlri 10.0.7.0/24;
+} then {
+deny;
+}
+}
+entry permit {
+if match all {
+}
+then {
+    permit;
+}
+}
+```
+entry - это как term в junos, if = from, then = then. В примере запрет передачи префиксов.
+Каждый файл надо проверить
+```text
+check policy ibgp
+```
+Потом применить
+```text
+configure bgp neighbor 10.0.1.2 route-policy out ibgp
+```
+При изменении политики выполнить
+```text
+refresh policy "ibgp"
+```
+
 ## ecmp
 
 Включить, указав нужный vr
@@ -289,8 +327,7 @@ show edp ports 1 detail
 
 ## mac-lock
 
-[По инструкции](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-bind-a-single-mac-address-to-a-port)
-ограничить кол-во мак-адресов на порту, указать статикой нужный
+[По инструкции](https://gtacknowledge.extremenetworks.com/articles/How_To/How-to-bind-a-single-mac-address-to-a-port) ограничить кол-во мак-адресов на порту, указать статикой нужный
 
 ```text
 enable mac-locking
@@ -412,6 +449,21 @@ Playbook для проверки разного в качестве пример
 ```text
 disable stacking node-address [node-mac]
 reboot node-address [node-mac]
+```
+Для 670v с модулем vim4-40g4x понадобилось расконфигурировать стек, чтобы активировать порты.
+Т.е. если Yes, а не No как ниже
+# show stacking-support
+
+Stack    Available Ports
+Port    Native  Alternate  Configured  Current
+-----   -----------------  ----------  ----------
+1       Yes *   47         Native      Native      
+2       Yes *   48         Native      Native      
+stacking-support:          Enabled     Enabled   
+```
+то
+```text
+unconfigure stacking-support
 ```
 
 ## acl
