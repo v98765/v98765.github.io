@@ -1,56 +1,51 @@
 ## Установка
 
 Установка коллектора netflow, sflow с ролью [v98765_nfdump](https://github.com/v98765/v98765_nfdump). Пакеты есть для ubuntu,debian. Роль только для этих ОС с systemd.
-Каталоги в примерах ниже от старой роли.
 
 ## Примеры использования
 
 `man nfdump` для справки.
 
-Индекс интерфейса пишется тоже по умолчанию. Выбрать top 1 srcip, где snmp-индекс исходящего интерфейса 12, чтобы посмотреть откуда качают в заданном интервале времени. Заменить на dstip, чтобы посмотреть с каких адресов.
-```text
-root@flows:/var/lib/flows/router1/2020/09/08# nfdump -R nfcapd.202009080701:nfcapd.202009080756 'out if 12' -s srcip -O bytes -n 1
-Top 1 Src IP Addr ordered by bytes:
-Date first seen          Duration Proto       Src IP Addr    Flows(%)     Packets(%)       Bytes(%)         pps      bps   bpp
-2020-09-08 07:00:35.800  3655.194 any         10.06.00.30   111331(26.6)    2.7 M(39.0)    3.0 G(50.5)      726    6.6 M  1141
-
-Summary: total flows: 418762, total bytes: 6003467232, total packets: 6816316, avg bps: 13128750, avg pps: 1863, avg bpp: 880
-Time window: 2020-09-08 07:00:31 - 2020-09-08 08:01:30
-Total flows processed: 835676, Blocks skipped: 0, Bytes read: 46799764
-Sys: 0.119s flows/second: 7016060.9  Wall: 0.117s flows/second: 7100232.0 
+Индекс интерфейса пишется тоже по умолчанию. Выбрать top 1 srcip, где snmp-индекс исходящего интерфейса 12, чтобы посмотреть откуда качают. Заменить на dstip, чтобы посмотреть с каких адресов.
+```sh
+nfdump -r [filename] 'out if 12' -s srcip -O bytes -n 1
 ```
 
 Проверка маркировки телефонной сигнализации
-```text
-root@flows:/var/lib/flows/router1/2020/09/08# nfdump -R nfcapd.202009080701:nfcapd.202009080756 -c 1 'tos > 0 and port 5060'  -o long
-Date first seen          Duration Proto      Src IP Addr:Port          Dst IP Addr:Port   Flags Tos  Packets    Bytes Flows
-2020-09-08 07:01:19.647     0.000 UDP         10.00.00.0:5060  ->      10.00.20.50:5062  ......  96        1      413     1
-Summary: total flows: 1, total bytes: 413, total packets: 1, avg bps: 0, avg pps: 0, avg bpp: 0
-Time window: 2020-09-08 07:00:31 - 2020-09-08 07:06:30
-Total flows processed: 18706, Blocks skipped: 0, Bytes read: 1047612
-Sys: 0.004s flows/second: 3882523.9  Wall: 0.002s flows/second: 7536664.0 
+```sh
+nfdump -r [filename] -c 1 'tos > 0 and port 5060'  -o long
 ```
 
-Без маркировки нет.
-```text
-root@flows:/var/lib/flows/router1/2020/09/08# nfdump -R nfcapd.202009080701:nfcapd.202009080756 'host 10.00.00.0 and tos 0'  -o long
-Date first seen          Duration Proto      Src IP Addr:Port          Dst IP Addr:Port   Flags Tos  Packets    Bytes Flows
-Summary: total flows: 0, total bytes: 0, total packets: 0, avg bps: 0, avg pps: 0, avg bpp: 0
-Time window: 2020-09-08 07:00:31 - 2020-09-08 08:01:30
-Total flows processed: 835676, Blocks skipped: 0, Bytes read: 46799764
-Sys: 0.082s flows/second: 10137516.1 Wall: 0.080s flows/second: 10409516.7
+Проверка отсутствия маркировки на пакетах от/до АТС.
+```sh
+nfdump -r [filename] 'host 10.00.00.0 and tos 0'  -o long
 ```
 
-Top10 за 8 число
-```text
-root@flows:/var/lib/flows/router1/2020/09# nfdump -R 08 -s srcip -O bytes
-Top 10 Src IP Addr ordered by bytes:
-...
+Top10 за 1 апреля
+```sh
+nfdump -R 2021/04/01 -s srcip -O bytes
+```
+
+Фрагменты
+```sh
+nfdump -r [filename] '(proto tcp and flags F and dst ip in [ 999.888.777.0/22 ] and dst port in [ 80 445 443 ]) %nf_fragment ' -c 10
+```
+TCP syn. В `man nfdump` прямо так по флагам.
+```sh
+nfdump -r [filename]  '(proto tcp and flags S and not flags ARFPU and dst ip in [ 999.888.777.0/22 ] and port in [ 80 443 445 ]) %nf_syn' -c 10
+```
+UDP
+```sh
+nfdump -r [filename]   '(proto udp and dst ip in [ 999.888.777.0/22 ] and port in [ 53 123 161 80 3389 ] )' -c 10
+```
+ICMP
+```sh
+nfdump -r [filename]  '(proto icmp and dst ip in [  999.888.777.0/22 ] )' -A dstip
 ```
 
 ## Место на диске
 
-Есть утилита
+Есть утилита `nfexpire` но она только для файлов с именем `nfdump.*`. Если переименовать файлы, то бесполезна.
 
 ```text
 root@flows:/var/lib/flows# nfexpire -h
@@ -75,37 +70,67 @@ root@flows:/var/lib/flows# for i in `ls` ; do nfexpire -u $i -s 5g -t 8w ; done
 
 Можно ставить node_exporter с collector.textfile и генерить метрики
 
-## Ограничение доступа
-
-На ubuntu есть ufw.
-
-Коллектор | Протокол | Порт по умолчанию
----|---|---
-netflow | udp | 2055
-sflow | udp | 6343
-
-```text
-# cat /etc/ufw/applications.d/nfdump 
-[nfdump]
-title=nfdump
-description=nfdump
-ports=2055/udp
-
-# ufw app update nfdump
-Rules updated for profile 'nfdump'
-Skipped reloading firewall
-
-# ufw allow from any to any app nfdump
-```
-
 ## агрегация статистики
 
-С сохранением в файл в формате nfdump
+С сохранением в файл в формате nfdump, агрегацией и сжатием `-A srcip,dstip -j`.
 ```sh
-for day in `ls` ; do cd $day;
-for file in `find . -name 'nfcapd.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'` ; do  nfdump -A srcip,dstip -a -r ${file} -w ${file}.a ; rm -f ${file} ; done;
-cd ../;
+#!/bin/bash
+
+cd /var/cache/nflow
+filecounter=0
+for file in `find . -name 'nfcapd.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'` ; do
+    aggfile=$(echo ${file} | sed s/nfcapd/ajnfcapd/)
+    nfdump -A srcip,dstip -j -a -r ${file} -w ${aggfile}
+    [ -f ${aggfile} ] && rm -f ${file} && let filecounter=${filecounter}+1
 done
+date >> add.log
+echo " $filecounter" >> add.log
+```
+
+## поиск по файлам за период
+
+Для случаев когда нужно выбрать конкретные данные
+
+```sh
+#!/bin/bash
+
+cd /var/cache/nflow
+mkdir -p reports
+
+echo 'enter ip address'
+read varip
+
+# создание каталогов для отчета по Ip-адресу
+
+mkdir -p reports/${varip}
+
+# поиск данных по каталогам статистики
+
+date
+for m in $(find ./20* -maxdepth 1 -mindepth 1 -type d -name "[0-9][0-9]"); do
+  reportdata=$( echo $m | tr -d './')
+  set -x bash
+  targetnfdump="reports/${varip}/nfdump.${reportdata}"
+  nfdump -R $m "host ${varip}" -w $targetnfdump
+  nfdump -r $targetnfdump -o "fmt:%ts;%sa;%da" > reports/${varip}/${reportdata}.txt
+  set +x bash
+done
+date
+```
+
+Лучше запускать в `screen`, потому что долго.
+
+## просмотр текущих данных
+
+Файлы ротируются с интервалом раз в 15 минут, поэтому долго ждать актуальных данных. Просмативать можно и текущий временный файл. Время должно быть синхронизировано.
+```sh
+#!/bin/bash -x
+
+cd /var/cache/nflow
+
+filecurr=$(ls nfcapd.current*)
+timewin=$(date -d "-1 minutes" +%Y/%m/%d.%H:%M)
+nfdump -r $filecurr -t $timewin
 ```
 
 ## vmware
