@@ -135,6 +135,7 @@ ifType | тип интерфейса для фильтрации метрик в
       - 1.3.6.1.2.1.2.2.1.9         # IF-MIB::ifLastChange
       - 1.3.6.1.2.1.2.2.1.14        # IF-MIB::ifInErrors
       - 1.3.6.1.2.1.2.2.1.19        # IF-MIB::ifOutDiscards
+      - 1.3.6.1.4.1.1916.1.4.14.1.1   # EXTREME-PORT-MIB::extremePortCongDropPkts
       - 1.3.6.1.2.1.31.1.1.1.6      # IF-MIB::ifHCInOctets
       - 1.3.6.1.2.1.31.1.1.1.7      # IF-MIB::ifHCInUcastPkts
       - 1.3.6.1.2.1.31.1.1.1.10     # IF-MIB::ifHCOutOctets
