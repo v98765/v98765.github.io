@@ -2,15 +2,14 @@
 
 [rfc7999](https://tools.ietf.org/html/rfc7999) blackhole community
 
-AS | LG | BlackHole community
+AS | LG | BlackHole community | comment
 ---|---|---
-1299 | [lg.twelve99.net](https://lg.twelve99.net/) | 1299:999
-8631 | [msk-ix.ru/lookingglass/](https://msk-ix.ru/lookingglass/) | 65535:666
-9002 |[lg.retn.net](https://lg.retn.net/) | 9002:666
-49869 | [lg.piter-ix.ru](https://lg.piter-ix.ru/) | 50509:666
-56931 | [www.eurasiapeering.com/looking-glass/](https://www.eurasiapeering.com/looking-glass/) | 65535:666
-57724 | | 
-199599 | [lg.cirex.ru](http://lg.cirex.ru/) | 64000:666
+1299 | [lg.twelve99.net](https://lg.twelve99.net/) | 1299:999 | видно community, можно проверить ping'ом
+8631 | [msk-ix.ru/lookingglass/](https://msk-ix.ru/lookingglass/) | 65535:666 | видно community, не проверить ping'ом
+9002 |[lg.retn.net](https://lg.retn.net/) | 9002:666 | не видно community, можно проверить ping'ом
+49869 | [lg.piter-ix.ru](https://lg.piter-ix.ru/) | 50509:666 | ..
+56931 | [www.eurasiapeering.com/looking-glass/](https://www.eurasiapeering.com/looking-glass/) | 65535:666 | видно community, не проверить ping'ом
+199599 | [lg.cirex.ru](http://lg.cirex.ru/) | 64000:666 | ничего не работает в lg
 
 
 
