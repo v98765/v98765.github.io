@@ -1,15 +1,23 @@
 ## looking glass
 
-link | descr
----|---
-[cirex](http://lg.cirex.ru/) | телекомбиржа (не работает)
-[mastertel](http://lg.mastertel.ru/) | мастертел
-[mts](http://lg.mtu.ru/) | мтс
-[retn](https://lg.retn.net/) | РЕТН
-[telia](https://lg.telia.net/) | Telia
-[m9](https://msk-ix.ru/lookingglass/) | msk-ix
-[eurasia-ix](https://www.eurasiapeering.com/looking-glass/) | eurasia-ix
-[pitex-ix](https://lg.piter-ix.ru/) | piter-ix
+[rfc7999](https://tools.ietf.org/html/rfc7999) blackhole community
+
+AS | LG | BlackHole community
+---|---|---
+1299 | [lg.telia.net](https://lg.telia.net/) | 1299:999
+8631 | [msk-ix.ru/lookingglass/](https://msk-ix.ru/lookingglass/) | 65535:666
+9002 |[lg.retn.net](https://lg.retn.net/) | 9002:666
+49869 | [lg.piter-ix.ru](https://lg.piter-ix.ru/) | 65535:666
+56931 | [www.eurasiapeering.com/looking-glass/](https://www.eurasiapeering.com/looking-glass/) | 65535:666
+57724 | | 
+199599 | [lg.cirex.ru](http://lg.cirex.ru/) | 64000:666
+
+
+
+[mastertel](http://lg.mastertel.ru/), [mts](http://lg.mtu.ru/) 
+
+У РЕТН есть усуга extended blackhole, где с 9002:667 фильтруется весь udp, с 9002:668 фильтрация UDP-трафика от «известных amplifier’ов» (UDP with source-port 19, 53, 123, 161, 389, 520, 1900, 11211) и фрагментированного UDP-трафика
+
 
 ## route info
 
