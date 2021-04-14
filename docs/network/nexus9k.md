@@ -5,6 +5,7 @@
 * Multi-Site Orcestrator (MSO)
 
 Вебинары на тему Cisco EVPN. Пароль там где просит `Engage2021`. Какие-то ссылки могут быть нерабочими.
+
 День | Презентация | Demo | Запись
 ---|---|---|---
 1 | [Презентация 1](https://cisco.app.box.com/s/wdmiefytsfpc9q03sj6rgwcwzfmalmg2) | [Демо 1](https://cisco.app.box.com/s/rzp4ez4dnln5mb4swpply9a26l088eqp) | [Запись вебинара 1](https://cisco.webex.com/cisco/lsr.php?RCID=e1f9daa2b20e719d94e3f39eaaeb2c7f)
