@@ -5,14 +5,7 @@
 * Multi-Site Orcestrator (MSO)
 
 Вебинары на тему Cisco EVPN. Пароль там где просит `Engage2021`. Какие-то ссылки могут быть нерабочими.
-
-День | Презентация | Demo | Запись
----|---|---|---
-1 | [Презентация 1](https://cisco.app.box.com/s/wdmiefytsfpc9q03sj6rgwcwzfmalmg2) | [Демо 1](https://cisco.app.box.com/s/rzp4ez4dnln5mb4swpply9a26l088eqp) | [Запись вебинара 1](https://cisco.webex.com/cisco/lsr.php?RCID=e1f9daa2b20e719d94e3f39eaaeb2c7f)
-2 | [Презентация 2](https://cisco.app.box.com/s/ibzhar5b7yk852q16kjk0tsiutdfd65t) | [Демо 2](https://cisco.app.box.com/s/cpce0dgp0te7431tw6vnadxz445wh3i8) | [Запись вебинара 2](https://cisco.webex.com/cisco/lsr.php?RCID=8b6a24bb7449548f93b6a6d82c908305)
-3 | [Презентация 3](https://cisco.app.box.com/s/ncppldqtn4kbuajusaka6k2bhnej8pt5) | [Демо 3](https://cisco.app.box.com/s/0qv5l2vzjjkiazmzd4yev3qpxj13s2n5) | [Запись вебинара 3](https://cisco.webex.com/cisco/lsr.php?RCID=df24995c3ace13c7ed92edf11178002f)
-4 | [Презентация 4](https://cisco.app.box.com/s/vwb7retb9fqcj18k387bo1xczotsmwb9) | [Демо 4](https://cisco.app.box.com/s/ay00lu3c65izbtexjcbzhgqak0aba74t) | [Запись вебинара 4](https://cisco.webex.com/cisco/lsr.php?RCID=8f01a248aaa548dbbde62b02c180540c)
-5 | [Презентация 5](https://cisco.box.com/s/psvq5e8w755c4nfer5g1mamhgmvmdbsn) | - | [Запись вебинара 5](https://cisco.webex.com/cisco/lsr.php?RCID=10b3515e8e0447fbb63d7628dedf1557)
+[ЦОД: вычислительные мощности, сеть и управление](https://www.cisco.com/c/ru_ru/training-events/on-demand-webinars.html)
 
 ## Основные материалы
 
