@@ -21,6 +21,7 @@ nav:
         - 'PoE': network/poe.md
         - 'СКС': network/sks.md
         - 'Device DistKontrol': network/distkontrol.md
+        - 'Switch QoS': network/qos_switch.md
         - 'Switch list for vxlan': network/vxlan_sw.md
         - 'Switch cisco': network/cisco_sw.md
         - 'Switch cisco nexus3k': network/nexus3k.md

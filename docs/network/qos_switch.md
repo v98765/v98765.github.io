@@ -626,7 +626,7 @@ configure access-list qacl any
 Настройки выполнены по таблице ниже:
 
 dscp dec | dscp class | qosprofile
----|---|---|---
+---|---|---
 8 | cs1 | 2
 24 | cs3 | 3
 32 | cs4 | 4
