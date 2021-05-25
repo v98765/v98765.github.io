@@ -309,7 +309,7 @@ vsan 1 information
               pwwn: 21:00:00:24:ff:32:cf:e8
             - devtype: initiator
               pwwn: 21:00:00:24:ff:49:b9:6e
-             - devtype: target
+            - devtype: target
               pwwn: 29:00:74:3a:65:ea:50:8f
             - devtype: target
               pwwn: 21:00:74:3a:65:ea:50:8f
