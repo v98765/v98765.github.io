@@ -104,7 +104,8 @@ interface fc1/48
 В частности поэтому ниже в примере не будет handler'а, записывающего конфигурацию на коммутаторе фабрики.
 Как установить ansible и коллекцию описано в разделе [work/venv](https://v98765.github.io/work/venv/).
 
-В рабочем каталоге создать файл `ansible.cfg`
+В рабочем каталоге создать файл `ansible.cfg`.
+
 ```text
 [defaults]
 host_key_checking = False
@@ -112,7 +113,8 @@ inventory=./inventory
 [ssh_connection]
 pipelining = true
 ```
-Создать файл для описания коммутаторов фабрик `inventory`
+Создать файл для описания коммутаторов фабрик `inventory`.
+
 ```text
 [all:vars]
 
@@ -263,6 +265,98 @@ Total number of entries = 1
 ## smart zoning
 
 Решешие от cisco [smart zoning](https://www.cisco.com/c/en/us/support/docs/storage-networking/zoning/116390-technote-smartzoning-00.html) подразумевает одну зону, но с функионалом Single Initiator and Single Targets.
+
+Миграция возможна при отключении [interoperability](https://www.cisco.com/en/US/docs/storage/san_switches/mds9000/interoperability/guide/ICG_test.html) на коммутаторах фабрики.
+Коммутаторы Brocade должны быть отключены, либо переведены в режим access gateway.
+```text
+vsan database
+  no vsan 1 interop
+```
+Если отключено, то будет по умолчанию
+```
+MDS# show vsan 1
+vsan 1 information
+         name:VSAN0001  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+```
+
+Порядок внесения pwwn имеет значение, поэтому новые таргеты и инициаторы необходимо добавлять в конец. В таске используется модуль
+[zone_zoneset](https://github.com/ansible-collections/cisco.nxos/blob/main/docs/cisco.nxos.nxos_zone_zoneset_module.rst)
+```yaml
+---
+- name: configure smart-zoning
+  hosts:
+    - mdsA
+  gather_facts: false
+
+  tasks:
+
+  - name: task configure zoneset on fabric_a
+    cisco.nxos.nxos_zone_zoneset:
+      zone_zoneset_details:
+        - mode: basic
+          smart_zoning: true
+          vsan: 1
+          zone:
+          - members:
+            - devtype: initiator
+              pwwn: 21:00:00:24:ff:50:82:79
+            - devtype: initiator
+              pwwn: 21:00:00:24:ff:50:81:b1
+            - devtype: initiator
+              pwwn: 21:00:00:24:ff:32:cf:e8
+            - devtype: initiator
+              pwwn: 21:00:00:24:ff:49:b9:6e
+             - devtype: target
+              pwwn: 29:00:74:3a:65:ea:50:8f
+            - devtype: target
+              pwwn: 21:00:74:3a:65:ea:50:8f
+            name: smartzoneA
+          zoneset:
+          - action: activate
+            members:
+            - name: smartzoneA
+            name: smartsetA
+```
+Проверка статуса. Обратить внимание на Interop в т.ч.
+```
+MDS# show zone status
+VSAN: 1 default-zone: permit distribute: active only Interop: default
+    mode: basic merge-control: allow
+    session: none
+    hard-zoning: enabled broadcast: unsupported
+    smart-zoning: enabled
+    rscn-format: fabric-address
+    activation overwrite control: disabled
+Default zone:
+    qos: none broadcast: unsupported ronly: unsupported
+Full Zoning Database :
+    DB size: 106104 bytes
+    Zonesets:2  Zones:1066 Aliases: 78
+Active Zoning Database :
+    DB size: 1076 bytes
+    Name: smartsetA  Zonesets:1  Zones:2
+Current Total Zone DB Usage: 107180 / 2097152 bytes (5 % used)
+Pending (Session) DB size:
+    Full DB Copy size: n/a
+    Active DB Copy size: n/a
+SFC size: 107180 / 2097152 bytes (5 % used)
+Status: Activation completed at 23:36:57 MSK May 24 2021
+```
+Просто и понятно стало
+```
+MDS# show zoneset active
+zoneset name smartsetA vsan 1
+  zone name smartzoneA vsan 1
+  * fcid 0x101b00 [pwwn 21:00:00:24:ff:50:82:79]  init
+  * fcid 0x100e00 [pwwn 21:00:00:24:ff:50:81:b1]  init
+  * fcid 0x100c00 [pwwn 21:00:00:24:ff:32:cf:e8]  init
+  * fcid 0x100d00 [pwwn 21:00:00:24:ff:49:b9:6e]  init
+  * fcid 0x691500 [pwwn 29:00:74:3a:65:ea:50:8f]  target
+  * fcid 0x691800 [pwwn 21:00:74:3a:65:ea:50:8f]  target
+```
 
 ## проблемы
 
