@@ -44,3 +44,9 @@ The document follows the "Template for a CPS for the RPKI" as defined in RFC7382
 ## Прочее
 
 [peeringdb.com](http://peeringdb.com/)
+
+## mtr
+
+```sh
+mtr --report -c 100 ip
+```
