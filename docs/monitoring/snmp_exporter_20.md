@@ -255,12 +255,43 @@ jnxOperatingTemp{jnxOperatingDescr="midplane"} 0
 curl localhost:9116/snmp?module=mx\&target=mx_host
 ```
 
+Бывает необходимость поменять тип, в противном случае данные в label отображаются в hex. Ниже пример для мониторинга гипервизора esxi
+```yaml
+  esxi:
+    retries: 1
+    walk:
+      - 1.3.6.1.2.1.25.1.1              # hrSystemUptime
+      - 1.3.6.1.2.1.25.2.3.1.5          # hrStorageSize
+      - 1.3.6.1.2.1.25.2.3.1.6          # hrStorageUsed
+      - 1.3.6.1.2.1.25.3.3              # hrProcessorTable
+      - 1.3.6.1.2.1.25.5.1.1.2          # hrSWRunPerfMem
+      - 1.3.6.1.2.1.25.4.2.1.7          # hrSWRunStatus
+
+    lookups:
+      - source_indexes: [hrStorageIndex]
+        lookup: 1.3.6.1.2.1.25.2.3.1.2    # hrStorageType
+        drop_source_indexes: false
+      - source_indexes: [hrSWRunIndex]
+        lookup: 1.3.6.1.2.1.25.4.2.1.2    # hrSWRunName
+        drop_source_indexes: false
+    overrides:
+      hrSWRunName:
+        type: DisplayString
+```
+RAM тут как диск
+```text
+hrStorageSize{hrStorageType="1.3.6.1.2.1.25.2.1.2"}
+hrStorageUsed{hrStorageType="1.3.6.1.2.1.25.2.1.2"}
+```
+
 Ссылки по теме:
 [https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string](https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string)
 
 [EXTREME-SOFTWARE-MONITOR-MIB](http://www.circitor.fr/Mibs/Html/E/EXTREME-SOFTWARE-MONITOR-MIB.php)
 
 [Numbers from DisplayStrings with the snmp_exporter](https://www.robustperception.io/numbers-from-displaystrings-with-the-snmp_exporter)
+
+[Why is my SNMP string showing as hexadecimal?](https://www.robustperception.io/why-is-my-snmp-string-showing-as-hexadecimal)
 
 [EX How to check temperature, CPU/memory usage by SNMP OID](https://kb.juniper.net/InfoCenter/index?page=content&id=KB17526)
 
