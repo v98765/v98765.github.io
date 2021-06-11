@@ -249,12 +249,6 @@ jnxOperatingTemp{jnxOperatingDescr="midplane"} 0
         drop_source_indexes: true
 ```
 
-## проверка
-
-```sh
-curl localhost:9116/snmp?module=mx\&target=mx_host
-```
-
 Бывает необходимость поменять тип, в противном случае данные в label отображаются в hex. Ниже пример для мониторинга гипервизора esxi
 ```yaml
   esxi:
@@ -283,8 +277,14 @@ RAM тут как диск
 hrStorageSize{hrStorageType="1.3.6.1.2.1.25.2.1.2"}
 hrStorageUsed{hrStorageType="1.3.6.1.2.1.25.2.1.2"}
 ```
+## проверка
+
+```sh
+curl localhost:9116/snmp?module=mx\&target=mx_host
+```
 
 Ссылки по теме:
+
 [https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string](https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string)
 
 [EXTREME-SOFTWARE-MONITOR-MIB](http://www.circitor.fr/Mibs/Html/E/EXTREME-SOFTWARE-MONITOR-MIB.php)
