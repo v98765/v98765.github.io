@@ -16,7 +16,7 @@ runroot="$XDG_RUNTIME_DIR/containers"
 
 Настроить окружение [v98765.github.io/work/venv/](https://v98765.github.io/work/venv/)
 
-## molecule
+## molecule driver podmap
 
 Установка
 ```text
@@ -171,6 +171,54 @@ root@ubuntu:/#
 Применить роль `molecule converge` и подключиться повторно, проверить работу установленных приложений.
 Если все работает, то `molecule test`.
 
+## molecule driver docker
+
+```sh
+pip install molecule-docker
+```
+Устанавливал докер через snap
+```sh
+sudo snap install docker
+```
+Создание роли
+```sh
+molecule init role v98765_vmalert --driver-name=docker
+```
+Настройка молекулы для запуска докера от root, т.к. прав не хватит. molecule/default/molecule.yml
+```yaml
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance_vmalert
+    privileged: true
+    image: docker.io/pycontribs/centos:8
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/lib/systemd/systemd"
+    pre_build_image: true
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callback_whitelist: profile_tasks, timer, yaml
+    ssh_connection:
+      pipelining: false
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+```
 
 ## Ссылки
 [Developing and Testing Ansible Roles with Molecule and Podman - Part 1](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-1), 
