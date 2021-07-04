@@ -538,3 +538,42 @@ download url http://[ip-address]/firmware/summitX-16.2.5.4-patch1-29.xos vr "VR-
 extreme# configure vlan A vlan-translation add member-vlan B
 Error: VLAN translation services can't be added to virtual-network associated VLAN A
 ```
+
+## debug
+
+Когда загрузка cpu system выше 20%, тогда проблемы.
+Нужен алерт `extremeCpuMonitorSystemUtilization1min > 15`.
+
+Посмотреть загрузку cpu.
+```text
+sh cpu-monitoring
+```
+Если `top`, то это extrRx0
+
+```text
+debug hal show device port-info system unit 0 | include cpu
+```
+
+Смотреть где больше трафика. Если 0, то это броадкаст или ipv6.
+На L3 коммутаторах с evpn будет 3, что значит смотреть fdb и обратить внимание на rt в выводе `show bgp evpn evi`
+
+```text
+Queue 0 : Broadcast and IPv6 packets
+Queue 1 : sFlow packets
+Queue 2 : vMAC destined packets (VRRP MAC and ESRP MAC)
+Queue 3 : L3 Miss packets (ARP request not resolved) or L2 Miss packets (Software MAC learning)
+Queue 4 : Multicast traffic not hitting hardware ipmc table (224.0.0.0/4 normal IP multicast packets neither IGMP nor PIM)
+Queue 5 : ARP reply packets or packets destined for switch itself
+Queue 6 : IGMP or PIM packets
+Queue 7 : Packets whose TOS field is "0xc0" and Ethertype is "0x0800", or STP, EAPS, EDP, OSPF packets
+```
+
+Для 0 можно записать пакеты в файл `/usr/local/tmp/<date-time>.pcap`
+```text
+debug packet capture on interface Broadcom count 1000
+```
+По scp скопировать себе и посмотреть tshark'ом
+```text
+ tshark -r <date-time>_rx_tx.pcap
+```
+В нормальном случае там будут только пакеты Extreme-ESRP
