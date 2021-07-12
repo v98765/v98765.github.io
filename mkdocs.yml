@@ -56,16 +56,17 @@ nav:
         - 'Msys2': work/msys2.md
         - 'Pip, venv': work/venv.md
         - 'Proxy for app': work/app_proxy.md
-        - 'Speed test': work/speedtest.md
         - 'Tacacs': work/tacacs.md
         - 'Translit, recode': work/translit.md
         - 'USB writer': work/usbwrite.md
     - info:
         - 'Mac address': info/mac_info.md
         - 'Mail': info/mail_info.md
+        - 'Web': info/mail_info.md
         - 'Phone number': info/phone_info.md
         - 'dns servers': info/dns_info.md
         - 'Routing': info/routing_info.md
+        - 'Speed test': work/speedtest.md
 theme:
   name: material
 markdown_extensions:
