@@ -62,7 +62,7 @@ nav:
     - info:
         - 'Mac address': info/mac_info.md
         - 'Mail': info/mail_info.md
-        - 'Web': info/mail_info.md
+        - 'Web': info/web_info.md
         - 'Phone number': info/phone_info.md
         - 'dns servers': info/dns_info.md
         - 'Routing': info/routing_info.md
