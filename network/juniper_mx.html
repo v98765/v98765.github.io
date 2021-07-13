@@ -1,0 +1,1571 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>Router juniper - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arp-policer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Router juniper
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        monitoring
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="monitoring" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          monitoring
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/promql_metricql.html" class="md-nav__link">
+        PromQL, MetricQL
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/snmp_exporter.html" class="md-nav__link">
+        Vmagent, snmp_exporter (old)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/snmp_exporter_20.html" class="md-nav__link">
+        snmp_exporter 0.20
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/backbox_exporter.html" class="md-nav__link">
+        Vmagent, blackbox_exporter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/telegraf_vmagent.html" class="md-nav__link">
+        Telegraf vs vmagent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/telegraf_snmp.html" class="md-nav__link">
+        Telegraf snmp
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/sflow.html" class="md-nav__link">
+        netflow, sflow
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/logs.html" class="md-nav__link">
+        logs
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        network
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="network" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          network
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="errors.html" class="md-nav__link">
+        Interface Errors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="switching.html" class="md-nav__link">
+        Switching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dhcpsnooping.html" class="md-nav__link">
+        DHCP snooping
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="nlb.html" class="md-nav__link">
+        NLB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tcp_mss.html" class="md-nav__link">
+        TCP MSS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="flowcontrol.html" class="md-nav__link">
+        Flowcontrol
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="poe.html" class="md-nav__link">
+        PoE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sks.html" class="md-nav__link">
+        СКС
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="distkontrol.html" class="md-nav__link">
+        Device DistKontrol
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="qos_switch.html" class="md-nav__link">
+        Switch QoS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vxlan_sw.html" class="md-nav__link">
+        Switch list for vxlan
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cisco_sw.html" class="md-nav__link">
+        Switch cisco
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="nexus3k.html" class="md-nav__link">
+        Switch cisco nexus3k
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="nexus9k.html" class="md-nav__link">
+        Switch cisco nexus9k
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mds.html" class="md-nav__link">
+        Switch cisco mds
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="juniper_ex.html" class="md-nav__link">
+        Switch juniper ex
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="huawei.html" class="md-nav__link">
+        Switch huawei s57
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="eltex.html" class="md-nav__link">
+        Switch eltex
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="extreme.html" class="md-nav__link">
+        Switch extreme
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tfortis.html" class="md-nav__link">
+        Switch tfortis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cisco_r.html" class="md-nav__link">
+        Router cisco
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Router juniper
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="juniper_mx.html" class="md-nav__link md-nav__link--active">
+        Router juniper
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arp-policer" class="md-nav__link">
+    arp policer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddos" class="md-nav__link">
+    ddos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sflow" class="md-nav__link">
+    sflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#load-balancing" class="md-nav__link">
+    load-balancing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic" class="md-nav__link">
+    pic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    ЦМУ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ipfix" class="md-nav__link">
+    ipfix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#junos-upgrade" class="md-nav__link">
+    junos upgrade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmhost-rollback" class="md-nav__link">
+    vmhost rollback
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vyos.html" class="md-nav__link">
+        Router vyos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vipnet.html" class="md-nav__link">
+        FW vipnet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        voip
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="voip" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          voip
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/softphone.html" class="md-nav__link">
+        Softphones
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/freeswitch.html" class="md-nav__link">
+        Freeswitch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_e1_gateway.html" class="md-nav__link">
+        Cisco E1 gateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_gw_cdr.html" class="md-nav__link">
+        Cisco CDR for gateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_cme.html" class="md-nav__link">
+        Cisco CME(CUCME)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_cor.html" class="md-nav__link">
+        Cisco COR list
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_cube.html" class="md-nav__link">
+        Cisco CUBE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_voip.html" class="md-nav__link">
+        Cisco voip notes
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        work
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="work" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          work
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/adguardhome.html" class="md-nav__link">
+        AdGuardHome
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/ansible_ntwrk.html" class="md-nav__link">
+        Ansible for ntwrk
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/empty.html" class="md-nav__link">
+        Empty, sshpass
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/github.html" class="md-nav__link">
+        github
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/miniconda.html" class="md-nav__link">
+        Miniconda
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/mkdocs.html" class="md-nav__link">
+        Mkdocs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/molecule.html" class="md-nav__link">
+        Molecule
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/msys2.html" class="md-nav__link">
+        Msys2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/venv.html" class="md-nav__link">
+        Pip, venv
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/app_proxy.html" class="md-nav__link">
+        Proxy for app
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/tacacs.html" class="md-nav__link">
+        Tacacs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/translit.html" class="md-nav__link">
+        Translit, recode
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/usbwrite.html" class="md-nav__link">
+        USB writer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        info
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="info" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          info
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/mac_info.html" class="md-nav__link">
+        Mac address
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/mail_info.html" class="md-nav__link">
+        Mail
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/web_info.md" class="md-nav__link">
+        Web
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/phone_info.html" class="md-nav__link">
+        Phone number
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/dns_info.html" class="md-nav__link">
+        dns servers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/routing_info.html" class="md-nav__link">
+        Routing
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work/speedtest.html" class="md-nav__link">
+        Speed test
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arp-policer" class="md-nav__link">
+    arp policer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddos" class="md-nav__link">
+    ddos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sflow" class="md-nav__link">
+    sflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#load-balancing" class="md-nav__link">
+    load-balancing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pic" class="md-nav__link">
+    pic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    ЦМУ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ipfix" class="md-nav__link">
+    ipfix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#junos-upgrade" class="md-nav__link">
+    junos upgrade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmhost-rollback" class="md-nav__link">
+    vmhost rollback
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Router juniper</h1>
+                
+                <h2 id="arp-policer">arp policer</h2>
+<p><a href="https://www.juniper.net/documentation/en_US/junos/topics/example/example-configuring-arp-policer.html">Example: Configuring ARP Policer</a></p>
+<blockquote>
+<p>NOTE: A default arp policer named <strong>default_arp_policer</strong> is used and <strong>shared</strong> by all ethernet interfaces with family inet configured, by default.</p>
+</blockquote>
+<p>Проблема в дефолтовом полисере. На бордерах, подключенных к точкам обмена, его необходимо настраивать
+<div class="highlight"><pre><span></span><code>&gt; show policer
+Policers:
+Name                                                Bytes              Packets
+__default_arp_policer__                       74695272896           1656698750
+</code></pre></div></p>
+<p>По инструкции создать фильтр, применить к интерфейсу, почистить счетчики <code>clear firewall</code>. Проверить еще раз и при необходимости увеличить.
+<div class="highlight"><pre><span></span><code>&gt; show policer
+Policers:
+Name                                                Bytes              Packets
+__default_arp_policer__                                 0                    0
+arp_limit-xe-0/0/0.100-inet-arp                        46                    1
+</code></pre></div></p>
+<h2 id="ddos">ddos</h2>
+<div class="highlight"><pre><span></span><code>show ddos-protection protocols statistics terse
+show ddos-protection protocols culprit-flows
+show ddos-protection protocols violations
+</code></pre></div>
+<h2 id="sflow">sflow</h2>
+<p><a href="https://www.juniper.net/documentation/en_US/junos/topics/example/sflow-configuring-mx-series.html">Example: Configuring sFlow Technology to Monitor Network Traffic on MX Series Routers
+</a></p>
+<p>Смотреть индексы интерфейсов c дескрипшенами, чтобы добавить их в описание <code>annotate interfaces ..</code>
+<div class="highlight"><pre><span></span><code>show snmp mib walk ifAlias | match =
+</code></pre></div>
+Есть ограничение в один сабинтерфейс на один физический интерфейс.
+<div class="highlight"><pre><span></span><code>&gt; show configuration protocols sflow
+polling-interval 60;
+sample-rate {
+    ingress 2048;
+    egress 2048;
+}
+source-ip 10.9.8.7;
+collector 10.0.0.1 {
+    forwarding-class best-effort;
+}
+/* 550.peer1 */
+interfaces xe-0/1/1.100;
+/* 560.peer2 */
+inactive: interfaces xe-0/1/1.200;
+/* 570.peer3 */
+inactive: interfaces xe-0/1/1.300;
+/* 580.peer4 */
+interfaces xe-0/1/2.100;
+</code></pre></div></p>
+<p>В 20.2
+<div class="highlight"><pre><span></span><code>Alarm cleared: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+Alarm set: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+</code></pre></div></p>
+<h2 id="load-balancing">load-balancing</h2>
+<blockquote>
+<p>You can configure Junos OS so that, for the active route, all next-hop addresses for a destination are installed in the forwarding table. This feature is called per-packet load balancing. The naming may be counter-intuitive. However, Junos per-packet load balancing is functionally equivalent to what other vendors may term per-flow load balancing. You can use load balancing to spread traffic across multiple paths between routers.</p>
+<p>To enable per-flow load balancing, you must set the load-balance per-packet action in the routing policy configuration.</p>
+</blockquote>
+<p>Полиси
+<div class="highlight"><pre><span></span><code>&gt; show configuration policy-options policy-statement balance
+from protocol bgp;
+then {
+    load-balance per-packet;
+}
+&gt; show configuration routing-options forwarding-table
+export balance;
+</code></pre></div>
+В группу bgp peer-ов добавить <code>multipath multiple-as</code>
+<div class="highlight"><pre><span></span><code>&gt; show configuration protocols bgp group upstream
+type external;
+multipath {
+    multiple-as;
+}
+...
+</code></pre></div></p>
+<h2 id="pic">pic</h2>
+<p><a href="https://www.juniper.net/documentation/en_US/junos/topics/reference/configuration-statement/pic-mode-edit-chassis-mx-series.html">pic-mode</a>
+<a href="https://apps.juniper.net/home/port-checker/index.html">Port Checker</a>
+<a href="https://www.juniper.net/documentation/en_US/junos/topics/topic-map/port-speed-configuration.html#id-configuring-rate-selectability">Port Speed</a></p>
+<h2 id="_1">ЦМУ</h2>
+<p>Делается в рамках инструкции для передачи данных в ЦМУ. Написал ниже cmo, переделывать уже не стану. Адрес ЦМУ реальный из инструкции. Интернет в инстансе для примера <code>as1234</code>.</p>
+<p>Для snmp хотят:</p>
+<blockquote>
+<p>IP-адрес системы (на стороне ЦМУ) для SNMP  (от данного адреса будут приходит запросы);77.95.132.140 Запросы направляются на стандарт-ный порт (161).
+Опрашиваются IF-MIB, IP-FORWARD-MIB,  BGP4-MIB,  SNMPv2-MIB. Перио-дичность опросов по умолчанию 60 минут (может быть скорректирована).</p>
+</blockquote>
+<p><div class="highlight"><pre><span></span><code>set snmp view CMO oid 1.3.6.1.2.1.2.2 include
+set snmp view CMO oid 1.3.6.1.2.1.15 include
+set snmp view CMO oid 1.3.6.1.6.3.1 include
+set snmp view CMO oid 1.3.6.1.2.1.4.24 include
+set snmp community cmo view CMO
+set snmp community cmo authorization read-only
+set snmp community cmo routing-instance as1234 clients 77.95.132.140/32
+set snmp community cmo routing-instance as1234 clients [test-ip]/32
+set snmp routing-instance-access
+</code></pre></div>
+С тестового хоста с адресом <code>test-ip</code> проверить доступность
+<div class="highlight"><pre><span></span><code>snmpwalk -c as1234@cmo -v2c router
+</code></pre></div></p>
+<p>Для bgp хотят:</p>
+<blockquote>
+<p>IP-адрес системы (на стороне ЦМУ) для BGP соединений; Необходимо использовать eBGP Multihop соединение.
+Если для установления BGP соединения НЕ используется MD5 (рекомендуется), для конфигурации использовать адрес: 77.95.132.140
+Если для установления BGP соединения используется MD5 (НЕ рекомендуется), адрес для конфигурации необходимо запросить и согласовать с ЦМУ (будет предложен адрес из диапазона 185.224.228.0/24)
+Внимание! В связи с техническими возможностями ЦМУ используемый в данном документе адрес со временем будет меняться.
+В связи с этим, при передаче заполненной таблицы следует запросить у ЦМУ корректный на момент отправки таблицы  IP-адресс.
+Обратите внимание, ПО на стороне ЦМУ не является маршрутизатором, расположено за межсетевым экраном и NAT трансляцией, поэтому установка сес-сии может быть инициирована только со стороны ЦМУ,
+соединение устанавливается на 179 порт с порта из диапазона &gt;1024. Большая просьба учиты-вать данную информации при конфигурировании сессии BGP и фильтров (ACL) на Вашей стороне.
+Ес-ли поддерживается маршрутизатором, конфигури-руйте сессию с ЦМУ в режиме passive.
+Номер AS на стороне ЦМУ   По умолчанию 65211 либо может быть любым, предполагается использование Private Space Number.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>set routing-instances as1234 protocols bgp group cmo type external
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 multihop
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 local-address [local-ip]
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 passive
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 import RF-reject
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 export RF-default-export
+set routing-instances as1234 protocols bgp group cmo neighbor 77.95.132.140 peer-as 65211
+</code></pre></div>
+<p>Хотят netflow. Есть sflow с PR1487876. В 20.2 хочет лицензию какую-то, чего в 18 и в 19 нет.</p>
+<div class="highlight"><pre><span></span><code>Alarm cleared: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+Alarm set: License id=0, color=YELLOW, class=CHASSIS, reason=Secure Flow usage requires a license
+</code></pre></div>
+<blockquote>
+<p>77.95.132.140. Порт UDP 9080</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>set protocols sflow polling-interval 60
+set protocols sflow sample-rate ingress 10000
+set protocols sflow sample-rate egress 10000
+set protocols sflow source-ip [local-ip]
+set protocols sflow collector 77.95.132.140 udp-port 9080
+set protocols sflow interfaces xe-0/1/4
+</code></pre></div>
+<p>By default, Junos will use the default routing instance to send sFlow packets. 
+<div class="highlight"><pre><span></span><code>set routing-options static route 77.95.132.140/32 next-table as1234.inet.0
+</code></pre></div></p>
+<p>Фильтр с каунтером для проверки отправки flows
+<div class="highlight"><pre><span></span><code>set firewall family inet filter cmo term cmo from destination-address 77.95.132.140/32
+set firewall family inet filter cmo term cmo from destination-port 9080
+set firewall family inet filter cmo term cmo then count cmo
+set firewall family inet filter cmo term cmo then accept
+set firewall family inet filter cmo term all then accept
+</code></pre></div></p>
+<h2 id="ipfix">ipfix</h2>
+<p>Взято из <a href="https://github.com/VerizonDigital/vflow/blame/master/docs/junos_integration.md">github.com/VerizonDigital/vflow</a> без изменений</p>
+<p>sampling на интерфейсах
+<div class="highlight"><pre><span></span><code>set interfaces xe-1/0/0.0 family inet sampling input
+set interfaces xe-1/0/0.0 family inet sampling output
+</code></pre></div></p>
+<p>темплейт
+<div class="highlight"><pre><span></span><code>set services flow-monitoring version-ipfix template vflow flow-active-timeout 10
+set services flow-monitoring version-ipfix template vflow flow-inactive-timeout 10
+set services flow-monitoring version-ipfix template vflow template-refresh-rate packets 1000
+set services flow-monitoring version-ipfix template vflow template-refresh-rate seconds 10
+set services flow-monitoring version-ipfix template vflow option-refresh-rate packets 1000
+set services flow-monitoring version-ipfix template vflow option-refresh-rate seconds 10
+set services flow-monitoring version-ipfix template vflow ipv4-template
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>set chassis fpc 0 sampling-instance vflow
+set chassis fpc 1 sampling-instance vflow
+set forwarding-options sampling instance ipfix input rate 100
+set forwarding-options sampling instance ipfix family inet output flow-server 192.168.0.10 port 4739
+set forwarding-options sampling instance ipfix family inet output flow-server 192.168.0.10 version-ipfix template vflow
+set forwarding-options sampling instance ipfix family inet output inline-jflow source-address 192.168.0.1
+</code></pre></div>
+<h2 id="junos-upgrade">junos upgrade</h2>
+<p><a href="https://www.juniper.net/documentation/en_US/junos/topics/topic-map/vm-host-overview.html">VM Host Overview</a>, <a href="https://www.juniper.net/documentation/en_US/junos/topics/concept/vm-host-operations-management.html">vm-host-operations-management</a>, 
+<a href="https://www.juniper.net/documentation/en_US/junos/topics/concept/installation_upgrade.html">installation_upgrade</a></p>
+<p>С 17.x до 20.2 обновиться сразу не получится.
+<div class="highlight"><pre><span></span><code>ERROR: estimate of space required: 4035098 Kbytes, available: 3994154 Kbytes
+</code></pre></div>
+Обновление с 17.x до 19.4 возможно, но потребуется дополнительный ребут после первой загрузки 19.4.
+<div class="highlight"><pre><span></span><code>Chassis control process: &lt;xnm:warning xmlns=&quot;http://xml.juniper.net/xnm/1.1/xnm&quot; xmlns:xnm=&quot;http://xml.juniper.net/xnm/1.1/xnm&quot;&gt;
+Chassis control process: &lt;source-daemon&gt;chassisd&lt;/source-daemon&gt;
+Chassis control process: &lt;edit-path&gt;[edit groups junos-defaults]&lt;/edit-path&gt;
+Chassis control process: &lt;statement&gt;chassis&lt;/statement&gt;
+Chassis control process: &lt;message&gt;Chassis configuration for network services has been changed. A system reboot is mandatory.  Please reboot *ALL* routing engines NOW. &gt;
+Chassis control process: &lt;/xnm:warning&gt;
+</code></pre></div>
+Предварительная копия в /var/tmp/
+<div class="highlight"><pre><span></span><code>file copy http://[host]/fw/junos/junos-vmhost-install-mx-x86-64-19.4R3-S2.2.tgz /var/tmp/
+</code></pre></div>
+Обновление с перезагрузкой
+<div class="highlight"><pre><span></span><code>request vmhost software add no-validate reboot /var/tmp/junos-vmhost-install-mx-x86-64-19.4R3-S2.2.tgz
+</code></pre></div>
+Перезагрузка RE по причине выше
+<div class="highlight"><pre><span></span><code>request vmhost reboot
+</code></pre></div>
+Обновление с 19.4 до 20.2 штатно
+<div class="highlight"><pre><span></span><code>request vmhost software add no-validate http://[host]/fw/junos/junos-vmhost-install-mx-x86-64-20.2R2-S2.6.tgz
+</code></pre></div>
+После сообщения выполнить указанную команду
+<div class="highlight"><pre><span></span><code>A REBOOT IS REQUIRED TO LOAD THIS SOFTWARE CORRECTLY.
+Use the &#39;request vmhost reboot&#39; command to reboot the system.
+</code></pre></div></p>
+<p>Обновление проводить предпочтительно через OOBM подключение, т.к. после перезагрузки некоторое время будут недоступны физические интерфейсы
+из-за обновлений линейных карт. Это же касается mx204, где несколько минут после загрузки будут отсутствовать <code>xe-</code> интерфейсы.</p>
+<h2 id="vmhost-rollback">vmhost rollback</h2>
+<div class="highlight"><pre><span></span><code>mx&gt; show vmhost version
+Current root details,           Device sda, Label: jrootp_P, Partition: sda3
+Current boot disk: Primary
+Current root set: p
+UEFI    Version: CBEP_P_SUM1_00.13.01
+
+Primary Disk, Upgrade Time: Wed Mar 17 12:30:11 UTC 2021
+
+Version: set p
+VMHost Version: 5.2268
+VMHost Root: vmhost-x86_64-20.2R2-S1-20201210_1323_builder
+VMHost Core: vmhost-core-x86-64-20.2R2-S2.6
+kernel: 4.8.28-rt10-WR9.0.0.24_ovp
+Junos Disk: junos-install-mx-x86-64-20.2R2-S2.6
+
+Version: set b
+VMHost Version: 5.2225
+VMHost Root: vmhost-x86_64-19.4R3-S2-20210118_0229_builder
+VMHost Core: vmhost-core-x86-64-19.4R3-S2.2
+kernel: 4.8.28-rt10-WR9.0.0.20_ovp
+Junos Disk: junos-install-mx-x86-64-19.4R3-S2.2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>request vmhost software rollback
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mx&gt; show vmhost version
+Current root details,           Device sda, Label: jrootb_P, Partition: sda4
+Current boot disk: Primary
+Current root set: b
+UEFI    Version: CBEP_P_SUM1_00.13.01
+
+Primary Disk, Upgrade Time: Wed Mar 17 12:30:11 UTC 2021
+
+Version: set p
+VMHost Version: 5.2268
+VMHost Root: vmhost-x86_64-20.2R2-S1-20201210_1323_builder
+VMHost Core: vmhost-core-x86-64-20.2R2-S2.6
+kernel: 4.8.28-rt10-WR9.0.0.24_ovp
+Junos Disk: junos-install-mx-x86-64-20.2R2-S2.6
+
+Version: set b
+VMHost Version: 5.2225
+VMHost Root: vmhost-x86_64-19.4R3-S2-20210118_0229_builder
+VMHost Core: vmhost-core-x86-64-19.4R3-S2.2
+kernel: 4.8.28-rt10-WR9.0.0.20_ovp
+Junos Disk: junos-install-mx-x86-64-19.4R3-S2.2
+
+mx&gt; show version
+Model: mx204
+Junos: 19.4R3-S2.2
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="cisco_r.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Router cisco" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Router cisco
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="vyos.html" class="md-footer__link md-footer__link--next" aria-label="Next: Router vyos" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Router vyos
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

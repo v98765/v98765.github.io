@@ -1,0 +1,1354 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>Empty, sshpass - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sshpass" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Empty, sshpass
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        monitoring
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="monitoring" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          monitoring
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/promql_metricql.html" class="md-nav__link">
+        PromQL, MetricQL
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/snmp_exporter.html" class="md-nav__link">
+        Vmagent, snmp_exporter (old)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/snmp_exporter_20.html" class="md-nav__link">
+        snmp_exporter 0.20
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/backbox_exporter.html" class="md-nav__link">
+        Vmagent, blackbox_exporter
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/telegraf_vmagent.html" class="md-nav__link">
+        Telegraf vs vmagent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/telegraf_snmp.html" class="md-nav__link">
+        Telegraf snmp
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/sflow.html" class="md-nav__link">
+        netflow, sflow
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/logs.html" class="md-nav__link">
+        logs
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        network
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="network" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          network
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/errors.html" class="md-nav__link">
+        Interface Errors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/switching.html" class="md-nav__link">
+        Switching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/dhcpsnooping.html" class="md-nav__link">
+        DHCP snooping
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/nlb.html" class="md-nav__link">
+        NLB
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/tcp_mss.html" class="md-nav__link">
+        TCP MSS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/flowcontrol.html" class="md-nav__link">
+        Flowcontrol
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/poe.html" class="md-nav__link">
+        PoE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/sks.html" class="md-nav__link">
+        СКС
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/distkontrol.html" class="md-nav__link">
+        Device DistKontrol
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/qos_switch.html" class="md-nav__link">
+        Switch QoS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/vxlan_sw.html" class="md-nav__link">
+        Switch list for vxlan
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/cisco_sw.html" class="md-nav__link">
+        Switch cisco
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/nexus3k.html" class="md-nav__link">
+        Switch cisco nexus3k
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/nexus9k.html" class="md-nav__link">
+        Switch cisco nexus9k
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/mds.html" class="md-nav__link">
+        Switch cisco mds
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/juniper_ex.html" class="md-nav__link">
+        Switch juniper ex
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/huawei.html" class="md-nav__link">
+        Switch huawei s57
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/eltex.html" class="md-nav__link">
+        Switch eltex
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/extreme.html" class="md-nav__link">
+        Switch extreme
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/tfortis.html" class="md-nav__link">
+        Switch tfortis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/cisco_r.html" class="md-nav__link">
+        Router cisco
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/juniper_mx.html" class="md-nav__link">
+        Router juniper
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/vyos.html" class="md-nav__link">
+        Router vyos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/vipnet.html" class="md-nav__link">
+        FW vipnet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        voip
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="voip" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          voip
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/softphone.html" class="md-nav__link">
+        Softphones
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/freeswitch.html" class="md-nav__link">
+        Freeswitch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_e1_gateway.html" class="md-nav__link">
+        Cisco E1 gateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_gw_cdr.html" class="md-nav__link">
+        Cisco CDR for gateway
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_cme.html" class="md-nav__link">
+        Cisco CME(CUCME)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_cor.html" class="md-nav__link">
+        Cisco COR list
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_cube.html" class="md-nav__link">
+        Cisco CUBE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voip/cisco_voip.html" class="md-nav__link">
+        Cisco voip notes
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        work
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="work" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          work
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="adguardhome.html" class="md-nav__link">
+        AdGuardHome
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ansible_ntwrk.html" class="md-nav__link">
+        Ansible for ntwrk
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Empty, sshpass
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="empty.html" class="md-nav__link md-nav__link--active">
+        Empty, sshpass
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sshpass" class="md-nav__link">
+    sshpass
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#empty-expect" class="md-nav__link">
+    empty-expect
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="github.html" class="md-nav__link">
+        github
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="miniconda.html" class="md-nav__link">
+        Miniconda
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mkdocs.html" class="md-nav__link">
+        Mkdocs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="molecule.html" class="md-nav__link">
+        Molecule
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="msys2.html" class="md-nav__link">
+        Msys2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="venv.html" class="md-nav__link">
+        Pip, venv
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="app_proxy.html" class="md-nav__link">
+        Proxy for app
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tacacs.html" class="md-nav__link">
+        Tacacs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="translit.html" class="md-nav__link">
+        Translit, recode
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usbwrite.html" class="md-nav__link">
+        USB writer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        info
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="info" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          info
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/mac_info.html" class="md-nav__link">
+        Mac address
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/mail_info.html" class="md-nav__link">
+        Mail
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/web_info.md" class="md-nav__link">
+        Web
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/phone_info.html" class="md-nav__link">
+        Phone number
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/dns_info.html" class="md-nav__link">
+        dns servers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../info/routing_info.html" class="md-nav__link">
+        Routing
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="speedtest.html" class="md-nav__link">
+        Speed test
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sshpass" class="md-nav__link">
+    sshpass
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#empty-expect" class="md-nav__link">
+    empty-expect
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Empty, sshpass</h1>
+                
+                <p>Актуально, если сейчас 2014 год, либо эксплуатируемое оборудование - дрова.
+Для скриптов нужен список хостов, поэтому в текущем каналоге файл LIST, где будут построчно перечислены адреса/имена устройств:
+<div class="highlight"><pre><span></span><code>1.2.3.4
+5.6.7.8
+</code></pre></div></p>
+<h2 id="sshpass">sshpass</h2>
+<p>Простой скрипт для копирования конфигураций с оборудования cisco, где предварительно включен scp server.
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="nb">read</span> -p <span class="s2">&quot;Username: &quot;</span>  username
+<span class="nb">echo</span> -n <span class="s1">&#39;Password:&#39;</span>
+<span class="nb">read</span> -s SSHPASS
+<span class="nb">export</span> SSHPASS
+mkdir -p cfg
+cat LIST <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> line <span class="p">;</span> <span class="k">do</span>
+    <span class="k">if</span> ping -q -c <span class="m">2</span> <span class="nv">$line</span> &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span> <span class="k">then</span>
+        sshpass -e scp -q <span class="nv">$username</span>@<span class="si">${</span><span class="nv">line</span><span class="si">}</span>:startup-config cfg/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>.cfg
+        <span class="nv">rc</span><span class="o">=</span><span class="nv">$?</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;instance: </span><span class="nv">$line</span><span class="s2">, code: </span><span class="nv">$rc</span><span class="s2">&quot;</span>
+    <span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">unset</span> SSHPASS
+<span class="nb">echo</span> <span class="nv">$SSHPASS</span>
+</code></pre></div></p>
+<h2 id="empty-expect">empty-expect</h2>
+<p>В ubuntu установить пакет <a href="http://empty.sourceforge.net/">empty-expect</a>
+<div class="highlight"><pre><span></span><code>apt install empty-expect
+</code></pre></div>
+Можно подключаться telnet'ом, ssh. Практически универсальное решение, если у устройства нет никаких проблем с эхом,
+как у коммутаторов tfortis,например.
+Пользоваться просто и относительно удобно, если сделать все через функции, чтобы к каждому коммутатору было индивидуальное подключение со своим логом и тп.
+Так по размеру лога можно судить об успешности выполнения скрипта, например.
+Чтобы empty не тупило при запуске необходимо подготовить список хостов и предварительно проверить их доступность.</p>
+<p>Если список команд для выполнения на устройстве постоянно меняется и нужен более универсальный скрипт, то такие команды писал в отдельный файл CMD.
+Первые строки - это всегда отключение пейжера и прочие команды, снимающие ограничения по выводу текста.
+Можно делать так, как удобнее.</p>
+<p>Juniper Junos
+<div class="highlight"><pre><span></span><code>set cli terminal xterm
+set cli screen-length 0
+set cli screen-width 0
+show system alarm
+show chassis alarms
+show chassis hardware | no-more
+</code></pre></div></p>
+<p>Cisco IOS
+<div class="highlight"><pre><span></span><code>terminal length 0
+show int status
+</code></pre></div></p>
+<p>Eltex
+<div class="highlight"><pre><span></span><code>terminal datadump
+show startup
+</code></pre></div></p>
+<p>Цикл для последовательного выполнения команд из файла CMD. <code>sleep</code> добавить, если нужно.
+<div class="highlight"><pre><span></span><code>cat ./CMD | while read line ; do
+    CmdStr=$(echo $line | tr -d &quot;\r\n&quot;)
+    empty -w -i fifoputacl/out.$Host -o fifoputacl/inc.$Host &quot;#&quot; &quot;${CmdStr}\n&quot;
+done
+</code></pre></div></p>
+<p>Учетные записи для подключения можно вводить при запуске скрипта, можно указывать в скрипте, либо брать из файла. Два варианта на выбор
+<div class="highlight"><pre><span></span><code>empty -w -i fifostatus/out.$Host -o fifostatus/inc.$Host &quot;assword:&quot; &quot;${Password}\n&quot;
+empty -s -i fifostatus/out.$Host -o fifostatus/inc.$Host &lt; ./mypass
+</code></pre></div></p>
+<p>Ниже скрипт. Сначала описываются функции.
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># проверка доступности хоста. вернуть 1, если не пингуется.</span>
+<span class="k">function</span> PingIt <span class="o">{</span>
+    <span class="nv">Host</span><span class="o">=</span><span class="nv">$1</span>    
+    <span class="k">if</span> ! ping -q -c <span class="m">2</span> <span class="nv">$Host</span> &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$Host</span><span class="s2"> down&quot;</span>
+        <span class="k">return</span> <span class="m">1</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="c1"># telnet на каждый хост из списка.</span>
+<span class="c1"># функции передается хост, имя пользователя и пароль</span>
+<span class="k">function</span> ReadStatus <span class="o">{</span>
+    <span class="nv">Host</span><span class="o">=</span><span class="nv">$1</span>
+    <span class="nv">Username</span><span class="o">=</span><span class="nv">$2</span>
+    <span class="nv">Password</span><span class="o">=</span><span class="nv">$3</span>
+    <span class="c1">#удаление данных от предыдущего запуска empty</span>
+    rm -f logstatus/<span class="nv">$Host</span>
+    rm -f fifostatus/inc.<span class="nv">$Host</span>
+    rm -f fifostatus/out.<span class="nv">$Host</span>
+    <span class="c1">#login</span>
+    empty -f -i fifostatus/inc.<span class="nv">$Host</span> -o fifostatus/out.<span class="nv">$Host</span> -p pidstatus/<span class="nv">$Host</span> -L logstatus/<span class="nv">$Host</span> telnet <span class="nv">$Host</span>
+    sleep <span class="m">2</span>
+    empty -w -i fifostatus/out.<span class="nv">$Host</span> -o fifostatus/inc.<span class="nv">$Host</span> <span class="s2">&quot;name&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">Username</span><span class="si">}</span><span class="s2">\n&quot;</span>
+    sleep <span class="m">2</span>
+    empty -w -i fifostatus/out.<span class="nv">$Host</span> -o fifostatus/inc.<span class="nv">$Host</span> <span class="s2">&quot;assword:&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">Password</span><span class="si">}</span><span class="s2">\n&quot;</span>
+    sleep <span class="m">2</span>
+    empty -w -i fifostatus/out.<span class="nv">$Host</span> -o fifostatus/inc.<span class="nv">$Host</span> <span class="s2">&quot;#&quot;</span> <span class="s2">&quot;\n&quot;</span>
+    <span class="c1"># если после ввода пароля не получен символ #, то выйти</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">255</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+        empty -k <span class="sb">`</span>cat pidstatus/<span class="nv">$Host</span><span class="sb">`</span>
+        <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$Host</span><span class="s2"> Incorrect password or priv lvl&quot;</span>
+        <span class="k">return</span>
+    <span class="k">fi</span>
+    <span class="nb">echo</span> <span class="s1">&#39;&#39;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Connected to </span><span class="nv">$Host</span><span class="s2">&quot;</span>
+    <span class="c1">#последовательный ввод команд. Тут можно сделать while для файла CMD</span>
+    empty -w -i fifostatus/out.<span class="nv">$Host</span> -o fifostatus/inc.<span class="nv">$Host</span> <span class="s2">&quot;#&quot;</span> <span class="s2">&quot;terminal length 0\n&quot;</span>
+    empty -w -i fifostatus/out.<span class="nv">$Host</span> -o fifostatus/inc.<span class="nv">$Host</span> <span class="s2">&quot;#&quot;</span> <span class="s2">&quot;show int status\n&quot;</span>
+    empty -w -i fifostatus/out.<span class="nv">$Host</span> -o fifostatus/inc.<span class="nv">$Host</span> <span class="s2">&quot;#&quot;</span> <span class="s2">&quot;exit\n&quot;</span>
+    sleep <span class="m">2</span>
+    <span class="c1">#отключение от коммутатора, empty отработал и теперь удалить из логов все, кроме необходимого</span>
+    <span class="nb">echo</span> <span class="s2">&quot;got iface name logstatus/</span><span class="nv">$Host</span><span class="s2">&quot;</span>
+    <span class="c1">#del all but ports</span>
+    sed -i <span class="s1">&#39;/\(^Fa\|^Gi\|^Te\)/!d; &#39;</span> logstatus/<span class="nv">$Host</span>
+<span class="o">}</span>
+
+<span class="c1">#каталоги для empty</span>
+mkdir -p logstatus
+mkdir -p fifostatus
+mkdir -p pidstatus
+
+<span class="c1">#ввод учетки</span>
+<span class="nb">echo</span> -n Username:
+<span class="nb">read</span> Username
+
+<span class="nb">echo</span> -n Password:
+<span class="nb">read</span> -s Password
+
+<span class="c1">#запуск в цикле функции PingIt для всех хостов. Если успех, то запуск ReadStatus с &amp;.</span>
+<span class="k">for</span> Host <span class="k">in</span> <span class="sb">`</span>cat LIST<span class="sb">`</span> <span class="p">;</span> <span class="k">do</span>
+   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$Host</span><span class="s2"> start&quot;</span>
+   PingIt <span class="s2">&quot;</span><span class="nv">$Host</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> ReadStatus <span class="s2">&quot;</span><span class="nv">$Host</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$Username</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$Password</span><span class="s2">&quot;</span> <span class="p">&amp;</span>
+<span class="k">done</span>
+</code></pre></div></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="ansible_ntwrk.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Ansible for ntwrk" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Ansible for ntwrk
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="github.html" class="md-footer__link md-footer__link--next" aria-label="Next: github" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              github
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>
