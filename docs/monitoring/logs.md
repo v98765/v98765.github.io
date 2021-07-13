@@ -235,6 +235,7 @@ with_item тут не применить из-за ограничений мод
             logging source-interface loopback0
             logging level authpri 6
             login on-success log
+            no logging rate-limit
       notify:
         - SAVE CONFIGURATION
 
