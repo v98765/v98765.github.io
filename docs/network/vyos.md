@@ -215,6 +215,44 @@ set interfaces ethernet [ifname] ip source-validation 'strict'
 
 [vyos.vyos.vyos_config](https://docs.ansible.com/ansible/latest/collections/vyos/vyos/vyos_config_module.html)
 
+set описывать в том виде, в котором будут в конфигурации, т.е. в одном таске можно несколько строк подряд, если в конфиге это точно так же выглядит.
+Если много править в разных местах, то делать несколько тасков.
+playbook.yml
+```yaml
+- hosts: vyos
+
+  tasks:
+
+    - name: configure
+      vyos.vyos.vyos_config:
+        lines:
+            - set ...
+
+    - name: save
+      vyos.vyos.vyos_config:
+        save: yes
+```
+inventory
+```text
+[vyos]
+vyos1 ansible_host=x.x.x.x
+
+[vyos:vars]
+ansible_network_os=vyos
+ansible_become=no
+ansible_user=some_user
+ansible_connection=network_cli
+ansible_python_interpreter=~/base/bin/python
+```
+ansible.cfg
+```text
+[defaults]
+host_key_checking = True
+inventory=./inventory
+[ssh_connection]
+pipelining = true
+```
+
 ## fastnetmon
 
 (краткое описание)[https://fastnetmon.com/fastnetmon-community-on-vyos-rolling-1-3/]
