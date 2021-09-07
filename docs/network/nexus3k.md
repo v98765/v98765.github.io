@@ -104,6 +104,51 @@ switch# show file bootflash:nxos.7.0.3.I7.7.bin md5sum
 a9d40fbfaf43c214c3d97cb290788d06
 ```
 
+## обновление до 7.0(3)I7(9)
+
+[Cisco Nexus 3000 Series NX-OS Release Notes, Release 7.0(3)I7(9)](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus3000/sw/release/703i79/70379_3000_3500_rn.html)
+
+
+MD5
+```text
+d31d5b556cc4d92f2ff2d83b5df7b943  nxos.7.0.3.I7.9.bin
+```
+
+В RelNotes сразу предлагается использовать compact image.
+
+Change the switching-mode from cut-through to store-and-forward and then reload the switch:
+```text
+switch#show switching-mode
+Configured switching mode: Cut through
+
+Module Number                   Operational Mode
+     1                          Cut-Through
+switch# configure terminal
+switch(config)# switching-mode store-forward
+```
+
+Для изменения режима работы портов тоже понадобится сброс и перезагрузка
+
+```text
+switch# configure terminal
+switch(config)# copy running-config bootflash:my-config.cfg
+switch(config)# write erase
+switch(config)# reload
+WARNING: This command will reboot the system
+Do you want to continue? (y/n) [n] y
+switch(config)# hardware profile portmode 48x10g+4x40g
+Warning: This command will take effect only after saving the configuration and reload!
+Port configurations could get lost when port mode is changed!
+switch(config)# copy running-config startup-config
+switch(config)# reload
+WARNING: This command will reboot the system
+Do you want to continue? (y/n) [n] y
+```
+
+The following limitations are applicable when you upgrade from Releases 7.0(3)I7(2) or later to the NX-OS Release 7.0(3)I7(9):
+You must run the setup script after you upgrade to Cisco NX-OS Release 7.0(3)I7(9).
+
+
 ## snmp
 
 acl с адресом nms. В конфигурации отобразится иначе.
