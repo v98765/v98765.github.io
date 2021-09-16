@@ -7,7 +7,7 @@
 * [Рекомендованная версия ПО](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus3000/sw/recommended_release/b_Minimum_and_Recommended_Cisco_NX-OS_Releases_for_Cisco_Nexus_3000_Series_Switches.html). Это 7.0(3)I7(7) сейчас.
 * [Cisco Nexus 3000 Series NX-OS Software Upgrade and Downgrade Guide, Release 7.x](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus3000/sw/upgrade/7_x/b_Cisco_Nexus_3000_Series_NX_OS_Software_Upgrade_and_Downgrade_Release_7_x/b_Cisco_Nexus_3000_Series_NX_OS_Software_Upgrade_and_Downgrade_Release_7_x_newGuide_chapter_01.html)
 
-> If you have a Cisco Nexus 3000 release prior to Release 7.0(3)I2(1), upgrade to Cisco Nexus 3000 Release 6.0.2.U6(3) first. 
+> If you have a Cisco Nexus 3000 release prior to Release 7.0(3)I2(1), upgrade to Cisco Nexus 3000 Release 6.0.2.U6(3) first.
 
 Скопировать, установить 6.0.2.U6(3), когда софт на коммутаторе слишком старый
 ```text
@@ -31,7 +31,7 @@ switch# install all nxos bootflash:nxos.7.0.3.I7.7.bin
 Когда места нет, удалить текущий image 7 версии нельзя
 ```text
 Switch is booted with 'nxos.7.0.3.I4.7.bin'. Overwriting/deleting this image is not allowed
-``` 
+```
 Есть параметр [compact](https://www.cisco.com/c/en/us/support/docs/switches/nexus-3000-series-switches/215781-nexus-3000-3100-and-3500-nx-os-compact.html) для такого случая.
 ```text
 switch# install all nxos bootflash:nxos.7.0.3.I4.7.bin compact
@@ -114,7 +114,32 @@ MD5
 d31d5b556cc4d92f2ff2d83b5df7b943  nxos.7.0.3.I7.9.bin
 ```
 
-В RelNotes сразу предлагается использовать compact image.
+В RelNotes сразу предлагается использовать compact image. Его можно сделать на нексусе
+```text
+switch# install all nxos usb1:nxos.7.0.3.I7.9.bin compact
+Installer will perform compatibility check first. Please wait.
+Compacting usb1:/nxos.7.0.3.I7.9.bin
+...................................................
+Compact usb1:/nxos.7.0.3.I7.9.bin done
+switch# move usb1:nxos.7.0.3.I7.9.bin usb1:cnxos.7.0.3.I7.9.bin
+switch# copy usb1:cnxos.7.0.3.I7.9.bin bootflash:
+Copy progress 100% 473665KB                                                     
+Copy complete, now saving to disk (please wait)...                              
+Copy complete.
+```
+
+Резервная копия и сброс
+```text
+copy running-config bootflash:bck.cfg
+Copy complete, now saving to disk (please wait)...                              
+Copy complete.                                                                  
+S0017_fabA# write erase                                                         
+Warning: This command will erase the startup-configuration.                     
+Do you wish to proceed anyway? (y/n)  [n] y                                     
+switch# reload
+
+write erase
+```
 
 Change the switching-mode from cut-through to store-and-forward and then reload the switch:
 ```text
@@ -127,7 +152,7 @@ switch# configure terminal
 switch(config)# switching-mode store-forward
 ```
 
-Для изменения режима работы портов тоже понадобится сброс и перезагрузка
+Для изменения режима работы портов тоже понадобится сброс и перезагрузка. Вот кусок из документации.
 
 ```text
 switch# configure terminal
@@ -148,6 +173,67 @@ Do you want to continue? (y/n) [n] y
 The following limitations are applicable when you upgrade from Releases 7.0(3)I7(2) or later to the NX-OS Release 7.0(3)I7(9):
 You must run the setup script after you upgrade to Cisco NX-OS Release 7.0(3)I7(9).
 
+Как видно из строк выше, после удаления конфигурации все равно надо запустить setup скрипт.
+Он создаст какую-то конфигурацию и в итоге запишет ее в startup.
+Если этого не сделать и выбрать skip, то из-за "фичи" записать конфигурацию после
+`hardware profile portmode 48x10g+4x40g` не получится
+
+```text
+Abort Power On Auto Provisioning [yes - continue with normal setup, skip - bypad
+yes
+Disabling POAP.......Disabling POAP
+
+
+
+         ---- System Admin Account Setup ----
+
+
+Do you want to enforce secure password standard (yes/no): no
+
+  Enter the password for "admin":
+  Confirm the password for "admin":
+
+         ---- Basic System Configuration Dialog ----
+
+This setup utility will guide you through the basic configuration of
+the system. Setup configures only enough connectivity for management
+of the system.
+
+Please register Cisco Nexus 3000 Family devices promptly with your
+supplier. Failure to register may affect response times for initial
+service calls. Nexus devices must be registered to receive entitled
+support services.
+
+Press Enter at anytime to skip a dialog. Use ctrl-c at anytime
+to skip the remaining dialogs.
+
+Would you like to enter the basic configuration dialog (yes/no):
+
+....
+
+  Enable the telnet service? (yes/no) [n]:
+
+  Enable the ssh service? (yes/no) [y]:
+
+    Type of ssh key you would like to generate (dsa/rsa) :
+
+  Configure the ntp server? (yes/no) [n]:
+
+  Configure default interface layer (L3/L2) [L2]:
+
+  Configure default switchport interface state (shut/noshut) [noshut]: shut
+
+  Configure CoPP System Policy Profile ( default / l2 / l3 ) [default]:
+
+The following configuration will be applied:
+  switchname switch
+  no telnet server enable
+  system default switchport
+  system default switchport shutdown
+  policy-map type control-plane copp-system-policy ( default )
+
+Would you like to edit the configuration? (yes/no) [n]:
+```
 
 ## snmp
 
@@ -183,7 +269,6 @@ reload
 logging level authpriv 6
 login on-success log
 ```
-
 
 ## ecmp
 
