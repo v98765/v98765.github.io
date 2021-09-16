@@ -57,7 +57,7 @@ nav:
         - 'Pip, venv': work/venv.md
         - 'Proxy for app': work/app_proxy.md
         - 'Tacacs': work/tacacs.md
-        - 'Web,tftp': work/translit.md
+        - 'Web,tftp': work/webtftp.md
         - 'Translit, recode': work/translit.md
         - 'USB writer': work/usbwrite.md
     - info:
