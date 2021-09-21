@@ -3,7 +3,7 @@ web,tftp-сервера
 Установить сервера
 
 ```text
-apt install lighttpd atftpd
+apt install lighttpd dnsmasq
 ```
 
 Чтобы показывало листинг файлов в каталоге, создать `/etc/lighttpd/conf-enabled/10-dir-listing.conf`
@@ -20,16 +20,12 @@ mkdir /var/www/html/fw
 systemctl restart lighttpd
 ```
 
-Указать для tftpd рабочий каталог
+Настроить tftp в dnsmasq, создав новый конфигурационный файл `/etc/dnsmasq.d/tftp.conf`
 ```text
-echo 'tftp          dgram   udp     wait    nobody /usr/sbin/tcpd /usr/sbin/in.tftpd --tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 239.239.239.0-255 --mcast-ttl 1 --maxthread 100 --verbose=5 /var/www/html/fw' |  inetd2rlinetd --force-overwrite --add-from-comment
+enable-tftp
+tftp-root=/var/www/html/fw
 ```
 Перезапустить сервис
 ```text
-systemctl restart rlinetd
+systemctl restart dnsmasq
 ```
-Проверка
-```text
-systemctl status rlinetd | grep tftp
-```
-В логах будет `rlinetd[x]:service tftp_udp enabled`
