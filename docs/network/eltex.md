@@ -488,6 +488,14 @@ aaa authentication enable default tacacs enable
 ```text
 encrypted tacacs-server host 10.9.9.9 key <hash>
 ```
+
+Для радиуса
+```text
+radius-server key xx
+radius-server host 10.9.9.9
+aaa authentication login authorization default radius local
+```
+
 ## ntp
 
 ```text
