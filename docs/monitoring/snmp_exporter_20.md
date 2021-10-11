@@ -7,14 +7,11 @@
 В версии 0.20 пока еще нужен генератор для формирования snmp.yml (конфигурационный файл snmp_exporter) из yaml файла generator.yml
 Из исходиков не получилось собрать в этот раз, поэтому вариант с докером [https://hub.docker.com/r/prom/snmp-generator](https://hub.docker.com/r/prom/snmp-generator).
 В примере ниже podman в ubuntu 20.10
-```sh
-podman pull prom/snmp-generator
-```
 Старый генератор искал мибы в домашнем каталоге .snmp/mibs, поэтому архив со всеми необходимыми мибами там.
 Сам файл generator.yml в .snmp/
 ```sh
 cd .snmp/
-podman run -it -v "${PWD}:/opt/" prom/snmp-generator generate
+docker run -it -v "${PWD}:/opt/" prom/snmp-generator generate
 ```
 Если завершится без ошибок, то сгенериться конфигурационный файл snmp.yml
 ```sh
