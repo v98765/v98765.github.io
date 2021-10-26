@@ -59,6 +59,7 @@ nav:
         - 'Tacacs': work/tacacs.md
         - 'Web,tftp': work/webtftp.md
         - 'Translit, recode': work/translit.md
+        - 'Ubuntu': work/ubuntu.md
         - 'USB writer': work/usbwrite.md
     - info:
         - 'Mac address': info/mac_info.md
