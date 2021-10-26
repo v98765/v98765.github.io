@@ -111,10 +111,6 @@ playbook
     notify:
       - reboot
 
-  - name: set timezone
-    community.general.timezone:
-      name: Europe/Moscow
-
   handlers:
 
     - name: reboot
