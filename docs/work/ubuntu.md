@@ -155,3 +155,63 @@ playbook
         post_reboot_delay: 30
         test_command: whoami
 ```
+
+## resize disk
+
+Увеличен диск для виртуалки с 16 до 32. Нужно использовать все свободное место
+
+```text
+# fdisk  /dev/sda
+
+Welcome to fdisk (util-linux 2.36).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+GPT PMBR size mismatch (33554431 != 67108863) will be corrected by write.
+The backup GPT table is not on the end of the device. This problem will be corrected by write.
+
+Command (m for help): w
+
+The partition table has been altered.
+Syncing disks.
+```
+
+Далее playbook с увеличением диска на текущей виртуалке с установленным ansible
+```yaml
+---
+- name: resize lvm
+  hosts: localhost
+  become: true
+  gather_facts: true
+  connection: local
+
+  tasks:
+
+  - name: Read device information (always use unit when probing)
+    community.general.parted:
+      device: /dev/sda
+      unit: MiB
+    register: sda_info
+
+  - name: Extend an existing partition to fill all available space
+    community.general.parted:
+      device: /dev/sda
+      number: "{{ sda_info.partitions | length }}"
+      label: gpt
+      unit: MiB
+      part_end: "100%"
+      state: present
+      resize: true
+
+  - name: Resize existing pv
+    community.general.lvg:
+      vg: ubuntu-vg
+      pvs: /dev/sda3
+      pvresize: yes
+
+  - name: Extend the logical volume to take all remaining space of the PVs and resize the underlying filesystem
+    community.general.lvol:
+      vg: ubuntu-vg
+      lv: ubuntu-lv
+      size: 100%PVS
+      resizefs: true
