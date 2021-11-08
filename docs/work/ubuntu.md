@@ -175,7 +175,10 @@ Command (m for help): w
 The partition table has been altered.
 Syncing disks.
 ```
-
+Либо
+```sh
+echo 'w' | fdisk /dev/sda
+```
 Далее playbook с увеличением диска на текущей виртуалке с установленным ansible
 ```yaml
 ---
