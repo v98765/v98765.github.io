@@ -42,6 +42,10 @@ dig domain ANY
 ```text
 nslookup -q=any domain
 ```
+В ubuntu
+```text
+resolvectl query -t any domain
+```
 Кратко
 ```text
 dig domain +short
