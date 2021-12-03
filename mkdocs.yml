@@ -70,7 +70,7 @@ nav:
         - 'Phone number': info/phone_info.md
         - 'dns servers': info/dns_info.md
         - 'Routing': info/routing_info.md
-        - 'Speed test': work/speedtest.md
+        - 'Speed test': info/speedtest.md
 theme:
   name: material
 markdown_extensions:
