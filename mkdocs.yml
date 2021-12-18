@@ -2,6 +2,8 @@ site_name: My Docs
 nav:
     - 'About': index.md
     - monitoring:
+        - 'Применение Victoriametrics для мониторинга по SNMP': monitoring/a1.md
+        - 'Применение Victoriametrics для мониторинга VMware vCenter': monitoring/a2.md
         - 'PromQL, MetricQL': monitoring/promql_metricql.md
         - 'Vmagent, snmp_exporter (old)': monitoring/snmp_exporter.md
         - 'snmp_exporter 0.20': monitoring/snmp_exporter_20.md
