@@ -179,32 +179,30 @@ set firewall family inet filter cmo term all then accept
 
 ## ipfix
 
-Взято из [github.com/VerizonDigital/vflow](https://github.com/VerizonDigital/vflow/blame/master/docs/junos_integration.md) без изменений
-
 sampling на интерфейсах
 ```
 set interfaces xe-1/0/0.0 family inet sampling input
 set interfaces xe-1/0/0.0 family inet sampling output
 ```
 
-темплейт
+настройки как с кентика
 ```
-set services flow-monitoring version-ipfix template vflow flow-active-timeout 10
-set services flow-monitoring version-ipfix template vflow flow-inactive-timeout 10
-set services flow-monitoring version-ipfix template vflow template-refresh-rate packets 1000
-set services flow-monitoring version-ipfix template vflow template-refresh-rate seconds 10
-set services flow-monitoring version-ipfix template vflow option-refresh-rate packets 1000
-set services flow-monitoring version-ipfix template vflow option-refresh-rate seconds 10
-set services flow-monitoring version-ipfix template vflow ipv4-template
-```
+set services flow-monitoring version-ipfix template ipv4 flow-active-timeout 60
+set services flow-monitoring version-ipfix template ipv4 flow-inactive-timeout 15
+set services flow-monitoring version-ipfix template ipv4 template-refresh-rate packets 30
+set services flow-monitoring version-ipfix template ipv4 template-refresh-rate seconds 60
+set services flow-monitoring version-ipfix template ipv4 option-refresh-rate packets 30
+set services flow-monitoring version-ipfix template ipv4 option-refresh-rate seconds 30
+set services flow-monitoring version-ipfix template ipv4 ipv4-template
 
-```
-set chassis fpc 0 sampling-instance vflow
-set chassis fpc 1 sampling-instance vflow
-set forwarding-options sampling instance ipfix input rate 100
-set forwarding-options sampling instance ipfix family inet output flow-server 192.168.0.10 port 4739
-set forwarding-options sampling instance ipfix family inet output flow-server 192.168.0.10 version-ipfix template vflow
-set forwarding-options sampling instance ipfix family inet output inline-jflow source-address 192.168.0.1
+set forwarding-options sampling instance sample-ins input rate 1
+set forwarding-options sampling instance sample-ins family inet output flow-server 10.0.0.2 port 20013
+set forwarding-options sampling instance sample-ins family inet output flow-server 10.0.0.2 autonomous-system-type origin
+set forwarding-options sampling instance sample-ins family inet output flow-server 10.0.0.2 version-ipfix template ipv4
+set forwarding-options sampling instance sample-ins family inet output inline-jflow source-address 10.0.0.1
+
+set chassis fpc 0 sampling-instance sample-ins
+
 ```
 
 ## junos upgrade
