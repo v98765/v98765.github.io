@@ -9,7 +9,8 @@ AS | LG | BlackHole community | comment
 9002 |[lg.retn.net](https://lg.retn.net/) | 9002:666 | не видно community, можно проверить ping'ом
 49869 | [lg.piter-ix.ru](https://lg.piter-ix.ru/) | 50509:666 | ..
 56931 | [www.eurasiapeering.com/looking-glass/](https://www.eurasiapeering.com/looking-glass/) | 65535:666 | видно community, не проверить ping'ом
-199599 | [lg.cirex.ru](http://lg.cirex.ru/) | 64000:666 | ничего не работает в lg
+199599 | [lg.cirex.ru](http://lg.cirex.ru/) | 64000:666 |
+12389 | [lg.ip.rt.ru](http://lg.ip.rt.ru/) | 12389:55555 |
 
 
 
