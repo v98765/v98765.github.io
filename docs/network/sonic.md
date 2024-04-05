@@ -26,7 +26,7 @@ speed: 115200, databit: 8m, stop: 1, parity:none, flowcontrol: none.
 
 Нужен для случаев, когда неудачное обновление ОС на коммутаторе удалило загрузчик.
 Собирается по [инструкции командами](https://opencomputeproject.github.io/onie/developers/building.html) в [докере](https://github.com/opencomputeproject/onie/tree/master/contrib/build-env).
-Каких-то пакетов может не хватать, их понадобится устрановить дополнительно и обязательно указать PATH.
+Каких-то пакетов может не хватать, их понадобится устрановить дополнительно и обязательно указать переменную `PATH`.
 В итоге получается файл `onie/build/images/onie-recovery-x86_64-mlnx_x86-r0.iso`. Его нужно записать на флешку.
 
 ## BIOS
@@ -310,7 +310,7 @@ Peer Link Mac: 1c:34:da:f2:17:00
 Role: Standby
 MCLAG Interface:
 Loglevel: NOTICE
-admin@S0039:~$ show interfaces portchannel
+admin@sonic01:~$ show interfaces portchannel
 Flags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available,
        S - selected, D - deselected, * - not synced
   No.  Team Dev       Protocol    Ports
