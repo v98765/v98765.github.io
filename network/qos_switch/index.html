@@ -1,0 +1,3090 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../esxi/">
+      
+      
+        <link rel="next" href="../vxlan_sw/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Switch QoS - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flow-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Switch QoS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flow-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      flow-control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cos-dscp" class="md-nav__link">
+    <span class="md-ellipsis">
+      cos или dscp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dscp" class="md-nav__link">
+    <span class="md-ellipsis">
+      dscp таблица
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      очереди и приоритеты
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      где маркировать
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      класифиры
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dscp-mapping-to-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      dscp mapping to queue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      перемаркировка
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-nexus-3000" class="md-nav__link">
+    <span class="md-ellipsis">
+      пример 1 для nexus 3000
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-extreme-670" class="md-nav__link">
+    <span class="md-ellipsis">
+      пример 1 для extreme 670
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-extreme-670" class="md-nav__link">
+    <span class="md-ellipsis">
+      пример 2 для extreme 670
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flow-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      flow-control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cos-dscp" class="md-nav__link">
+    <span class="md-ellipsis">
+      cos или dscp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dscp" class="md-nav__link">
+    <span class="md-ellipsis">
+      dscp таблица
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      очереди и приоритеты
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      где маркировать
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      класифиры
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dscp-mapping-to-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      dscp mapping to queue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      перемаркировка
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-nexus-3000" class="md-nav__link">
+    <span class="md-ellipsis">
+      пример 1 для nexus 3000
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-extreme-670" class="md-nav__link">
+    <span class="md-ellipsis">
+      пример 1 для extreme 670
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-extreme-670" class="md-nav__link">
+    <span class="md-ellipsis">
+      пример 2 для extreme 670
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Switch QoS</h1>
+
+<p>QoS на коммутаторах</p>
+<h2 id="flow-control">flow-control</h2>
+<p>Нужно отключать flow-control на коммутаторах. Подробнее <a href="https://v98765.github.io/network/flowcontrol/">тут</a>.</p>
+<h2 id="cos-dscp">cos или dscp</h2>
+<p>Dscp для маршрутизируемых сетей, т.к. является частью поля TOS в заголовке ip-пакета. Сos для L2 в пределах площадки, т.к. является частью L2 заголовка.
+Очереди для cos настраиваются, когда из-за ограничений нет возможности проанализировать ip-заголовок. Такое может быть из-за mpls, например.
+Чаще всего хватает dscp, поэтому там, где это требуется, настраивается dscp based qos.</p>
+<h2 id="dscp">dscp таблица</h2>
+<table>
+<thead>
+<tr>
+<th>DSCP Class</th>
+<th>DSCP (bin)</th>
+<th>DSCP (hex)</th>
+<th>DSCP (dec)</th>
+<th>ToS (dec)</th>
+<th>ToS (hex)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none</td>
+<td>000000</td>
+<td>0×00</td>
+<td>0</td>
+<td>0</td>
+<td>0×00</td>
+</tr>
+<tr>
+<td>cs1</td>
+<td>001000</td>
+<td>0×08</td>
+<td>8</td>
+<td>32</td>
+<td>0×20</td>
+</tr>
+<tr>
+<td>af11</td>
+<td>001010</td>
+<td>0×0A</td>
+<td>10</td>
+<td>40</td>
+<td>0×28</td>
+</tr>
+<tr>
+<td>af12</td>
+<td>001100</td>
+<td>0×0C</td>
+<td>12</td>
+<td>48</td>
+<td>0×30</td>
+</tr>
+<tr>
+<td>af13</td>
+<td>001110</td>
+<td>0×0E</td>
+<td>14</td>
+<td>56</td>
+<td>0×38</td>
+</tr>
+<tr>
+<td>cs2</td>
+<td>010000</td>
+<td>0×10</td>
+<td>16</td>
+<td>64</td>
+<td>0×40</td>
+</tr>
+<tr>
+<td>af21</td>
+<td>010010</td>
+<td>0×12</td>
+<td>18</td>
+<td>72</td>
+<td>0×48</td>
+</tr>
+<tr>
+<td>af22</td>
+<td>010100</td>
+<td>0×14</td>
+<td>20</td>
+<td>80</td>
+<td>0×50</td>
+</tr>
+<tr>
+<td>af23</td>
+<td>010110</td>
+<td>0×16</td>
+<td>22</td>
+<td>88</td>
+<td>0×58</td>
+</tr>
+<tr>
+<td>cs3</td>
+<td>011000</td>
+<td>0×18</td>
+<td>24</td>
+<td>96</td>
+<td>0×60</td>
+</tr>
+<tr>
+<td>af31</td>
+<td>011010</td>
+<td>0×1A</td>
+<td>26</td>
+<td>104</td>
+<td>0×68</td>
+</tr>
+<tr>
+<td>af32</td>
+<td>011100</td>
+<td>0×1C</td>
+<td>28</td>
+<td>112</td>
+<td>0×70</td>
+</tr>
+<tr>
+<td>af33</td>
+<td>011110</td>
+<td>0×1E</td>
+<td>30</td>
+<td>120</td>
+<td>0×78</td>
+</tr>
+<tr>
+<td>cs4</td>
+<td>100000</td>
+<td>0×20</td>
+<td>32</td>
+<td>128</td>
+<td>0×80</td>
+</tr>
+<tr>
+<td>af41</td>
+<td>100010</td>
+<td>0×22</td>
+<td>34</td>
+<td>136</td>
+<td>0×88</td>
+</tr>
+<tr>
+<td>af42</td>
+<td>100100</td>
+<td>0×34</td>
+<td>36</td>
+<td>144</td>
+<td>0×90</td>
+</tr>
+<tr>
+<td>af43</td>
+<td>100110</td>
+<td>0×26</td>
+<td>38</td>
+<td>152</td>
+<td>0×98</td>
+</tr>
+<tr>
+<td>cs5</td>
+<td>101000</td>
+<td>0×28</td>
+<td>40</td>
+<td>160</td>
+<td>0xA0</td>
+</tr>
+<tr>
+<td>ef</td>
+<td>101110</td>
+<td>0×2E</td>
+<td>46</td>
+<td>184</td>
+<td>0xB8</td>
+</tr>
+<tr>
+<td>cs6</td>
+<td>110000</td>
+<td>0×30</td>
+<td>48</td>
+<td>192</td>
+<td>0xC0</td>
+</tr>
+<tr>
+<td>cs7</td>
+<td>111000</td>
+<td>0×38</td>
+<td>56</td>
+<td>224</td>
+<td>0xE0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">очереди и приоритеты</h2>
+<p>У коммутаторов 4 или 8 очередей. При отключенном qos очереди обычно 2:</p>
+<ul>
+<li>неприоритетная, где 95-100% буферов</li>
+<li>приоритетная</li>
+</ul>
+<p>Есть два режима работы шедулера, который передает данные из очередей:</p>
+<ul>
+<li>Strict-Priority. Это обычно одна очередь (8ая), откуда данные передаются в первую очередь.</li>
+<li>Weighted Round Robin (WRR). Все остальные очереди, откуда данные передаются в соотв. с весами, заданными явно или в пропорциях от bandwidth.</li>
+</ul>
+<p>При переполнении неприоритетной очереди, данные дропаются, что фиксируется в счетчиках.
+Настроить qos - выделить часть передаваемых данных в определенную очередь коммутатора, где потерь данных не будет.
+Из-за уменьшения буферов в неприоритетной очереди количество потерь там увеличится.</p>
+<p>Juniper EX
+<div class="highlight"><pre><span></span><code>ex2200&gt; show class-of-service scheduler-map
+Scheduler map: , Index: 2
+
+  Scheduler: , Forwarding class: best-effort, Index: 21
+    Transmit rate: 95 percent, Rate Limit: none, Buffer size: 95 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      High            non-TCP         1          
+      High            TCP             1          
+
+  Scheduler: , Forwarding class: network-control, Index: 23
+    Transmit rate: 5 percent, Rate Limit: none, Buffer size: 5 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      High            non-TCP         1          
+      High            TCP             1          
+</code></pre></div>
+Extreme 670
+<div class="highlight"><pre><span></span><code>extreme # show qosprofile
+    QP1    Weight =   1     Max Buffer Percent = 100
+    QP8    Weight =   1     Max Buffer Percent = 100
+extreme # show qosscheduler
+
+Configured Scheduler (global) : Strict-Priority
+</code></pre></div>
+Cisco 3750 при включенном mls qos с настройками по умолчанию. Делолтовые значения не посмотреть
+<div class="highlight"><pre><span></span><code>c3750#sh mls qos queue-set 1
+Queueset: 1
+Queue     :       1       2       3       4
+----------------------------------------------
+buffers   :      25      25      25      25
+threshold1:     100     200     100     100
+threshold2:     100     200     100     100
+reserved  :      50      50      50      50
+maximum   :     400     400     400     400
+</code></pre></div></p>
+<h2 id="_2">где маркировать</h2>
+<p>Маркировать в корпсетях нужно на самих устройствах. Для телефонов это делается через провиженинг, а для видеокодеков - руками.
+На коммутаторе включается qos, на портах <code>trust dscp</code>, настраивается mapping и размер очередей.
+Для корпоративной сети вот такой вариант маркировки:</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>46</td>
+<td>ef</td>
+<td>медиа (rtp)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>сигнализация (sip,h323,unistim)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>видео c кодеков(rtp)</td>
+</tr>
+<tr>
+<td>34</td>
+<td>af41</td>
+<td>видео с телефона, софтового клиента, кодека (rtp)</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>весь остальной трафик без маркировки.</td>
+</tr>
+</tbody>
+</table>
+<p>Вариант маркировки для передачи данных между серверыми коммутаторами, когда подключены гипервизоры vmware esxi с TEP'ами NSX'а.</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>cs1</td>
+<td>vmotion</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>iscsi</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>vxlan,geneve</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>весь остальной трафик без маркировки</td>
+</tr>
+</tbody>
+</table>
+<p>Маркировать на гипервизоре может и получится, но нет. Поэтому маркировка на leaf-коммутаторах по acl.
+По ссылке <a href="https://kb.vmware.com/s/article/2039095">порты vmware</a>.
+iscsi, vmotion - это tcp, a туннели vxlan,geneve - udp.
+udp необходим более высокий приоритет. В случае vmotion можно немного потерять, подождать.</p>
+<h2 id="_3">класифиры</h2>
+<p>По умолчанию не все коммутаторы анализируют dscp в ip-заголовках и настроены на работу с полем cos. Например, у juniper ex
+<div class="highlight"><pre><span></span><code>ex2200&gt; show class-of-service interface ge-0/0/1  
+Physical interface: ge-0/0/1, Index: 130
+Queues supported: 8, Queues in use: 4
+  Scheduler map: , Index: 2
+  Congestion-notification: Disabled
+
+  Logical interface: ge-0/0/1.0, Index: 70
+Object                  Name                   Type                    Index
+Classifier              ieee8021p-default      ieee8021p                  11
+</code></pre></div>
+На старых cisco и прочих c похожим cli коммутаторах выбор между 802.1p и dscp производится одной командой, похожей на <code>trust qos dscp</code>.
+В extreme необходимо отключить 802.1p, иначе этот выбор будет приоритетнее, чем dscp
+<div class="highlight"><pre><span></span><code>disable dot1p examination ports all
+enable diffserv examination ports all
+</code></pre></div>
+В eltex вовсе делать ничего не нужно
+<div class="highlight"><pre><span></span><code>eltex-2324#sh qos 
+Qos: Basic mode
+Basic trust: dscp
+CoS to DSCP mapping: disabled
+DSCP to CoS mapping: disabled
+</code></pre></div>
+В huawei необходимо на портах включить <code>trust dscp</code>, а на routed-интефейсах дополнительно еще <code>undo qos phb marking enable</code>.</p>
+<h2 id="dscp-mapping-to-queue">dscp mapping to queue</h2>
+<p>Нет какого-то универсального правила, в соотв. с которым dscp мапятся в очереди.
+У всех вендоров это разные значения на разных моделях. Делать по своему усмотрению. Пример:</p>
+<table>
+<thead>
+<tr>
+<th>Очередь</th>
+<th>dot1p</th>
+<th>DSCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>8</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>16</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>24</td>
+</tr>
+<tr>
+<td>5</td>
+<td>4</td>
+<td>32</td>
+</tr>
+<tr>
+<td>6</td>
+<td>5</td>
+<td>40</td>
+</tr>
+<tr>
+<td>7</td>
+<td>6</td>
+<td>48</td>
+</tr>
+<tr>
+<td>8</td>
+<td>7</td>
+<td>56</td>
+</tr>
+</tbody>
+</table>
+<p>extreme 670 по умолчанию:
+<div class="highlight"><pre><span></span><code># show diffserv examination
+CodePoint-&gt;QOSProfile mapping:
+        00-&gt;QP1 01-&gt;QP1 02-&gt;QP1 03-&gt;QP1 04-&gt;QP1 05-&gt;QP1 06-&gt;QP1 07-&gt;QP1
+        08*&gt;QP1 09*&gt;QP1 10*&gt;QP1 11*&gt;QP1 12*&gt;QP1 13*&gt;QP1 14*&gt;QP1 15*&gt;QP1
+        16*&gt;QP1 17*&gt;QP1 18*&gt;QP1 19*&gt;QP1 20*&gt;QP1 21*&gt;QP1 22*&gt;QP1 23*&gt;QP1
+        24*&gt;QP1 25*&gt;QP1 26*&gt;QP1 27*&gt;QP1 28*&gt;QP1 29*&gt;QP1 30*&gt;QP1 31*&gt;QP1
+        32*&gt;QP1 33*&gt;QP1 34*&gt;QP1 35*&gt;QP1 36*&gt;QP1 37*&gt;QP1 38*&gt;QP1 39*&gt;QP1
+        40*&gt;QP1 41*&gt;QP1 42*&gt;QP1 43*&gt;QP1 44*&gt;QP1 45*&gt;QP1 46*&gt;QP1 47*&gt;QP1
+        48*&gt;QP1 49*&gt;QP1 50*&gt;QP1 51*&gt;QP1 52*&gt;QP1 53*&gt;QP1 54*&gt;QP1 55*&gt;QP1
+        56-&gt;QP8 57-&gt;QP8 58-&gt;QP8 59-&gt;QP8 60-&gt;QP8 61-&gt;QP8 62-&gt;QP8 63-&gt;QP8
+</code></pre></div>
+Т.е. нет никаких предустановленных правил, да и очереди всего две. Поэтому необходимо создать новые очереди, описать mapping.
+<div class="highlight"><pre><span></span><code>create qosprofile &quot;qp2&quot;
+create qosprofile &quot;qp3&quot;
+create qosprofile &quot;qp4&quot;
+configure diffserv examination code-point 24 qosprofile qp3
+configure diffserv examination code-point 32 qosprofile qp4
+configure diffserv examination code-point 8 qosprofile qp2
+</code></pre></div>
+eltex
+<div class="highlight"><pre><span></span><code>eltex-3324#sh qos map dscp-queue
+Dscp-queue map:
+     d1 : d2 0  1  2  3  4  5  6  7  8  9
+     -------------------------------------
+      0 :   01 01 01 01 01 01 01 01 01 02
+      1 :   02 02 02 02 02 02 06 03 03 03
+      2 :   03 03 03 03 06 04 04 04 04 04
+      3 :   04 04 07 05 05 05 05 05 05 05
+      4 :   06 07 07 07 07 07 07 07 06 06
+      5 :   06 06 06 06 06 06 06 06 06 06
+      6 :   06 06 06 06
+eltex-2324#sh qos map dscp-queue
+Dscp-queue map:
+     d1 : d2 0  1  2  3  4  5  6  7  8  9
+     -------------------------------------
+      0 :   02 01 01 01 01 01 01 01 01 03
+      1 :   03 03 03 03 03 03 07 04 04 04
+      2 :   04 04 04 04 07 05 05 05 05 05
+      3 :   05 05 07 06 06 06 06 06 06 06
+      4 :   07 08 08 08 08 08 08 08 07 07
+      5 :   07 07 07 07 07 07 07 07 07 07
+      6 :   07 07 07 07
+</code></pre></div>
+Juniper EX
+<div class="highlight"><pre><span></span><code>ex2200&gt; show class-of-service classifier name dscp-default
+Classifier: dscp-default, Code point type: dscp, Index: 7
+  Code point         Forwarding class                    Loss priority
+  000000             best-effort                         low
+  000001             best-effort                         low
+  000010             best-effort                         low
+  000011             best-effort                         low
+  000100             best-effort                         low
+  000101             best-effort                         low
+  000110             best-effort                         low
+  000111             best-effort                         low
+  001000             best-effort                         low
+  001001             best-effort                         low
+  001010             best-effort                         low
+  001011             best-effort                         low
+  001100             best-effort                         low
+  001101             best-effort                         low
+  001110             best-effort                         low
+  001111             best-effort                         low
+  010000             best-effort                         low
+  010001             best-effort                         low
+  010010             best-effort                         low
+  010011             best-effort                         low
+  010100             best-effort                         low
+  010101             best-effort                         low
+  010110             best-effort                         low
+  010111             best-effort                         low
+  011000             best-effort                         low
+  011001             best-effort                         low
+  011010             best-effort                         low
+  011011             best-effort                         low
+  011100             best-effort                         low
+  011101             best-effort                         low
+  011110             best-effort                         low
+  011111             best-effort                         low
+  100000             best-effort                         low
+  100001             best-effort                         low
+  100010             best-effort                         low
+  100011             best-effort                         low
+  100100             best-effort                         low
+  100101             best-effort                         low
+  100110             best-effort                         low
+  100111             best-effort                         low
+  101000             best-effort                         low
+  101001             best-effort                         low
+  101010             best-effort                         low
+  101011             best-effort                         low
+  101100             best-effort                         low
+  101101             best-effort                         low
+  101110             best-effort                         low
+  101111             best-effort                         low
+  110000             network-control                     low
+  110001             network-control                     low
+  110010             network-control                     low
+  110011             network-control                     low
+  110100             network-control                     low
+  110101             network-control                     low
+  110110             network-control                     low
+  110111             network-control                     low
+  111000             network-control                     low
+  111001             network-control                     low
+  111010             network-control                     low
+  111011             network-control                     low
+  111100             network-control                     low
+  111101             network-control                     low
+  111110             network-control                     low
+  111111             network-control                     low
+</code></pre></div>
+Cisco 3750, где 4 очереди (01..04) и еще у каждой очереди есть пара трешхолдов
+<div class="highlight"><pre><span></span><code>SWITCH#sh mls qos maps dscp-output-q
+   Dscp-outputq-threshold map:
+     d1 :d2    0     1     2     3     4     5     6     7     8     9 
+     ------------------------------------------------------------
+      0 :    02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 
+      1 :    02-01 02-01 02-01 02-01 02-01 02-01 03-01 03-01 03-01 03-01 
+      2 :    03-01 03-01 03-01 03-01 03-01 03-01 03-01 03-01 03-01 03-01 
+      3 :    03-01 03-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 
+      4 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 04-01 04-01 
+      5 :    04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 
+      6 :    04-01 04-01 04-01 04-01
+</code></pre></div></p>
+<h2 id="_4">перемаркировка</h2>
+<p>Она может быть выключена или включена по умолчанию. Где-то ее можно включить на конкретных портах, где-то она работает только глобально.</p>
+<p>На Cisco 3750 включена. Если нет политик для маркировки пакетов, то отключить
+<div class="highlight"><pre><span></span><code>no mls qos rewrite ip dscp
+</code></pre></div>
+На extreme по умолчанию выключена
+<div class="highlight"><pre><span></span><code>disable dot1p examination ports all
+</code></pre></div>
+На современных cisco делается все политиками, а не специфичными командами, поэтому проще стало с одной стороны. Достаточно в политике выставить <code>set dscp xx</code>.
+Перемаркировка на extreme на примере, где все данные в дефолтовой очереди порта 47 перемаркируются:
+<div class="highlight"><pre><span></span><code>configure diffserv replacement qosprofile qp1 code-point 0
+configure ports 47 qosprofile qp1
+enable diffserv replacement port 47
+</code></pre></div></p>
+<h2 id="1-nexus-3000">пример 1 для nexus 3000</h2>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus3000/sw/qos/7x/b_3k_QoS_Config_7x/b_3k_QoS_Config_7x_chapter_010.html">Cisco Nexus 3000 Series NX-OS QoS Configuration Guide</a>
+В коммутатор включены сервера с установленными гипервизорами vmware esxi.
+Для примера приводится в виде тасков ансибла. Команды и таски описываются в том виде и в том порядке, в каком они есть в конфигурации устройства.
+Поэтому это вместо листинга тоже подойдет.
+Настройки выполнены по таблице ниже:</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>qos-group</th>
+<th>bw,%</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>cs1</td>
+<td>1</td>
+<td>25</td>
+<td>vmotion</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>3</td>
+<td>10</td>
+<td>iscsi</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>4</td>
+<td>40</td>
+<td>vxlan,geneve</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>0</td>
+<td>25</td>
+<td>other</td>
+</tr>
+</tbody>
+</table>
+<p>Весь трафик перемаркировывается, ему присваивается соответствующая qos-group'а, у которой приоритеты определены процентами от полосы.
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configure qos for nexus</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cisco_n3k</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">serial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">acl</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">ip access-list acl-iscsi</span>
+<span class="w">            </span><span class="no">10 permit tcp any 10.0.0.0/8 eq 3260</span>
+<span class="w">            </span><span class="no">20 permit tcp 10.0.0.0/8 eq 3260 any</span>
+<span class="w">          </span><span class="no">ip access-list acl-vmotion</span>
+<span class="w">            </span><span class="no">10 permit tcp any 10.0.0.0/8 eq 8000</span>
+<span class="w">            </span><span class="no">20 permit tcp 10.0.0.0/8 eq 8000 any</span>
+<span class="w">          </span><span class="no">ip access-list acl-vxlan</span>
+<span class="w">            </span><span class="no">10 permit udp any 10.0.0.0/8 eq 4789</span>
+<span class="w">            </span><span class="no">20 permit udp any 10.0.0.0/8 eq 6081</span>
+<span class="w">            </span><span class="no">30 permit udp 10.0.0.0/8 eq 4789 any</span>
+<span class="w">            </span><span class="no">40 permit udp 10.0.0.0/8 eq 6081 any</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">class-map qos</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">class-map type qos match-all ISCSI</span>
+<span class="w">            </span><span class="no">match access-group name acl-iscsi</span>
+<span class="w">          </span><span class="no">class-map type qos match-all VXLAN</span>
+<span class="w">            </span><span class="no">match access-group name acl-vxlan</span>
+<span class="w">          </span><span class="no">class-map type qos match-all VMOTION</span>
+<span class="w">            </span><span class="no">match access-group name acl-vmotion</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">class-map type queuing</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">class-map type queuing QG1</span>
+<span class="w">            </span><span class="no">match qos-group 1</span>
+<span class="w">          </span><span class="no">class-map type queuing QG3</span>
+<span class="w">            </span><span class="no">match qos-group 3</span>
+<span class="w">          </span><span class="no">class-map type queuing QG4</span>
+<span class="w">            </span><span class="no">match qos-group 4</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy-map type qos SET-QG</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">policy-map type qos SET-QG</span>
+<span class="w">            </span><span class="no">class ISCSI</span>
+<span class="w">              </span><span class="no">set qos-group 3</span>
+<span class="w">              </span><span class="no">set dscp 24</span>
+<span class="w">            </span><span class="no">class VXLAN</span>
+<span class="w">              </span><span class="no">set qos-group 4</span>
+<span class="w">              </span><span class="no">set dscp 32</span>
+<span class="w">            </span><span class="no">class VMOTION</span>
+<span class="w">              </span><span class="no">set qos-group 1</span>
+<span class="w">              </span><span class="no">set dscp 8</span>
+<span class="w">            </span><span class="no">class class-default</span>
+<span class="w">              </span><span class="no">set dscp 0</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy-map type queuing DS (datastore iscsi)</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">policy-map type queuing DS</span>
+<span class="w">            </span><span class="no">class type queuing QG3</span>
+<span class="w">              </span><span class="no">bandwidth percent 90</span>
+<span class="w">            </span><span class="no">class type queuing class-default</span>
+<span class="w">              </span><span class="no">bandwidth percent 10</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy-map type queuing ESXI</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">policy-map type queuing ESXI</span>
+<span class="w">            </span><span class="no">class type queuing QG1</span>
+<span class="w">              </span><span class="no">bandwidth percent 25</span>
+<span class="w">            </span><span class="no">class type queuing QG3</span>
+<span class="w">              </span><span class="no">bandwidth percent 10</span>
+<span class="w">            </span><span class="no">class type queuing QG4</span>
+<span class="w">              </span><span class="no">bandwidth percent 40</span>
+<span class="w">            </span><span class="no">class type queuing class-default</span>
+<span class="w">              </span><span class="no">bandwidth percent 25</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">class-map type network-qos</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_1</span>
+<span class="w">            </span><span class="no">match qos-group 1</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_2</span>
+<span class="w">            </span><span class="no">match qos-group 2</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_3</span>
+<span class="w">            </span><span class="no">match qos-group 3</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_4</span>
+<span class="w">            </span><span class="no">match qos-group 4</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_5</span>
+<span class="w">            </span><span class="no">match qos-group 5</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_6</span>
+<span class="w">            </span><span class="no">match qos-group 6</span>
+<span class="w">          </span><span class="no">class-map type network-qos cn_7</span>
+<span class="w">            </span><span class="no">match qos-group 7</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy-map type network-qos cq_system</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">policy-map type network-qos cq_system</span>
+<span class="w">            </span><span class="no">class type network-qos cn_1</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos cn_2</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos cn_3</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos cn_4</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos cn_5</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos cn_6</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos cn_7</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">            </span><span class="no">class type network-qos class-default</span>
+<span class="w">              </span><span class="no">mtu 9216</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">system qos</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">system qos</span>
+<span class="w">            </span><span class="no">service-policy type qos input SET-QG</span>
+<span class="w">            </span><span class="no">service-policy type queuing output ESXI</span>
+<span class="w">            </span><span class="no">service-policy type network-qos cq_system</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clear counters</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_command</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clear counters</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clear qos statistics</span>
+<span class="w">      </span><span class="nt">ansible.netcommon.cli_command</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clear qos statistics</span>
+
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SAVE CONFIGURATION</span>
+<span class="w">      </span><span class="nt">cli_command</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">copy running-config startup-config</span>
+</code></pre></div></p>
+<h2 id="1-extreme-670">пример 1 для extreme 670</h2>
+<p>В коммутатор включены сервера с установленными гипервизорами vmware esxi.
+Для примера приводится в виде последовательности команд. Непонятно как автоматизировать редактирование acl.
+Настройки выполнены по таблице ниже:</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>qosprofile</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>cs1</td>
+<td>2</td>
+<td>vmotion</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>3</td>
+<td>iscsi</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>4</td>
+<td>vxlan,geneve</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>1</td>
+<td>other</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>create qosprofile &quot;qp2&quot;
+create qosprofile &quot;qp3&quot;
+create qosprofile &quot;qp4&quot;
+configure diffserv examination code-point 24 qosprofile qp3
+configure diffserv examination code-point 32 qosprofile qp4
+configure diffserv examination code-point 8 qosprofile qp2
+configure diffserv replacement qosprofile qp1 code-point 0
+configure diffserv replacement qosprofile qp2 code-point 8
+configure diffserv replacement qosprofile qp3 code-point 24
+configure diffserv replacement qosprofile qp4 code-point 32
+disable dot1p examination ports all
+enable diffserv examination ports all
+enable diffserv replacement ports all
+</code></pre></div>
+<p>Весь трафик перемаркировывается политикой, ему присвается соотвествующий qosprofile.
+Создать acl/политику <code>vi qacl.pol</code>
+<div class="highlight"><pre><span></span><code>entry QP2-vmotionsrc {
+    if {
+        source-address 10.0.0.0/8;
+        protocol tcp;
+        source-port 8000;
+    } then {
+        Qosprofile qp2;
+        replace-dscp;
+   }
+}
+entry QP2-vmotiondst {
+    if {
+        destination-address 10.0.0.0/8;
+        protocol tcp;
+        destination-port 8000;
+    } then {
+        Qosprofile qp2;
+        replace-dscp;
+   }
+}
+entry QP3-iscsisrc {
+    if {
+        source-address 10.0.0.0/8;
+        protocol tcp;
+        source-port 3260;
+    } then {
+        Qosprofile qp3;
+        replace-dscp;
+   }
+}
+entry QP3-iscsidst {
+    if {
+        destination-address 10.0.0.0/8;
+        protocol tcp;
+        destination-port 3260;
+    } then {
+        Qosprofile qp3;
+        replace-dscp;
+   }
+}
+entry QP4-vxlansrc {
+    if {
+        source-address 10.0.0.0/8;
+        protocol udp;
+        source-port 4789;
+    } then {
+        Qosprofile qp4;
+        replace-dscp;
+   }
+}
+entry QP4-vxlandst {
+    if {
+        destination-address 10.0.0.0/8;
+        protocol udp;
+        destination-port 4789;
+    } then {
+        Qosprofile qp4;
+        replace-dscp;
+   }
+}
+entry QP4-genevesrc {
+    if {
+        source-address 10.0.0.0/8;
+        protocol udp;
+        source-port 6081;
+    } then {
+        Qosprofile qp4;
+        replace-dscp;
+   }
+}
+entry QP4-genevedst {
+    if {
+        destination-address 10.0.0.0/8;
+        protocol udp;
+        destination-port 6081;
+    } then {
+        Qosprofile qp4;
+        replace-dscp;
+   }
+}
+</code></pre></div>
+Проверить синтаксис, включить для всех портов
+<div class="highlight"><pre><span></span><code>check policy qacl
+configure access-list qacl any
+</code></pre></div></p>
+<h2 id="2-extreme-670">пример 2 для extreme 670</h2>
+<p>Коммутатор является транзитным. Перемаркировка трафика не производится, кроме недоверенных портов, на которых она сбрасывается в 0.
+Для примера приводится в виде последовательности команд.
+Настройки выполнены по таблице ниже:</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>qosprofile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>cs1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>create qosprofile &quot;qp2&quot;
+create qosprofile &quot;qp3&quot;
+create qosprofile &quot;qp4&quot;
+configure diffserv examination code-point 24 qosprofile qp3
+configure diffserv examination code-point 32 qosprofile qp4
+configure diffserv examination code-point 8 qosprofile qp2
+configure diffserv replacement qosprofile qp1 code-point 0
+disable dot1p examination ports all
+enable diffserv examination ports all
+</code></pre></div>
+<p>Недоверенный порт
+<div class="highlight"><pre><span></span><code>configure ports 47 qosprofile qp1
+enable diffserv replacement port 47
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

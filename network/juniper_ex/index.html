@@ -1,0 +1,3157 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../mds/">
+      
+      
+        <link rel="next" href="../huawei/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Switch juniper ex - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#juniper-ex" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Switch juniper ex
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vlan-trunk-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      vlan, trunk, access
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lacp" class="md-nav__link">
+    <span class="md-ellipsis">
+      lacp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-chassis" class="md-nav__link">
+    <span class="md-ellipsis">
+      virtual-chassis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      software add
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="software add">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Подготовка к обновлению
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Обновление
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autosnapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      autosnapshot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      snmp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tacacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      tacacs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dhcp-snooping-juniper-ex-ex9200" class="md-nav__link">
+    <span class="md-ellipsis">
+      dhcp-snooping на Juniper EX, кроме EX9200
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cos-ex2200" class="md-nav__link">
+    <span class="md-ellipsis">
+      CoS EX2200
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CoS EX2200">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ex2200-cos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Работа коммутатора EX2200 с дефолтовым CoS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#os-ex2200" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка СoS на коммутаторе EX2200
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spanning-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      spanning-tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bpdufilter-bpduguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      bpdufilter, bpduguard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#igmp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      igmp-snooping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storm-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      storm-control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#span" class="md-nav__link">
+    <span class="md-ellipsis">
+      SPAN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vlan-trunk-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      vlan, trunk, access
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lacp" class="md-nav__link">
+    <span class="md-ellipsis">
+      lacp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-chassis" class="md-nav__link">
+    <span class="md-ellipsis">
+      virtual-chassis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      software add
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="software add">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Подготовка к обновлению
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Обновление
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autosnapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      autosnapshot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      snmp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tacacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      tacacs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dhcp-snooping-juniper-ex-ex9200" class="md-nav__link">
+    <span class="md-ellipsis">
+      dhcp-snooping на Juniper EX, кроме EX9200
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cos-ex2200" class="md-nav__link">
+    <span class="md-ellipsis">
+      CoS EX2200
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CoS EX2200">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ex2200-cos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Работа коммутатора EX2200 с дефолтовым CoS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#os-ex2200" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка СoS на коммутаторе EX2200
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spanning-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      spanning-tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bpdufilter-bpduguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      bpdufilter, bpduguard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#igmp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      igmp-snooping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storm-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      storm-control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#span" class="md-nav__link">
+    <span class="md-ellipsis">
+      SPAN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="juniper-ex">Про juniper ex</h1>
+<h2 id="vlan-trunk-access">vlan, trunk, access</h2>
+<p>Группы удобны. Настроенный порт в транк без вланов оказывается включен во все вланы.
+Если указан список, то только в них. Поэтому есть vlan default, в котором acl дропает все.
+<div class="highlight"><pre><span></span><code>groups {
+    trunk {
+        interfaces {
+            &lt;*&gt; {
+                mtu 9216;
+                ether-options {
+                    no-flow-control;
+                }
+                unit 0 {
+                    family ethernet-switching {
+                        port-mode trunk;
+                        vlan {
+                            members default;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    access {
+        interfaces {
+            &lt;*&gt; {
+                mtu 9216;
+                ether-options {
+                    no-flow-control;
+                }
+                unit 0 {
+                    family ethernet-switching {
+                        port-mode access;
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre></div>
+Нужен access
+<div class="highlight"><pre><span></span><code>set interfaces ge-0/0/0 apply-groups access
+</code></pre></div>
+Нужен trunk
+<div class="highlight"><pre><span></span><code>set interfaces ge-0/0/1 apply-groups trunk
+</code></pre></div>
+Фильтр для vlan default
+<div class="highlight"><pre><span></span><code>&gt; show configuration vlans default    
+vlan-id 1;
+filter {
+    input Drop;
+}
+
+{master:0}
+&gt; show configuration firewall family ethernet-switching 
+filter Drop {
+    term all {
+        then discard;
+    }
+}
+
+{master:0}
+</code></pre></div>
+Создать vlan. Название всегда с буквы и для простоты пишу так, а описание в описании.
+<div class="highlight"><pre><span></span><code>set vlans v30 vlan-id 30 desciption &quot;dmz_1&quot;
+set vlans v40 vlan-id 40 desciption &quot;dmz_2&quot;
+</code></pre></div>
+Для access порта, который уже в группе access. Вланы числами удобнее.
+<div class="highlight"><pre><span></span><code>set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members 30
+</code></pre></div>
+Для порта в группе trunk
+<div class="highlight"><pre><span></span><code>set interfaces ge-0/0/1 unit 0 family ethernet-switching vlan members 30
+set interfaces ge-0/0/1 unit 0 family ethernet-switching vlan members 40
+</code></pre></div></p>
+<h2 id="lacp">lacp</h2>
+<p>Группы можно делать, но тут проще руками.
+Нужно какое-то количество aggregated-devices указать, указать в физических интерфейсах логический ae, настроить ae.
+Забегая вперед, для dhcp-snooping ae не является доверенным портом по умолчанию.
+<div class="highlight"><pre><span></span><code>&gt; show configuration chassis                 
+aggregated-devices {
+    ethernet {
+        device-count 6;
+    }
+}
+alarm {
+    management-ethernet {
+        link-down ignore;
+    }
+}
+
+{master:0}
+&gt; show configuration interfaces ge-0/0/10 
+ether-options {
+    802.3ad ae0;
+}
+
+{master:0}
+&gt; show configuration interfaces ae0          
+mtu 9216;
+aggregated-ether-options {
+    no-flow-control;
+    lacp {
+        active;
+        periodic slow;
+    }
+}
+unit 0 {
+    family ethernet-switching {
+        port-mode trunk;
+        vlan {
+            members default;
+        }
+    }
+}
+
+{master:0}
+&gt; show lacp interfaces 
+Aggregated interface: ae0
+    LACP state:       Role   Exp   Def  Dist  Col  Syn  Aggr  Timeout  Activity
+      ge-0/0/10      Actor    No   Yes    No   No   No   Yes     Slow    Active
+      ge-0/0/10    Partner    No   Yes    No   No   No   Yes     Fast   Passive
+      ge-1/0/10      Actor    No   Yes    No   No   No   Yes     Slow    Active
+      ge-1/0/10    Partner    No   Yes    No   No   No   Yes     Fast   Passive
+    LACP protocol:        Receive State  Transmit State          Mux State 
+      ge-0/0/10           Port disabled     No periodic           Detached
+      ge-1/0/10           Port disabled     No periodic           Detached
+
+{master:0}
+</code></pre></div></p>
+<h2 id="virtual-chassis">virtual-chassis</h2>
+<p>В основном стекируются через sfp+ порты 2300 и 3300, либо через медные в ex2200. Бывают stack интерфейсы у 4200 серии.
+Читайте документацию на модель.
+Для 2200 написано "We recommend that you physically cable the ports as the final step of this procedure."
+Т.е. настроить порты, vc, включить кабели. Как удобно в cisco и eltex. В последнем даже софт накатит до версии мастера автоматом.
+Ниже порты 3 и 4 настроены как vcp и в конфигурации их нет ни в каком виде.</p>
+<div class="highlight"><pre><span></span><code>&gt; show virtual-chassis vc-port    
+fpc0:
+--------------------------------------------------------------------------
+Interface   Type              Trunk  Status       Speed        Neighbor
+or                             ID                 (mbps)       ID  Interface
+PIC / Port
+0/3         Configured          5    Up           1000         1   vcp-255/0/3
+0/4         Configured          5    Up           1000         1   vcp-255/0/4
+
+fpc1:
+--------------------------------------------------------------------------
+Interface   Type              Trunk  Status       Speed        Neighbor
+or                             ID                 (mbps)       ID  Interface
+PIC / Port
+0/3         Configured          5    Up           1000         0   vcp-255/0/4
+0/4         Configured          5    Up           1000         0   vcp-255/0/4
+
+{master:0}
+&gt; show configuration virtual-chassis 
+preprovisioned;
+no-split-detection;
+member 0 {
+    role routing-engine;
+    serial-number CW0218430000;
+}
+member 1 {
+    role routing-engine;
+    serial-number CW0218430001;
+}
+
+{master:0}
+</code></pre></div>
+<h2 id="software-add">software add</h2>
+<p>В базе знаний советую ознакомиться с EX/SRX Recovering from file system corruption during a system reboot,
+NAND media utility checks for bad blocks in the NAND flash memory
+и EX Switch boots from backup root patition after file system corruption on the primary root partition.</p>
+<h3 id="_1">Подготовка к обновлению</h3>
+<p>Для ex4200 cтал копировать в шеле в /var/tmp/.
+Если делать из cli с указанием /var/tmp/ в качестве назначения, то сначала он будет копировать в раздел на котором места нет,
+а потом якобы должен будет переместить в /var/tmp/.
+Ниже показана очистка флешки и проверка свободного места в разделах.
+<div class="highlight"><pre><span></span><code>ex2200&gt; request system storage cleanup    
+Please check the list of files to be deleted using the dry-run option. i.e.
+request system storage cleanup dry-run
+Do you want to proceed ? [yes,no] (no) yes   
+
+fpc0:
+--------------------------------------------------------------------------
+
+List of files to delete:
+[пропущено]
+   708B Dec 17  2012 /var/lost+found/#00045
+[пропущено]
+
+
+ex2200&gt; start shell
+
+% df -h | grep -v mnt
+Filesystem       Size    Used   Avail Capacity  Mounted on
+/dev/da0s1a      184M    105M     64M    62%    /
+devfs            1.0K    1.0K      0B   100%    /dev
+/dev/md9         126M     12K    116M     0%    /tmp
+/dev/da0s3e      123M    3.2M    110M     3%    /var
+/dev/da0s3d      369M    132K    339M     0%    /var/tmp
+/dev/da0s4d       62M    274K     57M     0%    /config
+/dev/md10         59M     17M     37M    31%    /var/rundb
+procfs           4.0K    4.0K      0B   100%    /proc
+%
+</code></pre></div>
+Проверить целостность флешки.
+<div class="highlight"><pre><span></span><code>% su
+Password:
+root@ex2200:RE:0% nand-mediack -C
+Media check on da0 on ex platforms
+root@ex2200:RE:0%exit 
+% exit
+exit
+
+{master:0}
+</code></pre></div>
+Ошибок нет. На всякий случай еще раз переформатировать раздел для последующей установки.
+<div class="highlight"><pre><span></span><code>ex2200&gt; request system snapshot slice alternate 
+fpc0:
+--------------------------------------------------------------------------
+Formatting alternate root (/dev/da0s2a)...
+Copying &#39;/dev/da0s1a&#39; to &#39;/dev/da0s2a&#39; .. (this may take a few minutes)
+The following filesystems were archived: /
+</code></pre></div>
+Скачать с ftp и проверить md5
+<div class="highlight"><pre><span></span><code>% cd /var/tmp/
+% fetch ftp://999.1.1.1/junos/jinstall-ex-2200-12.3R12.4-domestic-signed.tgz
+jinstall-ex-2200-12.3R12.4-domestic-signed.tgz  3% of   95 MB  643 kBps
+% md5 jinstall-ex-2200-12.3R12.4-domestic-signed.tgz
+MD5 (jinstall-ex-2200-12.3R12.4-domestic-signed.tgz) = 73759d24a949181dcfe6111c0df20d1d
+</code></pre></div>
+Копирование с usb-флешки
+<div class="highlight"><pre><span></span><code>% clear
+% mount_msdosfs /dev/da1s1 /mnt
+% cp /mnt/jinstall-ex-2200-12.3R3.4-domestic-signed.tgz /var/tmp/
+% umount /mnt
+</code></pre></div></p>
+<h3 id="_2">Обновление</h3>
+<p>Вернуться в cli и запустить установку с ключем force.
+Как-то обновлял коммутатор ex4200, а он в непонятный режим вывалился без части файлов
+и хорошо еще удаленно смогли консолью подключиться и перезагрузить с рабочего слайса командой <code>request system reboot slice alternate</code>.
+Со второй попытки и с ключем force обновиться получилось.
+<div class="highlight"><pre><span></span><code>ex2200&gt; request system software add no-copy delay-restart force /var/tmp/jinstall-ex-2200-12.3R12.4-domestic-signed.tgz
+</code></pre></div>
+Посмотреть текущее время.
+<div class="highlight"><pre><span></span><code>ex2200&gt; show system uptime
+</code></pre></div>
+Перезагрузиться через 840 минут.
+<div class="highlight"><pre><span></span><code>ex2200&gt; request system reboot in 840 
+</code></pre></div>
+Отменить перезагрузку, если не устраивает время.
+<div class="highlight"><pre><span></span><code>ex2200&gt;clear system reboot
+</code></pre></div>
+После перезагрузки выполнить и дождаться(!) выполнения команды:
+<div class="highlight"><pre><span></span><code>ex2200&gt; request system snapshot slice alternate 
+fpc0:
+--------------------------------------------------------------------------
+Formatting alternate root (/dev/da0s2a)...
+Copying &#39;/dev/da0s1a&#39; to &#39;/dev/da0s2a&#39; .. (this may take a few minutes)
+The following filesystems were archived: /
+</code></pre></div></p>
+<h2 id="autosnapshot">autosnapshot</h2>
+<p>При повреждении файловой системы и автоматической загрузке с альтернативного слайса будет сделан снапшот.
+Однако, возможное повторное отключение питания до завершения операции сделает устройство неработоспособным,
+т.к. контроля успешности завершения снапшота нет.
+<div class="highlight"><pre><span></span><code>set system auto-snapshot
+
+ex&gt; show system auto-snapshot    
+Auto-snapshot Configuration:   Enabled
+Auto-snapshot State:  Disabled
+</code></pre></div></p>
+<h2 id="snmp">snmp</h2>
+<p>В коммутаторах EX-серии по snmp запросу ifName (1.3.6.1.2.1.31.1.1.1.1) ответы в том числе с юнитами. Можно фильтровать юниты и прочие логические интерфейсы.
+<div class="highlight"><pre><span></span><code>ex&gt; show configuration snmp filter-interfaces 
+interfaces {
+    lsi;
+    bme;
+    dsc;
+    ipip;
+    mtun;
+    pimd;
+    pime;
+    tap;
+    lt;
+    &quot;^ge-[0-9]+/[0-9]+/[0-9]+.0$&quot;;
+    &quot;^xe-[0-9]+/[0-9]+/[0-9]+.0$&quot;;
+    &quot;^ae[0-9]+.0$&quot;;
+}
+</code></pre></div></p>
+<h2 id="tacacs">tacacs</h2>
+<div class="highlight"><pre><span></span><code>system {
+   authentication-order [ tacplus password ];
+    tacplus-server {
+        10.8.7.6 {
+            secret &quot;key&quot;;
+            single-connection;
+        }
+    }
+    accounting {
+        events [ login interactive-commands ];
+        destination {
+            tacplus {
+                server {
+                    10.8.7.6 {
+                        secret &quot;key&quot;;
+                        single-connection;
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre></div>
+<h2 id="dhcp-snooping-juniper-ex-ex9200">dhcp-snooping на Juniper EX, кроме EX9200</h2>
+<p>Чем чреваты настройки dhcp-snooping'а на джуниперах:</p>
+<ul>
+<li>не работает для vlan'ов, которые маршрутизируются данным коммутатором, т.е. имеется RVI интерфейс и настроен dhcp-relay.</li>
+<li>На ex9200 работает вроде, но я забыл уже. Там зато был регулярный косяк с dhcp-relay, который правили раза два минимум. Просто переставал релаить и привет;</li>
+<li>локальную базу хранить небезопасно, так как при внеплановой перезагрузке она может быть недоступа из-за загрузки с альтернативного раздела. Это специфика junos;</li>
+<li>по умолчанию доверенными являются все транковые порты, а недоверенными - access-порты. Нигде не описывается, что транковый агрегированный интерфейс (ae) является недоверенным по умолчанию. В случае, когда в такой порт прописан vlan с настройкой dot1q-tunneling, то настроить порт ae доверенным не получится. Почитать про EX/QFX Error message: DHCP trusted configuration cannot be specified on a dot1q tunneled interfaces. Получить такой ответ при создании тикета я совсем не ожидал. Не работает и всё.</li>
+</ul>
+<p>Настройка для всех vlan. Доверенные порты по умолчанию - это все транки, кроме ae.
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration ethernet-switching-options secure-access-port 
+vlan all {
+    examine-dhcp;
+}
+dhcp-snooping-file {
+    location /путь/имя_файла;
+    write-interval 300;
+    timeout 10;
+}
+</code></pre></div></p>
+<h2 id="cos-ex2200">CoS EX2200</h2>
+<p>Рассматривается приоритезация трафика ip-телефонии и видеоконференцсвязи на коммутаторе EX2200 путем изменения дефолтовых настроек class-of-service (CoS).
+К коммутатору подключены ip-телефоны. Для маркировки ip-пакетов от ip-PBX и других ip-телефонов используются следующие значения dscp:</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>46</td>
+<td>ef</td>
+<td>медиа (rtp)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>сигнализация (sip,h323,unistim)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>видео c кодеков(rtp)</td>
+</tr>
+<tr>
+<td>34</td>
+<td>af41</td>
+<td>видео с телефона, софтового клиента, кодека (rtp)</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>весь остальной трафик без маркировки.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ex2200-cos">Работа коммутатора EX2200 с дефолтовым CoS</h3>
+<p>Без лишней необходимости включать qos на коммутаторе не нужно.
+Как минимум, необходимо убедиться в корректной маркировке пакетов телефонами или кодеками, иначе будет только хуже.
+Если qos на коммутаторе не настраивался:</p>
+<ul>
+<li>с высокой вероятностью дропов на портах нет;</li>
+<li>все порты доверяют меткам cos и dscp по умолчанию;</li>
+<li>для всех портов одинаковые настройки очередей, где для всего трафика, кроме network control выделено 95% буферов.</li>
+</ul>
+<p>Разделение происходит по маркировке, которую можно посмотреть в настройках CoS по умолчанию.
+<div class="highlight"><pre><span></span><code>ex2200&gt; show class-of-service forwarding-class 
+Forwarding class                    ID                      Queue  Policing priority    SPU priority
+  best-effort                             0                       0           normal           low    
+  expedited-forwarding                    1                       5           normal           low    
+  assured-forwarding                      2                       1           normal           low    
+  network-control                         3                       7           normal           low   
+
+ex2200&gt; show class-of-service interface ge-0/0/1  
+Physical interface: ge-0/0/1, Index: 130
+Queues supported: 8, Queues in use: 4
+  Scheduler map: , Index: 2
+  Congestion-notification: Disabled
+
+  Logical interface: ge-0/0/1.0, Index: 70
+Object                  Name                   Type                    Index
+Classifier              ieee8021p-default      ieee8021p                  11
+
+ex2200&gt; show class-of-service classifier name ieee8021p-default 
+Classifier: ieee8021p-default, Code point type: ieee-802.1, Index: 11
+  Code point         Forwarding class                    Loss priority
+  000                best-effort                         low         
+  001                best-effort                         low         
+  010                best-effort                         low         
+  011                best-effort                         low         
+  100                best-effort                         low         
+  101                best-effort                         low         
+  110                network-control                     low         
+  111                network-control                     low          
+ex2200&gt; show class-of-service classifier name dscp-default   
+Classifier: dscp-default, Code point type: dscp, Index: 7
+  Code point         Forwarding class                    Loss priority
+  000000             best-effort                         low         
+  000001             best-effort                         low         
+  000010             best-effort                         low         
+  000011             best-effort                         low         
+  000100             best-effort                         low         
+  000101             best-effort                         low         
+  000110             best-effort                         low         
+  000111             best-effort                         low         
+  001000             best-effort                         low         
+  001001             best-effort                         low         
+  001010             best-effort                         low         
+  001011             best-effort                         low         
+  001100             best-effort                         low         
+  001101             best-effort                         low         
+  001110             best-effort                         low         
+  001111             best-effort                         low         
+  010000             best-effort                         low         
+  010001             best-effort                         low         
+  010010             best-effort                         low         
+  010011             best-effort                         low         
+  010100             best-effort                         low         
+  010101             best-effort                         low         
+  010110             best-effort                         low         
+  010111             best-effort                         low         
+  011000             best-effort                         low         
+  011001             best-effort                         low         
+  011010             best-effort                         low         
+  011011             best-effort                         low         
+  011100             best-effort                         low         
+  011101             best-effort                         low         
+  011110             best-effort                         low         
+  011111             best-effort                         low         
+  100000             best-effort                         low         
+  100001             best-effort                         low         
+  100010             best-effort                         low         
+  100011             best-effort                         low         
+  100100             best-effort                         low         
+  100101             best-effort                         low         
+  100110             best-effort                         low         
+  100111             best-effort                         low         
+  101000             best-effort                         low         
+  101001             best-effort                         low         
+  101010             best-effort                         low         
+  101011             best-effort                         low         
+  101100             best-effort                         low         
+  101101             best-effort                         low         
+  101110             best-effort                         low         
+  101111             best-effort                         low         
+  110000             network-control                     low         
+  110001             network-control                     low         
+  110010             network-control                     low         
+  110011             network-control                     low         
+  110100             network-control                     low         
+  110101             network-control                     low         
+  110110             network-control                     low         
+  110111             network-control                     low         
+  111000             network-control                     low         
+  111001             network-control                     low         
+  111010             network-control                     low         
+  111011             network-control                     low         
+  111100             network-control                     low         
+  111101             network-control                     low         
+  111110             network-control                     low         
+  111111             network-control                     low         
+
+ex2200&gt; show class-of-service code-point-aliases dscp
+Code point type: dscp
+  Alias              Bit pattern
+  af11               001010         
+  af12               001100         
+  af13               001110         
+  af21               010010         
+  af22               010100         
+  af23               010110         
+  af31               011010         
+  af32               011100         
+  af33               011110         
+  af41               100010         
+  af42               100100         
+  af43               100110         
+  be                 000000         
+  cs1                001000         
+  cs2                010000         
+  cs3                011000         
+  cs4                100000         
+  cs5                101000         
+  cs6                110000         
+  cs7                111000         
+  ef                 101110         
+  nc1                110000         
+  nc2                111000         
+
+ex2200&gt; show class-of-service scheduler-map    
+Scheduler map: , Index: 2
+
+  Scheduler: , Forwarding class: best-effort, Index: 21
+    Transmit rate: 95 percent, Rate Limit: none, Buffer size: 95 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      High            non-TCP         1          
+      High            TCP             1          
+
+  Scheduler: , Forwarding class: network-control, Index: 23
+    Transmit rate: 5 percent, Rate Limit: none, Buffer size: 5 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      High            non-TCP         1          
+      High            TCP             1          
+</code></pre></div></p>
+<h3 id="os-ex2200">Настройка СoS на коммутаторе EX2200</h3>
+<p>Необходимо dscp ef и af поставить в соответствие с внутренними классами expedited-forwarding и assured-forwarding.
+Для этого настраивается т.н. classifiers. Можно создать и новые классы, но для примера пусть будет так.
+Перечислять все остальные биты dscp, как это сделано в класифире по умолчанию, смысла нет.
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration class-of-service classifiers 
+dscp custom-dscp {
+    forwarding-class network-control {
+        loss-priority low code-points [ cs6 cs7 ];
+    }
+    forwarding-class expedited-forwarding {
+        loss-priority low code-points ef;
+    }
+    forwarding-class assured-forwarding {
+        loss-priority low code-points [ cs3 cs4 af41 ];
+    }
+}
+</code></pre></div>
+Для каждого класса необходимо настроить шедулеры:
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration class-of-service schedulers  
+sc-ef {
+    buffer-size percent 10;
+    priority strict-high;
+}
+sc-af {
+    shaping-rate 20m;
+    buffer-size percent 10;
+}
+sc-nc {
+    buffer-size percent 5;
+    priority strict-high;
+}
+sc-be {
+    shaping-rate percent 80;
+    buffer-size {
+        remainder;
+    }
+}
+</code></pre></div>
+Названия выбираются произвольно, а процент выделенных буферов - по потребностям.
+Для шедулеров sc-ef и sc-nc включается механизм strict-priority. Для шедулера sc-af полоса ограничивается 20мбит/с, а для sc-be - 80% от полосы интерфейса.
+Далее шедулеры надо поставить в соответствие с внутренними классами:
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration class-of-service scheduler-maps    
+custom-maps {
+    forwarding-class network-control scheduler sc-nc;
+    forwarding-class expedited-forwarding scheduler sc-ef;
+    forwarding-class assured-forwarding scheduler sc-af;
+    forwarding-class best-effort scheduler sc-be;
+}
+</code></pre></div>
+В итоге, scheduler-map и classifier необходимо применить ко всем интерфейсам, описав их как шаблон, например:
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration class-of-service interfaces 
+ge-* {
+    scheduler-map custom-maps;
+    unit 0 {
+        classifiers {
+            dscp custom-dscp;
+        }
+    }
+}
+ae* {
+    scheduler-map custom-maps;
+    unit 0 {
+        classifiers {
+            dscp custom-dscp;
+        }
+    }
+}
+</code></pre></div>
+На интерфейсы можно применить одинаковые или индивидуальные настройки, т.е. можно написать разные scheduler и scheduler-maps для разных интерфейсов.
+В этом отношении коммутаторы juniper лучше, чем cisco 2960/3750, где всего два queue-set.
+Итоговая конфигурация выглядит вот так:
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration class-of-service 
+classifiers {
+    dscp custom-dscp {
+        forwarding-class network-control {
+            loss-priority low code-points [ cs6 cs7 ];
+        }
+        forwarding-class expedited-forwarding {
+            loss-priority low code-points ef;
+        }
+        forwarding-class assured-forwarding {
+            loss-priority low code-points [ cs3 cs4 af41 ];
+        }
+    }
+}
+host-outbound-traffic {
+    forwarding-class network-control;
+}
+interfaces {
+    ge-* {
+        scheduler-map custom-maps;
+        unit 0 {
+            classifiers {
+                dscp custom-dscp;
+            }
+        }
+    }
+    ae* {
+        scheduler-map custom-maps;
+        unit 0 {
+            classifiers {
+                dscp custom-dscp;
+            }
+        }
+    }                                   
+}
+scheduler-maps {
+    custom-maps {
+        forwarding-class network-control scheduler sc-nc;
+        forwarding-class expedited-forwarding scheduler sc-ef;
+        forwarding-class assured-forwarding scheduler sc-af;
+        forwarding-class best-effort scheduler sc-be;
+    }
+}
+schedulers {
+    sc-ef {
+        buffer-size percent 10;
+        priority strict-high;
+    }
+    sc-af {
+        shaping-rate 20m;
+        buffer-size percent 10;
+    }
+    sc-nc {
+        buffer-size percent 5;
+        priority strict-high;
+    }
+    sc-be {
+        shaping-rate percent 80;
+        buffer-size {
+            remainder;
+        }
+    }
+}
+</code></pre></div>
+Перед применением конфигурации необходимо ее проверить командой commit check. У меня возникала следующая ошибка:
+<div class="highlight"><pre><span></span><code>[edit class-of-service interfaces]
+  &#39;ge-*&#39;
+    One or more &quot;strict-high&quot; priority queues have lower queue-numbers than priority &quot;low&quot; queues in custom-maps for ge-*. Ifd ge-* supports strict-high priority only on higher numbered queues.
+error: configuration check-out failed
+</code></pre></div>
+Это буквально означает, что нельзя указать priority "strict-high" только для 5ой очереди, когда у 7ой останется priority "low".
+Поэтому тут или переписать классы и изменить очередь у network-control, либо настроить для network-control priority "strict-high", что и было сделано.
+После применения конфигурации часть фреймов будет в очередях потеряна, поэтому надо почистить счетчики и спустя короткое время проверить счетчики дропов,
+где значение отлично от нуля.
+<div class="highlight"><pre><span></span><code>clear interfaces statistics all
+show interfaces queue | match dropped | except &quot; 0$&quot;
+</code></pre></div>
+Если счетчики дропов нарастают, то имеется ошибка в конфигурации.
+Например, если какой-то интерфейс не описан в class-of-service interfaces шаблоном или в явном виде, то трафик в классах дропнется.
+Ниже пример нормальной работы без потерь.
+<div class="highlight"><pre><span></span><code>ex2200&gt; show interfaces queue ge-0/0/22    
+Physical interface: ge-0/0/22, Enabled, Physical link is Up
+  Interface index: 151, SNMP ifIndex: 531
+Forwarding classes: 16 supported, 4 in use
+Egress queues: 8 supported, 4 in use
+Queue: 0, Forwarding classes: best-effort
+  Queued:
+  Transmitted:
+    Packets              :                320486
+    Bytes                :             145189648
+    Tail-dropped packets :                     0
+    RL-dropped packets   :                     0
+    RL-dropped bytes     :                     0
+Queue: 1, Forwarding classes: assured-forwarding
+  Queued:
+  Transmitted:
+    Packets              :                   317
+    Bytes                :                169479
+    Tail-dropped packets :                     0
+    RL-dropped packets   :                     0
+    RL-dropped bytes     :                     0
+Queue: 5, Forwarding classes: expedited-forwarding
+  Queued:
+  Transmitted:
+    Packets              :                   624
+    Bytes                :                138260
+    Tail-dropped packets :                     0
+    RL-dropped packets   :                     0
+    RL-dropped bytes     :                     0
+Queue: 7, Forwarding classes: network-control
+  Queued:
+  Transmitted:                          
+    Packets              :                   674
+    Bytes                :                243314
+    Tail-dropped packets :                     0
+    RL-dropped packets   :                     0
+    RL-dropped bytes     :                     0
+</code></pre></div>
+Классы можно мониторить по snmp.</p>
+<h2 id="spanning-tree">spanning-tree</h2>
+<p>На разных моделях в разных версиях может отличаться. Например в 2300 stp работает на указанных в настройках портах.
+В старых версиях и моделях 2200 3300 4200 работает везде, надо в конфиге наоборот отключать.
+<div class="highlight"><pre><span></span><code>&gt; show configuration protocols mstp 
+configuration-name abc;
+revision-level 1;
+bridge-priority 24k;
+interface ge-0/0/1.0 {
+    disable;
+}
+interface ge-0/0/2.0 {
+    mode point-to-point;
+}
+msti 1 {
+    bridge-priority 24k;
+    vlan 1-4094;
+}
+
+{master:0}
+</code></pre></div></p>
+<h2 id="bpdufilter-bpduguard">bpdufilter, bpduguard</h2>
+<p>Я не знаю, фильтруют ли производители своими bpdufilter'ами цисковский 01:00:0C:CC:CC:CD или нет.
+В общем случае, рекомендуется написать фильтр с указанием двух мак-адресов и повесить по входу, например, такой:
+<div class="highlight"><pre><span></span><code>firewall {
+    family inet {
+        filter bpdufilter {
+            term discard-bpdu {
+                from {
+                    destination-mac-address {
+                        01:80:c2:00:00:00/48;
+                        01:00:0c:cc:cc:cd/48;
+                    }
+                }
+                then {
+                    discard;
+                    count BPDU_FILTER;
+                }
+            }
+            term allow-other {
+                then accept;
+            }
+
+        }
+    }
+}
+</code></pre></div>
+Согласно документации, на мелких коммутаторах, кроме ex9200, можно глобально включить фильтр для портов, где spanning-tree отключен.
+В примере ниже для всех интерфейсов отключен spanning-tree и включена фильтрация bpdu, но это работало в старых версиях junos.
+В 12.3R12.4 надо в явном виде в bpdu-block прописывать интерфейсы, где stp работает, иначе зафильтрует bpdu на всех интерфейсах. Нежданчик.
+<div class="highlight"><pre><span></span><code>ex2200&gt; show configuration protocols mstp                
+configuration-name abc;
+revision-level 1;
+bridge-priority 28k;
+interface all {
+    disable;
+}
+msti 1 {
+    bridge-priority 28k;
+    vlan 1-4094;
+}
+
+{master:0}
+ex2200&gt; show configuration ethernet-switching-options bpdu-block 
+interface ge-0/0/5.0 {
+    disable;
+}
+
+interface xstp-disabled {
+    drop;
+}
+{master:0}
+</code></pre></div>
+Настроить bpduguard на ex2200 можно прописав пользовательские порты диапазоном,
+в настройках используемого протокола stp указать для созданного диапазона портов тип edge и там же включить функционал bpdu-block-on-edge.
+<div class="highlight"><pre><span></span><code>ex2200# show | compare 
+[edit interfaces]
++   interface-range Users {
++       member-range ge-0/0/20 to ge-0/0/30;
++       unit 0 {
++           family ethernet-switching {
++               port-mode access;
++               vlan {
++                   members 200;
++               }
++           }
++       }
++   }
+[edit protocols mstp]
++    interface Users {
++        edge;
++    }
+[edit protocols mstp]
++   bpdu-block-on-edge;
+[edit ethernet-switching-options bpdu-block]
++   disable-timeout 120;
+</code></pre></div></p>
+<h2 id="igmp-snooping">igmp-snooping</h2>
+<p>Если не оператор связи, то выключить совсем. Если оператор, то настраивать исключения для конкретных вланов и тп.
+<div class="highlight"><pre><span></span><code>&gt; show configuration protocols igmp-snooping 
+vlan all {
+    disable;
+}
+
+{master:0}
+</code></pre></div></p>
+<h2 id="storm-control">storm-control</h2>
+<p>Хорошая штука, но на своих аплинках надо выключать
+<div class="highlight"><pre><span></span><code>ethernet-switching-options {
+    storm-control {
+        action-shutdown;
+        interface ge-1/0/1.0 {
+            no-broadcast;
+            no-unknown-unicast;
+            no-multicast;
+        }
+}
+</code></pre></div></p>
+<h2 id="span">SPAN</h2>
+<p>Количество dst интерфейсов ограничено. От 1 в до 4.
+<div class="highlight"><pre><span></span><code>ethernet-switching-options {
+    analyzer span {
+        input {
+            ingress {
+                vlan 100;
+                vlan 200;
+                vlan 300;
+            }
+        }
+        output {
+            interface {
+                ge-0/0/47.0;
+            }
+        }
+    }
+
+}
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2586 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../a1/">
+      
+      
+        <link rel="next" href="../promql_metricql/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Применение Victoriametrics для мониторинга VMware vCenter - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tsdb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Применение Victoriametrics для мониторинга VMware vCenter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tsdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Выбор tsdb
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Выбор tsdb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Лейблы и теги
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Счетчики
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ustom-" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сustom-атрибуты
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сustom-атрибуты">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Установка
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Счетчики производительности
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#victoriametrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      victoriametrics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmware_exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      vmware_exporter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telegraf" class="md-nav__link">
+    <span class="md-ellipsis">
+      telegraf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmui" class="md-nav__link">
+    <span class="md-ellipsis">
+      VMUI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grafana
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kapacitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kapacitor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmalert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vmalert
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tsdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Выбор tsdb
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Выбор tsdb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Лейблы и теги
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Счетчики
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ustom-" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сustom-атрибуты
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сustom-атрибуты">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Установка
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Счетчики производительности
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#victoriametrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      victoriametrics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmware_exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      vmware_exporter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telegraf" class="md-nav__link">
+    <span class="md-ellipsis">
+      telegraf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmui" class="md-nav__link">
+    <span class="md-ellipsis">
+      VMUI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grafana
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kapacitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kapacitor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmalert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vmalert
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Применение Victoriametrics для мониторинга VMware vCenter</h1>
+
+<p>Заметка написана специально для коммунити <a href="https://t.me/VictoriaMetrics_ru1">VictoriaMetrics_ru1</a> в телеграм.</p>
+<h2 id="tsdb">Выбор tsdb</h2>
+<p>В vmware vcenter можно посмотреть realtime метрики виртуальных машин, которые хранятся с момента включения или миграции
+виртуальной машины в течение одного часа. Есть еще исторические данные в отдельной базе. Туда они пишутся в соотв. с настройками
+<a href="https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vcenter.configuration.doc/GUID-25800DE4-68E5-41CC-82D9-8811E27924BC.html">Data Collection Levels</a>.
+Изменение уровня логирования и изменение интервалов приведет к росту базы, деградации производительности. Благо есть api, используя который
+можно получить значения нужных счетчиков производительности и сохранить их в отдельную базу для дальшейшего использования.</p>
+<p>Чем можно опрашивать vcenter:</p>
+<ul>
+<li>telegraf с input плагином <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/vsphere">vsphere</a>;</li>
+<li><a href="https://github.com/pryorda/vmware_exporter">vmware_exporter</a>;</li>
+<li><a href="https://github.com/Intrinsec/govc_exporter">govc_exporter</a>.</li>
+</ul>
+<p>Про последний нужно только знать, что коммунити prometheus не приветствует разработку нескольких экспортеров для одного
+и того же софта, поэтому в свое время автор был послан разработчиком дорабатывать экспортер на python,
+а не предлагать свое ПО. В итоге автор забил.</p>
+<p>Куда можно писать данные:</p>
+<ul>
+<li>В influxdb только telegraf'ом;</li>
+<li>В prometheus только опрашивая exporter'ы;</li>
+<li>В victoriametrics всем чем угодно, т.к. и база, и vmagent поддерживает оба формата: prometheus и influx.
+Но кроме текстовых значений. Например, ip-адреса записать не получится.</li>
+</ul>
+<p>Будет использоваться и telegraf, и vmware_exporter одновременно. В итоге все данные будут сохраняться в victoriametrics.
+Нужно не забывать про эту особенность:</p>
+<blockquote>
+<p>Note that InfluxDB line protocol expects timestamps in nanoseconds by default, while VictoriaMetrics stores them with milliseconds precision.</p>
+</blockquote>
+<p>Краткое сравнение экспортера (VE) и плагина телеграфа (TG) ниже.</p>
+<h3 id="_1">Лейблы и теги</h3>
+<p>TG: в метриках нет данных о гипервизоре, датасторе. Только о кластере и это <strong>правильно</strong> с точки зрения хранения данных в tsdb,
+потому что временной ряд не должен прерываться из-за миграции виртуальной машины на другой гипервизор или датастор. Идеально и неожиданно.</p>
+<p>VE: Много лишнего, но это может быть полезным. Например, посмотреть когда куда мигрировала виртуальная машина.</p>
+<h3 id="_2">Счетчики</h3>
+<p>TG: Указываются в конфигурационном файле, опрашиваются все указанные.</p>
+<p>VE: Указываются в коде (wat?).
+Пишутся только суммарные значения и нет данных по конкретному ядру, сетевому интерфейсу.
+Не получается настроить сохранение счетчиков IOPS'ов. Опрос есть, а результата нет. По виртуальным машинам сохраняются из коробки дополнительные счетчики по кол-ву
+vcpu, снапшотам, данным из гостевой ОС. При запущенном в vcenter'е процессе клонирования счетчики опросятся, но преобразовать в метрики exporter их не может из-за ошибки.
+Тоже самое происходит когда недоступен какой-то из гипервизоров. Все долго и плохо.</p>
+<h2 id="ustom-">Сustom-атрибуты</h2>
+<p>TG: Если атрибут есть и он пустой, то тега с ним не будет.</p>
+<p>VE: Если атрибут есть и он пустой, то будет тег со значением <code>n/a</code>.</p>
+<h3 id="_3">Установка</h3>
+<p>TG: Бинарник с понятными конфигурационным файлами.</p>
+<p>VE: pip или docker с примером конфигурации из readme</p>
+<h2 id="_4">Счетчики производительности</h2>
+<p>Через UI в vcenter можно смотреть разные графики по разным счетчикам. Иной раз непонятно какой именно нужно опрашивать.
+Для этого есть <a href="https://github.com/vmware/govmomi">govmomi</a>.</p>
+<p><div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/tmp
+wget<span class="w"> </span>https://github.com/vmware/govmomi/releases/download/v0.27.2/govc_Linux_x86_64.tar.gz
+tar<span class="w"> </span>zxvf<span class="w"> </span>govc_Linux_x86_64.tar.gz
+</code></pre></div>
+Нужны переменные для подлкючения к vcenter</p>
+<p><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">GOVC_USERNAME</span><span class="o">=</span>vmuser
+<span class="nb">export</span><span class="w"> </span><span class="nv">GOVC_PASSWORD</span><span class="o">=</span>pswd
+<span class="nb">export</span><span class="w"> </span><span class="nv">GOVC_URL</span><span class="o">=</span>vcenter-host
+<span class="nb">export</span><span class="w"> </span><span class="nv">GOVC_INSECURE</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+Для настройки telegraf'а потребуется указать корректный интервал. Если он не менялся, то это 5m.</p>
+<p><div class="highlight"><pre><span></span><code>./govc<span class="w"> </span>metric.interval.info
+</code></pre></div>
+вывод
+<div class="highlight"><pre><span></span><code>ID:                   300
+  Enabled:            true
+  Interval:           5m
+  Available Samples:  288
+  Name:               Past day
+  Level:              1
+ID:                   1800
+  Enabled:            true
+  Interval:           30m
+  Available Samples:  336
+  Name:               Past week
+  Level:              1
+ID:                   7200
+  Enabled:            true
+  Interval:           2h
+  Available Samples:  360
+  Name:               Past month
+  Level:              1
+ID:                   86400
+  Enabled:            true
+  Interval:           24h
+  Available Samples:  365
+  Name:               Past year
+  Level:              1
+</code></pre></div>
+Список доступных метрик
+<div class="highlight"><pre><span></span><code><span class="w"> </span>./govc<span class="w"> </span>metric.ls<span class="w"> </span>/*/vm/*<span class="w"> </span>&gt;<span class="w"> </span>vm.out
+</code></pre></div>
+Просмотр информации по конкретному счетчику
+<div class="highlight"><pre><span></span><code>./govc<span class="w"> </span>metric.info<span class="w"> </span>-<span class="w"> </span>cpu.usage.average
+</code></pre></div>
+вывод как из документации практически
+<div class="highlight"><pre><span></span><code>Name:                cpu.usage.average
+  Label:             Usage
+  Summary:           CPU usage as a percentage during the interval
+  Group:             CPU
+  Unit:              %
+  Rollup type:       average
+  Stats type:        rate
+  Level:             1
+    Intervals:       Past day,Past week,Past month,Past year
+  Per-device level:  3
+    Intervals:
+</code></pre></div></p>
+<h2 id="victoriametrics">victoriametrics</h2>
+<p>Предполагается, что база и vmagent установлены и запущены. Неважно кластер или сингл.
+Агент устанавливается на хост(ы) с vmware_exporter'ом, telegraf'ом,
+чтобы при недоступности базы сохранить полученные метрики в очереди на локальном диске.
+Тут необходимо определиться с интервалом и решить как часто будут записываться любые метрики в базу.
+Пусть 1m. Тогда минимальный конфиг для vmagent'а, установленного на exporters-host такой:
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
+<span class="w">  </span><span class="nt">scrape_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+
+<span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vmagent</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exporters-host:8429</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">victoria-metrics</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">victoriametrics-host:8428</span>
+</code></pre></div>
+vmagent можно запускать с флагами или указать брать параметры из переменных.
+Для второго варианта /etc/default/vmagent выглядит так:
+<div class="highlight"><pre><span></span><code>#
+# Ansible managed
+#
+
+# must have
+VMAGENT_promscrape_config=/etc/vmagent/vmagent.yml
+VMAGENT_remoteWrite_tmpDataPath=/var/lib/vmagent
+VMAGENT_remoteWrite_url=&#39;http://victoriametrics-host:8428/api/v1/write&#39;
+
+# optional
+VMAGENT_promscrape_suppressScrapeErrors=True
+VMAGENT_influxTrimTimestamp=1s
+VMAGENT_remoteWrite_urlRelabelConfig=&#39;/etc/vmagent/relabel/telegraf.yml&#39;
+</code></pre></div>
+Запуск из /lib/systemd/system/vmagent.service
+<div class="highlight"><pre><span></span><code>#
+# Ansible managed
+#
+
+[Unit]
+Description=Victoria-metrics vmagent
+After=network-online.target auditd.service
+
+[Service]
+Type=simple
+User=vmagent
+Group=vmagent
+EnvironmentFile=-/etc/default/vmagent
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/vmagent -envflag.enable -envflag.prefix=VMAGENT_
+
+SyslogIdentifier=vmagent
+Restart=always
+LimitNOFILE=infinity
+ReadWriteDirectories=/var/lib/vmagent
+
+PrivateTmp=yes
+ProtectHome=yes
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div></p>
+<h2 id="vmware_exporter">vmware_exporter</h2>
+<p>Установка в пользовательском окружении
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>vmware_exporter
+</code></pre></div>
+Запуск
+<div class="highlight"><pre><span></span><code>vmware_exporter<span class="w"> </span>-c<span class="w"> </span>config.yml
+</code></pre></div>
+Конфиг без опроса хостов и датасторов. Для них можно указать отдельную конфигурацию и опрашивать отдельным job'ом.
+<div class="highlight"><pre><span></span><code><span class="nt">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">vsphere_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vcenter-host&quot;</span>
+<span class="w">    </span><span class="nt">vsphere_user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vmuser&quot;</span>
+<span class="w">    </span><span class="nt">vsphere_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pswd&quot;</span>
+<span class="w">    </span><span class="nt">ignore_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">    </span><span class="nt">specs_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span>
+<span class="w">    </span><span class="nt">fetch_custom_attributes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">    </span><span class="nt">fetch_tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">fetch_alarms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">collect_only</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">vms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">vmguests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">datastores</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">        </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">        </span><span class="nt">snapshots</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+При старте напишет порт, куда следует подключиться для проверки
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:9272/metrics<span class="w"> </span>&gt;<span class="w"> </span>vc.metrics
+</code></pre></div>
+Добавить job для опроса экспортера в vmagent. Это уже после nice_yaml, поэтому отсортировано и отформатировано вот так.
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vcenter</span>
+<span class="w">    </span><span class="nt">metric_relabel_configs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^([A-Z]):.*</span>
+<span class="w">      </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$1</span>
+<span class="w">      </span><span class="nt">source_labels</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">partition</span>
+<span class="w">      </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">partition</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drop</span>
+<span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/target|/storage/archive</span>
+<span class="w">      </span><span class="nt">source_labels</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">partition</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeldrop</span>
+<span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host_name|ds_name</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exporters-host:9272</span>
+</code></pre></div>
+При опросе экпортера будут применены правила relabel ко всем полученным метрикам, а именно:</p>
+<ul>
+<li>из названия разделов дисков ОС windows будут удаляться двоеточия, иначе их придется экранировать в запросах;</li>
+<li>будут удаляться все метрики с разделами в ОС linux <code>/target</code> или <code>/storage/archive</code>, собирать которые бессмысленно;</li>
+<li>удалить лейблы <code>host_name</code> и <code>ds_name</code> чтобы уменьшить количество временных рядов или т.н. <a href="https://docs.victoriametrics.com/FAQ.html#what-is-high-churn-rate">churn rate</a>.</li>
+</ul>
+<h2 id="telegraf">telegraf</h2>
+<p>Установка пакета при условии что репа добавлена
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>telegraf
+</code></pre></div>
+В другой заметке писал почему нужно для разных устройств делать разные конфиги в /etc/telegraf/telegraf.d. Не буду повторяться.
+Нужно создать какой-то конфигурационный файл без лишних строк
+<div class="highlight"><pre><span></span><code>telegraf<span class="w"> </span>--input-filter<span class="w"> </span>vsphere<span class="w"> </span>--output-filter<span class="w"> </span>influxdb<span class="w"> </span>config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;#&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;^$&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>influx
+</code></pre></div>
+Далее внести изменения с учетом того что timestamp будет округляться до секунд в <code>precision</code>, интервал 1m, а секцию с inputs вынести в отдельный файл.
+В итоге /etc/telegraf/telegraf.conf будет выглядеть так и писать vmagent'у в порт 8429.
+<div class="highlight"><pre><span></span><code><span class="k">[global_tags]</span>
+<span class="k">[agent]</span>
+<span class="w">  </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1m&quot;</span>
+<span class="w">  </span><span class="n">round_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="n">metric_batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">  </span><span class="n">metric_buffer_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">  </span><span class="n">collection_jitter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0s&quot;</span>
+<span class="w">  </span><span class="n">flush_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10s&quot;</span>
+<span class="w">  </span><span class="n">flush_jitter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0s&quot;</span>
+<span class="w">  </span><span class="n">precision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;s&quot;</span>
+<span class="w">  </span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="n">omit_hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="k">[[outputs.influxdb]]</span>
+<span class="w">  </span><span class="n">urls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;http://127.0.0.1:8429&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">exclude_database_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="n">skip_database_creation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
+Тег <code>hostname</code> не нужен, а тег <code>db</code> будет удален vmagent'ом relabel правилами из <code>/etc/vmagent/relabel/telegraf.yml</code> до записи в базу.</p>
+<p>Плагин vsphere c конфигурацией по умолчанию опрашивает много данных.
+Нужно сделать один конфигурационный файл для быстрого опроса счетчиков виртуальных машин, а если требуются счетчики по кластеру, хостам, то для них сделать
+отдельные конфигурационные файлы и пусть запросы выполняются параллельно. Файл <code>/etc/telegraf/telegraf.d/vcenter_vm.conf</code>
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.vsphere]]</span>
+<span class="w">  </span><span class="n">vcenters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;https://vcenter-host/sdk&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vmuser&quot;</span>
+<span class="w">  </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;pswd&quot;</span>
+<span class="w">  </span><span class="n">tagexclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;dcname&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;vcenter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;moid&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="n">vm_metric_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;cpu.costop.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.ready.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.wait.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.run.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.idle.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.used.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.demand.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.usagemhz.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cpu.usage.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;mem.active.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;mem.granted.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;mem.consumed.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;mem.usage.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;mem.vmmemctl.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;net.bytesRx.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;net.bytesTx.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;net.droppedRx.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;net.droppedTx.summation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;net.usage.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;power.power.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.numberReadAveraged.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.numberWriteAveraged.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.read.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.readOIO.latest&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.throughput.usage.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.totalReadLatency.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.totalWriteLatency.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.write.average&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;virtualDisk.writeOIO.latest&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;sys.uptime.latest&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="w">  </span><span class="n">host_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="n">host_exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">cluster_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="n">cluster_exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">datastore_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="n">datastore_exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">datacenter_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="n">datacenter_exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">separator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;_&quot;</span>
+<span class="w">  </span><span class="n">collect_concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">  </span><span class="n">discover_concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">  </span><span class="n">custom_attribute_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">custom_attribute_exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="n">insecure_skip_verify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="n">historical_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;5m&quot;</span>
+
+<span class="k">[inputs.vsphere.tags]</span>
+<span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vmware_vm&quot;</span>
+</code></pre></div>
+На каждый inputs плагин/файл будет отдельный тег <code>job</code> по аналогии с другими exporter'ами.
+Конкретно тут <code>job = "vmware_vm"</code> будет добавлен к каждой метрике. Из каждой метрики будут удалены теги,
+перечисленные в <code>tagexclude</code>. <code>historical_interval</code> по умолчанию 5m и совпадает с интервалом из <code>metric.interval.info</code>.
+Все custom-атрибуты, если таковые есть, будут использоваться в качестве тегов.</p>
+<p>Проверка
+<div class="highlight"><pre><span></span><code><span class="w"> </span>telegraf<span class="w"> </span>--config<span class="w"> </span>/etc/telegraf/telegraf.d/vcenter_vm.conf<span class="w"> </span>--test<span class="w"> </span>&gt;<span class="w"> </span>/tmp/vcenter_vm.out
+</code></pre></div>
+После установки telegraf запущен и работает с конфигурационным файлом по умолчанию.
+До перезапуска необходимо настроить relabel конфиг <code>/etc/vmagent/relabel/telegraf.yml</code>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="c1"># rename label</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labelmap_all</span>
+<span class="w">  </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vmname&quot;</span>
+<span class="w">  </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vm_name&quot;</span>
+<span class="c1"># remove labels</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeldrop</span>
+<span class="w">  </span><span class="nt">regex</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;db&quot;</span>
+</code></pre></div>
+Переименован <code>vmname</code> чтобы совпадал с vmware_exporter и можно было бы делать запросы по одинаковым лейблам.
+Удален лейбл <code>db</code>, который пишет telegraf. </p>
+<h2 id="vmui">VMUI</h2>
+<p>vmagent раз в минуту опрашивает vmware_exporter и принимает от telegraf'а метрики по influx-протоколу.
+Зайти на http://victoriametrics-host:8428/vmui/ в instant query table и поделать запросы, посмотреть что насобирал telegraf
+<div class="highlight"><pre><span></span><code>max({job=&quot;vmware_vm&quot;}) by  (__name__)
+</code></pre></div>
+и что насобирал vmware_exporter
+<div class="highlight"><pre><span></span><code>max({job=&quot;vcenter&quot;}) by  (__name__)
+</code></pre></div></p>
+<h2 id="grafana">Grafana</h2>
+<p>Установить grafana, добавить datasource <code>Prometheus</code> c url <code>http://victoriametrics-host:8428</code>, создать или добавить готовые дашборды.
+Дашборды для influx придется переделать полностью.</p>
+<h2 id="kapacitor">Kapacitor</h2>
+<p>Не нужен.</p>
+<h2 id="vmalert">Vmalert</h2>
+<p>Для метрик из vmware_exporter можно создать разные правила, например:
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vmware</span>
+<span class="w">    </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VMMemoryBalooning</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vmware_vm_mem_vmmemctl_average &gt; 0</span>
+<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1h</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+<span class="w">        </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Balooning</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.vm_name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VMDiskLowSpace</span>
+<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vmware_vm_guest_disk_free{partition=&quot;C&quot;} &lt; 10000000000</span>
+<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warning</span>
+<span class="w">          </span><span class="nt">partition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C</span>
+<span class="w">        </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Low</span><span class="nv"> </span><span class="s">disk</span><span class="nv"> </span><span class="s">space</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.partition</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.vm_name</span><span class="nv"> </span><span class="s">}}&#39;</span>
+</code></pre></div>
+Еще можно <a href="https://github.com/pryorda/vmware_exporter/blob/main/alerts/vmware.rules.yml">тут</a> посмотреть варианты.
+Для метрик из telegraf'а можно сделать аналогичные правила.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2645 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../nexus9k/">
+      
+      
+        <link rel="next" href="../juniper_ex/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Switch cisco mds - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nxos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Switch cisco mds
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nxos" class="md-nav__link">
+    <span class="md-ellipsis">
+      обновление nxos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      настройка портов
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zone-zoneset" class="md-nav__link">
+    <span class="md-ellipsis">
+      zone, zoneset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      netapp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-initiator-and-single-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      single initiator and single targets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-initiator-and-multiple-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      single initiator and multiple targets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Полезные команды
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smart-zoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      smart zoning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      проблемы
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      snmp monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#port-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      port channel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fspf" class="md-nav__link">
+    <span class="md-ellipsis">
+      FSPF
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nxos" class="md-nav__link">
+    <span class="md-ellipsis">
+      обновление nxos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      настройка портов
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zone-zoneset" class="md-nav__link">
+    <span class="md-ellipsis">
+      zone, zoneset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      netapp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-initiator-and-single-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      single initiator and single targets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-initiator-and-multiple-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      single initiator and multiple targets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Полезные команды
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smart-zoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      smart zoning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      проблемы
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      snmp monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#port-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      port channel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fspf" class="md-nav__link">
+    <span class="md-ellipsis">
+      FSPF
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Switch cisco mds</h1>
+
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/configuration/guides/fabric/nx-os/nx_os_fabric.html">Документация на 6.2х Cisco MDS 9000 Family NX-OS Fabric Configuration Guide</a></p>
+<h2 id="nxos">обновление nxos</h2>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/release/notes/nx-os/mds_nxos_rn_6_2_29.html">Cisco MDS 9000 Series Release Notes for Cisco MDS NX-OS Release 6.2(29)</a>
+Рекомендуемый релиз из того что есть </p>
+<table>
+<thead>
+<tr>
+<th>file</th>
+<th>md5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://software.cisco.com/download/home/282867260/type/282088129/release/6.2(29)">m9100-s3ek9-mz.6.2.29.bin</a></td>
+<td><code>md5 60891b50b773222ecfef778f263f0af3</code></td>
+</tr>
+<tr>
+<td><a href="https://software.cisco.com/download/home/282867260/type/282088130/release/6.2(29)">m9100-s3ek9-kickstart-mz.6.2.29.bin</a></td>
+<td><code>md5 227276a329ffca6cbabd5264df40762d</code></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/6_2/upgrade/guides/nx-os/upgrade.html">Cisco MDS 9000 NX-OS Software Upgrade and Downgrade Guide</a></p>
+<p>If your switch is running software that is earlier than Cisco NX-OS Release 5.2(x), you must upgrade to Release 6.2(x). Follow this upgrade path:</p>
+<ul>
+<li>Release 5.0(x): upgrade to 5.2(x), and then upgrade to 6.2(x).</li>
+<li>Release 4.1(x) or release 4.2(x): upgrade to Release 5.0(x), upgrade to Release 5.2(x) and then upgrade to Release 6.2(x).</li>
+<li>Release 3.3(2), Release 3.3(3), Release 3.3(4x), and Release 3.3(5x), upgrade to release 4.1(x) or Release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).</li>
+<li>Release 3.3(1c), all Release 3.2(x), all Release 3.1(x), and all Release 3.0(x), upgrade to release 3.3(5b), then upgrade to release 4.1(x) or release 4.2(x), then upgrade to Release 5.0(x), and then upgrade to Release 5.2(x), and then upgrade to 6.2(x).</li>
+</ul>
+<p>Включить scp-server на mds
+<div class="highlight"><pre><span></span><code>feature scp-server
+</code></pre></div></p>
+<p>Скопировать файлы по scp
+<div class="highlight"><pre><span></span><code>C:\&gt;pscp.exe -scp m9100-s3ek9-kickstart-mz.6.2.29.bin user@mds_ip:/
+Keyboard-interactive authentication prompts from server:
+| Password:
+End of keyboard-interactive prompts from server
+m9100-s3ek9-kickstart-mz. | 21361 kB | 5340.3 kB/s | ETA: 00:00:00 | 100%
+
+C:\&gt;pscp.exe -scp m9100-s3ek9-mz.6.2.29.bin user@mds_ip:/
+Keyboard-interactive authentication prompts from server:
+| Password:
+End of keyboard-interactive prompts from server
+m9100-s3ek9-mz.6.2.29.bin | 73713 kB | 3204.9 kB/s | ETA: 00:00:00 | 100%
+</code></pre></div>
+В 5 версии нет scp-server но можно скопировать с любого хоста, подключившись к ноуту через mgmt интерфейс
+<div class="highlight"><pre><span></span><code>copy scp://username@192.168.1.181/home/v98765/soft/m9100-s3ek9-kickstart-mz.6.2.29.bin bootflash:/
+copy scp://username@192.168.1.181/home/v98765/soft/m9100-s3ek9-mz.6.2.29.bin bootflash:/
+</code></pre></div></p>
+<p>Проверить md5 и должно совпасть.
+<div class="highlight"><pre><span></span><code>mds# show file m9100-s3ek9-kickstart-mz.6.2.29.bin md5sum
+227276a329ffca6cbabd5264df40762d
+mds# show file m9100-s3ek9-mz.6.2.29.bin md5sum
+60891b50b773222ecfef778f263f0af3
+</code></pre></div></p>
+<p>Предварительная проверка перед установкой
+<div class="highlight"><pre><span></span><code>mds# show install all impact kickstart m9100-s3ek9-kickstart-mz.6.2.29.bin system 9100-s3ek9-mz.6.2.29.bin
+</code></pre></div></p>
+<p>Установка
+<div class="highlight"><pre><span></span><code>mds# install all kickstart  m9100-s3ek9-kickstart-mz.6.2.29.bin system m9100-s3ek9-mz.6.2.29.bin
+</code></pre></div></p>
+<h2 id="_1">настройка портов</h2>
+<p>В общем случае не нужно, но порты с fc картами настраиваются как <code>F</code>, а линк до коммутатора san - <code>E</code>.
+Если подключается СХД с несколькими pwwn, но на коммутаторе необходимо включить <code>feature npiv</code>.
+<div class="highlight"><pre><span></span><code>interface fc1/1
+  switchport mode F
+  switchport description &quot;[hostname]&quot;
+  switchport trunk mode off
+
+interface fc1/48
+  switchport description &quot;[another fc switch]&quot;
+  switchport mode E
+</code></pre></div></p>
+<h2 id="zone-zoneset">zone, zoneset</h2>
+<p>Зоны на коммутаторах могут быть различными, но включенные в zoneset зоны должны быть идентичны на всей сети.
+Поэтому необходимо при подключении нового коммутатора вывести <code>show zoneset</code> или <code>show zoneset brief</code> т.к порядок тоже важен и добиться идентичного вывода вплоть до порядка строк pwwn на вновь подключаемом коммутаторе.
+В этом поможет <code>vimdiff</code>, например. При подключении коммутатора с различными zoneset, когда merge зон невозможен,
+происходит блокировка линка со статусом <code>isolated</code> и соотвествующими сообщениями в логах.</p>
+<h2 id="netapp">netapp</h2>
+<blockquote>
+<p>Physical WWPNs (beginning with 50:0a:09:8x) do not present a SCSI target
+service and should not be included in any zone configurations on the FC fabric, though they show as logged in to the fabric.
+Instead, use only virtual WWPNs (WWPNs  starting  with 20:)</p>
+</blockquote>
+<h2 id="single-initiator-and-single-targets">single initiator and single targets</h2>
+<p>Цитата с <a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/7_3/configuration/config_limits/cisco_mds9000_config_limits_7x.html">cisco</a>:</p>
+<blockquote>
+<p>The preferred number of members per zone is 2, and the maximum recommended limit is 50.</p>
+</blockquote>
+<p>Т.к. зон будет много, то настаивать необходимо с применением средств автоматизации.
+Есть модуль <a href="https://github.com/ansible-collections/cisco.nxos/blob/main/docs/cisco.nxos.nxos_zone_zoneset_module.rst">zone_zoneset</a> в коллекции cisco.nxos. В примере описан task, который является частью playbook'а.
+Скрипт для геренации playbook'а <a href="https://github.com/v98765/cisco-1i-1t-zoning">cisco-1i-1t-zoning</a> для этого модуля.
+Модуль не идемпотентный, т.е. изменения будут применяться каждый раз и каждый раз активироваться zoneset.
+В частности поэтому ниже в примере не будет handler'а, записывающего конфигурацию на коммутаторе фабрики.
+Как установить ansible и коллекцию описано в разделе <a href="https://v98765.github.io/work/venv/">work/venv</a>.</p>
+<p>В рабочем каталоге создать файл <code>ansible.cfg</code>.</p>
+<p><div class="highlight"><pre><span></span><code>[defaults]
+host_key_checking = False
+inventory=./inventory
+[ssh_connection]
+pipelining = true
+</code></pre></div>
+Создать файл для описания коммутаторов фабрик <code>inventory</code>.</p>
+<p><div class="highlight"><pre><span></span><code>[all:vars]
+
+ansible_network_os=nxos
+ansible_become=no
+ansible_connection=network_cli
+ansible_python_interpreter=~/base/bin/python
+
+[fabric_a]
+mdsA ansible_host=10.0.0.1
+[fabric_b]
+mdsB ansible_host=10.0.0.2
+</code></pre></div>
+Проверить доступность устройств по ssh с хоста. <code>-k</code> для ввода пароля. <code>-vv</code> для отладки. <code>all</code> - все хосты в inventory.
+<div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>all<span class="w"> </span>-m<span class="w"> </span>ping<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>username<span class="o">]</span><span class="w"> </span>-k<span class="w"> </span>-vv
+</code></pre></div>
+Создать файл <code>fabric-A.yml</code>. В <code>[]</code> указано что нужно прописать в этом месте. Посмотреть еще раз пример task'а в описании модуля в ссылке выше.
+<div class="highlight"><pre><span></span><code>---
+- name: configure zoneset on A
+  hosts: fabric_a
+  gather_facts: false
+
+  tasks:
+  - name: task configure zoneset on A
+    cisco.nxos.nxos_zone_zoneset:
+      zone_zoneset_details:
+      - mode: enhanced
+        vsan: 1
+        zone:
+        - members:
+          - pwwn: [netapp pwwn]
+          - pwwn: [esxi pwwn]
+          name: [zone name]
+        zoneset:
+        - action: activate
+          members:
+          - name: [zone name]
+          name: [zoneset name]
+</code></pre></div>
+Проверить синтаксис
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>fabric-A.yml<span class="w"> </span>--syntax-check
+</code></pre></div>
+Проверить применение на коммутаторе фабрики
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>fabric-A.yml<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>username<span class="o">]</span><span class="w"> </span>-k<span class="w"> </span>--check
+</code></pre></div>
+Запустить без <code>--check</code></p>
+<p>Для сохранения кофигурации отдельный playbook <code>mds-save.yml</code>
+<div class="highlight"><pre><span></span><code>---
+- name: save configuration
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: copy running-config startup-config
+      cli_command:
+        command: copy running-config startup-config
+</code></pre></div>
+Запуск
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>mds-save.yml<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>username<span class="o">]</span><span class="w"> </span>-k
+</code></pre></div></p>
+<h2 id="single-initiator-and-multiple-targets">single initiator and multiple targets</h2>
+<p>Для случая, когда зоны настраиваются по принципу single initiator and multiple targets.</p>
+<p>Посмотреть данные по устройству на портах
+<div class="highlight"><pre><span></span><code>show flogi database
+</code></pre></div>
+Создать fcalias для инициатора.
+<div class="highlight"><pre><span></span><code>fcalias name [init] vsan 1
+ member pwwn [pwwn]
+</code></pre></div>
+Если это дополнительное хранилище, то добавить все его pwwn в существующий алиас таргетов.
+<div class="highlight"><pre><span></span><code>fcalias name [targets] vsan 1
+ member pwwn [pwwn]
+</code></pre></div>
+Создать новую зону
+<div class="highlight"><pre><span></span><code>zone name [init_and_targets] vsan 1
+ member fcalias [init]
+ member fcalias [targets]
+</code></pre></div>
+Добавить зону в zoneset
+<div class="highlight"><pre><span></span><code>zoneset name [zonesetname] vsan 1
+ member [init_and_targets]
+</code></pre></div>
+Активировать изменения в режиме конфигурирования. Кстати, <code>show</code> тоже работает и необязательно переключаться из режима конфигурирования.
+<div class="highlight"><pre><span></span><code>MDS(config)# zoneset activate name [zonesetname] vsan 1
+</code></pre></div>
+Когда номер vsan отличается, то помимо указания его номера в зонах, необходимо включить соотв порт в нужный vsan.
+<div class="highlight"><pre><span></span><code>vsan database
+ vsan 2 interface fc1/33
+</code></pre></div></p>
+<h2 id="_2">Полезные команды</h2>
+<p>Что подключено
+<div class="highlight"><pre><span></span><code>show flogi database
+</code></pre></div>
+Список инициаторов и таргетов. Если нужны только локальные то с <code>local</code>. Обязательно к просмотру, если номера vsan отличные от 1.
+<div class="highlight"><pre><span></span><code>show fcns database
+</code></pre></div>
+Прописан ли pwwn. Пусто, если не прописан.
+<div class="highlight"><pre><span></span><code>show zone member pwwn [pwwn]
+</code></pre></div>
+Где подключено устройство
+<div class="highlight"><pre><span></span><code>MDS# show fcns database fcid 0x693c00 detail vsan 1
+------------------------
+VSAN:1     FCID:0x693c00
+------------------------
+port-wwn (vendor)           :21:00:00:24:ff:33:55:ee
+node-wwn                    :20:00:00:24:ff:33:55:ee
+class                       :3
+node-ip-addr                :0.0.0.0
+ipa                         :ff ff ff ff ff ff ff ff
+fc4-types:fc4_features      :scsi-fcp:init
+symbolic-port-name          :
+symbolic-node-name          :QLE2562 FW:v5 DVR:v1
+port-type                   :N
+port-ip-addr                :0.0.0.0
+fabric-port-wwn             :20:16:00:05:73:ee:11:55
+hard-addr                   :0x000000
+permanent-port-wwn (vendor) :21:00:00:24:ff:33:55:ee
+connected interface         :fc1/22
+switch name (IP address)    :MDS (10.9.8.7)
+
+Total number of entries = 1
+</code></pre></div></p>
+<h2 id="smart-zoning">smart zoning</h2>
+<p>Решешие от cisco <a href="https://www.cisco.com/c/en/us/support/docs/storage-networking/zoning/116390-technote-smartzoning-00.html">smart zoning</a> подразумевает одну зону, но с функионалом Single Initiator and Single Targets.</p>
+<p>Миграция возможна при отключении <a href="https://www.cisco.com/en/US/docs/storage/san_switches/mds9000/interoperability/guide/ICG_test.html">interoperability</a> на коммутаторах фабрики.
+Коммутаторы Brocade должны быть отключены, либо переведены в режим access gateway.
+<div class="highlight"><pre><span></span><code>vsan database
+  no vsan 1 interop
+</code></pre></div>
+Если отключено, то будет по умолчанию
+<div class="highlight"><pre><span></span><code>MDS# show vsan 1
+vsan 1 information
+         name:VSAN0001  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+</code></pre></div></p>
+<p>Порядок внесения pwwn имеет значение, поэтому новые таргеты и инициаторы необходимо добавлять в конец. В таске используется модуль
+<a href="https://github.com/ansible-collections/cisco.nxos/blob/main/docs/cisco.nxos.nxos_zone_zoneset_module.rst">zone_zoneset</a>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configure smart-zoning</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mdsA</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">task configure zoneset on fabric_a</span>
+<span class="w">    </span><span class="nt">cisco.nxos.nxos_zone_zoneset</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">zone_zoneset_details</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">basic</span>
+<span class="w">          </span><span class="nt">smart_zoning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">          </span><span class="nt">vsan</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">          </span><span class="nt">zone</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">members</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initiator</span>
+<span class="w">              </span><span class="nt">pwwn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21:00:00:24:ff:50:82:79</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initiator</span>
+<span class="w">              </span><span class="nt">pwwn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21:00:00:24:ff:50:81:b1</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initiator</span>
+<span class="w">              </span><span class="nt">pwwn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21:00:00:24:ff:32:cf:e8</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">initiator</span>
+<span class="w">              </span><span class="nt">pwwn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21:00:00:24:ff:49:b9:6e</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target</span>
+<span class="w">              </span><span class="nt">pwwn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">29:00:74:3a:65:ea:50:8f</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target</span>
+<span class="w">              </span><span class="nt">pwwn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">21:00:74:3a:65:ea:50:8f</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smartzoneA</span>
+<span class="w">          </span><span class="nt">zoneset</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activate</span>
+<span class="w">            </span><span class="nt">members</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smartzoneA</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smartsetA</span>
+</code></pre></div>
+Проверка статуса. Обратить внимание на Interop в т.ч.
+<div class="highlight"><pre><span></span><code>MDS# show zone status
+VSAN: 1 default-zone: permit distribute: active only Interop: default
+    mode: basic merge-control: allow
+    session: none
+    hard-zoning: enabled broadcast: unsupported
+    smart-zoning: enabled
+    rscn-format: fabric-address
+    activation overwrite control: disabled
+Default zone:
+    qos: none broadcast: unsupported ronly: unsupported
+Full Zoning Database :
+    DB size: 106104 bytes
+    Zonesets:2  Zones:1066 Aliases: 78
+Active Zoning Database :
+    DB size: 1076 bytes
+    Name: smartsetA  Zonesets:1  Zones:2
+Current Total Zone DB Usage: 107180 / 2097152 bytes (5 % used)
+Pending (Session) DB size:
+    Full DB Copy size: n/a
+    Active DB Copy size: n/a
+SFC size: 107180 / 2097152 bytes (5 % used)
+Status: Activation completed at 23:36:57 MSK May 24 2021
+</code></pre></div>
+Просто и понятно стало
+<div class="highlight"><pre><span></span><code>MDS# show zoneset active
+zoneset name smartsetA vsan 1
+  zone name smartzoneA vsan 1
+  * fcid 0x101b00 [pwwn 21:00:00:24:ff:50:82:79]  init
+  * fcid 0x100e00 [pwwn 21:00:00:24:ff:50:81:b1]  init
+  * fcid 0x100c00 [pwwn 21:00:00:24:ff:32:cf:e8]  init
+  * fcid 0x100d00 [pwwn 21:00:00:24:ff:49:b9:6e]  init
+  * fcid 0x691500 [pwwn 29:00:74:3a:65:ea:50:8f]  target
+  * fcid 0x691800 [pwwn 21:00:74:3a:65:ea:50:8f]  target
+</code></pre></div></p>
+<h2 id="_3">проблемы</h2>
+<p>Смотреть интерфейсы кратко
+<div class="highlight"><pre><span></span><code>show int bri
+</code></pre></div>
+Смотреть состояние порта на предмет ошибок (errors), когда скорее всего надо менять трансивер. Из-за битовых ошибок порт может отключиться и в статусе будет <code>errdisabled</code>
+<div class="highlight"><pre><span></span><code>show int fc1/1
+</code></pre></div>
+Смотреть какой трансивер установлен. Т.к. они перешиваются, то не факт что это полезно.
+<div class="highlight"><pre><span></span><code>show port internal info interface fc1/1
+</code></pre></div>
+Смотреть сообщения о нехватке rxbbcredits и других ошибках. Эта и другие команды в <a href="https://www.cisco.com/c/en/us/support/docs/storage-networking/mds-9100-series-multilayer-fabric-switches/116401-trouble-mds9148-00.html">MDS 9148 Slow Drain Counters and Commands</a>
+<div class="highlight"><pre><span></span><code>show logging onboard error-stats
+</code></pre></div>
+В частности нехватка буферов это FCP_CNTR_RX_WT_AVG_B2B_ZERO</p>
+<blockquote>
+<p>This counter increments when the remaining Rx B2B value is at zero for 100ms or more. This typically indicates the switch is withholding R_RDYs (B2B credits) from the attached device due to upstream congestion (congestion away from this port).</p>
+</blockquote>
+<h2 id="snmp-monitoring">snmp monitoring</h2>
+<p><a href="https://www.cisco.com/c/dam/en/us/products/collateral/storage-networking/mds-9700-series-multilayer-directors/whitepaper-c11-737315.pdf">Appendix D: Cisco MDS 9000 Family Slow-Drain–Specific SNMP MIBs</a></p>
+<table>
+<thead>
+<tr>
+<th>SNMP Object</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fcIfTxWaitCount (1.3.6.1.4.1.9.9.289.1.2.1.1.15)</td>
+<td>TxWait counter</td>
+</tr>
+<tr>
+<td>fcHCIfBBCreditTransistionFromZero (1.3.6.1.4.1.9.9.289.1.2.1.1.40)</td>
+<td>Tx B2B credit transition to zero. Tx B2B credit transition to zero indicates that the port on the other end of the link is not returning R_RDY.</td>
+</tr>
+<tr>
+<td>fcIfBBCreditTransistionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.41)</td>
+<td>Rx B2B credit transition to zero. Rx B2B credit transition to zero indicates that the port is not able to return R_RDY to the device on the other end of the link. This may happen if frames cannot be switched to another port on the same switch fast enough.</td>
+</tr>
+<tr>
+<td>fcIfTxWtAvgBBCreditTransitionToZero (1.3.6.1.4.1.9.9.289.1.2.1.1.38)</td>
+<td>Credit unavailability at 100 ms</td>
+</tr>
+<tr>
+<td>fcIfCreditLoss (1.3.6.1.4.1.9.9.289.1.2.1.1.37)</td>
+<td>Credit Loss (recovery)</td>
+</tr>
+<tr>
+<td>fcIfTimeOutDiscards (1.3.6.1.4.1.9.9.289.1.2.1.1.35)</td>
+<td>Timeout discards</td>
+</tr>
+<tr>
+<td>fcIfOutDiscard (1.3.6.1.4.1.9.9.289.1.2.1.1.36)</td>
+<td>Total number of frames discarded in egress direction, which includes timeout discards</td>
+</tr>
+<tr>
+<td>fcIfLinkResetIns (1.3.6.1.4.1.9.9.289.1.2.1.1.9)</td>
+<td>Number of link reset protocol errors received by the FC port from the attached FC port</td>
+</tr>
+<tr>
+<td>fcIfLinkResetOuts (1.3.6.1.4.1.9.9.289.1.2.1.1.10)</td>
+<td>Number of link reset protocol errors issued by the FC port to the attached FC port.</td>
+</tr>
+<tr>
+<td>fcIfSlowportCount (1.3.6.1.4.1.9.9.289.1.2.1.1.44)</td>
+<td>Duration for which Tx B2B credits were unavailable on a port</td>
+</tr>
+<tr>
+<td>fcIfSlowportOperDelay (1.3.6.1.4.1.9.9.289.1.2.1.1.45)</td>
+<td>Number of times for which Tx B2B credits were unavailable on a port for a duration longer than the configured admin-delay value in slowport-monitor</td>
+</tr>
+</tbody>
+</table>
+<p>fcHCIfBBCreditTransistionFromZero и fcIfBBCreditTransistionToZero это что-то вроде flow-control
+<a href="https://www.ciscolive.com/c/dam/r/ciscolive/emea/docs/2017/pdf/BRKSAN-3446.pdf">Check Transitions to Zero counters лист 164</a></p>
+<p>В данный порт включена СХД и тут рост <code>Rx B2B credit transition to zero</code>. Описание в таблице.
+<div class="highlight"><pre><span></span><code>MDS# show interface fc1/1 counters | in transitions
+     852 Transmit B2B credit transitions to zero
+     308015715 Receive B2B credit transitions to zero
+</code></pre></div>
+Это аплинк. Тут рост <code>Tx B2B credit transition to zero</code>. Описание в таблице.
+<div class="highlight"><pre><span></span><code>MDS# show interface fc1/48 counters | in transitions
+     50532726 Transmit B2B credit transitions to zero
+     845047928 Receive B2B credit transitions to zero
+</code></pre></div></p>
+<h2 id="port-channel">port channel</h2>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/mds9000/sw/8_x/config/interfaces/cisco_mds9000_interfaces_config_guide_8x/configuring_portchannels.html">Configuring Port Channels</a></p>
+<p>В каждой модели конечное число forwarding engines (Table 4. Ports to Forwarding Engines Mapping) и у каждого свой диапазон портов.
+Выбор портов целиком зависит от конкретной модели. Для 9148 выбрал порты 23,35</p>
+<div class="highlight"><pre><span></span><code>mds(config)# int fc1/23
+mds(config-if)# channel-group 1 force
+fc1/23 added to port-channel 1 and disabled
+please do the same operation on the switch at the other end of the port-channel,
+then do &quot;no shutdown&quot; at both ends to bring it up
+mds(config)# int fc1/35
+mds(config-if)#channel-group 1 force
+
+mds# sh port-channel database
+port-channel1
+    Administrative channel mode is on
+    Operational channel mode is on
+    Last membership update succeeded
+    2 ports in total, 0 ports up
+    Ports:   fc1/35   [down]
+             fc1/23   [down]
+
+mds# sh port-channel summary
+------------------------------------------------------------------------------
+Interface                 Total Ports        Oper Ports        First Oper Port
+------------------------------------------------------------------------------
+port-channel 1                 2                 0                  --
+</code></pre></div>
+<p>Практики от циски.
+Consequently, most of the best practices followed for the F and TF port channels should be followed to ensure that TCAM
+is utilized as efficiently as possible for the following purposes:</p>
+<ul>
+<li>Distribute port-channel member interfaces into different forwarding engines, especially on fabric switches.</li>
+<li>Distribute member interfaces into different linecards on director-class switches.</li>
+<li>Distribute member interfaces into forwarding engines with lower TCAM zoning region usage.</li>
+<li>Use single-initiator zones, single-target zones, or Smart Zoning.</li>
+</ul>
+<p>Это про brocade. To avoid congestion ISL Trunking can be used. With ISL Trunking several ISLs are grouped into a logical ISL.
+When using Brocade switches, a license has to be installed on all switches, that use ISL Trunking.
+An ISL Trunk is automatically formed, when two or more (up to 8) adjacent ports are used to connect two switches.
+The adjacent ports must belong to the same port group. That’s the cause why you can’t add more than 8 ports to an ISL Trunk.
+Instead of using an exchange-based distribution, a frame-based distribution is used for ISL Trunks.
+This method is more finer and allows a better distribution. The Ports, that belongs to an ISL Trunk, are known as trunking members.
+One port of the trunking members is the trunking master. This port has a special function, because it assigns traffic to the other trunking members.
+Even if an ISL Trunk is an logical ISL, it preserves “in-order delivery” of frames.</p>
+<h2 id="fspf">FSPF</h2>
+<p>FSPF: “Fabric shortest path first” is a routing protocol used in Fibre Channel fabrics.
+It’s used to establish routes accross the fabric and to re-calculate this routes, if a topology change occurs (e.g. link failures).</p>
+<p>ISL: An ISL is an inter-switch link. It’s a connection between two Fibre Channel switches.</p>
+<p>Как минимум можно посмотреть номер удаленного порта. Ниже cost is 125 для 8Gb порта, а cost is 62 для port-channel из двух портов 8Gb</p>
+<div class="highlight"><pre><span></span><code>mds# show fspf interface
+FSPF interface fc1/48 in VSAN 1
+FSPF routing administrative state is active
+Interface cost is 125
+Timer intervals configured, Hello 20 s, Dead 80 s, Retransmit 5 s
+FSPF State is FULL
+Neighbor Domain Id is 0x01(1)
+Neighbor Interface is Port 23  (0x00000017 )
+
+Statistics counters :
+   Number of packets received : LSU  10385  LSA  3464  Hello 311486  Error packets 0
+   Number of packets transmitted : LSU  3464  LSA  10385  Hello 311492  Retransmitted LSU  0
+  Number of times inactivity timer expired for the interface = 0
+
+FSPF interface port-channel1 in VSAN 1
+FSPF routing administrative state is active
+Interface cost is 62
+Timer intervals configured, Hello 20 s, Dead 80 s, Retransmit 5 s
+FSPF State is FULL
+Neighbor Domain Id is 0x69(105)
+Neighbor Interface is port-channel1 (0x00040000 )
+
+Statistics counters :
+   Number of packets received : LSU  3  LSA  3  Hello 3  Error packets 0
+   Number of packets transmitted : LSU  3  LSA  3  Hello 3  Retransmitted LSU  0
+  Number of times inactivity timer expired for the interface = 0
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

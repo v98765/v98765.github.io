@@ -1,0 +1,2501 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../vxlan_sw/">
+      
+      
+        <link rel="next" href="../nexus3k/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Switch cisco - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spanning-tree" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Switch cisco
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spanning-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      spanning-tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      save config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dhcp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      dhcp-snooping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mls-qos" class="md-nav__link">
+    <span class="md-ellipsis">
+      mls qos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="mls qos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip-pbx" class="md-nav__link">
+    <span class="md-ellipsis">
+      Маркировка трафика на примере IP-PBX
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos-4900m" class="md-nav__link">
+    <span class="md-ellipsis">
+      qos на 4900M
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eem-high-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      eem high cpu
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spanning-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      spanning-tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      save config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dhcp-snooping" class="md-nav__link">
+    <span class="md-ellipsis">
+      dhcp-snooping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mls-qos" class="md-nav__link">
+    <span class="md-ellipsis">
+      mls qos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="mls qos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip-pbx" class="md-nav__link">
+    <span class="md-ellipsis">
+      Маркировка трафика на примере IP-PBX
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos-4900m" class="md-nav__link">
+    <span class="md-ellipsis">
+      qos на 4900M
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eem-high-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      eem high cpu
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Switch cisco</h1>
+
+<h2 id="spanning-tree">spanning-tree</h2>
+<p>Нельзя на порту отключить stp, поэтому так. И loopback-detection нет на старом железе. Вот только недавно где-то сделали.</p>
+<p>Bdpufilter фильтрует в обе стороны, т.е. коммутатор отбрасывает все входящие BPDU и не отправляет BPDU в порт.
+Логично фильтр повесить на порты, которые никак не участвуют в кольцевой топологии, с которых никогда не придет BPDU,
+например, на порт подключения сервера, на порт подключения маршрутизатора, на стык с провайдером.
+Особо странный провайдер включает на порту клиента bpduguard и отключит порт при получении bpdu от вашего коммутатора.
+Поэтому на операторских стыках необходимо вешать фильтр всегда. Чтобы при изменении топологии данные порты не проходили все возможные фазы blocking, listening, learning, а переходили сразу в forwarding,
+необходимо включать portfast.
+Необходимо учесть, что включенный <code>spanning-tree portfast</code> на транковом порту работать не будет.
+Тут нужен <code>spanning-tree portfast trunk</code> или <code>spanning-tree portfast edge trunk</code> как в этом примере.
+<div class="highlight"><pre><span></span><code>interface GigabitEthernet1/0/1
+ description Server
+ switchport access vlan 100
+ switchport mode access
+ spanning-tree portfast edge
+ spanning-tree bpdufilter enable
+
+interface GigabitEthernet1/0/2
+ description Router
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ spanning-tree portfast edge trunk
+ spanning-tree bpdufilter enable
+
+interface GigabitEthernet1/0/3
+ description Internet
+ switchport access vlan 5000
+ switchport mode access
+ spanning-tree portfast edge
+ spanning-tree bpdufilter enable
+</code></pre></div>
+В этом примере bpduguard - лишняя команда, так как она работать не будет по причине отработавшего ранее фильтра. Но так только в cisco.
+<div class="highlight"><pre><span></span><code>interface GigabitEthernet1/0/4
+ spanning-tree bpdufilter enable
+ spanning-tree bpduguard enable
+</code></pre></div>
+Вот самый распространенный пример, когда используется bpduguard.
+Протокол spanning-tree циской используется для того чтобы послать BPDU в порт и при получении его по какой-то причине обратно отключить порт.</p>
+<p><div class="highlight"><pre><span></span><code>interface GigabitEthernet1/0/5
+ description User
+ switchport access vlan 200
+ switchport mode access
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+</code></pre></div>
+Для автоматического включения порта необходимо настроить errdisable.
+<div class="highlight"><pre><span></span><code>errdisable recovery cause bpduguard
+errdisable recovery interval 120
+</code></pre></div></p>
+<p>Кажется, что mstp сложен для внедрения, но если поставить себе более простую задачу – создание аналога RSTP, то все сильно упрощается.
+Необходимо для начала определить для себя минимально необходимое количество инстансов.
+Пусть будет всего один, в который будут включены вообще все возможные вланы.
+Такая конфигурация никогда не будет изменяться, поэтому можно не читать про номера ревизий и т.п.
+Здесь в качестве нулевого - cist, через который mstp будет взаимодействовать с другими протоколами, а в первом msti - все возможные вланы.
+В качестве примера для 0 и 1 увеличены приоритеты. Бывает, что для 1-го увеличишь, а для cist - нет.
+При получении pvst bpdu порт переключается в режим совместимости и mstp перестает работать. Поэтому pvst надо фильтровать или недопускать подключение ненастроенных коммутаторов cisco.
+<div class="highlight"><pre><span></span><code>spanning-tree mst configuration
+ name acb
+ revision 1
+ instance 1 vlan 1-4094
+spanning-tree mode mst
+spanning-tree mst 0-1 priority 28672
+</code></pre></div>
+Говорят, cisco поддерживает RSTP, но называется это RPVST+  или даже PVRST+.
+Но это ведь не стандартный RSTP, так как в цисковской реализации для каждого влана создается свой инстанс,
+рассылаются для каждого влана BPDU. Это неудобно даже в случае применения на сетях с цисками:</p>
+<ul>
+<li>У вас есть коммутаторы с ограничением по количеству активных вланов: 256 или 1024.</li>
+<li>Если вы используете vtp протокол для создания вланов, то есть вероятность превышения лимита, из-за которого для определенных вланов инстанс stp создан не будет. Это 100% кольцо;
+неудобно администрировать кучу инстансов;</li>
+<li>загрузка cpu на коммутаторе тем выше, чем больше инстансов.</li>
+</ul>
+<p>В стандартном RSTP ничего этого нет, поэтому самый простой способ оптимизировать сеть на старых коммутаторах cisco – настроить MSTP.
+Почему протокол spanning-tree не защищает от петель? Коммутатор, который отправил BPDU, по понятным причинам не может
+и не должен контролировать его получение другими коммутаторами, а для рассылки BPDU использует мультикастовый адрес.
+Между коммутаторами могут происходить разные события, из-за которых какой-то коммутатор не получит BPDU,
+переведет порт из состояния alternate в состояние forwarding хоть и на короткое время, но этого будет вполне достаточно. Такое может случиться когда:</p>
+<ul>
+<li>возникла односторонняя связь на оптических линках;</li>
+<li>между коммутаторами включился half-duplex, что привело к множественным ошибкам и потерям;</li>
+<li>на вашей транспортной сети из-за ошибок больше не передается мультикаст в принципе;</li>
+<li>через операторские сети BPDU перестали передаваться, если вообще хоть кто-то когда-то из операторов такое разрешает;</li>
+<li>вы просто ошиблись с конфигурацией оборудования, не смогли предусмотреть каких-то нюансов, что происходит чаще всего.</li>
+</ul>
+<p>В случае использования коммутаторов Cisco следует:</p>
+<ul>
+<li>изменить схему включения, если по какой-то причине stp настроили в ШБД точка-многоточка, хотя для нормальной работы надо p2p линки;</li>
+<li>настроить Unidirectional Link Detection (UDLD) протокол для оптических линков на случай односторонней связи;</li>
+<li>настроить spanning-tree loopguard для блокировки порта до соседнего коммутатора на случай, когда BPDU не будет получен по любой причине;</li>
+<li>настроить Connectivity Fault Management (CFM), если у вас metro-серия коммутаторов.</li>
+</ul>
+<p>В случае использования коммутаторов других производителей или какого-то транспортного оборудования можно заметить, что:</p>
+<ul>
+<li>UDLD протокол можно применить только между коммутаторами cisco, так как это их разработка;</li>
+<li>аналога spanning-tree loopguard на коммутаторе может не быть;</li>
+<li>надо настраивать "link-fault-management" (802.3ah) или “connectivity-fault-management" (802.3ag)</li>
+</ul>
+<p>Выводы:</p>
+<ul>
+<li>CFM 802.3ag полезен для определения состояния линка;</li>
+<li>При наличии только loopguard из всего выше перечисленного можно себя обезопасить от потери BPDU, но только если линки p2p а не точка-многоточка.</li>
+</ul>
+<h2 id="save-config">save config</h2>
+<p>Конфигурации можно сохранять с маршрутизаторов и коммутаторов cisco несколькими способами:
+* настроить archive и оборудование будет сохранять конфигурацию автоматически, либо после записи конфигурации в память устройства;
+* настроить kron и оборудование будет сохранять конфигурацию автоматически;
+* настроить cisco event manager для сохранения конфигурацию по какому-либо событию;
+* командой write net .. данной вручную или скриптом с сервера;
+* командой sh startup-config | tee .. данной вручную или скриптом с сервера;
+* включить scp и запустить на удаленном сервере копирование;
+* сохранить по tftp, отравив snmp-запрос на запись с удаленного сервера;
+* любыми скриптами или ansible'ом выполнить sh run и сохранить вывод в файл.
+Возможно, наиболее безопасным способом будет копирование конфигурации по протоколу ssh, однако не во всех версиях IOS он присутствует.
+При условии уже настроенного ssh в IOS, включить scp:
+<div class="highlight"><pre><span></span><code>ip scp server enable
+</code></pre></div>
+Скопировать файл startup-config с оборудования на сервер:
+<div class="highlight"><pre><span></span><code>scp hostname:startup-config /backup/hostname
+</code></pre></div>
+В сохраненных конфигурациях можно удалять лишние строки, например, содержащие такой регулярно изменяющийся параметр, как ntp clock-period.</p>
+<h2 id="dhcp-snooping">dhcp-snooping</h2>
+<p>Тут нет такого как на джуниперах и в случае L3 коммутатора dhcp-snooping работает.
+Есть ограничение на использование совсем старых флешек с файловой системой Low End File System,
+которая предусматривает очистку файловой системы от удаленных файлов вручную.
+На коммутаторе настраивается dhcp-snooping очень привычно.
+<div class="highlight"><pre><span></span><code>ip dhcp snooping vlan [диапазон или список через запятую]
+no ip dhcp snooping information option
+ip dhcp snooping database flash:/имя_файла
+ip dhcp snooping
+</code></pre></div>
+Настройка доверенного порта.
+<div class="highlight"><pre><span></span><code>interface GigabitEthernet0/1
+ ip dhcp snooping trust
+</code></pre></div></p>
+<h2 id="mls-qos">mls qos</h2>
+<p>Без лишней необходимости включать qos на коммутаторе не нужно. Это касается и cisco voip autoqos, в частности.
+Как минимум, необходимо убедиться в корректной маркировке пакетов телефонами или кодеками, иначе будет только хуже.
+Если qos на коммутаторе выключен:</p>
+<ul>
+<li>с высокой вероятностью дропов на портах нет;</li>
+<li>все порты доверяют меткам cos и dscp по-умолчанию;</li>
+<li>для всех портов одинаковые и малоизвестные настройки очередей, где для трафика выделено от 90% полосы и буферов.Часть буферов может быть зарезервирована для network control. Передача данных с разными метками через порт коммутатора возможна на скорости близкой к скорости порта, но за счет буферизации может немного вырасти jitter;
+возможны дропы в буфере коммутации, но это уже зависит от чипа, который использовал производитель коммутаторов. В чипе может не хватить памяти, либо он обрабатывает эту память недостаточно быстро, я не знаю наверняка. Например, в сети могут возникать т.н. микробёрсты - большой объем данных, переданных за короткое время, которые могут передаваться через гигабитный интерфейс без потерь, к примеру, а при коммутации в 100мбит/с интерфейс, куда включен ip-телефон и ПК, эти данные могут быть частично потеряны.</li>
+</ul>
+<p>Если qos на коммутаторе включен и никаких предварительных настроек не проводилось:</p>
+<ul>
+<li>порты не доверяют меткам cos или dscp;</li>
+<li>начинают работать 4 исходящие очереди с одинаковыми настройками. Поскольку все метки снимаются, то весь трафик попадет в одну очередь, которая почти в 4 раза меньше той, которая была при выключенном qos.</li>
+<li>с высокой вероятностью появляются дропы на портах. Их можно посмотреть командой sh int counters errors в столбце OutDiscards;</li>
+<li>с буфером коммутации ситуация не поменялась, но поскольку метки сбросились, то все попадает в одну входящую очередь из двух.</li>
+</ul>
+<p>Практически все устройства так или иначе поддерживают маркировки, которые можно посмотреть в таблице QoS.</p>
+<p>Для ip-телефонии и видеоконференцсвязи часто используются следующие значения dscp:</p>
+<table>
+<thead>
+<tr>
+<th>dscp dec</th>
+<th>dscp class</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>46</td>
+<td>ef</td>
+<td>медиа (rtp)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>cs3</td>
+<td>сигнализация (sip,h323,unistim)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>cs4</td>
+<td>видео c кодеков(rtp)</td>
+</tr>
+<tr>
+<td>34</td>
+<td>af41</td>
+<td>видео с телефона, софтового клиента, кодека (rtp)</td>
+</tr>
+<tr>
+<td>0</td>
+<td>be</td>
+<td>весь остальной трафик без маркировки.</td>
+</tr>
+</tbody>
+</table>
+<p>Для начала рекомендуется изучить вывод следующих команд и понять какой "dscp" в какую очередь попадет.
+34 - 3 по горизонтали, 4 по вертикали. В исходящей очереди это будет очередь 4 и трешхолд 1
+<div class="highlight"><pre><span></span><code>SWITCH#sh mls qos maps dscp-input-q
+   Dscp-inputq-threshold map:
+     d1 :d2    0     1     2     3     4     5     6     7     8     9 
+     ------------------------------------------------------------
+      0 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 
+      1 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 
+      2 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 
+      3 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 
+      4 :    02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 01-01 01-01 
+      5 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 
+      6 :    01-01 01-01 01-01 01-01 
+
+SWITCH#sh mls qos maps dscp-output-q
+   Dscp-outputq-threshold map:
+     d1 :d2    0     1     2     3     4     5     6     7     8     9 
+     ------------------------------------------------------------
+      0 :    02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 02-01 
+      1 :    02-01 02-01 02-01 02-01 02-01 02-01 03-01 03-01 03-01 03-01 
+      2 :    03-01 03-01 03-01 03-01 03-01 03-01 03-01 03-01 03-01 03-01 
+      3 :    03-01 03-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 
+      4 :    01-01 01-01 01-01 01-01 01-01 01-01 01-01 01-01 04-01 04-01 
+      5 :    04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 04-01 
+      6 :    04-01 04-01 04-01 04-01
+</code></pre></div>
+Необходимо изучить параметры очередей по-умолчанию, которые придется менять или можно будет оставить по-умолчанию. Входящая очередь:
+<div class="highlight"><pre><span></span><code>SWITCH#sh mls qos input-queue 
+Queue     :       1       2
+----------------------------------------------
+buffers   :      90      10
+bandwidth :       4       4
+priority  :       0      10
+threshold1:     100     100
+threshold2:     100     100
+</code></pre></div>
+Исходящая очередь:
+<div class="highlight"><pre><span></span><code>SWITCH#sh mls qos queue-set 1
+Queueset: 1
+Queue     :       1       2       3       4
+----------------------------------------------
+buffers   :      25      25      25      25
+threshold1:     100     200     100     100
+threshold2:     100     200     100     100
+reserved  :      50      50      50      50
+maximum   :     400     400     400     400
+</code></pre></div>
+Здесь хочу вставить замечание о том, что таких профиля всего два и, соответственно, выбор ограничен,
+а значит, оборудование необходимо подключать только одного типа, например, телефоны+ПК, но никак не сервера видеонаблюдения, СХД и т.п.
+Если рассматривать конкретно Cisco и ее autoqos, то можно обратить внимание, как один профиль используется на пользовательских портах,
+а второй – на аплинках/транках. Посмотреть текущие dscp на портах коммутатора не включая qos можно. 
+Для этого необходимо выполнить <code>sh mls qos interface &lt;ifname&gt; statistics</code> с указанием имени интересующего интерфейса.</p>
+<p>Цифры для настройки очередей предварительно подбираются, но за основу можно брать тот же autoqos.
+Никакого другого пояснения я дать не могу. Будут дропы – надо будет менять параметры. Не будет – все хорошо.
+Ниже в примере приоритетная первая очередь, вторая очередь с основным объем данных. Сигнализация попадет в 3-ю очередь, видео - в 4-ю.
+Второй очереди выделено 60% буфера.
+<div class="highlight"><pre><span></span><code>mls qos queue-set output 1 threshold 1 150 150 90 150
+mls qos queue-set output 1 threshold 2 400 400 100 400
+mls qos queue-set output 1 threshold 3 150 150 90 400
+mls qos queue-set output 1 threshold 4 150 150 50 400
+mls qos queue-set output 1 buffers 10 60 15 15
+</code></pre></div>
+Qos включать только тогда, когда все настройки выполнены. Если в очередях будут дропы, то нужно отключить qos,
+подумать, внести изменения, например, часть dscp перенести по другим очередям, поменять буферы очередей. Включение qos:
+<div class="highlight"><pre><span></span><code>SWITCH#(config)#mls qos
+</code></pre></div>
+При отключении qos все остальные строки конфига удалять не нужно, они не будут "работать":
+<div class="highlight"><pre><span></span><code>SWITCH#(config)#no mls qos
+</code></pre></div>
+Перемаркировка dscp по-умолчанию включена и необходима в случае использования политик на интерфейсе. Если отключить эту команду, то политика работать на интерфейсе не будет.
+<div class="highlight"><pre><span></span><code>SWITCH#(config)#mls qos rewrite ip dscp
+</code></pre></div>
+На всех интефейсах необходимо включить strict priority для 1ой очереди из dscp-output-q
+<div class="highlight"><pre><span></span><code>SWITCH#(config-if)# priority-queue out
+</code></pre></div>
+По-умолчанию коммутатор с включенным qos не доверяет меткам. Надо это исправить.
+<div class="highlight"><pre><span></span><code>SWITCH#(config-if)# mls qos trust dscp
+</code></pre></div></p>
+<h3 id="ip-pbx">Маркировка трафика на примере IP-PBX</h3>
+<p>Если надо маркировать трафик, например, для сервера с ip-pbx, то сначала создаются acl, которые указываются в классах, из которых составляется политика
+<div class="highlight"><pre><span></span><code>ip access-list extended rtp
+permit udp any range 10000 20000 any
+ip access-list extended signaling
+permit tcp any any eq 5060
+permit udp any any eq 5060
+permit udp any eq 5060 any
+permit tcp any eq 5060 any
+permit udp any any eq 1720
+permit tcp any any eq 1720
+
+class-map match-all MARK-SIGN
+match access-group name signaling
+class-map match-all MARK-VOICE
+match access-group name rtp
+!
+policy-map MARK-PBX
+class MARK-VOICE
+  set dscp ef
+class MARK-SIGN
+  set dscp cs3
+class class-default
+</code></pre></div>
+На интерфейсе ip-pbx нет trust dscp. Тут применяется политика для маркировки трафика.
+<div class="highlight"><pre><span></span><code>SWITCH#sh run int gi1/0/22
+interface GigabitEthernet1/0/22
+description IP-PBX
+switchport access vlan 100
+switchport mode access
+priority-queue out 
+spanning-tree portfast edge
+spanning-tree bpdufilter enable
+service-policy input MARK-PBX
+
+SWITCH#sh mls qos interface gi1/0/22
+GigabitEthernet1/0/22
+Attached policy-map for Ingress: MARK-PBX
+trust state: not trusted
+trust mode: not trusted
+trust enabled flag: ena
+COS override: dis
+default COS: 0
+DSCP Mutation Map: Default DSCP Mutation Map
+Trust device: none
+qos mode: port-based
+</code></pre></div>
+Вот так проводится анализ маркировки входящего трафика и исходящего, осуществляется наблюдение за очередями.
+Остается добавить, что в этом выводе очереди нумеруются с 0 ,а не с 1.
+Видно, что по входу нет маркированного трафика с 24 и 46, а исходящий трафик (dscp 46) преимущественно промаркирован на телефонах
+и попадает в приоритетную очередь.
+<div class="highlight"><pre><span></span><code>SWITCH#sh mls qos interface gi1/0/22 statistics 
+GigabitEthernet1/0/22 (All statistics are in packets)
+
+  dscp: incoming  
+-------------------------------
+
+  0 -  4 :     7510037            0            0            0            0  
+  5 -  9 :           0            0            0            0            0  
+ 10 - 14 :           0            0            0            0            0  
+ 15 - 19 :           0            0            0            0            0  
+ 20 - 24 :           0            0            0            0            4  
+ 25 - 29 :           0            0            0            0            0  
+ 30 - 34 :           0            0            0            0            0  
+ 35 - 39 :           0            0            0            0            0  
+ 40 - 44 :           0            0            0            0            0  
+ 45 - 49 :           0            2            0          114            0  
+ 50 - 54 :         373            0          104            0         1479  
+ 55 - 59 :           0            0            0            0            0  
+ 60 - 64 :           0            0            0            0  
+  dscp: outgoing 
+-------------------------------
+
+  0 -  4 :      125576            0            0            0            0  
+  5 -  9 :           0            0            0            0            0  
+ 10 - 14 :           0            0       932963            0            0  
+ 15 - 19 :           0            0            0            0            0  
+ 20 - 24 :           0            0            0            0        31532  
+ 25 - 29 :           0        32781            0            0            0  
+ 30 - 34 :           0            0            0            0            0  
+ 35 - 39 :           0            0            0            0            0  
+ 40 - 44 :           0            0            0            0            0  
+ 45 - 49 :           0      6364194            0          159            0  
+ 50 - 54 :           0            0            0            0           94  
+ 55 - 59 :           0            0            0            0            0  
+ 60 - 64 :           0            0            0            0  
+  cos: incoming  
+-------------------------------
+
+  0 -  4 :     7512319            0            0            0            0  
+  5 -  7 :           0            0            0  
+  cos: outgoing 
+-------------------------------
+
+  0 -  4 :      125883       932963            0        64313            0  
+  5 -  7 :     6364194          253          874  
+  output queues enqueued: 
+
+queue:    threshold1   threshold2   threshold3
+-----------------------------------------------
+ queue 0:     6364193           0           0 
+ queue 1:     1058845         121       23495 
+ queue 2:       64272           0           0 
+ queue 3:         253           0           0 
+
+  output queues dropped: 
+ queue:    threshold1   threshold2   threshold3
+-----------------------------------------------
+ queue 0:           0           0           0 
+ queue 1:           0           0           0 
+ queue 2:           0           0           0 
+ queue 3:           0           0           0 
+
+Policer: Inprofile:            0 OutofProfile:            0
+</code></pre></div></p>
+<h2 id="qos-4900m">qos на 4900M</h2>
+<p>Полисеры для маркировки, полисеры для ограничения полосы в классе настраиваются немного иначе
+<div class="highlight"><pre><span></span><code>vlan configuration 100
+  service-policy output MARK
+vlan configuration 200,300
+  service-policy input LIMIT
+</code></pre></div>
+Смотреть <code>sh policy-map vlan</code></p>
+<h2 id="eem-high-cpu">eem high cpu</h2>
+<p>От cisco tac 
+<div class="highlight"><pre><span></span><code>process cpu threshold type total rising 60 interval 5
+
+event manager applet HIGH_CPU
+event syslog pattern &quot;CPURISINGTHRESHOLD&quot;
+action 0.0 syslog msg &quot;High CPU Detected&quot;
+action 0.1 cli command &quot;enable&quot;
+action 0.2 cli command &quot;show clock | append nvram:HIGHCPU.txt&quot;
+action 0.2 cli command &quot;show process cpu sort | append nvram:HIGHCPU.txt&quot;
+action 0.2 cli command &quot;debug platform packet all receive&quot;
+action 0.3 cli command &quot;show platform cpu packet buffered | append nvram:HIGHCPU.txt&quot;
+action 0.4 cli command &quot;show ip arp | append nvram:HIGHCPU.txt&quot;
+action 0.9 cli command &quot;show platform cpu packet statistics | append nvram:HIGHCPU.txt&quot;
+action 0.9 cli command &quot;undebug all&quot;
+action 1.1 cli command &quot;end&quot;
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

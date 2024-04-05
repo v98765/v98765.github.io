@@ -1,0 +1,3033 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../a2/">
+      
+      
+        <link rel="next" href="../snmp_exporter/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>PromQL, MetricQL - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PromQL, MetricQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Список метрик
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Варианты запросов в базу
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Переменные для дашбордов
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uptime
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблица для определения утечки памяти на cisco
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ошибки на интерфейсах
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Отчет по доступности
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      График свободной памяти
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      График загрузки cpu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifoutdiscards" class="md-nav__link">
+    <span class="md-ellipsis">
+      График ifOutDiscards ошибок
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifinerrors" class="md-nav__link">
+    <span class="md-ellipsis">
+      График IfInErrors ошибок
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bps" class="md-nav__link">
+    <span class="md-ellipsis">
+      График BPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблица BPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pps" class="md-nav__link">
+    <span class="md-ellipsis">
+      График PPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-top-flapping-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблица c top по flapping interface
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spanning-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблицы по spanning-tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cisco-errdisableifstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cisco ErrDisableIfStatus
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка протоколов маршрутизации
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sla-nqa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка проберов SLA, NQA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка статуса интерфейса
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка температуры
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка ИБП APC
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerts-ifmib" class="md-nav__link">
+    <span class="md-ellipsis">
+      alerts ifmib
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerts-fiber-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      alerts fiber channel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerts-exos" class="md-nav__link">
+    <span class="md-ellipsis">
+      alerts exos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Список метрик
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Варианты запросов в базу
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Переменные для дашбордов
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uptime
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблица для определения утечки памяти на cisco
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ошибки на интерфейсах
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Отчет по доступности
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      График свободной памяти
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      График загрузки cpu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifoutdiscards" class="md-nav__link">
+    <span class="md-ellipsis">
+      График ifOutDiscards ошибок
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifinerrors" class="md-nav__link">
+    <span class="md-ellipsis">
+      График IfInErrors ошибок
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bps" class="md-nav__link">
+    <span class="md-ellipsis">
+      График BPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблица BPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pps" class="md-nav__link">
+    <span class="md-ellipsis">
+      График PPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-top-flapping-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблица c top по flapping interface
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spanning-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таблицы по spanning-tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cisco-errdisableifstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cisco ErrDisableIfStatus
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка протоколов маршрутизации
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sla-nqa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка проберов SLA, NQA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка статуса интерфейса
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка температуры
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка ИБП APC
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerts-ifmib" class="md-nav__link">
+    <span class="md-ellipsis">
+      alerts ifmib
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerts-fiber-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      alerts fiber channel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerts-exos" class="md-nav__link">
+    <span class="md-ellipsis">
+      alerts exos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>PromQL, MetricQL</h1>
+
+<p><a href="https://victoriametrics.github.io/MetricsQL.html">MetricQL</a> и <a href="https://prometheus.io/docs/prometheus/latest/querying/functions/">PromQL</a></p>
+<p><a href="https://play.victoriametrics.com/promql/expand-with-exprs">Expand VictoriaMetrics WITH templates to canonical PromQL</a></p>
+<p>Все описанные метрики получены vmagent'ом с snmp_exporter'а, записаны в базу VictoriaMetrics.</p>
+<h2 id="_1">Список метрик</h2>
+<p>В grafana есть возможность делать запросы в базы через Explore. Для вывода всех метрик, полученных по job'у job_name выполнить:
+<div class="highlight"><pre><span></span><code>max({job=&quot;job_name&quot;}) by (__name__)
+</code></pre></div></p>
+<h2 id="_2">Варианты запросов в базу</h2>
+<p>В редакторе панели есть query inspector. Он позволяет посмотреть запрос в базу со всеми параметрами. Можно разделить запросы на два типа, описанных в API:</p>
+<ul>
+<li><a href="https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries">instant-queries</a>. Включается галочкой instant.</li>
+<li><a href="https://prometheus.io/docs/prometheus/latest/querying/api/#range-queries">range-queries</a>. Используется по умолчанию.</li>
+</ul>
+<p><a href="https://t.me/VictoriaMetrics_ru1/15540">Цитата</a> из чата:</p>
+<blockquote>
+<p>Instant запросы идут к /api/v1/query, а не к /api/v1/query_range.
+Там вообще нет параметра step - см. <a href="https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries">https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries</a>,
+т.к. такой запрос должен возвращать только по одной точке на ряд в момент времени, переданном в параметре time. ВМ принимает step в запросе к /api/v1/query из-за особенностей реализации.
+В большинстве случаев его туда передавать не нужно.</p>
+</blockquote>
+<h2 id="_3">Переменные для дашбордов</h2>
+<p>Для дашборда с выводом информации по маршрутизаторам и коммутаторам понадобится несколько переменных: хост (ip) и интерфейс (iface).
+Имя хоста (instance) из метрики ifHCInOctets в переменную ip.
+<div class="highlight"><pre><span></span><code>label_values(ifHCInOctets{},instance)
+</code></pre></div>
+Для списка интерфейсов конкретного хоста взял ifName из ifHCInOctets, где label instance - это выбранный ранее хост:
+<div class="highlight"><pre><span></span><code>label_values(ifHCInOctets{instance=&quot;$ip&quot;},  ifName)
+</code></pre></div>
+ifDescr из ifTable не опрашиваю, поэтому имена только из ifXTable.</p>
+<h2 id="uptime">Uptime</h2>
+<div class="highlight"><pre><span></span><code>sysUpTime{instance=&quot;$ip&quot;}*10
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>Stat</td>
+<td></td>
+<td>1m</td>
+<td>15m</td>
+</tr>
+</tbody>
+</table>
+<p>Field -&gt; Standard options -&gt; Units -&gt; Time -&gt; duration (ms), Field -&gt; Standard options -&gt; Decimals -&gt; 3,
+Panel -&gt; Display -&gt; Fields - Numeric Fields</p>
+<h2 id="cisco">Таблица для определения утечки памяти на cisco</h2>
+<p>В vmagent'е job'у соотвествует модуль snmp_exporter'а, созданный для определенного типа устройств: asa, router, l2 switch, l3 switch.
+Т.е. выбирается по 5 для каждого типа устройств.</p>
+<div class="highlight"><pre><span></span><code>bottomk by (job) (5, (delta(ciscoMemoryPoolFree{ciscoMemoryPoolType!=&quot;20&quot;}[7d])))
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>table</td>
+<td>7d</td>
+<td>7d</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">Ошибки на интерфейсах</h2>
+<p>Устройства имеют label "obj" для идентификации места установки и удобства при составлении запросов.</p>
+<div class="highlight"><pre><span></span><code>topk(10, (increase(ifInErrors{obj=&quot;$object&quot;}[8h]))) &gt; 0
+topk(5, (increase(ifOutDiscards{obj=&quot;$object&quot;}[8h]))) &gt; 0
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>table</td>
+<td>8d</td>
+<td>8d</td>
+</tr>
+</tbody>
+</table>
+<p>Для вывода ошибок по конкретному хосту удобнее видеть таблицу с текущими ошибками и суммой за период:
+<div class="highlight"><pre><span></span><code>increase(ifInErrors{instance=&quot;$ip&quot;}[5m])
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>table</td>
+<td>timeseries</td>
+<td>5m</td>
+<td>1h</td>
+</tr>
+</tbody>
+</table>
+<p>Для timeseries нужно в таблице сделать Transform Reduce с Calculation Last, Total.
+В поле Legend указать <code>{{ ifName }}</code> чтобы не отображать все имеющиеся лейблы временного ряда.</p>
+<h2 id="_5">Отчет по доступности</h2>
+<p>Анализируются статусы недоступности в cisco ip sla (4) и huawei nqa (2).
+В дашборде создана переменная ivl тип Interval.
+Для каждого пробера в одной таблице создается отдельный запрос, чтобы понятными буквами в легенде описать название канала связи.
+Каждая строка - отдельный запрос: A,B и т.д.
+<div class="highlight"><pre><span></span><code>count_gt_over_time(rttMonLatestRttOperSense{instance=&quot;cisco-router-1&quot;,rttMonCtrlAdminIndex=&quot;1&quot;}[$ivl], 3)
+count_gt_over_time(rttMonLatestRttOperSense{instance=&quot;cisco-router-1&quot;,rttMonCtrlAdminIndex=&quot;2&quot;}[$ivl], 3)
+..
+count_gt_over_time(nqaResultsCompletions{instance=&quot;huawei-1&quot;,nqaAdminCtrlOwnerIndex=&quot;1&quot;,nqaAdminCtrlTestName=&quot;1&quot;}[$ivl], 1)
+count_gt_over_time(nqaResultsCompletions{instance=&quot;huawei-1&quot;,nqaAdminCtrlOwnerIndex=&quot;1&quot;,nqaAdminCtrlTestName=&quot;2&quot;}[$ivl], 1)
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>timeseries</td>
+<td>$ivl</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max или Last.</p>
+<h2 id="_6">График свободной памяти</h2>
+<p>Нужно вывести %, а значит нужно вычислить:
+<div class="highlight"><pre><span></span><code>ciscoMemoryPoolFree{instance=&quot;$ip&quot;,ciscoMemoryPoolType!=&quot;20&quot;}*100/(ciscoMemoryPoolFree{instance=&quot;$ip&quot;,ciscoMemoryPoolType!=&quot;20&quot;}+ciscoMemoryPoolUsed{instance=&quot;$ip&quot;,ciscoMemoryPoolType!=&quot;20&quot;})
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>graph</td>
+<td>timeseries</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{ciscoMemoryPoolName}}</code> чтобы не отображать все имеющиеся лейблы временного ряда. Panel -&gt; Axes -&gt; Left Y -&gt; Unit -&gt; Misc -&gt; percent (0-100)</p>
+<h2 id="cpu">График загрузки cpu</h2>
+<p>В метрике есть %, поэтому:
+<div class="highlight"><pre><span></span><code>cpmCPUTotal5min{instance=&quot;$ip&quot;}
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>graph</td>
+<td>timeseries</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{cpu5min}}</code> чтобы не отображать все имеющиеся лейблы временного ряда. Panel -&gt; Axes -&gt; Left Y -&gt; Unit -&gt; Misc -&gt; percent (0-100)</p>
+<h2 id="ifoutdiscards">График ifOutDiscards ошибок</h2>
+<p>В панели будет график с двумя линиями: выбранный интерфейс, сумма ошибок по всем интерфейсам.
+Там будут записи только для ifType=6, потому что есть правило для удаление иных значений в vmagent'е. Для выбранного интерфейса:
+<div class="highlight"><pre><span></span><code>increase(ifOutDiscards{instance=&quot;$ip&quot;,ifName=&quot;$iface&quot;}[5m])
+</code></pre></div>
+Сумма ошибок:
+<div class="highlight"><pre><span></span><code>sum(increase(ifOutDiscards{instance=&quot;$ip&quot;}[5m]))
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>graph</td>
+<td>timeseries</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>$iface</code> для первого запроса и <code>Total</code> для второго.</p>
+<h2 id="ifinerrors">График IfInErrors ошибок</h2>
+<p>В панели будет график с двумя линиями: выбранный интерфейс, сумма ошибок по всем интерфейсам.
+Там будут записи только для ifType=6, потому что есть правило для удаление иных значений в vmagent'е. Для выбранного интерфейса:
+<div class="highlight"><pre><span></span><code>increase(ifInErrors{instance=&quot;$ip&quot;,ifName=&quot;$iface&quot;}[5m])
+</code></pre></div>
+Сумма ошибок:
+<div class="highlight"><pre><span></span><code>sum(increase(ifInErrors{instance=&quot;$ip&quot;}[5m]))
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>graph</td>
+<td>timeseries</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>$iface</code> для первого запроса и <code>Total</code> для второго.</p>
+<h2 id="bps">График BPS</h2>
+<p>Сумма по всем физическим интерфейсам хоста:
+<div class="highlight"><pre><span></span><code>8 * sum(rate(ifHCInOctets{instance=&quot;$ip&quot;,ifType=&quot;6&quot;}[5m]))
+</code></pre></div>
+BPS по выбранному интерфейсу по приему:
+<div class="highlight"><pre><span></span><code>8 * rate(ifHCInOctets{instance=&quot;$ip&quot;,ifName=&quot;$iface&quot;}[5m])
+</code></pre></div>
+BPS по выбранному интерфейсу по передаче:
+<div class="highlight"><pre><span></span><code>8 * rate(ifHCOutOctets{instance=&quot;$ip&quot;,ifName=&quot;$iface&quot;}[5m])
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>graph</td>
+<td>timeseries</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>$iface recv</code> и <code>$iface send</code> для второго и третьего запроса и <code>Total recv</code> для первого.
+Panel -&gt; Axes -&gt; Left Y -&gt; Unit -&gt; Data rate -&gt; bits/sec.</p>
+<p>MetricQL позволяет конструировать один запрос для приема и передачи. Ниже сумма счетчиков с двух интерфейсов Gi0/1.100 разных маршрутизаторов для построения одного графика:
+<div class="highlight"><pre><span></span><code>WITH (
+    cf = {instance=~&quot;border-1|border-2&quot;, ifName=&quot;Gi0/1.100&quot; },
+    netUsage(name, m) = label_set(sum(rate(m{cf})*8), &quot;name&quot;, name),
+)
+union (
+    netUsage(&quot;recv&quot;, ifHCOutOctets),
+    netUsage(&quot;send&quot;, ifHCInOctets),
+)
+</code></pre></div>
+Когда используется шаблон <code>instance=~</code> для того чтобы указать какое-то регулярное выражение, то необходимо функцию <code>rate()</code> поместить в <code>sum()</code>.
+Это сделано выше и ниже в примере, где BPS показан из счетчиков политики huawei c двух разных устройств. Счетчики политики для приема (direction=1):
+<div class="highlight"><pre><span></span><code>sum(rate(hwCBQoSPolicyStatClassifierMatchedPassBytes{hwCBQoSIfApplyPolicyDirection=&quot;1&quot;,hwCBQoSIfApplyPolicyIfIndex=&quot;6&quot;,hwCBQoSIfVlanApplyPolicyVlanid1=&quot;0&quot;,hwCBQoSPolicyStatClassifierName=&quot;0xA&quot;,instance=~&quot;huawei-[12]&quot;}[5m]))*8
+</code></pre></div>
+Счетчики политики для передачи (direction=2):
+<div class="highlight"><pre><span></span><code>sum(rate(hwCBQoSPolicyStatClassifierMatchedPassBytes{hwCBQoSIfApplyPolicyDirection=&quot;2&quot;,hwCBQoSIfApplyPolicyIfIndex=&quot;6&quot;,hwCBQoSIfVlanApplyPolicyVlanid1=&quot;0&quot;,hwCBQoSPolicyStatClassifierName=&quot;0xB&quot;,instance=~&quot;huawei-[12]&quot;}[5m]))*8
+</code></pre></div>
+Счетчики bps есть в политиках на маршрутизаторах cisco.
+В примере ниже сумма счетчиков класса двух политик с двух разных маршрутизаторов.
+Для сокращения напишу пример только для одного направления. Как узнать индексы я не буду тут писать.
+<div class="highlight"><pre><span></span><code>8 * (sum(rate(cbQosCMPostPolicyByte{cbQosObjectsIndex=&quot;13816289&quot;,cbQosPolicyIndex=&quot;240&quot;,instance=&quot;border-1&quot;}))
+ + 
+sum(rate(cbQosCMPostPolicyByte{cbQosObjectsIndex=&quot;1341969&quot;,cbQosPolicyIndex=&quot;3680&quot;,instance=&quot;border-2&quot;})))
+</code></pre></div>
+Функция offset из MetricQL позволяет сравнивать текущие данные с историческими. Например, разница в BPS одного интерфейса сейчас и неделю назад:
+<div class="highlight"><pre><span></span><code>8 * (sum(rate(ifHCOutOctets{instance=&quot;switch&quot;,ifName=&quot;Gi1/0/1&quot;})) - sum(rate(ifHCOutOctets{instance=&quot;switch&quot;,ifName=&quot;Gi1/0/1&quot;}) offset 7d))
+</code></pre></div></p>
+<h2 id="bps_1">Таблица BPS</h2>
+<p>Снова MetricQL. Top 10 загруженных интерфейсов по всей сети за 5 минут по счетчику ifHCOutOctets, переданному как параметр PortUtilization из topk.
+Дополнительно используется функция ru() из MetricQL для определения % утилизации порта:
+<div class="highlight"><pre><span></span><code>WITH (
+    maxRate = ifHighSpeed{ifType=&quot;6&quot;}[$__interval] * 1e6 / 8,
+    commonFilters = {ifType=&quot;6&quot;},
+    PortUtilization(ifHCOctets, maxRate) = ru(maxRate - rate(ifHCOctets{commonFilters}[$__interval]), maxRate)
+)topk(10,PortUtilization(ifHCOutOctets, maxRate))
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>timeseries</td>
+<td>5m</td>
+<td>5m</td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{instance}},{{ifName}}</code>.
+Такую же таблицу сделать для ifHCInOctets.</p>
+<h2 id="pps">График PPS</h2>
+<p>PPS по выбранному интерфейсу по приему:
+<div class="highlight"><pre><span></span><code>rate(ifHCInUcastPkts{instance=&quot;$ip&quot;,ifName=&quot;$iface&quot;}[5m])
+</code></pre></div>
+PPS по выбранному интерфейсу по передаче:
+<div class="highlight"><pre><span></span><code>rate(ifHCOutUcastPkts{instance=&quot;$ip&quot;,ifName=&quot;$iface&quot;}[5m])
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>graph</td>
+<td>timeseries</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>$iface recv</code> и <code>$iface send</code> для первого и второго запроса.
+Panel -&gt; Axes -&gt; Left Y -&gt; Unit -&gt; Data rate -&gt; packets/sec.</p>
+<h2 id="c-top-flapping-interface">Таблица c top по flapping interface</h2>
+<p>Первая таблица по кол-ву изменений оперативного статуса интерфейса.
+<div class="highlight"><pre><span></span><code>topk(10,sum_over_time(changes(ifOperStatus{}[1m])[1h]))
+</code></pre></div>
+Вторая таблица по изменнию скорости подключения. В топе будут принтеры, которые в режиме ожидания переключаются в 10мбит периодически.
+<div class="highlight"><pre><span></span><code>topk(10,sum_over_time(changes(ifHighSpeed{}[1m])[1h]))
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>timeseries</td>
+<td>1m</td>
+<td>1h</td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{instance}},{{ifName}}</code>.
+Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max.</p>
+<h2 id="spanning-tree">Таблицы по spanning-tree</h2>
+<p>Определение root'а в регионе.
+<div class="highlight"><pre><span></span><code>bottomk(1,dot1dStpPriority) by (obj) 
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>timeseries</td>
+<td>1m</td>
+<td>5m</td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{instance}}</code>.
+Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max.</p>
+<p>Таймеры TCN. Если изменился недавно, то значит произошло изменение топологии из-за переключений или из-за некорректных настроек.
+<div class="highlight"><pre><span></span><code>10 * bottomk(1,dot1dStpTimeSinceTopologyChange != 0) by (obj)
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>timeseries</td>
+<td>1m</td>
+<td>5m</td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{instance}}</code>.
+Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max. Для колонки с временем выбрать Units -&gt; Time -&gt; duration (ms)</p>
+<p>Сколько раз на коммутаторе менялся root port за час.
+<div class="highlight"><pre><span></span><code>sum_over_time(changes(dot1dStpRootPort{})[1h]) &gt; 
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>timeseries</td>
+<td>1m</td>
+<td>1h</td>
+</tr>
+</tbody>
+</table>
+<p>В поле Legend указать <code>{{instance}}</code>.
+Для timeseries нужно в таблице сделать Transform Reduce с Calculation Max.</p>
+<h2 id="cisco-errdisableifstatus">Cisco ErrDisableIfStatus</h2>
+<p>Это не метрики, а события. С одной стороны неправильно для этого использовать tsdb. С другой стороны, когда recovery на коммутаторах выключен, то вполне.
+В таблице будут числа, а Enum можно посмотреть в snmp.yml или в мибах. Так 2 - это отработал bpduguard.
+<div class="highlight"><pre><span></span><code>cErrDisableIfStatusCause{}[1m]
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>instant</th>
+<th>panel</th>
+<th>format</th>
+<th>interval</th>
+<th>relative time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>table</td>
+<td>table</td>
+<td>1m</td>
+<td>5m</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_7">Проверка протоколов маршрутизации</h2>
+<p>Для проверки состояния протоколов маршрутизации можно использовать доступные метрики, создавать алерты средствами grafana или vmalerts+alertmanager.</p>
+<p>BGP peer status равен 6, если established. Если не 6, то алерт.
+<div class="highlight"><pre><span></span><code>bgpPeerState{bgpPeerRemoteAddr=&quot;10.9.8.7&quot;}[1m]
+</code></pre></div>
+Huawei OSPF nbr state. 8 - OK. Если меньше, то алерт.
+<div class="highlight"><pre><span></span><code>hwOspfv2NbrState{hwOspfv2NbrIpAddrIndex=&quot;10.9.8.7&quot;}[1m]
+</code></pre></div></p>
+<h2 id="sla-nqa">Проверка проберов SLA, NQA</h2>
+<p>NQA для huawei с icmp пробером. 1 - ОК. Если больше, то алерт.
+<div class="highlight"><pre><span></span><code>nqaResultsCompletions{instance=&quot;huawei&quot;,nqaAdminCtrlTestName=&quot;1&quot;}[1m]`
+</code></pre></div>
+Cisco SLA с icmp пробером. 1 - OK. 3 - OK, но сработал трешхолд по rtt. 4 - FAIL.
+<div class="highlight"><pre><span></span><code>rttMonLatestRttOperSense{instance=&quot;cisco&quot;,rttMonCtrlAdminIndex=&quot;1&quot;}[1m]
+</code></pre></div>
+Наличие потерь на канале связи, когда статус периодически изменяется. Если более 4 раз за 15 минут, то алерт.
+<div class="highlight"><pre><span></span><code>changes(rttMonLatestRttOperSense{instance=&quot;cisco&quot;,rttMonCtrlAdminIndex=&quot;1&quot;}[15m])
+</code></pre></div></p>
+<h2 id="_8">Проверка статуса интерфейса</h2>
+<p>1 - OK. Если больше, то алерт.
+<div class="highlight"><pre><span></span><code>ifOperStatus{ifName=&quot;Gi1/0/1&quot;,instance=&quot;cisco&quot;}[1m]
+</code></pre></div></p>
+<h2 id="_9">Проверка температуры</h2>
+<p>Есть датчики на оборудовании Cisco и у большинства старых моделей одинаковый oid, но разные TemperatureStatusIndex для разных моделей, стеков.
+Либо датчиков более одного и нужно выбрать конкретный.
+<div class="highlight"><pre><span></span><code>ciscoEnvMonTemperatureStatusValue{ciscoEnvMonTemperatureStatusIndex=&quot;1&quot;,instance=&quot;cisco&quot;}[10m]
+</code></pre></div>
+Проверка температуры батарей ИБП.
+<div class="highlight"><pre><span></span><code>upsAdvBatteryTemperature{instance=&quot;apc_ups&quot;}
+</code></pre></div></p>
+<h2 id="apc">Проверка ИБП APC</h2>
+<p>Статус. 2 - ОК. 3 - на батареях. 12 - напряжение выше 250В на входе.
+<div class="highlight"><pre><span></span><code>upsBasicOutputStatus{instance=&quot;apc_ups&quot;}
+</code></pre></div></p>
+<p>Enum
+<div class="highlight"><pre><span></span><code>  1: unknown
+  2: onLine
+  3: onBattery
+  4: onSmartBoost
+  5: timedSleeping
+  6: softwareBypass
+  7: &quot;off&quot;
+  8: rebooting
+  9: switchedBypass
+  10: hardwareFailureBypass
+  11: sleepingUntilPowerReturn
+  12: onSmartTrim
+</code></pre></div></p>
+<h2 id="alerts-ifmib">alerts ifmib</h2>
+<p>flapping физического интерфейса, который в up, но его состояние изменилось до этого
+<div class="highlight"><pre><span></span><code>(changes(ifLastChange{ifType=&quot;6&quot;}[15m]) &gt; 0) and (ifOperStatus == 1) and ON(instance) (sysUpTime &gt; 150000)
+</code></pre></div>
+Перезагружался коммутатор. Иначе есть шанс что какой-то ifLastChange больше, а каунтер sysUpTime обнулился.
+Если еще были labels, как у меня, например, rack, то by (instance,rack)
+<div class="highlight"><pre><span></span><code>(max(ifLastChange{ifType=&quot;6&quot;} &lt; 20000) by (instance)) and ON(instance) (sysUpTime &lt; 150000)
+</code></pre></div>
+Нет линка на административно включенном интерфейсе
+<div class="highlight"><pre><span></span><code>(ifAdminStatus == 1) and (ifOperStatus == 2)
+</code></pre></div>
+Включился flowcontrol. Полезно для портов, куда подключены стораджи
+<div class="highlight"><pre><span></span><code>rate(dot3HCInPauseFrames[5m]) &gt; 5
+</code></pre></div>
+Входящие ошибки
+<div class="highlight"><pre><span></span><code>rate(ifInErrors[15m]) &gt; 5
+</code></pre></div>
+Дискарды
+<div class="highlight"><pre><span></span><code>rate(ifOutDiscards[15m]) &gt; 100
+</code></pre></div>
+Утилизация пропускной полосы в зависимости от указанной bw или физической скорости интерфейса. 62500 = 1e6 / 8 / 2, где 2 - rate 50%.
+В примере ниже 72% потому что круглое число
+<div class="highlight"><pre><span></span><code>rate(ifHCOutOctets{ifType=&quot;6&quot;}[10m]) &gt; ((ifHighSpeed{ifType=&quot;6&quot;})*90000)
+</code></pre></div></p>
+<h2 id="alerts-fiber-channel">alerts fiber channel</h2>
+<p>Редко. не видел
+<div class="highlight"><pre><span></span><code>rate(fcIfCreditLoss[5m]) &gt; 0
+rate(fcIfTxWaitCount[5m]) &gt; 0
+</code></pre></div>
+Физика, например, вкл/выкл
+<div class="highlight"><pre><span></span><code>rate(fcIfLinkResetIns[5m]) &gt; 0
+rate(fcIfLinkResetOuts[5m]) &gt; 0
+</code></pre></div>
+Нормальная работа FC сети, когда заканчиваются bbcredits
+<div class="highlight"><pre><span></span><code>rate(fcHCIfBBCreditTransistionToZero[5m]) &gt; 500000
+rate(fcHCIfBBCreditTransistionFromZero[5m]) &gt; 500000
+</code></pre></div>
+Серьезные проблемы. Что-то отвалилилось и данные не были доставлены.
+<div class="highlight"><pre><span></span><code>rate(fcIfTimeOutDiscards[5m]) &gt; 0
+rate(fcIfOutDiscards[5m]) &gt; 0
+</code></pre></div>
+Более 100мс не было ресурсов на порту. Переделать порт-группу, добавить кредитов на порт.
+<div class="highlight"><pre><span></span><code>rate(fcIfTxWtAvgBBCreditTransitionToZero[5m]) &gt; 0
+</code></pre></div>
+Не хватает полосы. Нужен port-channel, дополнительные линки
+<div class="highlight"><pre><span></span><code>rate(fcIfC3InOctets[10m]) &gt; ((ifHighSpeed)*90000)
+rate(fcIfC3OutOctets[10m]) &gt; ((ifHighSpeed)*90000)
+</code></pre></div></p>
+<h2 id="alerts-exos">alerts exos</h2>
+<p>Питание
+<div class="highlight"><pre><span></span><code>extremePowerSupplyStatus !=2
+</code></pre></div>
+Блок вентиляторов
+<div class="highlight"><pre><span></span><code>extremeFanOperational &gt; 1
+</code></pre></div>
+Перегрев
+<div class="highlight"><pre><span></span><code>extremeOverTemperatureAlarm &lt; 2
+</code></pre></div>
+cpu
+<div class="highlight"><pre><span></span><code>extremeCpuMonitorSystemUtilization1min &gt; 15
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

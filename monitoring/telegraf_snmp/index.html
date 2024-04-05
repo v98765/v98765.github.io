@@ -1,0 +1,2346 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../telegraf_vmagent/">
+      
+      
+        <link rel="next" href="../sflow/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Telegraf snmp - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Telegraf snmp
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Telegraf snmp</h1>
+
+<p>Информацию по протоколу snmp можно получать разную: счетчики интерфейсов, статус sla, описание интерфейсов,
+состав оборудования из entity-mib, счетчики политик qos. Все это можно опрашивать с разными интервалами,
+например, данные по sla нужны раз в минуту, счетчики интерфейсов и политик раз в пять минут, инвентаризацию раз в сутки.
+Разные интервалы подразумевают разные конфигурационные файлы для плагина snmp, т.к. интервал указывается для плагина,
+а не для job'а, как в prometheus/vmagent. Опрашивать все с одним интервалом не получится, т.к. нет необходимости хранить одни и те же данные,
+например, строковые значения инвертацизации, описаний интерфейсов, ip-адреса, arp'ы и т.п.
+Еще опрос такого количества таблиц занимает приличное время и в минутный интервал просто не успеть.
+Это легко проверить, запустив в тестовом режиме telegraf.
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>telegraf<span class="w"> </span>-config<span class="w"> </span>test.cfg<span class="w"> </span>-test
+</code></pre></div>
+Отсюда появляется ограничение, что интервал опроса для конкретного конфигурационного файла не может быть меньше,
+чем время опроса всех агентов в т.ч. с учетом таймаутов из-за недоступности.
+Если все агенты не будут опрошены до наступления следующего интервала опроса, то данные,
+полученные от всех агентов будут потеряны с фиксацией события в логах "input "inputs.snmp" did not complete within its interval".
+Т.е. приходится как-то оптимизировать запрашиваемую информацию, опрашивать какие-то таблицы менее часто, но с бОльшим таймаутом по времени.
+Ниже будут примеры, но это больше для информации, истории.
+Теперь пользуюсь vmagent'ом и snmp_exporter'ом для сбора каунтеров и конфигурация для него
+немного отличается в сторону упрощения и уменьшения количества лейблов.
+Telegraf оставил для записи строк в clickhouse. Дальше в примерах будут некоторые штуки, которые пришли с опытом:</p>
+<ul>
+<li>Если какой-то field будет использоваться как tag, то имя  в конфиге будет отличаться. Это связано с использованием ранних версий influxdb, где с наименованием в самой базе случалась каная-то каша. Так появлялись ifName и ifName_1 и я уже не помню что из этого что. Опять же в запросах меньше путаницы будет, когда ifName - это field, а Name - это tag. Позже стал использовать fieldpass , в котором не указывал все field, используемые в качестве tag.</li>
+<li>Вместо имени oid'а используется сам oid, а его имя для удобства указано в комментарии выше. Старая версия telegraf'а при старте запускала в shell'е snmptranslate и чем больше было конфигурационных файлов, тем выше была загрузка cpu. Рестарт был очень неудобен и позже алгоритм немного поменяли на однократный запуск snmptranslate. Все таблицы все равно проверяются в мибах и опросить таблицу совсем без миба не получится.</li>
+</ul>
+<p>Пример для cisco ip sla, где не опрашивается вся таблица rttMonLatestRttOperTable (закоменнирован oid), а только два значения из нее.
+Тэг для замены индекса берется из другой таблицы rttMonCtrlAdmintable. На оборудовании cisco настроен следующий sla:
+<div class="highlight"><pre><span></span><code>ip sla 1
+ icmp-echo 10.4.3.1 source-ip 10.4.3.2
+ tos 96
+ threshold 200
+ owner IPSName-vlanid@AddrA-AddrB
+ip sla schedule 1 life forever start-time now
+</code></pre></div>
+Конфигурация плагина с фильтрацией по тегу, чтобы не записывать все тестовые, временные пробы:
+<div class="highlight"><pre><span></span><code>[[inputs.snmp]]
+ interval = &quot;1m&quot;
+ agents = [ &quot;cisco&quot; ]
+ version = 2
+ community = &quot;public&quot;
+
+#CISCO-RTTMON-MIB::rttMonCtrlAdminOwner.5 = STRING: &quot;IPSName-vlanid@AddrA-AddrB&quot;
+
+  [[inputs.snmp.table]]
+    name = &quot;rttsla&quot;
+    #oid = &quot;CISCO-RTTMON-MIB::rttMonLatestRttOperTable&quot;
+
+    [[inputs.snmp.table.field]]
+      name = &quot;Descr&quot;
+      #oid = &quot;CISCO-RTTMON-MIB::rttMonCtrlAdminOwner&quot;
+      oid = &quot;1.3.6.1.4.1.9.9.42.1.2.1.1.2&quot;
+      is_tag = true
+
+    [[inputs.snmp.table.field]]
+      name = &quot;icmpResults&quot;
+      #oid = &quot;CISCO-RTTMON-MIB::rttMonLatestRttOperSense&quot;
+      oid = &quot;1.3.6.1.4.1.9.9.42.1.2.10.1.2&quot;
+
+    [[inputs.snmp.table.field]]
+      name = &quot;rttAvg&quot;
+      #oid = &quot;CISCO-RTTMON-MIB::rttMonLatestRttOperCompletionTime&quot;
+      oid = &quot;1.3.6.1.4.1.9.9.42.1.2.10.1.1&quot;
+
+ [inputs.snmp.tagpass]
+   Descr = [ &quot;*@*&quot; ]
+</code></pre></div>
+Более сложным оказался опрос аналогичных проберов на коммутаторах huawei s5720ei,
+где в качестве одного из индексов используется растущий счетчик для истории проверок.
+Чтобы его удалить, понадобилось ограничить oid. Для удобства, используются такие же имена метрик:
+<div class="highlight"><pre><span></span><code>[[inputs.snmp]]
+ interval = &quot;1m&quot;
+ agents = [ &quot;huawei&quot; ]
+ version = 2
+ community = &quot;public&quot;
+
+# for  huawei s5720-ei
+#NQA-MIB::nqaAdminCtrlTag.&quot;1&quot;.&quot;1&quot; = STRING: IPSName-vlanid@AddrA-AddrB
+#.1.3.6.1.4.1.2011.5.25.111.2.1.1.3.1.49.1.49 = STRING: IPSName-vlanid@AddrA-AddrB
+#index is 1.49.1.49. oid_index_length = 4
+#NQA-MIB::nqaResultsCompletions.&quot;1&quot;.&quot;1&quot;.186177.1 = INTEGER: success(1)
+#s5720-ei has a history index
+
+  [[inputs.snmp.table]]
+    name = &quot;rttsla&quot;
+    #oid = &quot;NQA-MIB::nqaAdminCtrlTable&quot;
+
+    [[inputs.snmp.table.field]]
+      name = &quot;Descr&quot;
+      #oid = &quot;NQA-MIB::nqaAdminCtrlTag&quot;
+      oid = &quot;1.3.6.1.4.1.2011.5.25.111.2.1.1.3&quot;
+      is_tag = true
+
+    [[inputs.snmp.table.field]]
+      name = &quot;icmpResults&quot;
+      #NQA-MIB::nqaResultsCompletions
+      oid = &quot;1.3.6.1.4.1.2011.5.25.111.4.1.1.3&quot;
+      oid_index_length = 4
+
+
+    [[inputs.snmp.table.field]]
+      name = &quot;rttAvg&quot;
+      #NQA-MIB::nqaResultsRttAvg
+      oid = &quot;1.3.6.1.4.1.2011.5.25.111.4.1.1.26&quot;
+      oid_index_length = 4
+
+ [inputs.snmp.tagpass]
+   Descr = [ &quot;*@*&quot; ]
+</code></pre></div>
+Вот закончились небольшие таблицы, которые можно опросить за короткое время с интервалом опроса одна минута.
+Далее конфигурация для маршрутизатора cisco, где есть ряд ограничений,
+чтобы случайно в базу influxdb не записать лишнего и не было такого, когда одно устройство пишет больше полей в базу, чем другое.
+Эта конфигурация не запишет в базу значения mtu, ifalias и прочее. Только то, что определено в fieldpass.
+Метрики с тегами логических интерфейсов будут удалены. Сейчас я удаляю по лейблу ifType, а не по имени интерфейса.
+Вопреки примерам, не следует опрашивать таблицы ifTable и ifTableX целиком и записывать в influxdb все подряд: дескрипшены, таймстампы и прочую ненужную информацию.
+Необходимо сосредоточится на скорости выполения запроса, хотя тут тоже много лишнего для маршрутизатора.
+Жаль было расставаться с функционалом, который позволил использовать именно такую замену индексов в таблице cbqos,
+потому что этот миб самый невменяемый, а chain lookup в snmp_exporter'е сделали относительно недавно.
+<div class="highlight"><pre><span></span><code>[[inputs.snmp]]
+ interval = &quot;5m&quot;
+ agents = [ &quot;cisco_router&quot; ]
+ version = 2
+ community = &quot;public&quot;
+ fieldpass = [ &quot;cbQos*&quot;, &quot;bgpPeerState&quot;, &quot;bgpPeerFsmEstablishedTransitions&quot;, &quot;Duplex&quot; , &quot;Speed&quot; , &quot;ifAdminStatus&quot; , &quot;ifOperStatus&quot; , &quot;ifInDiscards&quot; , &quot;ifInErrors&quot; , &quot;ifOutDiscards&quot; , &quot;ifOutErrors&quot; , &quot;ifHCInOctets&quot; , &quot;ifHCInUcastPkts&quot; , &quot;ifHCInMulticastPkts&quot; , &quot;ifHCInBroadcastPkts&quot; , &quot;ifHCOutOctets&quot; , &quot;ifHCOutUcastPkts&quot; , &quot;ifHCOutMulticastPkts&quot; , &quot;ifHCOutBroadcastPkts&quot; ]
+ tagexclude = [ &quot;ifIndex&quot; ]
+
+ [[inputs.snmp.table]]
+  name = &quot;interface32&quot;
+  #oid = &quot;IF-MIB::ifTable&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Name&quot;
+    #IF-MIB::ifName
+    oid = &quot;1.3.6.1.2.1.31.1.1.1.1&quot;
+    is_tag = true
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Speed&quot;
+    #IF-MIB::ifHighSpeed
+    oid = &quot;1.3.6.1.2.1.31.1.1.1.15&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Duplex&quot;
+    #EtherLike-MIB::dot3StatsDuplexStatus
+    oid = &quot;1.3.6.1.2.1.10.7.2.1.19&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;ifAdminStatus&quot;
+    #IF-MIB::ifAdminStatus
+    oid = &quot;1.3.6.1.2.1.2.2.1.7&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;ifOperStatus&quot;
+    #IF-MIB::ifOperStatus
+    oid = &quot;1.3.6.1.2.1.2.2.1.8&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;ifInDiscards&quot;
+    #IF-MIB::ifInDiscards
+    oid = &quot;1.3.6.1.2.1.2.2.1.13&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;ifInErrors&quot;
+    #IF-MIB::ifInErrors
+    oid = &quot;1.3.6.1.2.1.2.2.1.14&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;ifOutDiscards&quot;
+    #IF-MIB::ifOutDiscards
+    oid = &quot;1.3.6.1.2.1.2.2.1.19&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;ifOutErrors&quot;
+    #IF-MIB::ifOutErrors
+    oid = &quot;1.3.6.1.2.1.2.2.1.20&quot;
+
+ [[inputs.snmp.table]]
+  name = &quot;interface64&quot;
+  #oid = &quot;IF-MIB::ifXTable&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Name&quot;
+    #IF-MIB::ifName
+    oid = &quot;1.3.6.1.2.1.31.1.1.1.1&quot;
+    is_tag = true
+
+   [[inputs.snmp.table.field]]
+     name = &quot;Speed&quot;
+     #IF-MIB::ifHighSpeed
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.15&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCInOctets&quot;
+     #IF-MIB::ifHCInOctets
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.6&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCInUcastPkts&quot;
+     #IF-MIB::ifHCInUcastPkts
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.7&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCInMulticastPkts&quot;
+     #IF-MIB::ifHCInMulticastPkts
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.8&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCInBroadcastPkts&quot;
+     #IF-MIB::ifHCInBroadcastPkts
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.9&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCOutOctets&quot;
+     #IF-MIB::ifHCOutOctets
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.10&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCOutUcastPkts&quot;
+     #IF-MIB::ifHCOutUcastPkts
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.11&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCOutMulticastPkts&quot;
+     #IF-MIB::ifHCOutMulticastPkts
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.12&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ifHCOutBroadcastPkts&quot;
+     #IF-MIB::ifHCOutBroadcastPkts
+     oid = &quot;1.3.6.1.2.1.31.1.1.1.13&quot;
+
+  [[inputs.snmp.table]]
+    name = &quot;bgpPeer&quot;
+    #oid = &quot;1.3.6.1.2.1.15.3&quot;
+
+    [[inputs.snmp.table.field]]
+      name = &quot;bgpPeerIdentifier&quot;
+      #BGP4-MIB::bgpPeerIdentifier&quot;
+      oid = &quot;1.3.6.1.2.1.15.3.1.1&quot;
+      is_tag = true
+
+    [[inputs.snmp.table.field]]
+      name = &quot;bgpPeerState&quot;
+      #BGP4-MIB::bgpPeerState&quot;
+      oid = &quot;1.3.6.1.2.1.15.3.1.2&quot;
+
+    [[inputs.snmp.table.field]]
+      name = &quot;bgpPeerFsmEstablishedTransitions&quot;
+      #BGP4-MIB::bgpPeerFsmEstablishedTransitions
+      oid = &quot;1.3.6.1.2.1.15.3.1.15&quot;
+
+ [[inputs.snmp.table]]
+   name =&quot;cbQos&quot;
+   oid = &quot;CISCO-CLASS-BASED-QOS-MIB::cbQosCMStatsTable&quot;
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ConfigIndex&quot;
+     #oid = &quot;CISCO-CLASS-BASED-QOS-MIB::cbQosConfigIndex&quot;
+     oid = &quot;1.3.6.1.4.1.9.9.166.1.5.1.1.2&quot;
+     is_tag = true
+
+   [[inputs.snmp.table.field]]
+     name = &quot;ParentObjectsIndex&quot;
+     #oid = &quot;CISCO-CLASS-BASED-QOS-MIB::cbQosParentObjectsIndex&quot;
+     oid = &quot;1.3.6.1.4.1.9.9.166.1.5.1.1.4&quot;
+     is_tag = true
+
+ [inputs.snmp.tagdrop]
+   Name = [ &quot;SONET*&quot;, &quot;Vo*&quot;, &quot;Nu0&quot;, &quot;E1*&quot;, &quot;Lo*&quot;, &quot;Vl*&quot;, &quot;CH*&quot;, &quot;*:*&quot;, &quot;St*&quot;, &quot;VL*&quot; ]
+</code></pre></div>
+Раз в 4 часа неспеша c getnext, а не getbulk собрать текст из ifalias. Сейчас подобное пишу в clickhouse, чтобы вывести описание интерфейсов в графане.
+<div class="highlight"><pre><span></span><code>[[inputs.snmp]]
+ interval = &quot;4h&quot;
+ agents = [ &quot;device&quot; ]
+ version = 2
+ max_repetitions = 1
+ retries = 1
+ community = &quot;public&quot;
+ fieldpass = [ &quot;Alias&quot;, &quot;Name&quot; ]
+
+ [[inputs.snmp.table]]
+  name = &quot;ifalias&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Ifindex&quot;
+    #IF-MIB::ifIndex
+    oid = &quot;1.3.6.1.2.1.2.2.1.1&quot;
+    is_tag = true
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Name&quot;
+    #IF-MIB::ifName
+    oid = &quot;1.3.6.1.2.1.31.1.1.1.1&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Alias&quot;
+    #IF-MIB::ifAlias
+    oid = &quot;1.3.6.1.2.1.31.1.1.1.18&quot;
+</code></pre></div>
+Этот конфигурационный файл для сбора информации о модели, серийниках, когда устройство поддерживает entity-mib.
+Juniper не поддерживает. Тут обратить внимание на index_as_tag, чтобы не потерять информацию о устройствах в стеке, точках доступа,
+зарегистрированных на контроллере. Т.к. в строке вендора может быть все что угодно (dlink,d-link и тп), то для каждого вендора решил использовать тег MfgName.
+Дополнительная проверка с ModelName в inputs.snmp.tagpass для фильтрации избыточных данных о портах.
+<div class="highlight"><pre><span></span><code>[[inputs.snmp]]
+ interval = &quot;24h&quot;
+ agents = [ &quot;dlink&quot; ]
+ version = 2
+ timeout = &quot;2m&quot;
+ community = &quot;public&quot;
+ fieldpass = [ &quot;entPhysicalDescr&quot; , &quot;entPhysicalName&quot; , &quot;entPhysicalFirmwareRev&quot; , &quot;entPhysicalHardwareRev&quot; , &quot;entPhysicalSerialNum&quot; , &quot;entPhysicalSoftwareRev&quot; ]
+
+ [[inputs.snmp.field]]
+  name = &quot;location&quot;
+  #SNMPv2-MIB::sysLocation.0
+  oid = &quot;1.3.6.1.2.1.1.6.0&quot;
+  is_tag = true
+
+ [[inputs.snmp.field]]
+  name = &quot;contact&quot;
+  #SNMPv2-MIB::sysContact.0
+  oid = &quot;1.3.6.1.2.1.1.4.0&quot;
+  is_tag = true
+
+ [[inputs.snmp.table]]
+  name = &quot;inventory_entity&quot;
+  inherit_tags = [ &quot;location&quot;, &quot;contact&quot; ]
+  #oid = &quot;ENTITY-MIB::entPhysicalTable&quot;
+  index_as_tag = true # stack, access points
+   [[inputs.snmp.table.field]]
+    name = &quot;ModelName&quot;
+    #ENTITY-MIB::entPhysicalModelName
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.13&quot;
+    is_tag = true
+
+   [[inputs.snmp.table.field]]
+    name = &quot;Class&quot;
+    #ENTITY-MIB::entPhysicalClass
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.5&quot;
+    is_tag = true
+
+   [[inputs.snmp.table.field]]
+    name = &quot;entPhysicalName&quot;
+    #ENTITY-MIB::entPhysicalName
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.7&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;entPhysicalDescr&quot;
+    #ENTITY-MIB::entPhysicalDescr
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.2&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;entPhysicalHardwareRev&quot;
+    #ENTITY-MIB::entPhysicalHardwareRev
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.8&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;entPhysicalFirmwareRev&quot;
+    #ENTITY-MIB::entPhysicalFirmwareRev
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.9&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;entPhysicalSoftwareRev&quot;
+    #ENTITY-MIB::entPhysicalSoftwareRev
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.10&quot;
+
+   [[inputs.snmp.table.field]]
+    name = &quot;entPhysicalSerialNum&quot;
+    #ENTITY-MIB::entPhysicalSerialNum
+    oid = &quot;1.3.6.1.2.1.47.1.1.1.1.11&quot;
+
+ [inputs.snmp.tags]
+  MfgName = &quot;dlink&quot;
+  obj = &quot;object_id&quot;
+
+ [inputs.snmp.tagpass]
+  ModelName = [ &quot;*&quot; ]
+</code></pre></div>
+Информация в полученных строках бывает кривая, с пробелами в конце, символами, чем грешат sfp и wic модули cisco.
+Поэтому в telegraf.d дополнительный конфигурационный файл proc_trim.conf. К сожалению, процессоры в телеграфе никак нельзя тестировать.
+<div class="highlight"><pre><span></span><code>[[processors.strings]]
+ namepass = [&quot;inventory_entity&quot;]
+ [[processors.strings.trim]]
+  tag = &quot;ModelName&quot;
+ [[processors.strings.trim]]
+  field = &quot;entPhysicalDescr&quot;
+ [[processors.strings.trim]]
+  field = &quot;entPhysicalName&quot;
+ [[processors.strings.trim]]
+  field = &quot;entPhysicalFirmwareRev&quot;
+ [[processors.strings.trim]]
+  field = &quot;entPhysicalHardwareRev&quot;
+ [[processors.strings.trim]]
+  field = &quot;entPhysicalSerialNum&quot;
+ [[processors.strings.trim]]
+  field = &quot;entPhysicalSoftwareRev&quot;
+ [[processors.strings.lowercase]]
+  tag = &quot;contact&quot;
+ [[processors.strings.lowercase]]
+  tag = &quot;location&quot;
+</code></pre></div>
+Вроде бы можно было и сделать обработку, но нет. Запускаешь тест и получаешь:
+<div class="highlight"><pre><span></span><code>inventory_entity,Class=9,MfgName=cisco,ModelName=WIC-2T\ \ \ \ \ \ \ \ \ \ \ \ ������
+</code></pre></div>
+Чем больше устройств опрашивается, тем больше LimitNOFILE требуется указать в /lib/systemd/system/telegraf.service.
+Необходимо увеличивать metric_buffer_limit в настройках агента в /etc/telegraf/telegraf.conf, когда в логах появляются сообщения о дропах.
+Размер этого кэша влияет на время хранения данных в момент недоступности базы.
+Беда, когда нужен мониторинг не метрик, которые в каждый интервал возвращают значение, а событий, когда временной ряд метрики прерывается.
+Тут показателен мониторинг видеокодеков polycom, которые по snmp отдают данные только в момент сеанса видеоконференцсвязи.
+Странным образом все перечисленные oid'ы ниже - это строки. Тестовый запуск без преобразования строки в число приводит к тому,
+что field отсутствует, если строка пустая.
+Но преобразование делает из пустой строки 0i и все значения пишутся в базу, временной ряд метрики не прерывается.
+С генератором для snmp_exporter'а так не получится.
+<div class="highlight"><pre><span></span><code>[[inputs.snmp]]
+  interval = &quot;1m&quot;
+  agents = [ &quot;polycom&quot; ]
+  version = 2
+  community = &quot;public&quot;
+
+  name = &quot;polycom&quot;
+  [[inputs.snmp.field]]
+   name = &quot;PercentPacketLoss&quot;
+   oid = &quot;1.3.6.1.4.1.2684.1.1.21.0&quot;
+   conversion = &quot;int&quot;
+
+  [[inputs.snmp.field]]
+   name = &quot;Jitter&quot;
+   oid = &quot;1.3.6.1.4.1.2684.1.1.22.0&quot;
+   conversion = &quot;int&quot;
+
+  [[inputs.snmp.field]]
+   name = &quot;Latency&quot;
+   oid = &quot;1.3.6.1.4.1.2684.1.1.23.0&quot;
+   conversion = &quot;int&quot;
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

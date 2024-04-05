@@ -1,0 +1,3488 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../a2/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Применение Victoriametrics для мониторинга по SNMP - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tsdb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Применение Victoriametrics для мониторинга по SNMP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tsdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Выбор tsdb
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telegraf-vs-vmagentsnmp_exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      telegraf vs vmagent+snmp_exporter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="telegraf vs vmagent+snmp_exporter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      service discovery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Статус опрашиваемых устройств
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Буфер для опрошенных метрик
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snmp-mib" class="md-nav__link">
+    <span class="md-ellipsis">
+      snmp mib'ы
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      интервал опроса
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      конфигурационный файл
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      кардинальность
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      GUI для запросов
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      rate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telegraf" class="md-nav__link">
+    <span class="md-ellipsis">
+      telegraf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp_exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Генератор конфигурации snmp_exporter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generatoryml" class="md-nav__link">
+    <span class="md-ellipsis">
+      generator.yml
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="generator.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#override-displaystrings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Override DisplayStrings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chain-lookup-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chain lookup indexes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hex-in-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      HEX in string
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      проверка работы экспортера
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmagent" class="md-nav__link">
+    <span class="md-ellipsis">
+      vmagent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Язык запросов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Язык запросов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ifmib" class="md-nav__link">
+    <span class="md-ellipsis">
+      ifmib
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgp" class="md-nav__link">
+    <span class="md-ellipsis">
+      bgp
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extreme" class="md-nav__link">
+    <span class="md-ellipsis">
+      специфичные для extreme метрики
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      состояние ИБП APC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voip/cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tsdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Выбор tsdb
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telegraf-vs-vmagentsnmp_exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      telegraf vs vmagent+snmp_exporter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="telegraf vs vmagent+snmp_exporter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      service discovery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Статус опрашиваемых устройств
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Буфер для опрошенных метрик
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snmp-mib" class="md-nav__link">
+    <span class="md-ellipsis">
+      snmp mib'ы
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      интервал опроса
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      конфигурационный файл
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      кардинальность
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      GUI для запросов
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      rate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telegraf" class="md-nav__link">
+    <span class="md-ellipsis">
+      telegraf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp_exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Генератор конфигурации snmp_exporter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generatoryml" class="md-nav__link">
+    <span class="md-ellipsis">
+      generator.yml
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="generator.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#override-displaystrings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Override DisplayStrings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chain-lookup-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chain lookup indexes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hex-in-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      HEX in string
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      проверка работы экспортера
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmagent" class="md-nav__link">
+    <span class="md-ellipsis">
+      vmagent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Язык запросов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Язык запросов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ifmib" class="md-nav__link">
+    <span class="md-ellipsis">
+      ifmib
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgp" class="md-nav__link">
+    <span class="md-ellipsis">
+      bgp
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extreme" class="md-nav__link">
+    <span class="md-ellipsis">
+      специфичные для extreme метрики
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apc" class="md-nav__link">
+    <span class="md-ellipsis">
+      состояние ИБП APC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Применение Victoriametrics для мониторинга по SNMP</h1>
+
+<p>Заметка написана специально для коммунити <a href="https://t.me/VictoriaMetrics_ru1">VictoriaMetrics_ru1</a> в телеграм.</p>
+<h2 id="tsdb">Выбор tsdb</h2>
+<p>Развитие облачных сервисов, хайп вокруг kubernetes привели к тому, что с 2017 года популярность стали набирать базы данных временных рядов (time series databases).
+В таких базах хранят метрики (metrics) приложений, а специально разработанные языки запросов для этих баз позволяют проводить анализ данных,
+строить графики, информировать об отклонениях от заданных пороговых значений и т.д.
+Prometheus становится решением по умолчанию для мониторинга kubernetes и все больше разработчиков начинают дописывать свои приложения,
+чтобы те могли по протоколу http отдавать свои метрики в в формате prometheus:</p>
+<div class="highlight"><pre><span></span><code>myapp_status{server=&quot;prod1&quot;} 1
+</code></pre></div>
+<p>Не всегда приложение или какое-то устройство может отдать метрики в нужном формате.
+Начинается разработка специализированных приложений для интеграции с prometheus,
+получивших общее название <a href="https://prometheus.io/docs/instrumenting/exporters/">exporter</a>.
+Список exporter'ов ничем не ограничен.
+Надо только согласовать с community <a href="https://github.com/prometheus/prometheus/wiki/Default-port-allocations">номер порта</a>,
+на котором ваш exporter будет принимать запросы.
+Есть и более простой способ передать метрики без написания exporter'а.
+Разработчики <a href="https://github.com/prometheus/node_exporter">node_exporter</a> предусмотрели для этого textfile collector.
+Теперь достаточно скопировать файл с готовыми метриками в определенный каталог.</p>
+<p>С заданным интервалом (scrape interval) Prometheus опрашивает приложения, exporter'ы и записывает метрики с базу.
+При всех достоинствах этого решения, конечно, были ограничения:</p>
+<ul>
+<li>ограниченное время хранения метрик;</li>
+<li>отсутствие горизонтального масштабирования;</li>
+<li>и другие ограничения пулл модели.</li>
+</ul>
+<p>Первое ограничение обходится применением удаленных хранилищ, т.н. <a href="https://prometheus.io/docs/prometheus/latest/storage/">remote storage</a>.
+Такой базой данных временных рядов с возможностью длительного хранения данных является VictoriaMetrics (далее VM).
+Ее разработка началась в 2018 году, а в мае 2019 года появляется open-source версия на <a href="https://github.com/VictoriaMetrics/VictoriaMetrics">github</a>.
+VM начинают выбирать за быстроту, производительность, простоту установки и возможности горизонтального масштабирования в кластерной версии.
+Экономия на ресурсах, поддержка языка запросов PromQl и наличие новых востребованных функций в MetricsQl приводит к росту ее популярности. Вокруг VM начинает развиваться экосистема, разрабатываются дополнительные приложения, позволяющие исключить prometheus, как компонент, полностью.</p>
+<h2 id="telegraf-vs-vmagentsnmp_exporter">telegraf vs vmagent+snmp_exporter</h2>
+<p>Протокол snmp все еще активно используется для мониторинга параметров работы телекоммуникационного оборудования, например:</p>
+<ul>
+<li>счетчики объемов переданных данных через интерфейс в байтах, пакетах;</li>
+<li>счетчики ошибок и потерь на интерфейсах;</li>
+<li>состояние сенсоров температуры, питания, вентиляторов;</li>
+<li>счетчики утизизации ресуров, таких как память, cpu;</li>
+<li>состояние сессий протоколов маршрутизации;</li>
+<li>различные счетчики политик, acl.</li>
+</ul>
+<p>Ниже будет сравнение telegraf c плагином snmp (T) и vmagent + snmp_exporter (VS). Я работал с обоими, telegraf не использую более года.
+Не будет сравнения с другим ПО: zabbix, cacti, librenms.</p>
+<p><a href="https://victoriametrics.github.io/">vmagent</a> периодически опрашивает через <a href="https://github.com/prometheus/snmp_exporter">snmp_exporter</a>
+устройства по протоколу snmp и записывает полученные метрики в базу VictoriaMetrics.
+После 0.20.0 заявлены изменения и snmp_exporter возможно пеередет <a href="https://github.com/prometheus-community/snmp">github.com/prometheus-community/snmp</a></p>
+<h3 id="service-discovery">service discovery</h3>
+<p>Удобно, когда хосты для мониторинга можно добавить на лету и нет необходимости править конфигурацию, релоадить сервис.</p>
+<p>T: Нет service discovery. Необходимо после изменения списка агентов делать reload telegraf'у.</p>
+<p>VS: Есть service discovery и file_sd в частности. Для каждого модуля можно создавать файл со списком хостов средствами автоматизации.</p>
+<h3 id="_1">Статус опрашиваемых устройств</h3>
+<p>Если устройство недоступно, то это надо видеть как-то и не только по отсутствию метрик в базе.</p>
+<p>T: Статус опрашиваемых устройств определить нельзя. Можно посмотреть логи об ошибках.</p>
+<p>VS: Есть ручка <code>curl http://vmagent-host:8429/targets</code> , метрики и официальный <a href="https://grafana.com/grafana/dashboards/12683">dashboard</a> для них с кол-вом targets up/down.</p>
+<h3 id="_2">Буфер для опрошенных метрик</h3>
+<p>При отсуствии связи между агентом и базой метрики будут кешироваться на хосте агента.</p>
+<p>T: metric_buffer_limit в настройках telegraf определяет размер кэша для хранения метрик при опросе устройств
+При недоступности базы метрики хранятся в кэше (оперативной памяти) и при восстановлении связи записываются.
+При перезапуске telegraf'а, например из-за изменения адреса базы, данные будут потеряны.</p>
+<p>VS: remoteWrite.tmpDataPath у vmagent определяет каталог для хранения данных при недоступности базы.
+Данные дописываются при восстановлении доступа к базе, каталог очищается, а метрика <code>vmagent_remotewrite_pending_data_bytes</code> будет с какого-то числа уменьшаться до нуля.</p>
+<h3 id="snmp-mib">snmp mib'ы</h3>
+<p>Обычно на хост, с которого осуществляется опрос, требуется установить snmp, все mib'ы с зависимостями.
+В случае snmp_exporter'а, чей конфиг с oid'ами генерится на отдельном хосте, mib'ы нужны только на рабочем месте или виртуальной машине администратора, работаюшего с генератором.</p>
+<p>T: На хосте, который будет мониторинть сетевые устройства устанавливается snmp, mib'ы, telegraf.
+В конфигурации можно использовать oid без мибов в случае  inputs.snmp.field.
+Необходимы mib'ы на хосте, т.к плагин выполняет snmptranslate при старте и делает проверку oid для таблиц inputs.snmp.table
+что это действительно таблица.</p>
+<p>VS: На хост устанавливается snmp_exporter c конфигурационным файлом snmp.yml, vmagent. Устанавливать snmp, mib'ы не нужно.</p>
+<p>Отдельно добавлю про генератор, т.к. он является частью подготовительных работ по настройке.
+Создать конфигурацию без миба не получится, потому что все индексы - это лейблы.</p>
+<h3 id="_3">интервал опроса</h3>
+<p>interval или scrape interval. Считается хорошей практикой хранить метрики в базе с одним интервалом.
+Интервал 1 минута хорош для алертинга, а интервал в 5 минут является достаточным для хранения исторических данных
+и подходит для опроса устройств с медленным control-plane, которые не могут на минуту отдать свои таблицы, либо устройства расположены на каналами с высоким RTT.
+Во втором случае следует определиться с масштабированием и выносом агента поближе к опрашиваемым устройствам.
+Необходимо понимать, что устройства отвечают по snmp медленно и необходим компромис между количеством опрашиваемых данных и интервалом опроса.</p>
+<p>T: Интервал опроса указывается в каждом конфигурационном файле, либо глобально.
+Имеет смысл делать множество файлов, т.к. если плагин не успеет завершить работу в указанный интервал, то данные обо всех устройствах будут потеряны.
+Когда начинается какая-то проблема, то потеря данных мониторинга делает бессмысленным мониторинг.</p>
+<p>VS: Рекомендуется один интервал для всех метрик. 1 минута - интервал опроса всех устройств по snmp.
+Недоступность устройства по snmp или длительное время опроса, превышающее интервал опроса данных не влияет на получения результатов опроса от других устройств.</p>
+<h3 id="_4">конфигурационный файл</h3>
+<p>T: Казалось бы, что настраивать все плагины в одном файле удобно, но из-за ограничений плагина при таймауте интервала их нужно много.
+Для каждого вендора или модели оборудования или/и региона опроса создается отдельный конфигурационный файл для snmp плагина в /etc/telegraf/telegraf.d/.</p>
+<p>VS: У snmp_exporter один конфигурационный файл, в котором для каждого вендора или модели оборудования описывается модуль.
+Этот конфигурационный файл может быть универсальным для всех устройств на сети и копироваться на все хосты с exporter'ами.
+В vmagent'е для каждого модуля свой job или иная реализация. Для каждого хоста в регионах будут свои таргеты из service discovery.</p>
+<h3 id="_5">кардинальность</h3>
+<p>При использовании influx об кардинальности вообще не задумываются до тех пор, пока база как-то работает.
+Это простота использования обманчива и расплачиваться приходится медленной работой базы.
+В случае БД prometheus уже тот факт что в базу нельзя писать текстовые значения, заставляет смотреть что вообще пишется.</p>
+<p>T: Добавление тегов влияет на производительность, но рекомендуется для индексации и поиска.
+Запишет все полученные значения (value) текст, числа, неотфильтрованный мусор в базу influxdb как одну метрику (measurement)
+с множеством значений и индексов (tag).
+Есть мибы, например от polycom, где числа описаны как строки.
+Такое значение можно преобразовать через conversion = "int".
+Лишние индексы в oid можно ограничить через oid_index_length в inputs.snmp.table.field.
+Можно настроить фильтрацию через fieldpass, tagexclude, inputs.snmp.tagdrop в конфигурации плагина.</p>
+<p>VS: Метрика с другим набором лейблов - это другой временной ряд.
+В victoria-metrics и prometheus можно записать только числовые значения, а текст только в индексы/лейблы.
+Одной метрике будет соотвествовать одно значение с набором лейблов. snmp_exporter умеет преобразовывать string через overrides.
+Ниже будет пример в конфигураторе с коммутатором extreme, где cpu usage в oid описана как string и по дефолту запишется в label.
+В конфигурации vmagent'а необходимо настроить labeldrop в metric_relabel_configs.
+Есть drop_source_indexes в lookup и ignore overrides в snmp_exporter.</p>
+<h3 id="gui">GUI для запросов</h3>
+<p>Для новичков низкий порог входа в язык запросов influx может показаться удобным. Здесь медвежью услугу оказала grafana.</p>
+<p>T: В grafana есть конструктор запросов для influxdb, где в качестве условий указываются теги.</p>
+<p>VS: Необходимо знать функции promql для составления запросов в базу, указывать в запросе специфичные для метрики лейблы.</p>
+<h3 id="rate">rate</h3>
+<p>Для построения исторических данных в виде графиков загрузки интерфейса используются метрики с 64-битными счетчиками, которые растут, либо сбрасываются в 0.
+Чтобы определить скорость изменения, необходимо получить из базы несколько точек за указанный интервал.</p>
+<p>T: Функции derivative() или non_negative_derivative() испольуются в grafana для отображения графиков загрузки интерфейсов.
+Интервал для использования в функциях может совпадать с интервалом опроса устройств.</p>
+<p>VS: Функции rate() и increase() для счетчиков (counters) 32 и 64 битных. В базе prometheus для rate() необходимо 2.3 точки на интервале.
+Т.е. при опросе раз в минуту можно задать rate(metric[5m]), но не rate(metric[1m]). В victoria-metrics такого ограничения нет.</p>
+<h2 id="telegraf">telegraf</h2>
+<p>Ниже будет текст про предыдущий опыт эксплуатации telegraf'а с influxdb. В influxdb можно писать текст, а это уже совсем не про хранение метрик.
+Еще я пробовал плагин сlickhouse и писал туда дескрипшены интерфейсов, а счетчики iftable писал в VM.
+Рекомендую пропустить этот абзац для экономии времени.</p>
+<p>Информацию по протоколу snmp можно получать разную: счетчики интерфейсов, статус sla, описание интерфейсов,
+состав оборудования из entity-mib, счетчики политик qos.
+Все это можно опрашивать с разными интервалами, например, данные по sla нужны раз в минуту, счетчики интерфейсов и политик раз в пять минут,
+инвентаризацию раз в сутки.
+Разные интервалы подразумевают разные конфигурационные файлы для плагина snmp, т.к. интервал указывается для плагина,
+а не для job'а, как в prometheus/vmagent. Опрашивать все с одним интервалом не получится, т.к. нет необходимости хранить одни и те же данные,
+например, строковые значения инвертацизации, описаний интерфейсов, ip-адреса, arp'ы и т.п.
+Еще опрос такого количества таблиц занимает приличное время и в минутный интервал просто не успеть.
+Это легко проверить, запустив в тестовом режиме telegraf.
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>telegraf<span class="w"> </span>-config<span class="w"> </span>test.cfg<span class="w"> </span>-test
+</code></pre></div>
+Отсюда появляется ограничение, что интервал опроса для конкретного конфигурационного файла не может быть меньше,
+чем время опроса всех агентов в т.ч. с учетом таймаутов из-за недоступности.
+Если все агенты не будут опрошены до наступления следующего интервала опроса, то данные,
+полученные от всех агентов будут потеряны с фиксацией события в логах "input "inputs.snmp" did not complete within its interval".
+Т.е. приходится как-то оптимизировать запрашиваемую информацию, опрашивать какие-то таблицы менее часто, но с бОльшим таймаутом по времени.
+Ниже будут примеры, но это больше для информации, истории.
+Теперь пользуюсь vmagent'ом и snmp_exporter'ом для сбора каунтеров и конфигурация для него
+немного отличается в сторону упрощения и уменьшения количества лейблов.
+Telegraf оставил для записи строк в clickhouse. Дальше в примерах будут некоторые штуки, которые пришли с опытом:</p>
+<ul>
+<li>Если какой-то field будет использоваться как tag, то имя в конфиге будет отличаться. Это связано с использованием ранних версий influxdb, где с наименованием в самой базе случалась каная-то каша. Так появлялись ifName и ifName_1 и я уже не помню что из этого что. Опять же в запросах меньше путаницы будет, когда ifName - это field, а Name - это tag. Позже стал использовать fieldpass , в котором не указывал все field, используемые в качестве tag.</li>
+<li>Вместо имени oid'а используется сам oid, а его имя для удобства указано в комментарии выше. Старая версия telegraf'а при старте запускала в shell'е snmptranslate и чем больше было конфигурационных файлов, тем выше была загрузка cpu. Рестарт был очень неудобен и позже алгоритм немного поменяли на однократный запуск snmptranslate. Все таблицы все равно проверяются в мибах и опросить таблицу совсем без миба не получится.</li>
+</ul>
+<p>Пример для cisco ip sla, где не опрашивается вся таблица rttMonLatestRttOperTable (закоменнирован oid), а только два значения из нее.
+Тэг для замены индекса берется из другой таблицы rttMonCtrlAdmintable. На оборудовании cisco настроен следующий sla:
+<div class="highlight"><pre><span></span><code>ip sla 1
+ icmp-echo 10.4.3.1 source-ip 10.4.3.2
+ tos 96
+ threshold 200
+ owner IPSName-vlanid@AddrA-AddrB
+ip sla schedule 1 life forever start-time now
+</code></pre></div>
+Конфигурация плагина с фильтрацией по тегу, чтобы не записывать все тестовые, временные пробы:
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.snmp]]</span>
+<span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1m&quot;</span>
+<span class="w"> </span><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;cisco&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">community</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public&quot;</span>
+
+<span class="c1">#CISCO-RTTMON-MIB::rttMonCtrlAdminOwner.5 = STRING: &quot;IPSName-vlanid@AddrA-AddrB&quot;</span>
+
+<span class="w">  </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rttsla&quot;</span>
+<span class="w">    </span><span class="c1">#oid = &quot;CISCO-RTTMON-MIB::rttMonLatestRttOperTable&quot;</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Descr&quot;</span>
+<span class="w">      </span><span class="c1">#oid = &quot;CISCO-RTTMON-MIB::rttMonCtrlAdminOwner&quot;</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.9.9.42.1.2.1.1.2&quot;</span>
+<span class="w">      </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;icmpResults&quot;</span>
+<span class="w">      </span><span class="c1">#oid = &quot;CISCO-RTTMON-MIB::rttMonLatestRttOperSense&quot;</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.9.9.42.1.2.10.1.2&quot;</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rttAvg&quot;</span>
+<span class="w">      </span><span class="c1">#oid = &quot;CISCO-RTTMON-MIB::rttMonLatestRttOperCompletionTime&quot;</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.9.9.42.1.2.10.1.1&quot;</span>
+
+<span class="w"> </span><span class="k">[inputs.snmp.tagpass]</span>
+<span class="w">   </span><span class="n">Descr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;*@*&quot;</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div>
+Более сложным оказался опрос аналогичных проберов на коммутаторах huawei s5720ei,
+где в качестве одного из индексов используется растущий счетчик для истории проверок.
+Чтобы его удалить, понадобилось ограничить oid. Для удобства, используются такие же имена метрик:
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.snmp]]</span>
+<span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1m&quot;</span>
+<span class="w"> </span><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;huawei&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">community</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public&quot;</span>
+
+<span class="c1"># for  huawei s5720-ei</span>
+<span class="c1">#NQA-MIB::nqaAdminCtrlTag.&quot;1&quot;.&quot;1&quot; = STRING: IPSName-vlanid@AddrA-AddrB</span>
+<span class="c1">#.1.3.6.1.4.1.2011.5.25.111.2.1.1.3.1.49.1.49 = STRING: IPSName-vlanid@AddrA-AddrB</span>
+<span class="c1">#index is 1.49.1.49. oid_index_length = 4</span>
+<span class="c1">#NQA-MIB::nqaResultsCompletions.&quot;1&quot;.&quot;1&quot;.186177.1 = INTEGER: success(1)</span>
+<span class="c1">#s5720-ei has a history index</span>
+
+<span class="w">  </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rttsla&quot;</span>
+<span class="w">    </span><span class="c1">#oid = &quot;NQA-MIB::nqaAdminCtrlTable&quot;</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Descr&quot;</span>
+<span class="w">      </span><span class="c1">#oid = &quot;NQA-MIB::nqaAdminCtrlTag&quot;</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.2011.5.25.111.2.1.1.3&quot;</span>
+<span class="w">      </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;icmpResults&quot;</span>
+<span class="w">      </span><span class="c1">#NQA-MIB::nqaResultsCompletions</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.2011.5.25.111.4.1.1.3&quot;</span>
+<span class="w">      </span><span class="n">oid_index_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rttAvg&quot;</span>
+<span class="w">      </span><span class="c1">#NQA-MIB::nqaResultsRttAvg</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.2011.5.25.111.4.1.1.26&quot;</span>
+<span class="w">      </span><span class="n">oid_index_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+
+<span class="w"> </span><span class="k">[inputs.snmp.tagpass]</span>
+<span class="w">   </span><span class="n">Descr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;*@*&quot;</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div>
+Вот закончились небольшие таблицы, которые можно опросить за короткое время с интервалом опроса одна минута.
+Далее конфигурация для маршрутизатора cisco, где есть ряд ограничений,
+чтобы случайно в базу influxdb не записать лишнего и не было такого, когда одно устройство пишет больше полей в базу, чем другое.
+Эта конфигурация не запишет в базу значения mtu, ifalias и прочее. Только то, что определено в fieldpass.
+Метрики с тегами логических интерфейсов будут удалены. Сейчас я удаляю по лейблу ifType, а не по имени интерфейса.
+Вопреки примерам, не следует опрашивать таблицы ifTable и ifTableX целиком и записывать в influxdb все подряд: дескрипшены, таймстампы и прочую ненужную информацию.
+Необходимо сосредоточится на скорости выполения запроса, хотя тут тоже много лишнего для маршрутизатора.
+Жаль было расставаться с функционалом, который позволил использовать именно такую замену индексов в таблице cbqos,
+потому что этот миб самый невменяемый, а chain lookup в snmp_exporter'е сделали относительно недавно.
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.snmp]]</span>
+<span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;5m&quot;</span>
+<span class="w"> </span><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;cisco_router&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">community</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public&quot;</span>
+<span class="w"> </span><span class="n">fieldpass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;cbQos*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bgpPeerState&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bgpPeerFsmEstablishedTransitions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Duplex&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Speed&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifAdminStatus&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifOperStatus&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifInDiscards&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifInErrors&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifOutDiscards&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifOutErrors&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCInOctets&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCInUcastPkts&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCInMulticastPkts&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCInBroadcastPkts&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCOutOctets&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCOutUcastPkts&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCOutMulticastPkts&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ifHCOutBroadcastPkts&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w"> </span><span class="n">tagexclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;ifIndex&quot;</span><span class="w"> </span><span class="p">]</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;interface32&quot;</span>
+<span class="w">  </span><span class="c1">#oid = &quot;IF-MIB::ifTable&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Name&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifName</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.1&quot;</span>
+<span class="w">    </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Speed&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifHighSpeed</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.15&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Duplex&quot;</span>
+<span class="w">    </span><span class="c1">#EtherLike-MIB::dot3StatsDuplexStatus</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.10.7.2.1.19&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifAdminStatus&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifAdminStatus</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.7&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifOperStatus&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifOperStatus</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.8&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifInDiscards&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifInDiscards</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.13&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifInErrors&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifInErrors</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.14&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifOutDiscards&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifOutDiscards</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.19&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifOutErrors&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifOutErrors</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.20&quot;</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;interface64&quot;</span>
+<span class="w">  </span><span class="c1">#oid = &quot;IF-MIB::ifXTable&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Name&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifName</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.1&quot;</span>
+<span class="w">    </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Speed&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHighSpeed</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.15&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCInOctets&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCInOctets</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.6&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCInUcastPkts&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCInUcastPkts</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.7&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCInMulticastPkts&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCInMulticastPkts</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.8&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCInBroadcastPkts&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCInBroadcastPkts</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.9&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCOutOctets&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCOutOctets</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.10&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCOutUcastPkts&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCOutUcastPkts</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.11&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCOutMulticastPkts&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCOutMulticastPkts</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.12&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifHCOutBroadcastPkts&quot;</span>
+<span class="w">     </span><span class="c1">#IF-MIB::ifHCOutBroadcastPkts</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.13&quot;</span>
+
+<span class="w">  </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bgpPeer&quot;</span>
+<span class="w">    </span><span class="c1">#oid = &quot;1.3.6.1.2.1.15.3&quot;</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bgpPeerIdentifier&quot;</span>
+<span class="w">      </span><span class="c1">#BGP4-MIB::bgpPeerIdentifier&quot;</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.15.3.1.1&quot;</span>
+<span class="w">      </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bgpPeerState&quot;</span>
+<span class="w">      </span><span class="c1">#BGP4-MIB::bgpPeerState&quot;</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.15.3.1.2&quot;</span>
+
+<span class="w">    </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">      </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bgpPeerFsmEstablishedTransitions&quot;</span>
+<span class="w">      </span><span class="c1">#BGP4-MIB::bgpPeerFsmEstablishedTransitions</span>
+<span class="w">      </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.15.3.1.15&quot;</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">   </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="s2">&quot;cbQos&quot;</span>
+<span class="w">   </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CISCO-CLASS-BASED-QOS-MIB::cbQosCMStatsTable&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ConfigIndex&quot;</span>
+<span class="w">     </span><span class="c1">#oid = &quot;CISCO-CLASS-BASED-QOS-MIB::cbQosConfigIndex&quot;</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.9.9.166.1.5.1.1.2&quot;</span>
+<span class="w">     </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">     </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ParentObjectsIndex&quot;</span>
+<span class="w">     </span><span class="c1">#oid = &quot;CISCO-CLASS-BASED-QOS-MIB::cbQosParentObjectsIndex&quot;</span>
+<span class="w">     </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.9.9.166.1.5.1.1.4&quot;</span>
+<span class="w">     </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w"> </span><span class="k">[inputs.snmp.tagdrop]</span>
+<span class="w">   </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;SONET*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Vo*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Nu0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;E1*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Lo*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Vl*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CH*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;*:*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;St*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;VL*&quot;</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div>
+Раз в 4 часа неспеша c getnext, а не getbulk собрать текст из ifalias. Пробовал писать подобное в clickhouse, чтобы вывести описание интерфейсов в графане.
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.snmp]]</span>
+<span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;4h&quot;</span>
+<span class="w"> </span><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;device&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">max_repetitions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">retries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">community</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public&quot;</span>
+<span class="w"> </span><span class="n">fieldpass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;Alias&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Name&quot;</span><span class="w"> </span><span class="p">]</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ifalias&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Ifindex&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifIndex</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.2.2.1.1&quot;</span>
+<span class="w">    </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Name&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifName</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.1&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Alias&quot;</span>
+<span class="w">    </span><span class="c1">#IF-MIB::ifAlias</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.31.1.1.1.18&quot;</span>
+</code></pre></div>
+Этот конфигурационный файл для сбора информации о модели, серийниках, когда устройство поддерживает entity-mib.
+Juniper не поддерживает. Тут обратить внимание на index_as_tag, чтобы не потерять информацию о устройствах в стеке, точках доступа,
+зарегистрированных на контроллере. Т.к. в строке вендора может быть все что угодно (dlink,d-link и тп), то для каждого вендора решил использовать тег MfgName.
+Дополнительная проверка с ModelName в inputs.snmp.tagpass для фильтрации избыточных данных о портах.
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.snmp]]</span>
+<span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;24h&quot;</span>
+<span class="w"> </span><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;dlink&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2m&quot;</span>
+<span class="w"> </span><span class="n">community</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public&quot;</span>
+<span class="w"> </span><span class="n">fieldpass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;entPhysicalDescr&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;entPhysicalName&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;entPhysicalFirmwareRev&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;entPhysicalHardwareRev&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;entPhysicalSerialNum&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;entPhysicalSoftwareRev&quot;</span><span class="w"> </span><span class="p">]</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.field]]</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;location&quot;</span>
+<span class="w">  </span><span class="c1">#SNMPv2-MIB::sysLocation.0</span>
+<span class="w">  </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.1.6.0&quot;</span>
+<span class="w">  </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.field]]</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;contact&quot;</span>
+<span class="w">  </span><span class="c1">#SNMPv2-MIB::sysContact.0</span>
+<span class="w">  </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.1.4.0&quot;</span>
+<span class="w">  </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w"> </span><span class="k">[[inputs.snmp.table]]</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;inventory_entity&quot;</span>
+<span class="w">  </span><span class="n">inherit_tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;location&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;contact&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="c1">#oid = &quot;ENTITY-MIB::entPhysicalTable&quot;</span>
+<span class="w">  </span><span class="n">index_as_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c1"># stack, access points</span>
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ModelName&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalModelName</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.13&quot;</span>
+<span class="w">    </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Class&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalClass</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.5&quot;</span>
+<span class="w">    </span><span class="n">is_tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalName&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalName</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.7&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalDescr&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalDescr</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.2&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalHardwareRev&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalHardwareRev</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.8&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalFirmwareRev&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalFirmwareRev</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.9&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalSoftwareRev&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalSoftwareRev</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.10&quot;</span>
+
+<span class="w">   </span><span class="k">[[inputs.snmp.table.field]]</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalSerialNum&quot;</span>
+<span class="w">    </span><span class="c1">#ENTITY-MIB::entPhysicalSerialNum</span>
+<span class="w">    </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.2.1.47.1.1.1.1.11&quot;</span>
+
+<span class="w"> </span><span class="k">[inputs.snmp.tags]</span>
+<span class="w">  </span><span class="n">MfgName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dlink&quot;</span>
+<span class="w">  </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;object_id&quot;</span>
+
+<span class="w"> </span><span class="k">[inputs.snmp.tagpass]</span>
+<span class="w">  </span><span class="n">ModelName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div>
+Информация в полученных строках бывает кривая, с пробелами в конце, символами, чем грешат sfp и wic модули cisco.
+Поэтому в telegraf.d дополнительный конфигурационный файл proc_trim.conf. К сожалению, процессоры в телеграфе никак нельзя тестировать.
+<div class="highlight"><pre><span></span><code><span class="k">[[processors.strings]]</span>
+<span class="w"> </span><span class="n">namepass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;inventory_entity&quot;</span><span class="p">]</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ModelName&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalDescr&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalName&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalFirmwareRev&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalHardwareRev&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalSerialNum&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.trim]]</span>
+<span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;entPhysicalSoftwareRev&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.lowercase]]</span>
+<span class="w">  </span><span class="n">tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;contact&quot;</span>
+<span class="w"> </span><span class="k">[[processors.strings.lowercase]]</span>
+<span class="w">  </span><span class="n">tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;location&quot;</span>
+</code></pre></div>
+Вроде бы можно было и сделать обработку, но нет. Запускаешь тест и получаешь:
+<div class="highlight"><pre><span></span><code>inventory_entity,Class=9,MfgName=cisco,ModelName=WIC-2T\ \ \ \ \ \ \ \ \ \ \ \ ������
+</code></pre></div>
+Чем больше устройств опрашивается, тем больше LimitNOFILE требуется указать в /lib/systemd/system/telegraf.service.
+Необходимо увеличивать metric_buffer_limit в настройках агента в /etc/telegraf/telegraf.conf, когда в логах появляются сообщения о дропах.
+Размер этого кэша влияет на время хранения данных в момент недоступности базы.
+Беда, когда нужен мониторинг не метрик, которые в каждый интервал возвращают значение, а событий, когда временной ряд метрики прерывается.
+Тут показателен мониторинг видеокодеков polycom, которые по snmp отдают данные только в момент сеанса видеоконференцсвязи.
+Странным образом все перечисленные oid'ы ниже - это строки. Тестовый запуск без преобразования строки в число приводит к тому,
+что field отсутствует, если строка пустая.
+Но преобразование делает из пустой строки 0i и все значения пишутся в базу, временной ряд метрики не прерывается.
+С генератором для snmp_exporter'а так не получится.
+<div class="highlight"><pre><span></span><code><span class="k">[[inputs.snmp]]</span>
+<span class="w">  </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1m&quot;</span>
+<span class="w">  </span><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;polycom&quot;</span><span class="w"> </span><span class="p">]</span>
+<span class="w">  </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="n">community</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public&quot;</span>
+
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;polycom&quot;</span>
+<span class="w">  </span><span class="k">[[inputs.snmp.field]]</span>
+<span class="w">   </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;PercentPacketLoss&quot;</span>
+<span class="w">   </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.2684.1.1.21.0&quot;</span>
+<span class="w">   </span><span class="n">conversion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;int&quot;</span>
+
+<span class="w">  </span><span class="k">[[inputs.snmp.field]]</span>
+<span class="w">   </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Jitter&quot;</span>
+<span class="w">   </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.2684.1.1.22.0&quot;</span>
+<span class="w">   </span><span class="n">conversion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;int&quot;</span>
+
+<span class="w">  </span><span class="k">[[inputs.snmp.field]]</span>
+<span class="w">   </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Latency&quot;</span>
+<span class="w">   </span><span class="n">oid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.3.6.1.4.1.2684.1.1.23.0&quot;</span>
+<span class="w">   </span><span class="n">conversion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;int&quot;</span>
+</code></pre></div></p>
+<h2 id="snmp_exporter">Генератор конфигурации snmp_exporter</h2>
+<p>В версии 0.20 пока еще нужен генератор для формирования snmp.yml (конфигурационный файл snmp_exporter) из yaml файла generator.yml
+Из исходиков не получилось собрать в этот раз, поэтому вариант с докером <a href="https://hub.docker.com/r/prom/snmp-generator">https://hub.docker.com/r/prom/snmp-generator</a>.
+В примере ниже podman в ubuntu 20.10
+Старый генератор искал мибы в домашнем каталоге .snmp/mibs, поэтому архив со всеми необходимыми мибами там.
+Сам файл generator.yml в .snmp/
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>.snmp/
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">:/opt/&quot;</span><span class="w"> </span>prom/snmp-generator<span class="w"> </span>generate
+</code></pre></div>
+Если завершится без ошибок, то сгенериться конфигурационный файл snmp.yml
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls
+generator.yml<span class="w">  </span>mibs<span class="w">  </span>snmp.yml
+</code></pre></div></p>
+<h2 id="generatoryml">generator.yml</h2>
+<p>Для простоты все устройства, описываемые одним модулем имеют одну и ту же версию snmp и коммутити public.
+В противном случае необходимо писать множество модулей и далее в конфигурации vmagent'а для каждого такого модуля делать отдельный job</p>
+<p>Для примера простой модуль для коммутатора в generator.yml:
+<div class="highlight"><pre><span></span><code><span class="nt">modules</span><span class="p">:</span>
+
+<span class="w">  </span><span class="nt">devicename</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.1.3</span><span class="w">         </span><span class="c1">#sysUpTime</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.8</span><span class="w">     </span><span class="c1">#IF-MIB::ifOperStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.14</span><span class="w">    </span><span class="c1">#IF-MIB::ifInErrors</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.19</span><span class="w">    </span><span class="c1">#IF-MIB::ifOutDiscards</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.6</span><span class="w">  </span><span class="c1">#IF-MIB::ifHCInOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.7</span><span class="w">  </span><span class="c1">#IF-MIB::ifHCInUcastPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.10</span><span class="w"> </span><span class="c1">#IF-MIB::ifHCOutOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.11</span><span class="w"> </span><span class="c1">#IF-MIB::ifHCOutUcastPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.15</span><span class="w"> </span><span class="c1">#IF-MIB::ifHighSpeed</span>
+
+<span class="w">    </span><span class="nt">lookups</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.1</span><span class="w">  </span><span class="c1">#ifName</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.3</span><span class="w">     </span><span class="c1">#ifType</span>
+</code></pre></div></p>
+<p>Используется только то, что нужно и что можно (строки нельзя, но ссылка внизу). Не требуется собирать вообще все и тем более обе таблицы iftable и ifxtable целиком.
+Таблица с метриками:</p>
+<table>
+<thead>
+<tr>
+<th>что</th>
+<th>зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sysUpTime</td>
+<td>для определения времени работы оборудования</td>
+</tr>
+<tr>
+<td>ifOperStatus</td>
+<td>статус интерфейса up/down</td>
+</tr>
+<tr>
+<td>ifInErrors</td>
+<td>общий счетчик входящих ошибок</td>
+</tr>
+<tr>
+<td>ifOutDiscards</td>
+<td>дискарды на портах из-за speed mismatch, qos, и тп</td>
+</tr>
+<tr>
+<td>ifHCInOctets</td>
+<td>64-битный счетчик входящих байт</td>
+</tr>
+<tr>
+<td>ifHCInUcastPkts</td>
+<td>64-битный счетчик входящих юникастовых пакетов</td>
+</tr>
+<tr>
+<td>ifHCOutOctets</td>
+<td>64-битный счетчик исходящих байт</td>
+</tr>
+<tr>
+<td>ifHCOutUcastPkts</td>
+<td>64-битный счетчик исходящих юникастовых пакетов</td>
+</tr>
+<tr>
+<td>ifHighSpeed</td>
+<td>скорость интерфейса для расчета % утилизации</td>
+</tr>
+</tbody>
+</table>
+<p>Таблица с label, которые дополнительно будут у каждой метрики предыдущей таблицы:</p>
+<table>
+<thead>
+<tr>
+<th>что</th>
+<th>зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ifName</td>
+<td>имя интерфейса из ifxtable вместо ifIndex, который удален <code>drop_source_indexes: true</code></td>
+</tr>
+<tr>
+<td>ifType</td>
+<td>тип интерфейса для фильтрации метрик в vmagent'е, чтобы исключить сбор данных по логическим интерфейсам</td>
+</tr>
+</tbody>
+</table>
+<p>Дропать индекс интерфейсов для некоторых маршрутизаторах cisco нельзя. Например, при опросе 7206VXR с модулями может возникнуть ошибка.</p>
+<p>У snmp_exporter'а есть функционал overrides, который можеть дропать метрики. Это необходимо для удаления высококардинальных метрик, например, или мусора.
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">n3k</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.1.3</span><span class="w">             </span><span class="c1"># sysUpTime</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.7</span><span class="w">         </span><span class="c1"># IF-MIB::ifAdminStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.8</span><span class="w">         </span><span class="c1"># IF-MIB::ifOperStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.9</span><span class="w">         </span><span class="c1"># IF-MIB::ifLastChange</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.14</span><span class="w">        </span><span class="c1"># IF-MIB::ifInErrors</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.19</span><span class="w">        </span><span class="c1"># IF-MIB::ifOutDiscards</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.6</span><span class="w">      </span><span class="c1"># IF-MIB::ifHCInOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.7</span><span class="w">      </span><span class="c1"># IF-MIB::ifHCInUcastPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.10</span><span class="w">     </span><span class="c1"># IF-MIB::ifHCOutOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.11</span><span class="w">     </span><span class="c1"># IF-MIB::ifHCOutUcastPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.15</span><span class="w">     </span><span class="c1"># IF-MIB::ifHighSpeed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.10.7.10</span><span class="w">         </span><span class="c1"># EtherLike-MIB::dot3PauseTable</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.15.3.1.2</span><span class="w">        </span><span class="c1"># BGP4-MIB::bgpPeerState</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.15.3.1.15</span><span class="w">       </span><span class="c1"># BGP4-MIB::bgpPeerFsmEstablishedTransitions</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.91.1.1.1.1.4</span><span class="w">    </span><span class="c1"># CISCO-ENTITY-SENSOR-MIB::entSensorValue</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.91.1.1.1.1.5</span><span class="w">    </span><span class="c1"># CISCO-ENTITY-SENSOR-MIB::entSensorStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.109.1.1.1.1.7</span><span class="w">       </span><span class="c1"># CISCO-PROCESS-MIB::cpmCPUTotal1minRev</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.109.1.1.1.1.12</span><span class="w">      </span><span class="c1"># CISCO-PROCESS-MIB::cpmCPUMemoryUsed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.109.1.1.1.1.13</span><span class="w">      </span><span class="c1"># CISCO-PROCESS-MIB::cpmCPUMemoryFree</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.117.1.1.2</span><span class="w">       </span><span class="c1"># CISCO-ENTITY-FRU-CONTROL-MIB::cefcFRUPowerStatusTable</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.117.1.2.1</span><span class="w">       </span><span class="c1"># CISCO-ENTITY-FRU-CONTROL-MIB::cefcModuleTable</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.117.1.4.1</span><span class="w">       </span><span class="c1"># CISCO-ENTITY-FRU-CONTROL-MIB::cefcFanTrayStatusTable</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.9.9.42.1.2.10.1.2</span><span class="w">   </span><span class="c1"># CISCO-RTTMON-MIB::rttMonLatestRttOperSense</span>
+
+<span class="w">    </span><span class="nt">lookups</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.1</span><span class="w">  </span><span class="c1"># ifName</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">dot3StatsIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.1</span><span class="w">  </span><span class="c1"># ifName</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.3</span><span class="w">     </span><span class="c1"># ifType for eth=6</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">entPhysicalIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.47.1.1.1.1.2</span><span class="w">    </span><span class="c1"># entPhysicalDescr</span>
+
+<span class="w">    </span><span class="nt">overrides</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">entSensorStatus</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">ignore</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div></p>
+<h3 id="override-displaystrings">Override DisplayStrings</h3>
+<p>Бывает что oid имеет тип string, но в него пишутся необходимые для мониторинга значения.
+Помимо прочего такие oid'ы необходимо отслеживать и игнорировать, либо переделывать.
+Если оставить как есть, то строки станут label'ми, что плохо скажется на производительности, т.к. увеличивается кардинальность метрик.
+Решение описано - <a href="https://www.robustperception.io/numbers-from-displaystrings-with-the-snmp_exporter">Numbers from DisplayStrings with the snmp_exporter</a>
+Ниже пример с коммутаторами extreme, где память и cpu - это string.
+<a href="https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string">https://gtacknowledge.extremenetworks.com/articles/Q_A/Is-there-a-way-to-display-the-OID-1-3-6-1-4-1-1916-1-32-1-4-1-9-for-CPU-utilization-to-an-integer-instead-of-a-string</a>
+<a href="http://www.circitor.fr/Mibs/Html/E/EXTREME-SOFTWARE-MONITOR-MIB.php">EXTREME-SOFTWARE-MONITOR-MIB</a></p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">exos</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.1.3</span><span class="w">             </span><span class="c1"># sysUpTime</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.7</span><span class="w">         </span><span class="c1"># IF-MIB::ifAdminStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.8</span><span class="w">         </span><span class="c1"># IF-MIB::ifOperStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.9</span><span class="w">         </span><span class="c1"># IF-MIB::ifLastChange</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.14</span><span class="w">        </span><span class="c1"># IF-MIB::ifInErrors</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.19</span><span class="w">        </span><span class="c1"># IF-MIB::ifOutDiscards</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.4.14.1.1</span><span class="w">   </span><span class="c1"># EXTREME-PORT-MIB::extremePortCongDropPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.6</span><span class="w">      </span><span class="c1"># IF-MIB::ifHCInOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.7</span><span class="w">      </span><span class="c1"># IF-MIB::ifHCInUcastPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.10</span><span class="w">     </span><span class="c1"># IF-MIB::ifHCOutOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.11</span><span class="w">     </span><span class="c1"># IF-MIB::ifHCOutUcastPkts</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.15</span><span class="w">     </span><span class="c1"># IF-MIB::ifHighSpeed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.15.3.1.2</span><span class="w">        </span><span class="c1"># BGP4-MIB::bgpPeerState</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.15.3.1.15</span><span class="w">       </span><span class="c1"># BGP4-MIB::bgpPeerFsmEstablishedTransitions</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.32.1.4.1.8</span><span class="w">   </span><span class="c1"># EXTREME-SOFTWARE-MONITOR-MIB::extremeCpuMonitorSystemUtilization1min</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.32.2.2</span><span class="w">       </span><span class="c1"># EXTREME-SOFTWARE-MONITOR-MIB::extremeMemoryMonitorSystemTable</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.1.1.27.1.2</span><span class="w">       </span><span class="c1"># EXTREME-SYSTEM-MIB::extremePowerSupplyStatus</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.1.1.7</span><span class="w">        </span><span class="c1"># EXTREME-SYSTEM-MIB::extremeOverTemperatureAlarm</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.1.1.8</span><span class="w">        </span><span class="c1"># EXTREME-SYSTEM-MIB::extremeCurrentTemperature</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.1916.1.1.1.9</span><span class="w">        </span><span class="c1"># EXTREME-SYSTEM-MIB::extremeFanStatusTable</span>
+
+<span class="w">    </span><span class="nt">lookups</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.1</span><span class="w">  </span><span class="c1"># ifName for ifmib and fcfemib</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.3</span><span class="w">     </span><span class="c1"># ifType for eth=6</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">entPhysicalIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.47.1.1.1.1.2</span><span class="w">    </span><span class="c1"># entPhysicalDescr</span>
+<span class="w">    </span><span class="nt">overrides</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">extremeCpuMonitorSystemUtilization1min</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">regex_extracts</span><span class="p">:</span>
+<span class="w">          </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(.*)&#39;</span>
+<span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$1&#39;</span>
+<span class="w">      </span><span class="nt">extremeMemoryMonitorSystemTotal</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">regex_extracts</span><span class="p">:</span>
+<span class="w">          </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(.*)&#39;</span>
+<span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$1&#39;</span>
+<span class="w">      </span><span class="nt">extremeMemoryMonitorSystemFree</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">regex_extracts</span><span class="p">:</span>
+<span class="w">          </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(.*)&#39;</span>
+<span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$1&#39;</span>
+<span class="w">      </span><span class="nt">extremeMemoryMonitorSystemUsage</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">regex_extracts</span><span class="p">:</span>
+<span class="w">          </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(.*)&#39;</span>
+<span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$1&#39;</span>
+<span class="w">      </span><span class="nt">extremeMemoryMonitorUserUsage</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">regex_extracts</span><span class="p">:</span>
+<span class="w">          </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(.*)&#39;</span>
+<span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$1&#39;</span>
+</code></pre></div>
+<h3 id="chain-lookup-indexes">Chain lookup indexes</h3>
+<p>Есть возможность заменить несколько индексов в oid'е на один. Например, было и стало
+<div class="highlight"><pre><span></span><code># TYPE jnxOperatingTemp gauge
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;1&quot;,jnxOperatingL1Index=&quot;0&quot;,jnxOperatingL2Index=&quot;0&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;12&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;0&quot;,jnxOperatingL3Index=&quot;0&quot;} 36
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;2&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;0&quot;,jnxOperatingL3Index=&quot;0&quot;} 29
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;2&quot;,jnxOperatingL1Index=&quot;2&quot;,jnxOperatingL2Index=&quot;0&quot;,jnxOperatingL3Index=&quot;0&quot;} 32
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;4&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;1&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;4&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;2&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;4&quot;,jnxOperatingL1Index=&quot;2&quot;,jnxOperatingL2Index=&quot;1&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;4&quot;,jnxOperatingL1Index=&quot;2&quot;,jnxOperatingL2Index=&quot;2&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;4&quot;,jnxOperatingL1Index=&quot;3&quot;,jnxOperatingL2Index=&quot;1&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;4&quot;,jnxOperatingL1Index=&quot;3&quot;,jnxOperatingL2Index=&quot;2&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;7&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;0&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;8&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;1&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;8&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;2&quot;,jnxOperatingL3Index=&quot;0&quot;} 0
+jnxOperatingTemp{jnxOperatingContentsIndex=&quot;9&quot;,jnxOperatingL1Index=&quot;1&quot;,jnxOperatingL2Index=&quot;0&quot;,jnxOperatingL3Index=&quot;0&quot;} 41
+
+
+# TYPE jnxOperatingTemp gauge
+jnxOperatingTemp{jnxOperatingDescr=&quot;CB 0&quot;} 36
+jnxOperatingTemp{jnxOperatingDescr=&quot;FPC: MPC @ 0/*/*&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Fan Tray 0 Fan 0&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Fan Tray 0 Fan 1&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Fan Tray 1 Fan 0&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Fan Tray 1 Fan 1&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Fan Tray 2 Fan 0&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Fan Tray 2 Fan 1&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;PEM 0&quot;} 29
+jnxOperatingTemp{jnxOperatingDescr=&quot;PEM 1&quot;} 32
+jnxOperatingTemp{jnxOperatingDescr=&quot;PIC: 4XQSFP28 PIC @ 0/0/*&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;PIC: 8XSFPP PIC @ 0/1/*&quot;} 0
+jnxOperatingTemp{jnxOperatingDescr=&quot;Routing Engine&quot;} 41
+jnxOperatingTemp{jnxOperatingDescr=&quot;midplane&quot;} 0
+</code></pre></div>
+Это достигается следующей конфигурацией
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">mx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.1.3</span><span class="w">             </span><span class="c1"># sysUpTime</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.14</span><span class="w">        </span><span class="c1"># IF-MIB::ifInErrors</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.6</span><span class="w">      </span><span class="c1"># IF-MIB::ifHCInOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.10</span><span class="w">     </span><span class="c1"># IF-MIB::ifHCOutOctets</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.15.3.1.2</span><span class="w">        </span><span class="c1"># BGP4-MIB::bgpPeerState</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.15.3.1.15</span><span class="w">       </span><span class="c1"># BGP4-MIB::bgpPeerFsmEstablishedTransitions</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.2636.3.5.2.1.4</span><span class="w">  </span><span class="c1"># JUNIPER-FIREWALL-MIB::jnxFWCounterPacketCount</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.2636.3.5.2.1.5</span><span class="w">  </span><span class="c1"># JUNIPER-FIREWALL-MIB::jnxFWCounterByteCount</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.2636.3.1.13</span><span class="w">     </span><span class="c1"># https://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB17526</span>
+<span class="w">                                    </span><span class="c1"># https://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB15467</span>
+<span class="w">    </span><span class="nt">lookups</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.31.1.1.1.1</span><span class="w">  </span><span class="c1"># ifName</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.2.2.1.3</span><span class="w">     </span><span class="c1"># ifType</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">jnxOperatingContentsIndex</span><span class="p p-Indicator">,</span><span class="nv">jnxOperatingL1Index</span><span class="p p-Indicator">,</span><span class="nv">jnxOperatingL2Index</span><span class="p p-Indicator">,</span><span class="nv">jnxOperatingL3Index</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.4.1.2636.3.1.13.1.5</span><span class="w">     </span><span class="c1"># jnxOperatingDescr</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div></p>
+<h3 id="hex-in-string">HEX in string</h3>
+<p>Бывает необходимость поменять тип, в противном случае данные в label отображаются в hex.
+Описано тут <a href="https://www.robustperception.io/why-is-my-snmp-string-showing-as-hexadecimal">Why is my SNMP string showing as hexadecimal?</a>.
+Ниже пример для мониторинга гипервизора esxi
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">esxi</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.1.1</span><span class="w">              </span><span class="c1"># hrSystemUptime</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.2.3.1.5</span><span class="w">          </span><span class="c1"># hrStorageSize</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.2.3.1.6</span><span class="w">          </span><span class="c1"># hrStorageUsed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.3.3</span><span class="w">              </span><span class="c1"># hrProcessorTable</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.5.1.1.2</span><span class="w">          </span><span class="c1"># hrSWRunPerfMem</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.4.2.1.7</span><span class="w">          </span><span class="c1"># hrSWRunStatus</span>
+
+<span class="w">    </span><span class="nt">lookups</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">hrStorageIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.2.3.1.2</span><span class="w">    </span><span class="c1"># hrStorageType</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_indexes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">hrSWRunIndex</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">lookup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3.6.1.2.1.25.4.2.1.2</span><span class="w">    </span><span class="c1"># hrSWRunName</span>
+<span class="w">        </span><span class="nt">drop_source_indexes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">overrides</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">hrSWRunName</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DisplayString</span>
+</code></pre></div>
+Мониторинг RAM в метриках на примере ниже.
+<div class="highlight"><pre><span></span><code>hrStorageSize{hrStorageType=&quot;1.3.6.1.2.1.25.2.1.2&quot;}
+hrStorageUsed{hrStorageType=&quot;1.3.6.1.2.1.25.2.1.2&quot;}
+</code></pre></div></p>
+<h2 id="_6">проверка работы экспортера</h2>
+<p>snmp.yml копируется на хост с exporter'ом, reload.
+Можно самостоятельно делать запросы для тестирования новых модулей без риска записать лишнее в базу.
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>localhost:9116/snmp?module<span class="o">=</span>mx_v2<span class="se">\&amp;</span><span class="nv">target</span><span class="o">=</span>mx_host
+</code></pre></div></p>
+<h2 id="vmagent">vmagent</h2>
+<p>snmp_exporter'у нельзя указать несколько параметров. Есть два способа описать job'ы в конфигурации. Первый, где все ограничивается одним job'ом:
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp</span>
+<span class="w">  </span><span class="nt">honor_timestamps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/snmp</span>
+<span class="w">  </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+<span class="w">  </span><span class="nt">http_sd_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span>
+<span class="w">    </span><span class="nt">follow_redirects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">refresh_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3m</span>
+<span class="w">  </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<span class="nn">...</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__meta_netbox_module</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">separator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">;</span>
+<span class="w">    </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(.*)</span>
+<span class="w">    </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__param_module</span>
+<span class="w">    </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$1</span>
+<span class="w">    </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replace</span>
+<span class="nn">...</span>
+</code></pre></div>
+Второй, где у каждого job'а есть еще специфичные таргеты, relabel настройки:
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;n3k&#39;</span>
+<span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/snmp</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">n3k</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">file_sd_configs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">files</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;targets/n3k.yml&#39;</span>
+<span class="w">    </span><span class="nt">metric_relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifType</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^[^6]$|\d{2,}&#39;</span>
+<span class="w">        </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drop</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifName</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;mgmt0&#39;</span>
+<span class="w">        </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drop</span>
+<span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__address__</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__param_target</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__param_target</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__address__</span>
+<span class="w">        </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fdqn.local:9116&quot;</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;exos&#39;</span>
+<span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/snmp</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">exos</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">file_sd_configs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">files</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;targets/exos.yml&#39;</span>
+<span class="w">    </span><span class="nt">metric_relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifType</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^[^6]$|\d{2,}&#39;</span>
+<span class="w">        </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drop</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifName</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Management&#39;</span>
+<span class="w">        </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drop</span>
+<span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__address__</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__param_target</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__param_target</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__address__</span>
+<span class="w">        </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fdqn.local:9116&quot;</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;mds9k&#39;</span>
+<span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/snmp</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mds9k</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">file_sd_configs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">files</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;targets/mds9k.yml&#39;</span>
+<span class="w">    </span><span class="nt">metric_relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ifType</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^6$&#39;</span>
+<span class="w">        </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drop</span>
+<span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__address__</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__param_target</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__param_target</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__address__</span>
+<span class="w">        </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fdqn.local:9116&quot;</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;mx&#39;</span>
+<span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/snmp</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mx</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">file_sd_configs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">files</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;targets/mx.yml&#39;</span>
+<span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__address__</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__param_target</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__param_target</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__address__</span>
+<span class="w">        </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fdqn.local:9116&quot;</span>
+</code></pre></div>
+Таргеты (хосты) можно описать с лейблами и без. Вот с дополнительными лейблами:
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">rack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">targets</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s0002</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s0003</span>
+</code></pre></div>
+Без лейблов просто список таргетов:
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s0002</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s0003</span>
+</code></pre></div>
+У vmagent'а есть rewrite функционал, где можно своими руками описать дескрипшены, добавить еще один label <code>hw</code> или <code>desc</code>,
+а не собирать их с оборудования. Пример файла, который указан как remoteWrite_relabelConfig:
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">instance</span><span class="p p-Indicator">,</span><span class="nv">ifName</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s0001;Ethernet1/47&quot;</span>
+<span class="w">  </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hw&quot;</span>
+<span class="w">  </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s0003&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">instance</span><span class="p p-Indicator">,</span><span class="nv">ifName</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s0002;Ethernet1/48&quot;</span>
+<span class="w">  </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hw&quot;</span>
+<span class="w">  </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s0004&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">instance</span><span class="p p-Indicator">,</span><span class="nv">ifName</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s0007;1:48&quot;</span>
+<span class="w">  </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hw&quot;</span>
+<span class="w">  </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;m9&quot;</span>
+</code></pre></div>
+У vmagent'а есть url http://fdqn.local:8429/targets, где видно наглядно за какое время и с каким успехом удалось опросить snmp_exporter по каждому хосту.</p>
+<h2 id="_7">Язык запросов</h2>
+<p><a href="https://victoriametrics.github.io/MetricsQL.html">MetricQL</a> и <a href="https://prometheus.io/docs/prometheus/latest/querying/functions/">PromQL</a></p>
+<p><a href="https://play.victoriametrics.com/promql/expand-with-exprs">Expand VictoriaMetrics WITH templates to canonical PromQL</a></p>
+<p>Все описанные метрики получены vmagent'ом с snmp_exporter'а, записаны в базу VictoriaMetrics.</p>
+<p>Для вывода всех метрик, полученных по job'у job_name выполнить:
+<div class="highlight"><pre><span></span><code>max({job=&quot;job_name&quot;}) by (__name__)
+</code></pre></div></p>
+<p>Ниже будут выражения (expr) для vmalert с кратким описанием</p>
+<h3 id="ifmib">ifmib</h3>
+<p>flapping физического интерфейса, который в up, но его состояние изменилось до этого
+<div class="highlight"><pre><span></span><code>(changes(ifLastChange{ifType=&quot;6&quot;}[15m]) &gt; 0) and (ifOperStatus == 1) and ON(instance) (sysUpTime &gt; 150000)
+</code></pre></div>
+Перезагружался коммутатор. Иначе есть шанс что какой-то ifLastChange больше, а каунтер sysUpTime обнулился.
+Если еще были labels, как у меня, например, rack, то by (instance,rack)
+<div class="highlight"><pre><span></span><code>(max(ifLastChange{ifType=&quot;6&quot;} &lt; 20000) by (instance)) and ON(instance) (sysUpTime &lt; 150000)
+</code></pre></div>
+Нет линка на административно включенном интерфейсе
+<div class="highlight"><pre><span></span><code>(ifAdminStatus == 1) and (ifOperStatus == 2)
+</code></pre></div>
+Включился flowcontrol. Полезно для портов, куда подключены стораджи
+<div class="highlight"><pre><span></span><code>rate(dot3HCInPauseFrames[5m]) &gt; 5
+</code></pre></div>
+Входящие ошибки
+<div class="highlight"><pre><span></span><code>rate(ifInErrors[15m]) &gt; 5
+</code></pre></div>
+Дискарды
+<div class="highlight"><pre><span></span><code>rate(ifOutDiscards[15m]) &gt; 100
+</code></pre></div>
+Утилизация пропускной полосы в зависимости от указанной bw или физической скорости интерфейса. 62500 = 1e6 / 8 / 2, где 2 - rate 50%.
+В примере ниже 72% потому что круглое число
+<div class="highlight"><pre><span></span><code>rate(ifHCOutOctets{ifType=&quot;6&quot;}[10m]) &gt; ((ifHighSpeed{ifType=&quot;6&quot;})*90000)
+</code></pre></div></p>
+<h3 id="bgp">bgp</h3>
+<p>flapping сессии
+<div class="highlight"><pre><span></span><code> changes(bgpPeerFsmEstablishedTransitions[15m]) &gt; 0
+</code></pre></div>
+Статус не established до конкретного нейбора
+<div class="highlight"><pre><span></span><code>bgpPeerState{bgpPeerRemoteAddr=&quot;9.8.7.6&quot;,instance=&quot;r0001&quot;} &lt; 6
+</code></pre></div></p>
+<h3 id="extreme">специфичные для extreme метрики</h3>
+<p>Питание
+<div class="highlight"><pre><span></span><code>extremePowerSupplyStatus !=2
+</code></pre></div>
+Блок вентиляторов
+<div class="highlight"><pre><span></span><code>extremeFanOperational &gt; 1
+</code></pre></div>
+Перегрев
+<div class="highlight"><pre><span></span><code>extremeOverTemperatureAlarm &lt; 2
+</code></pre></div>
+cpu
+<div class="highlight"><pre><span></span><code>extremeCpuMonitorSystemUtilization1min &gt; 15
+</code></pre></div></p>
+<h3 id="apc">состояние ИБП APC</h3>
+<p>Статус. 2 - ОК. 3 - на батареях. 12 - напряжение выше 250В на входе.
+<div class="highlight"><pre><span></span><code>upsBasicOutputStatus{instance=&quot;apc_ups&quot;} != 2
+</code></pre></div></p>
+<p>Enum из миба для понимания о чем речь
+<div class="highlight"><pre><span></span><code>  1: unknown
+  2: onLine
+  3: onBattery
+  4: onSmartBoost
+  5: timedSleeping
+  6: softwareBypass
+  7: &quot;off&quot;
+  8: rebooting
+  9: switchedBypass
+  10: hardwareFailureBypass
+  11: sleepingUntilPowerReturn
+  12: onSmartTrim
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

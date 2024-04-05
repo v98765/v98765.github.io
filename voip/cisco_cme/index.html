@@ -1,0 +1,2767 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../cisco_gw_cdr/">
+      
+      
+        <link rel="next" href="../cisco_cor/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Cisco CME(CUCME) - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cme-7x" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cisco CME(CUCME)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга по SNMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/a2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Применение Victoriametrics для мониторинга VMware vCenter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/promql_metricql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PromQL, MetricQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, snmp_exporter (old)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/snmp_exporter_20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    snmp_exporter 0.20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/backbox_exporter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vmagent, blackbox_exporter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_vmagent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf vs vmagent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/telegraf_snmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegraf snmp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/sflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    netflow, sflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    network
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Errors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/switching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/dhcpsnooping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP snooping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nlb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NLB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tcp_mss/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP MSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/flowcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flowcontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/poe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    СКС
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/distkontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Device DistKontrol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/esxi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Esxi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/qos_switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch QoS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vxlan_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch list for vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_sw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus3k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus3k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/nexus9k/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco nexus9k
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/mds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch cisco mds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_ex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch juniper ex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/huawei/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch huawei s57
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/eltex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch eltex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/extreme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch extreme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tfortis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch tfortis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/sonic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Switch mellanox sonic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cisco_r/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/juniper_mx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vyos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Router vyos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/vipnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FW vipnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    voip
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            voip
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../softphone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Softphones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../freeswitch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Freeswitch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_e1_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco E1 gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_gw_cdr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CDR for gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CME(CUCME)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cme-7x" class="md-nav__link">
+    <span class="md-ellipsis">
+      CME 7.x
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ad-hoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ad-Hoc конференция
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meetme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meetme конференция
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_cor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco COR list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_cube/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco CUBE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cisco_voip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cisco voip notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    work
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            work
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/adguardhome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdGuardHome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ansible_ntwrk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible for ntwrk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/empty/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empty, sshpass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/miniconda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Miniconda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mkdocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/molecule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/msys2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Msys2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pip, venv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/app_proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proxy for app
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/tacacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tacacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/webtftp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web,tftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/translit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translit, recode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../work/usbwrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    USB writer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    info
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mac_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mac address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/mail_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mail
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/www_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/phone_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phone number
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/dns_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dns servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/routing_info/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../info/speedtest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Speed test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cme-7x" class="md-nav__link">
+    <span class="md-ellipsis">
+      CME 7.x
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ad-hoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ad-Hoc конференция
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meetme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meetme конференция
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Cisco CME(CUCME)</h1>
+
+<h2 id="cme-7x">CME 7.x</h2>
+<p>Это вообще 2010 год.</p>
+<p>Для начала необходимо в 2800 или 3800 серию "залить" соответствующий IOS. Это может быть 12.4Т voice или advipservices.
+PVDM требуется только при подключении к телефонной станции потоком E1, либо при организации на cisco ip-телефонах hardware конференций,
+т.е. конференций, где участников больше чем 3.
+Если маршрутизатор не подключается к телефонной станции, к нему планируются подключаться еще и телефонные SIP ip-шлюзы с FXS-портами,
+то необходимо разрешить устанавливать соединения между ними.
+Предполагается, что для локального использования будет достаточно трехзначной нумерации и со всеми другими маршрутизаторами
+передача голоса будет осуществляться по H323-протоколу
+<div class="highlight"><pre><span></span><code>voice rtp send-recv
+!
+voice service voip 
+ allow-connections h323 to h323
+ allow-connections h323 to sip
+ allow-connections sip to h323
+ allow-connections sip to sip
+ supplementary-service h450.12
+ fax protocol t38 nse ls-redundancy 0 hs-redundancy 0 fallback cisco
+ h323
+ sip
+</code></pre></div>
+Отсутствие строк allow-connections ** to ** в конфигурационном файле означает, что взаимодействие voip-устройств возможно только через dial-peer pots.</p>
+<p>Пусть имеем некий интерфейс:
+<div class="highlight"><pre><span></span><code>interface FastEthernet0/1.100
+ description LAN
+ encapsulation dot1Q 100
+ ip address 10.10.9.254 255.255.255.0
+
+interface FastEthernet0/1.110
+ description Voice LAN
+ encapsulation dot1Q 110
+ ip address 10.10.10.254 255.255.255.0
+ h323-gateway voip bind srcaddr 10.10.10.254
+</code></pre></div>
+Отсутствие лубкека и наличие желания фиксировать адрес, с которого будет устанавливаться rtp-сессия с другими маршрутизаторами,
+подразумевает наличие строки h323-gateway voip bind srcaddr в интерфейсе.</p>
+<p>Настраивается сервис телефонии для ip-телефонов Сisco.
+<div class="highlight"><pre><span></span><code>telephony-service
+ ip source-address 10.10.10.254 port 2000
+ calling-number initiator
+ timeouts interdigit 3
+ system message MyCompany
+ cnf-file location flash:
+ time-zone 42
+ time-format 24
+ date-format dd-mm-yy
+ dialplan-pattern 1 ... extension-length 3
+ max-conferences 6 gain -6
+ call-forward pattern .T
+ call-forward system redirecting-expanded
+ transfer-system full-consult
+ transfer-pattern .T
+</code></pre></div>
+В настройках указан часовой пояс, который никак не связан с настройками часового пояса в маршрутизаторе.
+Текущее время телефон получает только при загрузке конфигурации и самостоятельно никак не синхронизируется.
+Поэтому важно синхронизировать маршрутизатор и не забывать осуществлять руками в сервисе телефонии переход на летнее/зимнее время.
+Понятно, что смена часового пояса должна в итоге сопровождаться командой:
+<div class="highlight"><pre><span></span><code>router(config)#telephony-service 
+router(config-telephony)#reset all
+</code></pre></div>
+Разные модели маршрутизаторов поддерживают разное количество телефонов.
+Таким образом, в зависимости от модели, оперативной памяти и еще чего-нибудь, задается количество телефонов и DN (что-то вроде профиля для номера).
+<div class="highlight"><pre><span></span><code>telephony-service
+ max-ephones 30
+ max-dn 100
+</code></pre></div>
+Далее создаются телефонные номера. Например, хочу создать 10 номеров и чтобы все они раздались автоматически при подключении телефона.
+<div class="highlight"><pre><span></span><code>ephone-dn  10  dual-line
+ number 210
+!
+!
+ephone-dn  11  dual-line
+ number 211
+!
+!
+ephone-dn  12  dual-line
+ number 212
+!
+!
+ephone-dn  13  dual-line
+ number 213
+!
+!
+ephone-dn  14  dual-line
+ number 214
+!
+!
+ephone-dn  15  dual-line
+ number 215
+!
+!
+ephone-dn  16  dual-line
+ number 216
+!
+!
+ephone-dn  17  dual-line
+ number 217
+!
+!
+ephone-dn  18  dual-line
+ number 218
+!
+!
+ephone-dn  19  dual-line
+ number 219
+
+telephony-service
+ auto assign 10 to 19
+</code></pre></div>
+Настраиваются DHCP пулы, который будет раздавать адреса рабочим станциям и телефонам. Наличие опции 150 укажет им с какого адреса они будут скачивать конфигурационный файл в формате xml по протоколу tftp. В качестве tftp-сервера выступает сам маршрутизатор.
+Часть адресов резервируется для голосовых шлюзов, которые должны иметь статические адреса.
+<div class="highlight"><pre><span></span><code>ip dhcp excluded-address 10.10.10.1 10.10.10.50
+
+ip dhcp pool LAN
+   network 10.10.9.0 255.255.255.0
+   default-router 10.10.9.254 
+   dns-server 10.0.0.1 10.0.1.1
+   domain-name mycompany.com
+   netbios-node-type h-node
+
+ip dhcp pool VoiceLAN
+   network 10.10.10.0 255.255.255.0
+   default-router 10.10.10.254 
+   dns-server 10.0.0.1 10.0.1.1 
+   option 150 ip 10.10.10.254
+</code></pre></div>
+Предполагается, что использоваться будет только кодек G729, который поддерживается всеми телефонами Cisco, в том числе и софтфоном Cisco Communicator. Поэтому после регистрации телефонов в каждом ephone прописывается:
+<div class="highlight"><pre><span></span><code>ephone  1
+..
+ codec g729r8
+..
+</code></pre></div>
+Если будут использоваться различные сервисы на телефонах, например конференции, то необходимо включить sccp.
+<div class="highlight"><pre><span></span><code>sccp local FastEthernet0/1.110
+sccp
+</code></pre></div></p>
+<h2 id="ad-hoc">Ad-Hoc конференция</h2>
+<p>Существуют два типа конференций:</p>
+<ol>
+<li>Ad-Hoc, когда конференция создается с телефона cisco путем нажатия кнопки Confrn. Без настройки конференций (conference hardware) на маршрутизаторе максимальное число участников такой конференции равно трем.</li>
+<li>Meetme, когда конференция создается с телефона cisco путем дозвона на предварительно созданный номер на маршрутизаторе. После чего все остальные участники с любого телефона могут звонить на тот же номер.</li>
+</ol>
+<p>Сейчас будет рассматриваться только Ad-Hoc конференция. 
+Считается, что один DSP поддерживает 8 конференций по 8 участников при использовании кодека G711 и 2 конференции по 8
+участников при использовании кодека G729. Так же допускается настроить конференцию на 16 участников.
+Мне пока неясно, как использовать больше чем один DSP. Пока все настраивается так, что больше чем один не может использоваться.
+Соответственно, получаю лимит на 2 по 8.</p>
+<p>В маршрутизаторе вставлен PVDM2, который необходимо настроить, включив dspfarm:
+<div class="highlight"><pre><span></span><code>router(config)#voice-card 0
+router(config-voicecard)#?
+Voice-card configuration commands:
+  codec         Manage codec configuration parameters for voice card
+  default       Set a command to its defaults
+  dsp           Manage DSP configuration for the voice card
+  dspfarm       Enable dspFarm feature for this voice card (command will be deprecated in future releases, use the new command &#39;dsp tdm pooling&#39;)
+  exit          Exit from voice card configuration mode
+  local-bypass  Enable TDM hairpinning
+  no            Negate a command or set its defaults
+
+router(config-voicecard)#dspfarm ?
+
+
+router(config-voicecard)#dsp ?   
+  allocation  dsp allocation scheme
+  services    Manage DSP services configuration for the voice card
+  tdm         Manage TDM configuration for the DSP on voice card
+
+router(config-voicecard)#dsp services ?
+  dspfarm  Enable dspfarm services on the Voice Card
+
+
+router(config-voicecard)#dsp services dspfarm ?
+
+
+router(config-voicecard)#dsp services dspfarm 
+router(config-voicecard)#
+</code></pre></div>
+В профиле dspfarm будут указываться тоны, которые проигрываются при входе и выходе из конференции:
+<div class="highlight"><pre><span></span><code>voice class custom-cptone jointone
+ dualtone conference
+  frequency 1200 1200
+  cadence 150 50 150 50
+!
+voice class custom-cptone leavetone
+ dualtone conference
+  frequency 900 900
+  cadence 150 50 150 50
+</code></pre></div>
+Далее настраивается сам профиль. Обратите внимание, что в конфигурационном файле профиль по-умолчанию выключен:
+<div class="highlight"><pre><span></span><code>!
+dspfarm profile 1 conference  
+ codec g711ulaw
+ codec g711alaw
+ codec g729ar8
+ codec g729abr8
+ codec g729r8
+ codec g729br8
+ maximum sessions 2
+ conference-join custom-cptone jointone
+ conference-leave custom-cptone leavetone
+ associate application SCCP
+ shutdown
+!
+</code></pre></div>
+Чтобы задать профиль для sccp необходим идентификатор.
+<div class="highlight"><pre><span></span><code>sccp ccm 10.10.10.254 identifier 1 version 7.0 
+
+sccp ccm group 1
+ bind interface FastEthernet0/1.110
+ associate ccm 1 priority 1
+ associate profile 1 register mtp002414de5631
+ keepalive retries 16
+ keepalive timeout 10
+</code></pre></div>
+Здесь mtp002414de5631 случайный набор понятных букв для указания их в сервисе телефонии. Напомню, что ранее sccp был уже включен:
+<div class="highlight"><pre><span></span><code>sccp local FastEthernet0/1.110
+sccp
+</code></pre></div>
+Правим сервис телефонии, чтобы указать там используемый профиль sccp и включить конференции:
+<div class="highlight"><pre><span></span><code>telephony-service
+ sdspfarm units 1
+ sdspfarm tag 1 mtp002414de5631
+ conference hardware
+</code></pre></div>
+Включаем профиль dspfarm
+<div class="highlight"><pre><span></span><code>router(config)#dspfarm profile 1 conference  
+router(config-dspfarm-profile)#no sh
+router(config-dspfarm-profile)#
+</code></pre></div>
+Смотрим, что получилось:
+<div class="highlight"><pre><span></span><code>router#sh sccp all
+SCCP Admin State: UP
+Gateway Local Interface: FastEthernet0/1.110
+        IPv4 Address: 10.10.10.254
+        Port Number: 2000
+IP Precedence: 5
+User Masked Codec list: None
+Call Manager: 10.10.10.254, Port Number: 2000
+  Priority: N/A, Version: 7.0, Identifier: 1
+  Trustpoint: N/A
+
+SCCP application services(dspfarm profiles) are not enabled 
+or haven&#39;t associated to SCCP CCM group
+
+CCM Group Identifier: 1
+ Description: None
+ Binded Interface: FastEthernet0/1.110
+        IPv4 Address: 10.10.10.254
+ Associated CCM Id: 1, Priority in this CCM Group: 1
+ Associated Profile: 1, Registration Name: mtp002414de5631
+ Registration Retries: 3, Registration Timeout: 10 sec
+ Keepalive Retries: 16, Keepalive Timeout: 10 sec
+ CCM Connect Retries: 3, CCM Connect Interval: 10 sec
+ Switchover Method: GRACEFUL, Switchback Method: GRACEFUL_GUARD
+ Switchback Interval: 10 sec, Switchback Timeout: 7200 sec
+ Signaling DSCP value: cs3, Audio DSCP value: ef
+[skip]
+
+router#sh dspfarm all
+Dspfarm Profile Configuration
+
+ Profile ID = 1, Service = CONFERENCING, Resource ID = 1  
+ Profile Description :  
+ Profile Service Mode : Non Secure 
+ Profile Admin State : UP 
+ Profile Operation State : RESOURCE ALLOCATED 
+ Application : SCCP   Status : NOT ASSOCIATED 
+ Resource Provider : FLEX_DSPRM   Status : UP 
+[skip]
+</code></pre></div>
+Есть ошибки, при наличии которых создать конференции нельзя.
+Документация описывает причину, по которым такой статус возможен - не включен созданный профиль dspfarm.
+Но тут необходимо обратить внимание на sccp, где, как оказывается, тоже важна последовательность команд.
+<div class="highlight"><pre><span></span><code>sccp local FastEthernet0/1.110
+sccp ccm 10.10.10.254 identifier 1 version 7.0 
+sccp
+</code></pre></div>
+Любое изменение (определили идентификатор в данном случае) sccp должно сопровождаться выключением/включением sccp:
+<div class="highlight"><pre><span></span><code>router(config)#no sccp
+router(config)#sccp
+router(config)#^Z
+router#sh dspfarm all
+Dspfarm Profile Configuration
+
+ Profile ID = 1, Service = CONFERENCING, Resource ID = 1  
+ Profile Description :  
+ Profile Service Mode : Non Secure 
+ Profile Admin State : UP 
+ Profile Operation State : ACTIVE 
+ Application : SCCP   Status : ASSOCIATED 
+ Resource Provider : FLEX_DSPRM   Status : UP
+[skip] 
+</code></pre></div>
+Для Ad-Hoc конференций необходимо создать DN-ки. Количество штук определяется максимальным количеством участников.
+Если DN-ки dual-line , то необходимо вполовину меньше.
+Пусть будет на 32 участника 16 DN dual-line:
+<div class="highlight"><pre><span></span><code>ephone-dn  100  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 1
+ no huntstop
+!
+!
+ephone-dn  101  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 2
+ no huntstop
+!
+!
+ephone-dn  102  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 3
+ no huntstop
+!
+!
+ephone-dn  103  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 4
+ no huntstop
+!
+!
+ephone-dn  104  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 5
+ no huntstop
+!
+!
+ephone-dn  105  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 6
+ no huntstop
+!
+!
+ephone-dn  106  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 7
+ no huntstop
+!
+!
+ephone-dn  107  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 8
+ no huntstop
+!
+!
+ephone-dn  108  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  109  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  110  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  111  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  112  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+ephone-dn  113  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  114  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  115  dual-line
+ number A0001
+ name conference
+ conference ad-hoc
+ preference 9
+ huntstop
+!
+</code></pre></div>
+Интерестно, что указывается number A0001. Непривычно. Для meetme необходимо указывать нормальный рабочий номер.
+По настройкам - все.
+Проверить работу конференции можно с зарегистрированного на CME телефона. Например, с Cisco IP Communicator'а, который поддерживает G711 и G729 кодеки.</p>
+<p>Смотрим тестовую конференцию из трех участников:
+<div class="highlight"><pre><span></span><code>router#sh sccp all
+SCCP Admin State: UP
+Gateway Local Interface: FastEthernet0/1.110
+        IPv4 Address: 10.10.10.254
+        Port Number: 2000
+IP Precedence: 5
+User Masked Codec list: None
+Call Manager: 10.10.10.254, Port Number: 2000
+  Priority: N/A, Version: 7.0, Identifier: 100
+  Trustpoint: N/A
+
+Conferencing Oper State: ACTIVE - Cause Code: NONE
+Active Call Manager: 10.10.10.254, Port Number: 2000
+TCP Link Status: CONNECTED, Profile Identifier: 1
+Reported Max Streams: 16, Reported Max OOS Streams: 0
+Supported Codec: g711ulaw, Maximum Packetization Period: 30
+Supported Codec: g711alaw, Maximum Packetization Period: 30
+Supported Codec: g729ar8, Maximum Packetization Period: 60
+Supported Codec: g729abr8, Maximum Packetization Period: 60
+Supported Codec: g729r8, Maximum Packetization Period: 60
+Supported Codec: g729br8, Maximum Packetization Period: 60
+Supported Codec: rfc2833 dtmf, Maximum Packetization Period: 30
+Supported Codec: rfc2833 pass-thru, Maximum Packetization Period: 30
+Supported Codec: inband-dtmf to rfc2833 conversion, Maximum Packetization Period: 30
+
+
+SCCP Application Service(s) Statistics:
+
+Profile Identifier: 1, Service Type: Conferencing
+TCP packets rx 1835, tx 1819
+Unsupported pkts rx 0, Unrecognized pkts rx 0
+Register tx 1, successful 1, rejected 0, failed 0
+Unregister tx 0, successful 0
+KeepAlive tx 1808, successful 1808, failed 0
+OpenReceiveChannel rx 6, successful 6, failed 0
+CloseReceiveChannel rx 3, successful 0, failed 0
+StartMediaTransmission rx 6, successful 3, failed 0
+StopMediaTransmission rx 3, successful 0, failed 0
+PortReq rx 0
+PortRes tx 0, successful 0, failed 0
+PortClose rx 0
+QosListen rx 0
+QosPath rx 0
+QosTeardown rx 0, send 0, recv 0, sendrecv 0
+QosResvNotify tx 0, send 0, recv 0, sendrecv 0
+QosErrorNotify tx 0, send 0, recv 0, sendrecv 0
+   err0 0, err1 0, err2 0, err3 0, err4 0, err5 0,
+   err6 0, err7 0, err8 0, err9 0, err10 0, err11 0,
+   err12 0
+QosModify rx 0, send 0, recv 0, sendrecv 0
+UpdateDscp rx 0
+Reset rx 0, successful 0, failed 0
+MediaStreamingFailure rx 6
+MediaStreamingFailure tx 0
+Switchover 0, Switchback 0
+
+CCM Group Identifier: 1
+ Description: None
+ Binded Interface: FastEthernet0/1.110
+        IPv4 Address: 10.10.10.254
+ Associated CCM Id: 1, Priority in this CCM Group: 1
+ Associated Profile: 1, Registration Name: mtp002414de5631
+ Registration Retries: 3, Registration Timeout: 10 sec
+ Keepalive Retries: 16, Keepalive Timeout: 10 sec
+ CCM Connect Retries: 3, CCM Connect Interval: 10 sec
+ Switchover Method: GRACEFUL, Switchback Method: GRACEFUL_GUARD
+ Switchback Interval: 10 sec, Switchback Timeout: 7200 sec
+ Signaling DSCP value: cs3, Audio DSCP value: ef
+
+sess_id    conn_id      stype mode     codec   sport rport ripaddr
+
+3221356546 65542        conf  sendrecv g729    17742 2000  10.10.10.254
+3221356546 65541        conf  sendrecv g729    17264 2000  10.10.10.254
+3221356546 65540        conf  sendrecv g729    17148 2000  10.10.10.254
+
+Total number of active session(s) 1, and connection(s) 3
+
+sess_id    conn_id    st ev orc_ts     orca_ts    crc_ts     stmt_ts    spmt_ts    dis_ind_ts preq_ts    pc_ts      qosl_ts    qost_r_ts  qosp_ts    qost_s_ts 
+
+3221356546 65542      -  -  61980160   61980200   0          61980212   0          0          0          0          0          0          0          0         
+3221356546 65541      -  -  61978476   61978492   0          61978504   0          0          0          0          0          0          0          0         
+3221356546 65540      -  -  61978388   61978440   0          61978452   0          0          0          0          0          0          0          0         
+
+Total number of active session(s) 1, and connection(s) 3
+
+
+bridge-info(bid, cid) - Normal bridge information(Bridge id, Calleg id)
+mmbridge-info(bid, cid) - Mixed mode bridge information(Bridge id, Calleg id)
+
+sess_id    conn_id    call-id    codec   pkt-period dtmf_method    type        bridge-info(bid, cid)   mmbridge-info(bid, cid) srtp_cryptosuite          dscp      
+
+3221356546 -          1249       N/A     N/A        none              confmsp   All RTPSPI Callegs      All MM-MSP Callegs      N/A                       N/A       
+
+3221356546 65542      1255       g729    20         none              rtpspi    (390,1249)               N/A                     N/A                       0         
+
+3221356546 65541      1252       g729    20         rfc2833_pthru     rtpspi    (388,1249)               N/A                     N/A                       0         
+
+3221356546 65540      1248       g729    20         rfc2833_pthru     rtpspi    (386,1249)               N/A                     N/A                       0         
+
+
+Total number of active session(s) 1, connection(s) 3, and callegs 4
+
+SCCP Application Service(s) Statistics Summary:
+Total Conferencing Sessions: 1, Connections: 3
+Total Transcoding Sessions: 0, Connections: 0
+Total MTP Sessions: 0, Connections: 0
+Total ALG-Phone Sessions: 0, Connections: 0
+Total BRI-Phone Sessions: 0, Connections: 0
+Total SCCP Sessions: 1, Connections: 3
+
+
+sess_id    conn_id    rsvp_id    dir  local ip       :port  remote ip      :port 
+
+
+ Total active sessions 1, connections 3, rsvp sessions 0
+Statistic                  Count
+-------------------------  -----------
+Send queue enqueue error   0
+Socket send error          1
+Msgs discarded upon error  0
+</code></pre></div></p>
+<p>Есть комментарии в выводе
+<div class="highlight"><pre><span></span><code>router#sh dspfarm all
+Dspfarm Profile Configuration
+
+ Profile ID = 1, Service = CONFERENCING, Resource ID = 1  
+ Profile Description :  
+ Profile Service Mode : Non Secure 
+ Profile Admin State : UP 
+ Profile Operation State : ACTIVE 
+ Application : SCCP   Status : ASSOCIATED 
+ Resource Provider : FLEX_DSPRM   Status : UP 
+ Number of Resource Configured : 2 
+ Number of Resource Available : 2         # как увеличить это число?
+ Codec Configuration 
+ Codec : g711ulaw, Maximum Packetization Period : 30 , Transcoder: Not Required 
+ Codec : g711alaw, Maximum Packetization Period : 30 , Transcoder: Not Required 
+ Codec : g729ar8, Maximum Packetization Period : 60 , Transcoder: Not Required 
+ Codec : g729abr8, Maximum Packetization Period : 60 , Transcoder: Not Required 
+ Codec : g729r8, Maximum Packetization Period : 60 , Transcoder: Not Required 
+ Codec : g729br8, Maximum Packetization Period : 60 , Transcoder: Not Required
+
+
+SLOT DSP VERSION  STATUS CHNL USE   TYPE    RSC_ID BRIDGE_ID PKTS_TXED PKTS_RXED
+
+0    1   24.3.2   UP     1    USED  conf    1      0x182       6165      6174     # используется 01 канал (см. ниже)
+0    1   24.3.2   UP     1    USED  conf    1      0x184       6165      6172     
+0    1   24.3.2   UP     1    USED  conf    1      0x186       6086      6007     
+0    1   24.3.2   UP     N/A  FREE  conf   1      -         -         -        
+
+Total number of DSPFARM DSP channel(s) 2
+
+
+
+
+
+router#sh voice dsp voice 
+
+DSP  DSP                DSPWARE CURR  BOOT                         PAK     TX/RX
+TYPE NUM CH CODEC       VERSION STATE STATE   RST AI VOICEPORT TS ABORT  PACK COUNT
+==== === == ======== ========== ===== ======= === == ========= == ===== ============
+edsp 0001 01 g729r8    0.1 IDLE  50/0/1.1     
+edsp 0002 02 g729r8 p  0.1 IDLE  50/0/1.2     
+[skip]  
+edsp 0010 01 g729r8    0.1 busy  50/0/40.1 # телефон с которого организуется конференция   
+[skip]
+edsp 0030 01 g729r8    0.1 busy  50/0/100.1  # 
+edsp 0031 02 g729r8    0.1 busy  50/0/100.2  # используются 3 линии Ad-Hoc
+edsp 0032 01 g729r8    0.1 busy  50/0/101.1  # 
+edsp 0033 02 g729r8 p  0.1 IDLE  50/0/101.2   
+edsp 0034 01 g729r8 p  0.1 IDLE  50/0/102.1   
+edsp 0035 02 g729r8 p  0.1 IDLE  50/0/102.2   
+[skip]
+
+
+----------------------------FLEX VOICE CARD 0 ------------------------------
+                           *DSP VOICE CHANNELS*
+
+CURR STATE : (busy)inuse (b-out)busy out (bpend)busyout pending 
+LEGEND     : (bad)bad    (shut)shutdown  (dpend)download pending
+
+DSP   DSP                 DSPWARE CURR  BOOT                         PAK   TX/RX
+TYPE  NUM CH CODEC        VERSION STATE STATE   RST AI VOICEPORT TS ABRT PACK COUNT
+===== === == ========= ========== ===== ======= === == ========= == ==== ============
+# в списке отсутствует канал 01
+C5510 001 02 None          24.3.2 idle  idle      0  0                 0          0/0 
+C5510 001 03 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 04 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 05 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 06 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 07 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 08 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 09 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 10 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 11 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 12 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 13 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 14 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 15 None          24.3.2 idle  idle      0  0                 0          0/0
+C5510 001 16 None          24.3.2 idle  idle      0  0                 0          0/0
+------------------------END OF FLEX VOICE CARD 0 ----------------------------
+</code></pre></div></p>
+<h2 id="meetme">Meetme конференция</h2>
+<p>CUCME позволяет реализовать что-то наподобие сервера конференций.
+Функционал называется Meetme, когда можно позвонить на определенный номер и попасть в конференцию, в отличии от Ad-hoc конференций,
+когда до каждого участника вручную необходимо дозвониться.</p>
+<p>Настройки маршрутизатора остаются прежними. Добавляется только ephone-dn:
+<div class="highlight"><pre><span></span><code>ephone-dn  111  dual-line
+ number 2222
+ conference meetme
+ preference 2
+ no huntstop
+!
+!
+ephone-dn  112  dual-line
+ number 2222
+ conference meetme
+ preference 3
+ no huntstop
+!
+!
+ephone-dn  113  dual-line
+ number 2222
+ conference meetme
+ preference 4
+ no huntstop
+!
+!
+ephone-dn  114  dual-line
+ number 2222
+ conference meetme
+ preference 5
+ no huntstop
+!
+!
+ephone-dn  115  dual-line
+ number 2222
+ conference meetme
+ preference 6
+ no huntstop
+!
+!
+ephone-dn  116  dual-line
+ number 2222
+ conference meetme
+ preference 7
+ no huntstop
+!
+!
+ephone-dn  117  dual-line
+ number 2222
+ conference meetme
+ preference 8
+ no huntstop
+!
+!
+ephone-dn  118  dual-line
+ number 2222
+ conference meetme
+ preference 9
+ no huntstop
+!
+!
+ephone-dn  119  dual-line
+ number 2222
+ conference meetme
+ preference 10
+ no huntstop
+!
+!
+ephone-dn  120  dual-line
+ number 2222
+ conference meetme
+ preference 10
+ no huntstop
+!
+!
+ephone-dn  121  dual-line
+ number 2222
+ conference meetme
+ preference 10
+ no huntstop
+!
+!
+ephone-dn  122  dual-line
+ number 2222
+ conference meetme
+ preference 10
+ no huntstop
+!
+!
+ephone-dn  123  dual-line
+ number 2222
+ conference meetme
+ preference 10
+ no huntstop
+!
+!
+ephone-dn  124  dual-line
+ number 2222
+ conference meetme
+ preference 10
+</code></pre></div>
+Количество dn определяет число участников, как и в Ad-hoc конференциях. Понятно, используются ресурсы DSP.
+Конференция создается только при наличии строки conference meetme хотя бы в одной DN.
+И только с телефона или ip-коммуникатора Cisco имеющего программные клавиши.
+Их необходимо создать и применить к телефону, который будет создавать конференцию. В примере ниже такое проделано для ip-коммуникатора:
+<div class="highlight"><pre><span></span><code>ephone-template  1
+ softkeys hold  Newcall Resume Select Join
+ softkeys idle  Cfwdall ConfList Dnd Gpickup HLog Join Login Newcall Pickup Redial RmLstC
+ softkeys seized  Redial Pickup Gpickup HLog Meetme Endcall
+ softkeys connected  Acct ConfList Confrn Endcall Flash HLog Hold Join Park RmLstC Select Trnsfer
+ephone  89
+ device-security-mode none
+ mac-address 0025.B311.E0D0
+ ephone-template 1
+ type CIPC
+ button  1:10
+</code></pre></div>
+Последовательность создания конференции:</p>
+<ul>
+<li>снимаем "трубку" на телефоне.</li>
+<li>выбираем программную клавишу Meetme (для русифицированных это Конф№). Она активна, если есть DN c conference meetme. Услышите тоновый сигнал по нажатию.</li>
+<li>набираем номер конференции 2222.</li>
+</ul>
+<p>Все остальные могут звонить на 2222 без ограничений как на обычный телефонный номер.
+Подключение и отключение участников будет сопровождаться join и leave тоновыми сигналами.
+К недостатку можно отнести невозможность управления участниками конференции из-за ошибок русификации. Все меню с участниками в кракозябрах.
+К ограничениям можно отнести возможность создания конференции только с аппаратов, использующих sccp сигнализацию.
+Cisco IP-Phone с прошивками SIP, а так же телефонные шлюзы ATA не могут создавать конференции Meetme.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
