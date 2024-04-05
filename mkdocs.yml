@@ -35,6 +35,7 @@ nav:
         - 'Switch eltex': network/eltex.md
         - 'Switch extreme': network/extreme.md
         - 'Switch tfortis': network/tfortis.md
+        - 'Switch mellanox sonic': network/sonic.md
         - 'Router cisco': network/cisco_r.md
         - 'Router juniper': network/juniper_mx.md
         - 'Router vyos': network/vyos.md
