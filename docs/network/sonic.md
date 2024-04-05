@@ -317,6 +317,7 @@ Flags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available,
 -----  -------------  ----------  -------
    01  PortChannel01  N/A
 admin@sonic01:~$
+
 admin@sonic02:~$ mclagdctl -i 1 dump state
 The MCLAG's keepalive is: OK
 MCLAG info sync is: completed
@@ -330,7 +331,7 @@ Peer Link Mac: 04:3f:72:2f:34:80
 Role: Active
 MCLAG Interface:
 Loglevel: NOTICE
-admin@S0038:~$ show interfaces portchannel
+admin@sonic02:~$ show interfaces portchannel
 Flags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available,
        S - selected, D - deselected, * - not synced
   No.  Team Dev       Protocol     Ports
